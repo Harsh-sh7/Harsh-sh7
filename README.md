@@ -40,7 +40,7 @@
   <p align="center">
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Harsh-sh7&layout=compact&theme=tokyonight" />
     </p>
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Harsh-sh7&bg_color=1A1B26&color=ffffff&line=ffffff&point=ffffff&area=true&hide_border=true"/>
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=Harsh-sh7&bg_color=0E1116&color=FFFFFF&line=FFFFFF&point=FFFFFF&area=true&hide_border=true"/>
 </p>
 
 <br>
