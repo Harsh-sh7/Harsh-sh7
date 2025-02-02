@@ -31,8 +31,10 @@
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=Harsh-sh7&show_icons=true&theme=tokyonight" />
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=Harsh-sh7&theme=tokyonight" />
+  <p align="center">
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Harsh-sh7&layout=compact&theme=tokyonight" />
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Harsh-sh7&theme=github" />
+    </p>
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Harsh-sh7&bg_color=1A1B26&color=ffffff&line=ffffff&point=ffffff&area=true&hide_border=true"/>
 </p>
 
 ---
