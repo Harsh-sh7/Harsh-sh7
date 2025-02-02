@@ -8,26 +8,30 @@
 
 <br>
 
-## 🚀 **About Me**
+<h2 align="center">🚀 About Me</h2>
+
 - 🎓 Aspiring **Software Developer**
 - 🧠 Developing a **website that tells you about entire solar system**
 - 🌱 Always learning **new tech & coding techniques**
 
 <br>
 
-## 🛠 **Tech Stack & Tools**
+<h2 align="center">🛠 Tech Stack & Tools</h2>
+
 <p align="center">
   <img src="https://skillicons.dev/icons?i=html,css,js,react,python,git,github,vscode,java" />
 </p>
 
 <br>
 
-## 📌 **Projects**
+<h2 align="center">📌 Projects</h2>
+
 🔹 [Capstone](#) - A pixel-perfect design. 
 
 <br>
 
-## 📊 **GitHub Stats**
+<h2 align="center">📊 GitHub Stats</h2>
+
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=Harsh-sh7&show_icons=true&theme=tokyonight" />
   <p align="center">
@@ -41,12 +45,13 @@
 
 <br>
 
-## 🌎 **Let's Connect**
+<h2 align="center">🌎 Let's Connect</h2>
+
 <p align="center">
   <a href="https://linkedin.com/in/harshit-shakya"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white"/></a>
   <a href="mailto:harshakya56@gmail.com"><img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white"/></a>
 </p>
 
----
+<br>
 
-### 🧑‍💻 **"Innovate. Build. Commit. Repeat!"** 🚀
+<h3 align="center"> 🧑‍💻 "Innovate. Build. Commit. Repeat!" 🚀</h3>
