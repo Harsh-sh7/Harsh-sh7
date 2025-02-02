@@ -6,38 +6,39 @@
   <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&duration=3000&pause=500&color=F75C7E&center=true&width=435&lines=Developer+%7C+Coder+%7C+Tech+Enthusiast;Creating+a+Solar+System+Web+Page;Innovator" alt="Typing SVG" />
 </p>
 
----
+<br>
 
 ## 🚀 **About Me**
 - 🎓 Aspiring **Software Developer**
 - 🧠 Developing a **website that tells you about entire solar system**
 - 🌱 Always learning **new tech & coding techniques**
 
----
-
+<br>
 ## 🛠 **Tech Stack & Tools**
 <p align="center">
   <img src="https://skillicons.dev/icons?i=html,css,js,react,python,git,github,vscode,java" />
 </p>
 
----
+<br>
 
 ## 📌 **Projects**
 🔹 [Capstone](#) - A pixel-perfect design. 
 
----
+<br>
 
 ## 📊 **GitHub Stats**
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api?username=Harsh-sh7&show_icons=true&theme=tokyonight" />
+  <p align="center">
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=Harsh-sh7&theme=tokyonight" />
+    </p>
   <p align="center">
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Harsh-sh7&layout=compact&theme=tokyonight" />
     </p>
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=Harsh-sh7&bg_color=1A1B26&color=ffffff&line=ffffff&point=ffffff&area=true&hide_border=true"/>
 </p>
 
----
+<br>
 
 ## 🌎 **Let's Connect**
 <p align="center">
