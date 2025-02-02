@@ -1,9 +1,9 @@
 <h1 align="center">Hi there, I'm Harshit Shakya 👋</h1>
 <p align="center">
-  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZms0b2RhbTNud3RtNG1xaThob2twaW9xYXF5aDlveTNobjZrcWZoaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CuuSHzuc0O166MRfjt/giphy.gif" width="500" />
+  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZms0b2RhbTNud3RtNG1xaThob2twaW9xYXF5aDlveTNobjZrcWZoaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CuuSHzuc0O166MRfjt/giphy.gif" width="400" />
 </p>
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&duration=3000&pause=500&color=F75C7E&center=true&width=435&lines=Developer+%7C+Coder+%7C+Tech+Enthusiast;Creating+a+Solar+System+Web+Page;Hardik+Jaiswal+Lover" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&duration=3000&pause=500&color=F75C7E&center=true&width=435&lines=Developer+%7C+Coder+%7C+Tech+Enthusiast;Creating+a+Solar+System+Web+Page;Innovator" alt="Typing SVG" />
 </p>
 
 ---
@@ -29,7 +29,6 @@
 
 ## 📊 **GitHub Stats**
 <p align="center">
-  <img src="https://github-readme-activity-graph.cyclic.app/graph?username=Harsh-sh7&theme=github" />
   <img src="https://github-readme-stats.vercel.app/api?username=Harsh-sh7&show_icons=true&theme=tokyonight" />
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=Harsh-sh7&theme=tokyonight" />
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Harsh-sh7&layout=compact&theme=tokyonight" />
