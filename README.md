@@ -32,6 +32,7 @@
   <img src="https://github-readme-stats.vercel.app/api?username=Harsh-sh7&show_icons=true&theme=tokyonight" />
   <img src="https://github-readme-streak-stats.herokuapp.com/?user=Harsh-sh7&theme=tokyonight" />
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Harsh-sh7&layout=compact&theme=tokyonight" />
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=Harsh-sh7&theme=github" />
 </p>
 
 ---
