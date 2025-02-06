@@ -27,6 +27,8 @@
 <h2 align="center">📌 Projects</h2>
 
 🔹 [Capstone](#) - A pixel-perfect design. 
+🔹 [Hospital Management System](#) - A python project for management of database.
+
 
 <br>
 
