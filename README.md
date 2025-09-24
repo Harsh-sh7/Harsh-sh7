@@ -26,9 +26,9 @@
 
 <h2 align="center">📌 Projects</h2>
 
-🔹 [Capstone](#) - A pixel-perfect design. 
+🔹 [FriendAI](#) - A friend that cares and gives opinions.
 <br>
-🔹 [Hospital Management System](#) - A python project for management of database.
+🔹 [Vehicle Tracker](#) - Website that traces your last trip using Leaflet Maps.
 
 
 <br>
