@@ -1,39 +1,40 @@
-<h1 align="center">Hi there, I'm Harshit Shakya 👋</h1>
+<h1 align="center">Hi there, I'm Harshit Shakya</h1>
 <p align="center">
   <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExZms0b2RhbTNud3RtNG1xaThob2twaW9xYXF5aDlveTNobjZrcWZoaSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CuuSHzuc0O166MRfjt/giphy.gif" width="400" />
 </p>
 <p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&duration=3000&pause=500&color=F75C7E&center=true&width=435&lines=Developer+%7C+Coder+%7C+Tech+Enthusiast;Creating+a+Solar+System+Web+Page;Innovator" alt="Typing SVG" />
+  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&duration=3000&pause=500&color=F75C7E&center=true&width=435&lines=Developer+%7C+Coder+%7C+AI+Enthusiast;AI+/ML+Engineer;Real+World+Solutions;Innovator" alt="Typing SVG" />
 </p>
 
 <br>
 
-<h2 align="center">🚀 About Me</h2>
+<h2 align="center">About Me</h2>
 
-- 🎓 Aspiring **Software Developer**
-- 🧠 Developing a **website that tells you about entire solar system**
-- 🌱 Always learning **new tech & coding techniques**
+- **Full Stack Developer** with a strong focus on new technologies.
+- Developing a **real world projects** every two weeks.
+- Always learning **new tech & coding techniques**
+- Strong inclination towards AI/ML.
 
 <br>
 
 <h2 align="center">🛠 Tech Stack & Tools</h2>
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=html,css,js,react,python,git,github,vscode,java" />
+  <img src="https://skillicons.dev/icons?i=html,css,js,react,next,python,git,github,vscode,java" />
 </p>
 
 <br>
 
-<h2 align="center">📌 Projects</h2>
+<h2 align="center">Projects</h2>
 
-🔹 [FriendAI](#) - A friend that cares and gives opinions.
+🔹 [NotAI](#) - A end-to-end learning platform for programmers.
 <br>
-🔹 [Vehicle Tracker](#) - Website that traces your last trip using Leaflet Maps.
+🔹 [NLP Research Analyzer](#) - A AI Project designed to analyze research papers.
 
 
 <br>
 
-<h2 align="center">📊 GitHub Stats</h2>
+<h2 align="center">GitHub Stats</h2>
 
 <p align="center">
   <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Harsh-sh7&layout=compact&theme=radical" />
