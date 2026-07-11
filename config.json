@@ -1,0 +1,18 @@
+{
+  "github_username": "Harsh-sh7",
+  "name": "Harshit Shakya",
+  "os": "macOS Sequoia, Linux",
+  "editor": "VS Code, Xcode, Vim",
+  "languages": ["Python", "JavaScript", "TypeScript", "Swift", "C++"],
+  "frameworks": ["Next.js", "React", "SwiftUI", "FastAPI"],
+  "database": ["PostgreSQL", "MongoDB", "Redis"],
+  "tools": ["Git", "Docker", "Firebase", "AWS"],
+  "current_focus": "Advanced Agentic AI & Systems Engineering",
+  "interests": ["Machine Learning", "System Design", "UI/UX Design"],
+  "location": "India",
+  "portfolio": "https://harshit-s-portfolio-indol.vercel.app/",
+  "email": "harshakya56@gmail.com",
+  "socials": {
+    "LinkedIn": "https://www.linkedin.com/in/harshit-shakya/"
+  }
+}

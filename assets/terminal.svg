@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="100%" height="auto">
+  <defs>
+    <!-- Import beautiful Monospace Font -->
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
+      
+      .terminal-window {
+        filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.45));
+        animation: fadeIn 0.8s ease-out;
+      }
+      
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+    
+    <!-- Typing Animation Clip Path -->
+    <clipPath id="type-clip">
+      <rect x="360" y="60" width="0" height="30">
+        <animate attributeName="width" from="0" to="136.60000000000002" dur="1.5s" begin="0.5s" fill="freeze" keyTimes="0; 1" keySplines="0.25, 0.1, 0.25, 1.0" calcMode="spline" />
+      </rect>
+    </clipPath>
+  </defs>
+
+  <g class="terminal-window">
+    <!-- Window Background (Premium Deep Dark) -->
+    <rect x="0" y="0" width="900" height="520" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+
+    <!-- Window Title Bar -->
+    <path d="M 0,12 A 12,12 0 0,1 12,0 L 888,0 A 12,12 0 0,1 900,12 L 900,42 L 0,42 Z" fill="#111827" />
+    
+    <!-- Window Control Buttons (macOS Style) -->
+    <circle cx="25" cy="21" r="6" fill="#ff5f56" />
+    <circle cx="45" cy="21" r="6" fill="#ffbd2e" />
+    <circle cx="65" cy="21" r="6" fill="#27c93f" />
+
+    <!-- Terminal Title -->
+    <text x="450" y="25" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" text-anchor="middle" font-weight="bold">
+      Harsh-sh7@macos: ~
+    </text>
+
+    <!-- Title Bar Divider -->
+    <line x1="0" y1="42" x2="900" y2="42" stroke="#1f2937" stroke-width="1" />
+
+    <!-- Vertical Separator Line (Dashed, Premium look) -->
+    <line x1="335" y1="58" x2="335" y2="502" stroke="#1f2937" stroke-width="1.5" stroke-dasharray="4 4" />
+
+    <!-- Rendered SVG elements -->
+  <text x="35" y="102" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" font-weight="bold" fill="#34d399" xml:space="preserve">
+    <tspan x="35" dy="0">+++++==++*+++++++**+=+#*+##==###*=++</tspan><tspan x="35" dy="14">===++=+++++=+++=-:---=**+*=+####+=++</tspan><tspan x="35" dy="14">--=----------::..::...::-:+#*###+=++</tspan><tspan x="35" dy="14">---::-::-----..--==:. ...-+++++++=++</tspan><tspan x="35" dy="14">--+=:-=+=::--:--:-==:.::.-+++++++=++</tspan><tspan x="35" dy="14">=+#+-=*+--:--=======---..-++++++=+++</tspan><tspan x="35" dy="14">===-:-=---:...::-----=-.:::=++++=+++</tspan><tspan x="35" dy="14">::::::::::.   .--:::-==-:-:-++++=++*</tspan><tspan x="35" dy="14">:::::::::-::::::..::---..---+++===-=</tspan><tspan x="35" dy="14">.-::::::-==--==.  :--:::-.=::-=--+=-</tspan><tspan x="35" dy="14">.:::::::+=:.:-:..:.:--:.:.-. :-::+==</tspan><tspan x="35" dy="14">:::::::-:--+**+==*=+*+===+*=--.:=-=+</tspan><tspan x="35" dy="14">::::....+*+==-..:==--::.-++==++===+=</tspan><tspan x="35" dy="14">+=::....=*- .:=. ::::   :--..+=: .: </tspan><tspan x="35" dy="14">+*::...::..::=*=++++=:-=-=*+:::.  --</tspan><tspan x="35" dy="14">-+::..=+=. .:---****=+:..:--.=++-=+=</tspan><tspan x="35" dy="14">:--...-+*-. .+- :-:-.-:   :.:***==+*</tspan><tspan x="35" dy="14">:-=...:::.:::+- .:-=--=-..:..=--...-</tspan><tspan x="35" dy="14">:-*=---.  .-=+-:-=+++-=+==-:.::::  .</tspan><tspan x="35" dy="14">                                    </tspan><tspan x="35" dy="14">                                    </tspan><tspan x="35" dy="14">                                    </tspan><tspan x="35" dy="14">                                    </tspan><tspan x="35" dy="14">                                    </tspan>
+  </text>
+  <!-- Typing Header -->
+  <g clip-path="url(#type-clip)">
+    <text x="360" y="80" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13.5" font-weight="bold">
+      <tspan fill="#34d399">Harsh-sh7</tspan>
+      <tspan fill="#9ca3af">@macos:~</tspan>
+    </text>
+  </g>
+  
+  <!-- Typing Cursor -->
+  <rect x="360" y="66" width="7" height="15" fill="#38bdf8">
+    <animate attributeName="x" from="360" to="496.6" dur="1.5s" begin="0.5s" fill="freeze" keyTimes="0; 1" keySplines="0.25, 0.1, 0.25, 1.0" calcMode="spline" />
+    <animate attributeName="opacity" values="1;0;1" dur="0.8s" repeatCount="indefinite" />
+  </rect>
+  <text x="360" y="105" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">OS</tspan>
+    <tspan fill="#4b5563">: .............. </tspan>
+    <tspan fill="#38bdf8">macOS Sequoia, Linux</tspan>
+  </text>
+  <text x="360" y="122.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">Host</tspan>
+    <tspan fill="#4b5563">: ............ </tspan>
+    <tspan fill="#38bdf8">MacBook Pro</tspan>
+  </text>
+  <text x="360" y="140.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">Editor</tspan>
+    <tspan fill="#4b5563">: .......... </tspan>
+    <tspan fill="#38bdf8">VS Code, Xcode, Vim</tspan>
+  </text>
+  <text x="360" y="157.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">Location</tspan>
+    <tspan fill="#4b5563">: ........ </tspan>
+    <tspan fill="#38bdf8">India</tspan>
+  </text>
+  <text x="360" y="175.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">Portfolio</tspan>
+    <tspan fill="#4b5563">: ....... </tspan>
+    <tspan fill="#38bdf8">https://harshit-s-portfolio-indol.vercel.app/</tspan>
+  </text>
+  <text x="360" y="192.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">Email</tspan>
+    <tspan fill="#4b5563">: ........... </tspan>
+    <tspan fill="#38bdf8">harshakya56@gmail.com</tspan>
+  </text>
+  <text x="360" y="216.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11.5" font-weight="700">
+    <tspan fill="#9ca3af">─ Technical Profile </tspan>
+    <tspan fill="#1f2937">──────────────────────────────────</tspan>
+  </text>
+  <text x="360" y="234.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">Languages</tspan>
+    <tspan fill="#4b5563">: ....... </tspan>
+    <tspan fill="#38bdf8">Python, JavaScript, TypeScript, Swift, C++</tspan>
+  </text>
+  <text x="360" y="251.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">Frameworks</tspan>
+    <tspan fill="#4b5563">: ...... </tspan>
+    <tspan fill="#38bdf8">Next.js, React, SwiftUI, FastAPI</tspan>
+  </text>
+  <text x="360" y="269.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">Database</tspan>
+    <tspan fill="#4b5563">: ........ </tspan>
+    <tspan fill="#38bdf8">PostgreSQL, MongoDB, Redis</tspan>
+  </text>
+  <text x="360" y="286.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">Tools</tspan>
+    <tspan fill="#4b5563">: ........... </tspan>
+    <tspan fill="#38bdf8">Git, Docker, Firebase, AWS</tspan>
+  </text>
+  <text x="360" y="310.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11.5" font-weight="700">
+    <tspan fill="#9ca3af">─ GitHub Stats </tspan>
+    <tspan fill="#1f2937">───────────────────────────────────────</tspan>
+  </text>
+  <text x="360" y="328.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">Repos</tspan>
+    <tspan fill="#4b5563">: ........... </tspan>
+    <tspan fill="#38bdf8">33 public repos</tspan>
+  </text>
+  <text x="360" y="345.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">Followers</tspan>
+    <tspan fill="#4b5563">: ....... </tspan>
+    <tspan fill="#38bdf8">7 | Following: 4</tspan>
+  </text>
+  <text x="360" y="363.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">Activity</tspan>
+    <tspan fill="#4b5563">: ........ </tspan>
+    <tspan fill="#38bdf8">0 contributions</tspan>
+  </text>
+  <text x="360" y="380.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#f97316">Top Lang</tspan>
+    <tspan fill="#4b5563">: ........ </tspan>
+    <tspan fill="#38bdf8">JavaScript, TypeScript, Python</tspan>
+  </text>
+  <!-- Progress Bar -->
+  <rect x="495" y="389.0" width="160" height="5" rx="2.5" fill="#1f2937" />
+  <rect x="495" y="389.0" width="69.3" height="5" rx="1.5" fill="#38bdf8" />
+  <rect x="564.28" y="389.0" width="42.7" height="5" rx="1.5" fill="#38bdf8" />
+  <rect x="607.0" y="389.0" width="16.0" height="5" rx="1.5" fill="#38bdf8" />
+  <rect x="623.0" y="389.0" width="16.0" height="5" rx="1.5" fill="#38bdf8" />
+  <text x="360" y="411.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11.5" font-weight="700">
+    <tspan fill="#9ca3af">─ Recent Activity </tspan>
+    <tspan fill="#1f2937">────────────────────────────────────</tspan>
+  </text>
+  <text x="360" y="428.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#60a5fa">Act 1</tspan>
+    <tspan fill="#4b5563">: ........... </tspan>
+    <tspan fill="#e5e7eb">Commented on issue #8 in newton-school-ai/...</tspan>
+  </text>
+  <text x="360" y="446.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#60a5fa">Act 2</tspan>
+    <tspan fill="#4b5563">: ........... </tspan>
+    <tspan fill="#e5e7eb">Assigned issue #8 in newton-school-ai/slmf...</tspan>
+  </text>
+  <text x="360" y="463.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    <tspan fill="#60a5fa">Act 3</tspan>
+    <tspan fill="#4b5563">: ........... </tspan>
+    <tspan fill="#e5e7eb">Commented on issue #54 in newton-school-ai...</tspan>
+  </text>
+  <!-- Bottom Timestamp -->
+  <text x="360" y="495" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">
+    Last Updated: 2026-07-11 21:29:38 (auto-updated every 12h)
+  </text>
+  </g>
+</svg>
