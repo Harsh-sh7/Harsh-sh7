@@ -1,4 +1,4 @@
-# Hi, I', Harshit
+# Hi, I'm Harshit
 
 <p align="center">
   <!-- Main macOS Terminal Profile Card -->
