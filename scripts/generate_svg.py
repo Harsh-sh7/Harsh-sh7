@@ -1,7 +1,7 @@
 import os
 import json
 from datetime import datetime
-from avatar_to_ascii import download_avatar, image_to_color_ascii
+from avatar_to_ascii import download_avatar, image_to_contrib_grid
 from github_stats import GitHubStatsFetcher
 
 def load_config() -> dict:
@@ -54,19 +54,10 @@ def generate_svg():
     stats_fetcher = GitHubStatsFetcher(username)
     stats = stats_fetcher.fetch_all_stats()
     
-    print("Generating ASCII avatar...")
+    print("Generating Contribution Grid avatar...")
     avatar_img = download_avatar(username)
-    # Target size: width=60 columns, aspect_ratio=0.5. Height will be around 30 rows.
-    ascii_grid = image_to_color_ascii(avatar_img, width=60, aspect_ratio_factor=0.5)
-    
-    # Pad/truncate ASCII grid to exactly 34 rows and 60 columns
-    target_rows = 34
-    target_cols = 60
-    if len(ascii_grid) < target_rows:
-        padding_row = [(" ", "#0b0f19")] * target_cols
-        ascii_grid += [padding_row] * (target_rows - len(ascii_grid))
-    else:
-        ascii_grid = ascii_grid[:target_rows]
+    # Target size: 30 columns x 40 rows for contribution grid
+    contrib_grid = image_to_contrib_grid(avatar_img, width=30, height=40)
 
     # Calculate typing animation widths
     typed_text = f"{username}@macos:~"
@@ -79,35 +70,23 @@ def generate_svg():
     # Header buttons & macOS terminal style
     svg_elements = []
     
-    # 1. Left Side ASCII portrait (colorized)
-    ascii_svg_lines = []
-    for y_idx, row in enumerate(ascii_grid):
-        dy = "11.5" if y_idx > 0 else "0"
-        row_svg = [f'<tspan x="35" dy="{dy}">']
-        
-        current_color = None
-        current_text = []
-        for char, color in row:
-            char_esc = char.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-            if color == current_color:
-                current_text.append(char_esc)
-            else:
-                if current_color is not None:
-                    text_str = "".join(current_text)
-                    row_svg.append(f'<tspan fill="{current_color}">{text_str}</tspan>')
-                current_color = color
-                current_text = [char_esc]
-        if current_text:
-            text_str = "".join(current_text)
-            row_svg.append(f'<tspan fill="{current_color}">{text_str}</tspan>')
+    # 1. Left Side Contribution Grid Portrait
+    contrib_svg_rects = ["  <!-- Left Side Contribution Grid Portrait -->"]
+    tile_size = 7.5
+    tile_gap = 1.8
+    x_start = 45.5
+    y_start_contrib = 86.0
+    
+    for y_idx, row in enumerate(contrib_grid):
+        for x_idx, color in enumerate(row):
+            cx = x_start + x_idx * (tile_size + tile_gap)
+            cy = y_start_contrib + y_idx * (tile_size + tile_gap)
+            contrib_svg_rects.append(
+                f'  <rect class="contrib-tile" x="{cx:.2f}" y="{cy:.2f}" width="{tile_size}" height="{tile_size}" rx="1.5" ry="1.5" fill="{color}" />'
+            )
             
-        row_svg.append('</tspan>')
-        ascii_svg_lines.append("".join(row_svg))
-        
-    ascii_text_block = f"""  <text x="35" y="98" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" font-weight="bold" xml:space="preserve">
-    {"".join(ascii_svg_lines)}
-  </text>"""
-    svg_elements.append(ascii_text_block)
+    contrib_text_block = "\n".join(contrib_svg_rects)
+    svg_elements.append(contrib_text_block)
 
     # 2. Right Side Info Panel
     # Typing username header
@@ -219,6 +198,18 @@ def generate_svg():
       .terminal-window {{
         filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.45));
         animation: fadeIn 0.8s ease-out;
+      }}
+      
+      .contrib-tile {{
+        transition: transform 0.15s ease, fill 0.15s ease;
+        transform-box: fill-box;
+        transform-origin: center;
+      }}
+      
+      .contrib-tile:hover {{
+        transform: scale(1.3);
+        fill: #38bdf8; /* Sky blue highlight on hover */
+        cursor: pointer;
       }}
       
       @keyframes fadeIn {{

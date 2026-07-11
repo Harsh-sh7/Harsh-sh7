@@ -63,6 +63,53 @@ def image_to_color_ascii(image: Image.Image, width: int = 60, aspect_ratio_facto
         
     return grid
 
+def image_to_contrib_grid(image: Image.Image, width: int = 30, height: int = 40) -> list[list[str]]:
+    """
+    Converts a Pillow image to a 2D grid of GitHub contribution colors.
+    """
+    # Handle transparency: paste RGBA images onto a dark background
+    if image.mode in ("RGBA", "LA") or (image.mode == "P" and "transparency" in image.info):
+        alpha_composite = Image.new("RGBA", image.size, (11, 15, 25, 255)) # Match terminal background color
+        alpha_composite.paste(image, mask=image.split()[-1])
+        image = alpha_composite.convert("RGB")
+    else:
+        image = image.convert("RGB")
+    
+    # Resize to exact dimensions (30x40)
+    image = image.resize((width, height), Image.Resampling.LANCZOS)
+    
+    # GitHub dark-mode contribution graph colors
+    colors = {
+        0: "#161b22", # empty
+        1: "#0e4429", # level 1
+        2: "#006d32", # level 2
+        3: "#26a641", # level 3
+        4: "#39d353"  # level 4
+    }
+    
+    grid = []
+    for y in range(height):
+        row = []
+        for x in range(width):
+            r, g, b = image.getpixel((x, y))
+            # Calculate luminance
+            gray = int(0.299 * r + 0.587 * g + 0.114 * b)
+            if gray < 50:
+                level = 0
+            elif gray < 100:
+                level = 1
+            elif gray < 150:
+                level = 2
+            elif gray < 200:
+                level = 3
+            else:
+                level = 4
+            row.append(colors[level])
+        grid.append(row)
+        
+    return grid
+
+
 if __name__ == "__main__":
     import sys
     username = "Harsh-sh7"
