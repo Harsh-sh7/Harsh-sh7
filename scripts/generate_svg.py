@@ -311,237 +311,199 @@ def generate_retro_badges():
     print("Generated retro social badges successfully!")
 
 def generate_tree_svg(stats: dict, username: str):
-    print("Generating Contribution Tree SVG...")
+    print("Generating 3D Isometric Contribution Graph SVG...")
     if "contribution_days" not in stats or not stats["contribution_days"]:
-        print("No contribution days found in stats! Skipping tree generation.")
+        print("No contribution days found in stats! Skipping generation.")
         return
         
-    months_data = {}
-    for day in stats["contribution_days"]:
-        dt = datetime.strptime(day["date"], "%Y-%m-%d")
-        my_key = dt.strftime("%b '%y")
-        if my_key not in months_data:
-            months_data[my_key] = []
-        months_data[my_key].append(day)
-        
-    month_keys = list(months_data.keys())[-12:]
-    
-    limbs_paths = []
-    branch_paths = []
-    twig_paths = []
-    ambient_leaves = []
-    leaf_rects = []
-    month_labels = []
-    recent_marker = ""
-    
+    # Find most recent commit
     recent_day = None
     for day in reversed(stats["contribution_days"]):
         if day["contributionCount"] > 0:
             recent_day = day
             break
             
-    colors = {
-        0: "#13261a",
-        1: "#0e4429",
-        2: "#006d32",
-        3: "#26a641",
-        4: "#39d353"
+    # Premium 3D Isometric Shading Color Palette
+    # Colors: (Top Face, Left Face, Right Face)
+    colors_3d = {
+        0: ("#161b22", "#11151b", "#0d1115"),  # Level 0
+        1: ("#0e4429", "#0b3620", "#082818"),  # Level 1
+        2: ("#006d32", "#005728", "#00411e"),  # Level 2
+        3: ("#26a641", "#1e8534", "#166327"),  # Level 3
+        4: ("#39d353", "#2ea942", "#227e31")   # Level 4
     }
     
-    x_base = 450
-    y_base = 560
-    y_split = 445
+    x_origin = 195
+    y_origin = 110
+    w = 11.5
+    h_d = 5.75
     
-    root_paths = [
-        f'    <!-- Gnarled roots and flared base -->',
-        f'    <path d="M 390 570 Q 420 540, 435 460" fill="none" stroke="#4e342e" stroke-width="26" stroke-linecap="round" />',
-        f'    <path d="M 510 570 Q 480 540, 465 460" fill="none" stroke="#4e342e" stroke-width="26" stroke-linecap="round" />',
-        f'    <path d="M 450 570 L 450 435" fill="none" stroke="#4e342e" stroke-width="32" stroke-linecap="round" />',
-        f'    <path d="M 390 570 Q 350 580, 310 585" fill="none" stroke="#4e342e" stroke-width="12" stroke-linecap="round" />',
-        f'    <path d="M 510 570 Q 550 580, 590 585" fill="none" stroke="#4e342e" stroke-width="12" stroke-linecap="round" />',
-        f'    <path d="M 450 570 Q 450 585, 450 592" fill="none" stroke="#4e342e" stroke-width="14" stroke-linecap="round" />'
-    ]
+    svg_elements = []
+    recent_marker = ""
     
-    limbs_paths = [
-        f'    <!-- Large Primary Limbs -->',
-        f'    <path d="M 435 450 C 410 390, 340 330, 290 280" fill="none" stroke="#4e342e" stroke-width="20" stroke-linecap="round" />',
-        f'    <path d="M 450 435 C 450 380, 440 310, 450 220" fill="none" stroke="#4e342e" stroke-width="16" stroke-linecap="round" />',
-        f'    <path d="M 465 450 C 490 390, 560 330, 610 280" fill="none" stroke="#4e342e" stroke-width="20" stroke-linecap="round" />'
-    ]
-    
-    for i, key in enumerate(month_keys):
-        angle_deg = 173 - i * (166 / 11)
-        theta = math.radians(angle_deg)
+    # Render all 3D pillars back-to-front
+    for idx, day in enumerate(stats["contribution_days"]):
+        col = idx // 7
+        row = idx % 7
         
-        x_tip = x_base + 210 * math.cos(theta)
-        y_tip = 340 - 150 * math.sin(theta)
+        cx = x_origin + col * w - row * w
+        cy = y_origin + col * h_d + row * h_d
         
-        if i <= 3:
-            x_start_branch, y_start_branch = 290, 280
-            c1x = 290 + 35 * math.cos(theta)
-            c1y = 280 - 25 * math.sin(theta)
-        elif i <= 7:
-            x_start_branch, y_start_branch = 450, 220
-            c1x = 450 + 25 * math.cos(theta)
-            c1y = 220 - 25 * math.sin(theta)
+        cnt = day["contributionCount"]
+        
+        # Calculate level 0-4
+        if cnt == 0:
+            level = 0
+            H = 0
+        elif cnt <= 2:
+            level = 1
+            H = 8
+        elif cnt <= 5:
+            level = 2
+            H = 18
+        elif cnt <= 8:
+            level = 3
+            H = 30
         else:
-            x_start_branch, y_start_branch = 610, 280
-            c1x = 610 + 35 * math.cos(theta)
-            c1y = 280 - 25 * math.sin(theta)
+            level = 4
+            H = 45
             
-        branch_paths.append(
-            f'    <path d="M {x_start_branch} {y_start_branch} Q {c1x:.1f} {c1y:.1f} {x_tip:.1f} {y_tip:.1f}" fill="none" stroke="#4e342e" stroke-width="5.0" stroke-linecap="round" />'
-        )
-        
-        twig_len1 = 45
-        twig_len2 = 55
-        twig_len3 = 45
-        
-        theta1 = theta + 0.60
-        theta2 = theta
-        theta3 = theta - 0.60
-        
-        xt1 = x_tip + twig_len1 * math.cos(theta1)
-        yt1 = y_tip - twig_len1 * math.sin(theta1)
-        xt2 = x_tip + twig_len2 * math.cos(theta2)
-        yt2 = y_tip - twig_len2 * math.sin(theta2)
-        xt3 = x_tip + twig_len3 * math.cos(theta3)
-        yt3 = y_tip - twig_len3 * math.sin(theta3)
-        
-        twig_paths.append(f'    <path d="M {x_tip:.1f} {y_tip:.1f} L {xt1:.1f} {yt1:.1f}" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />')
-        twig_paths.append(f'    <path d="M {x_tip:.1f} {y_tip:.1f} L {xt2:.1f} {yt2:.1f}" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />')
-        twig_paths.append(f'    <path d="M {x_tip:.1f} {y_tip:.1f} L {xt3:.1f} {yt3:.1f}" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />')
-        
-        label_x = x_base + 380 * math.cos(theta)
-        label_y = 360 - 270 * math.sin(theta)
-        
-        branch_paths.append(
-            f'    <line x1="{x_tip:.1f}" y1="{y_tip:.1f}" x2="{label_x:.1f}" y2="{label_y:.1f}" stroke="#374151" stroke-width="1" stroke-dasharray="3 3" />'
-        )
-        
-        anchor = "middle"
-        if label_x < 420:
-            anchor = "end"
-            label_x -= 5
-        elif label_x > 480:
-            anchor = "start"
-            label_x += 5
+        # Add slight additional height scaling for active commits
+        if cnt > 0:
+            H = min(75, H + (cnt - 1) * 1.8)
             
-        month_labels.append(
-            f'    <text x="{label_x:.1f}" y="{label_y + 4:.1f}" font-family="\'JetBrains Mono\', \'Fira Code\', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="{anchor}">{key}</text>'
-        )
+        top_color, left_color, right_color = colors_3d[level]
+        is_recent = (recent_day and day["date"] == recent_day["date"])
         
-        for k in range(25):
-            twig_idx = k % 3
-            if twig_idx == 0:
-                x_start, y_start, x_end, y_end, twig_angle = x_tip, y_tip, xt1, yt1, theta1
-            elif twig_idx == 1:
-                x_start, y_start, x_end, y_end, twig_angle = x_tip, y_tip, xt2, yt2, theta2
-            else:
-                x_start, y_start, x_end, y_end, twig_angle = x_tip, y_tip, xt3, yt3, theta3
-                
-            t = 0.2 + (k // 3) * (0.8 / 8)
-            if t > 1.0: t = 1.0
-            cx = x_start + (x_end - x_start) * t
-            cy = y_start + (y_end - y_start) * t
-            
-            angle_perp = twig_angle + math.pi / 2
-            offset_perp = ((k * 13) % 36) - 18
-            offset_para = ((k * 19) % 24) - 12
-            cx += offset_perp * math.cos(angle_perp) + offset_para * math.cos(twig_angle)
-            cy -= offset_perp * math.sin(angle_perp) + offset_para * math.sin(twig_angle)
-            
-            ambient_leaves.append(
-                f'    <rect class="contrib-leaf-bg" x="{cx - 3.75:.2f}" y="{cy - 3.75:.2f}" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />'
+        pillar_shapes = []
+        
+        # If H == 0, draw flat floor tile (rhombus only)
+        if H == 0:
+            pillar_shapes.append(
+                f'<polygon points="{cx:.1f},{cy - h_d:.1f} {cx + w:.1f},{cy:.1f} {cx:.1f},{cy + h_d:.1f} {cx - w:.1f},{cy:.1f}" fill="{top_color}" stroke="#0b0f19" stroke-width="0.3" />'
+            )
+        else:
+            # 1. Left face vertical wall
+            pillar_shapes.append(
+                f'<polygon points="{cx - w:.1f},{cy - H:.1f} {cx:.1f},{cy - H + h_d:.1f} {cx:.1f},{cy + h_d:.1f} {cx - w:.1f},{cy:.1f}" fill="{left_color}" />'
+            )
+            # 2. Right face vertical wall
+            pillar_shapes.append(
+                f'<polygon points="{cx:.1f},{cy - H + h_d:.1f} {cx + w:.1f},{cy - H:.1f} {cx + w:.1f},{cy:.1f} {cx:.1f},{cy + h_d:.1f}" fill="{right_color}" />'
+            )
+            # 3. Top face rhombus
+            pillar_shapes.append(
+                f'<polygon points="{cx:.1f},{cy - H - h_d:.1f} {cx + w:.1f},{cy - H:.1f} {cx:.1f},{cy - H + h_d:.1f} {cx - w:.1f},{cy - H:.1f}" fill="{top_color}" stroke="{top_color}" stroke-width="0.3" />'
             )
             
-        month_days = months_data[key]
-        N = len(month_days)
-        for j, day in enumerate(month_days):
-            twig_idx = j % 3
-            if twig_idx == 0:
-                x_start, y_start, x_end, y_end, twig_angle = x_tip, y_tip, xt1, yt1, theta1
-            elif twig_idx == 1:
-                x_start, y_start, x_end, y_end, twig_angle = x_tip, y_tip, xt2, yt2, theta2
-            else:
-                x_start, y_start, x_end, y_end, twig_angle = x_tip, y_tip, xt3, yt3, theta3
-                
-            t = 0.15 + (j // 3) * (0.8 / max(1, (N // 3)))
-            if t > 1.0: t = 1.0
-            
-            cx = x_start + (x_end - x_start) * t
-            cy = y_start + (y_end - y_start) * t
-            
-            angle_perp = twig_angle + math.pi / 2
-            offset_perp = ((j * 17) % 36) - 18
-            offset_para = ((j * 23) % 24) - 12
-            cx += offset_perp * math.cos(angle_perp) + offset_para * math.cos(twig_angle)
-            cy -= offset_perp * math.sin(angle_perp) + offset_para * math.sin(twig_angle)
-            
-            cnt = day["contributionCount"]
-            if cnt == 0:
-                color = colors[0]
-            elif cnt <= 1:
-                color = colors[1]
-            elif cnt <= 3:
-                color = colors[2]
-            elif cnt <= 6:
-                color = colors[3]
-            else:
-                color = colors[4]
-                
-            is_recent = (recent_day and day["date"] == recent_day["date"])
-            leaf_class = "contrib-leaf recent-leaf" if is_recent else "contrib-leaf"
-            
-            leaf_rects.append(
-                f'    <rect class="{leaf_class}" x="{cx - 3.75:.2f}" y="{cy - 3.75:.2f}" width="7.5" height="7.5" rx="1.8" fill="{color}" />'
-            )
-            
-            if is_recent:
-                recent_marker = f"""    <!-- Pulse Halo for Most Recent Commit -->
-    <circle cx="{cx:.2f}" cy="{cy:.2f}" r="11" fill="none" stroke="#ef4444" stroke-width="1.8">
-      <animate attributeName="r" values="6;14;6" dur="1.2s" repeatCount="indefinite" />
+        group_class = "pillar-group recent-pillar" if is_recent else "pillar-group"
+        svg_elements.append(
+            f'    <g class="{group_class}" data-date="{day["date"]}" data-commits="{cnt}">\n      {" ".join(pillar_shapes)}\n    </g>'
+        )
+        
+        if is_recent:
+            recent_marker = f"""    <!-- Pulse Halo for Most Recent Commit -->
+    <circle cx="{cx:.2f}" cy="{cy - H:.2f}" r="13" fill="none" stroke="#ef4444" stroke-width="1.8">
+      <animate attributeName="r" values="8;15;8" dur="1.2s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite" />
     </circle>
-    <circle cx="{cx:.2f}" cy="{cy:.2f}" r="2.5" fill="#ef4444" />
+    <circle cx="{cx:.2f}" cy="{cy - H:.2f}" r="2.5" fill="#ef4444" />
     <!-- Floating details bubble -->
-    <g transform="translate({cx + 12:.2f}, {cy - 12:.2f})">
+    <g transform="translate({cx + 12:.2f}, {cy - H - 12:.2f})">
       <rect x="0" y="0" width="185" height="18" rx="3" fill="#111827" stroke="#ef4444" stroke-width="1" opacity="0.95" />
       <text x="7" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#e5e7eb" font-weight="bold">Recent: {day['date']} ({cnt} commits)</text>
     </g>"""
 
-    svg_tree_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="auto">
+    # Generate month labels along the top-left axis (col axis)
+    months_labels = []
+    last_month = None
+    seen_months = set()
+    for idx, day in enumerate(stats["contribution_days"]):
+        col = idx // 7
+        dt = datetime.strptime(day["date"], "%Y-%m-%d")
+        m_name = dt.strftime("%b")
+        if m_name != last_month and m_name not in seen_months:
+            seen_months.add(m_name)
+            last_month = m_name
+            
+            # Week start baseline at row 0
+            cx = x_origin + col * w
+            cy = y_origin + col * h_d
+            tx = cx - 18
+            ty = cy - 25
+            months_labels.append(
+                f'    <line x1="{tx + 14:.1f}" y1="{ty + 4:.1f}" x2="{cx:.1f}" y2="{cy - 5:.1f}" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />'
+                f'\n    <text x="{tx:.1f}" y="{ty:.1f}" font-family="\'JetBrains Mono\', \'Fira Code\', monospace" font-size="9" fill="#9ca3af" text-anchor="end">{m_name}</text>'
+            )
+            
+    # Generate weekday labels along the top-right axis (row axis)
+    weekday_labels = []
+    for r, label in [(0, "Sun"), (3, "Wed"), (6, "Sat")]:
+        cx = x_origin - r * w
+        cy = y_origin + r * h_d
+        weekday_labels.append(
+            f'    <text x="{cx - 15:.1f}" y="{cy + 3:.1f}" font-family="\'JetBrains Mono\', \'Fira Code\', monospace" font-size="9" fill="#4b5563" text-anchor="end">{label}</text>'
+        )
+        
+    # Generate 3D Legend items at bottom-right
+    legend_elements = []
+    lx_start = 650
+    ly_start = 440
+    for lvl in range(5):
+        lx = lx_start + lvl * 28
+        ly = ly_start
+        t_col, l_col, r_col = colors_3d[lvl]
+        H_leg = lvl * 7
+        
+        leg_shapes = []
+        if H_leg == 0:
+            leg_shapes.append(
+                f'<polygon points="{lx:.1f},{ly - h_d:.1f} {lx + w:.1f},{ly:.1f} {lx:.1f},{ly + h_d:.1f} {lx - w:.1f},{ly:.1f}" fill="{t_col}" stroke="#0b0f19" stroke-width="0.3" />'
+            )
+        else:
+            leg_shapes.append(
+                f'<polygon points="{lx - w:.1f},{ly - H_leg:.1f} {lx:.1f},{ly - H_leg + h_d:.1f} {lx:.1f},{ly + h_d:.1f} {lx - w:.1f},{ly:.1f}" fill="{l_col}" />'
+            )
+            leg_shapes.append(
+                f'<polygon points="{lx:.1f},{ly - H_leg + h_d:.1f} {lx + w:.1f},{ly - H_leg:.1f} {lx + w:.1f},{ly:.1f} {lx:.1f},{ly + h_d:.1f}" fill="{r_col}" />'
+            )
+            leg_shapes.append(
+                f'<polygon points="{lx:.1f},{ly - H_leg - h_d:.1f} {lx + w:.1f},{ly - H_leg:.1f} {lx:.1f},{ly - H_leg + h_d:.1f} {lx - w:.1f},{ly - H_leg:.1f}" fill="{t_col}" stroke="{t_col}" stroke-width="0.3" />'
+            )
+        legend_elements.append(f'      <g transform="translate(0, 0)">{" ".join(leg_shapes)}</g>')
+
+    # SVG compilation
+    svg_tree_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="auto">
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
       
-      .contrib-tree-card {{
+      .contrib-graph-card {{
         filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.45));
-        animation: treeFadeIn 0.8s ease-out;
+        animation: graphFadeIn 0.8s ease-out;
       }}
       
-      .contrib-leaf {{
-        transition: transform 0.15s ease, fill 0.15s ease;
-        transform-box: fill-box;
-        transform-origin: center;
-      }}
-      
-      .contrib-leaf:hover {{
-        transform: scale(1.8);
-        fill: #38bdf8;
+      .pillar-group {{
+        transition: transform 0.2s ease;
         cursor: pointer;
+        transform-box: fill-box;
+        transform-origin: bottom center;
       }}
       
-      @keyframes treeFadeIn {{
+      .pillar-group:hover {{
+        transform: translateY(-8px);
+      }}
+      
+      @keyframes graphFadeIn {{
         from {{ opacity: 0; transform: translateY(10px); }}
         to {{ opacity: 1; transform: translateY(0); }}
       }}
     </style>
   </defs>
 
-  <g class="contrib-tree-card">
+  <g class="contrib-graph-card">
     <!-- Window Background -->
-    <rect x="0" y="0" width="900" height="600" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+    <rect x="0" y="0" width="900" height="480" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
 
     <!-- Window Title Bar -->
     <path d="M 0,12 A 12,12 0 0,1 12,0 L 888,0 A 12,12 0 0,1 900,12 L 900,42 L 0,42 Z" fill="#111827" />
@@ -553,7 +515,7 @@ def generate_tree_svg(stats: dict, username: str):
 
     <!-- Terminal Title -->
     <text x="450" y="25" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" text-anchor="middle" font-weight="bold">
-      {username}@macos: ~/contribution-tree
+      {username}@macos: ~/isometric-contributions
     </text>
 
     <!-- Title Bar Divider -->
@@ -561,35 +523,28 @@ def generate_tree_svg(stats: dict, username: str):
 
     <!-- Header Text -->
     <text x="35" y="70" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13" fill="#34d399" font-weight="bold">
-      &gt; git log --graph --date=relative --all --organic-foliage (Past 12 Months)
+      &gt; git log --graph --date=relative --all --3d-projection (Past 12 Months)
     </text>
 
-    <!-- Tree elements -->
-{chr(10).join(root_paths)}
-{chr(10).join(limbs_paths)}
-{chr(10).join(branch_paths)}
-{chr(10).join(twig_paths)}
-{chr(10).join(ambient_leaves)}
-{chr(10).join(leaf_rects)}
-{chr(10).join(month_labels)}
+    <!-- Weekday and Month labels -->
+{chr(10).join(weekday_labels)}
+{chr(10).join(months_labels)}
+
+    <!-- 3D Pillars -->
+{chr(10).join(svg_elements)}
 {recent_marker}
 
     <!-- Legend -->
-    <g transform="translate(680, 560)">
-      <text x="0" y="9" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Less</text>
-      <rect x="35" y="0" width="10" height="10" rx="1.5" fill="{colors[0]}" stroke="#1f2937" stroke-width="0.5" />
-      <rect x="48" y="0" width="10" height="10" rx="1.5" fill="{colors[1]}" />
-      <rect x="61" y="0" width="10" height="10" rx="1.5" fill="{colors[2]}" />
-      <rect x="74" y="0" width="10" height="10" rx="1.5" fill="{colors[3]}" />
-      <rect x="87" y="0" width="10" height="10" rx="1.5" fill="{colors[4]}" />
-      <text x="103" y="9" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">More</text>
+    <g transform="translate(0, 0)">
+      <text x="590" y="445" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#4b5563" font-weight="bold" text-anchor="end">Less</text>
+{chr(10).join(legend_elements)}
+      <text x="795" y="445" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#4b5563" font-weight="bold" text-anchor="start">More</text>
     </g>
   </g>
 </svg>"""
 
     output_path = os.path.join(os.path.dirname(__file__), "..", "assets", "contribution_tree.svg")
-    with open(output_path, "w") as f:
-        f.write(svg_tree_template)
+    with open(output_path, "w") as f: f.write(svg_tree_template)
     print(f"Successfully generated Contribution Tree SVG at {output_path}!")
 
 if __name__ == "__main__":
