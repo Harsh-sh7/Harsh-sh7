@@ -1,4 +1,4 @@
-# Hi 👋
+# Hi, I'm Harshit 
 
 <p align="center">
   <img src="assets/terminal.svg" alt="Harshit Shakya's Terminal Profile" width="850">
