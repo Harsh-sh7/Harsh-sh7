@@ -66,7 +66,7 @@ def generate_svg():
     text_width = len(typed_text) * char_width
     cursor_start_x = 360
     cursor_end_x = 360 + text_width + 4
-
+ 
     print("Compiling SVG content...")
     # Header buttons & macOS terminal style
     svg_elements = []
@@ -323,6 +323,57 @@ def generate_tree_svg(stats: dict, username: str):
             recent_day = day
             break
             
+    # Calculate stats
+    total_commits = sum(day["contributionCount"] for day in stats["contribution_days"])
+    
+    busiest_day = max(stats["contribution_days"], key=lambda d: d["contributionCount"])
+    busiest_count = busiest_day["contributionCount"]
+    busiest_date = datetime.strptime(busiest_day["date"], "%Y-%m-%d").strftime("%b %d, %Y") if busiest_count > 0 else "N/A"
+    
+    # Calculate streaks
+    longest_streak = 0
+    temp_streak = 0
+    longest_start = None
+    longest_end = None
+    temp_start = None
+    
+    for day in stats["contribution_days"]:
+        if day["contributionCount"] > 0:
+            if temp_streak == 0:
+                temp_start = day["date"]
+            temp_streak += 1
+            if temp_streak > longest_streak:
+                longest_streak = temp_streak
+                longest_start = temp_start
+                longest_end = day["date"]
+        else:
+            temp_streak = 0
+            
+    current_streak = 0
+    current_start = None
+    current_end = None
+    for day in reversed(stats["contribution_days"]):
+        if day["contributionCount"] > 0:
+            if current_streak == 0:
+                current_end = day["date"]
+            current_streak += 1
+            current_start = day["date"]
+        else:
+            if current_streak > 0:
+                break
+                
+    longest_streak_str = ""
+    if longest_streak > 0 and longest_start and longest_end:
+        ls_start = datetime.strptime(longest_start, "%Y-%m-%d").strftime("%b %d")
+        ls_end = datetime.strptime(longest_end, "%Y-%m-%d").strftime("%b %d")
+        longest_streak_str = f"{ls_start} - {ls_end}"
+        
+    current_streak_str = ""
+    if current_streak > 0 and current_start and current_end:
+        cs_start = datetime.strptime(current_start, "%Y-%m-%d").strftime("%b %d")
+        cs_end = datetime.strptime(current_end, "%Y-%m-%d").strftime("%b %d")
+        current_streak_str = f"{cs_start} - {cs_end}"
+        
     # Premium 3D Isometric Shading Color Palette
     # Colors: (Top Face, Left Face, Right Face)
     colors_3d = {
@@ -350,6 +401,7 @@ def generate_tree_svg(stats: dict, username: str):
         cy = y_origin + col * h_d + row * h_d
         
         cnt = day["contributionCount"]
+        dt = datetime.strptime(day["date"], "%Y-%m-%d")
         
         # Calculate level 0-4
         if cnt == 0:
@@ -396,9 +448,19 @@ def generate_tree_svg(stats: dict, username: str):
                 f'<polygon points="{cx:.1f},{cy - H - h_d:.1f} {cx + w:.1f},{cy - H:.1f} {cx:.1f},{cy - H + h_d:.1f} {cx - w:.1f},{cy - H:.1f}" fill="{top_color}" stroke="{top_color}" stroke-width="0.3" />'
             )
             
+        # Hover interactive tooltip
+        commit_lbl = f"{cnt} commits" if cnt != 1 else "1 commit"
+        if cnt == 0:
+            commit_lbl = "No commits"
+            
+        tooltip_element = f"""<g class="tooltip" transform="translate({cx + 10:.2f}, {cy - H - 18:.2f})">
+        <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="{top_color if cnt > 0 else '#1f2937'}" stroke-width="1" opacity="0.95" />
+        <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">{commit_lbl} ({dt.strftime('%b %d')})</text>
+      </g>"""
+      
         group_class = "pillar-group recent-pillar" if is_recent else "pillar-group"
         svg_elements.append(
-            f'    <g class="{group_class}" data-date="{day["date"]}" data-commits="{cnt}">\n      {" ".join(pillar_shapes)}\n    </g>'
+            f'    <g class="{group_class}" data-date="{day["date"]}">\n      {" ".join(pillar_shapes)}\n      {tooltip_element}\n    </g>'
         )
         
         if is_recent:
@@ -407,12 +469,7 @@ def generate_tree_svg(stats: dict, username: str):
       <animate attributeName="r" values="8;15;8" dur="1.2s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite" />
     </circle>
-    <circle cx="{cx:.2f}" cy="{cy - H:.2f}" r="2.5" fill="#ef4444" />
-    <!-- Floating details bubble -->
-    <g transform="translate({cx + 12:.2f}, {cy - H - 12:.2f})">
-      <rect x="0" y="0" width="185" height="18" rx="3" fill="#111827" stroke="#ef4444" stroke-width="1" opacity="0.95" />
-      <text x="7" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#e5e7eb" font-weight="bold">Recent: {day['date']} ({cnt} commits)</text>
-    </g>"""
+    <circle cx="{cx:.2f}" cy="{cy - H:.2f}" r="2.5" fill="#ef4444" />"""
 
     # Generate month labels along the top-left axis (col axis)
     months_labels = []
@@ -494,6 +551,19 @@ def generate_tree_svg(stats: dict, username: str):
         transform: translateY(-8px);
       }}
       
+      .pillar-group .tooltip {{
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.15s ease, transform 0.15s ease;
+        transform: translateY(5px);
+        transform-box: fill-box;
+      }}
+      
+      .pillar-group:hover .tooltip {{
+        opacity: 1;
+        transform: translateY(0);
+      }}
+      
       @keyframes graphFadeIn {{
         from {{ opacity: 0; transform: translateY(10px); }}
         to {{ opacity: 1; transform: translateY(0); }}
@@ -533,6 +603,28 @@ def generate_tree_svg(stats: dict, username: str):
     <!-- 3D Pillars -->
 {chr(10).join(svg_elements)}
 {recent_marker}
+
+    <!-- Left Stats Panel -->
+    <g transform="translate(45, 340)">
+      <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Longest Streak</text>
+      <text x="0" y="22" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="20" fill="#34d399" font-weight="bold">{longest_streak} days</text>
+      <text x="0" y="38" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">{longest_streak_str}</text>
+      
+      <text x="0" y="65" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Current Streak</text>
+      <text x="0" y="87" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="20" fill="#34d399" font-weight="bold">{current_streak} days</text>
+      <text x="0" y="103" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">{current_streak_str}</text>
+    </g>
+
+    <!-- Right Stats Panel -->
+    <g transform="translate(620, 95)">
+      <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">1 Year Total</text>
+      <text x="0" y="24" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="22" fill="#34d399" font-weight="bold">{total_commits:,} commits</text>
+      <text x="0" y="40" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">Past 365 Days</text>
+      
+      <text x="0" y="70" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Busiest Day</text>
+      <text x="0" y="92" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="19" fill="#34d399" font-weight="bold">{busiest_count} commits</text>
+      <text x="0" y="108" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">{busiest_date}</text>
+    </g>
 
     <!-- Legend -->
     <g transform="translate(0, 0)">
