@@ -2301,350 +2301,350 @@
     </g>
     <g class="pillar-group" data-date="2026-05-23">
       <polygon points="701.0,358.9 712.5,364.7 712.5,374.5 701.0,368.8" fill="#0b3620" /> <polygon points="712.5,364.7 724.0,358.9 724.0,368.8 712.5,374.5" fill="#082818" /> <polygon points="712.5,353.2 724.0,358.9 712.5,364.7 701.0,358.9" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(722.50, 340.95)">
+      <g class="tooltip" transform="translate(572.50, 340.95)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">2 commits (May 23)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-05-24">
       <polygon points="689.5,351.1 701.0,356.9 701.0,380.2 689.5,374.5" fill="#005728" /> <polygon points="701.0,356.9 712.5,351.1 712.5,374.5 701.0,380.2" fill="#00411e" /> <polygon points="701.0,345.4 712.5,351.1 701.0,356.9 689.5,351.1" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(711.00, 333.10)">
+      <g class="tooltip" transform="translate(561.00, 333.10)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#006d32" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">4 commits (May 24)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-05-25">
       <polygon points="689.5,374.5 701.0,380.2 689.5,386.0 678.0,380.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(699.50, 362.25)">
+      <g class="tooltip" transform="translate(549.50, 362.25)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (May 25)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-05-26">
       <polygon points="678.0,380.2 689.5,386.0 678.0,391.8 666.5,386.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(688.00, 368.00)">
+      <g class="tooltip" transform="translate(538.00, 368.00)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (May 26)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-05-27">
       <polygon points="655.0,383.8 666.5,389.5 666.5,397.5 655.0,391.8" fill="#0b3620" /> <polygon points="666.5,389.5 678.0,383.8 678.0,391.8 666.5,397.5" fill="#082818" /> <polygon points="666.5,378.0 678.0,383.8 666.5,389.5 655.0,383.8" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(676.50, 365.75)">
+      <g class="tooltip" transform="translate(526.50, 365.75)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">1 commit (May 27)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-05-28">
       <polygon points="643.5,387.7 655.0,393.4 655.0,403.2 643.5,397.5" fill="#0b3620" /> <polygon points="655.0,393.4 666.5,387.7 666.5,397.5 655.0,403.2" fill="#082818" /> <polygon points="655.0,381.9 666.5,387.7 655.0,393.4 643.5,387.7" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(665.00, 369.70)">
+      <g class="tooltip" transform="translate(515.00, 369.70)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">2 commits (May 28)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-05-29">
       <polygon points="643.5,397.5 655.0,403.2 643.5,409.0 632.0,403.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(653.50, 385.25)">
+      <g class="tooltip" transform="translate(503.50, 385.25)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (May 29)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-05-30">
       <polygon points="712.5,366.5 724.0,372.2 724.0,380.2 712.5,374.5" fill="#0b3620" /> <polygon points="724.0,372.2 735.5,366.5 735.5,374.5 724.0,380.2" fill="#082818" /> <polygon points="724.0,360.8 735.5,366.5 724.0,372.2 712.5,366.5" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(734.00, 348.50)">
+      <g class="tooltip" transform="translate(584.00, 348.50)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">1 commit (May 30)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-05-31">
       <polygon points="712.5,374.5 724.0,380.2 712.5,386.0 701.0,380.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(722.50, 362.25)">
+      <g class="tooltip" transform="translate(572.50, 362.25)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (May 31)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-01">
       <polygon points="701.0,380.2 712.5,386.0 701.0,391.8 689.5,386.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(711.00, 368.00)">
+      <g class="tooltip" transform="translate(561.00, 368.00)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 01)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-02">
       <polygon points="678.0,383.8 689.5,389.5 689.5,397.5 678.0,391.8" fill="#0b3620" /> <polygon points="689.5,389.5 701.0,383.8 701.0,391.8 689.5,397.5" fill="#082818" /> <polygon points="689.5,378.0 701.0,383.8 689.5,389.5 678.0,383.8" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(699.50, 365.75)">
+      <g class="tooltip" transform="translate(549.50, 365.75)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">1 commit (Jun 02)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-03">
       <polygon points="678.0,391.8 689.5,397.5 678.0,403.2 666.5,397.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(688.00, 379.50)">
+      <g class="tooltip" transform="translate(538.00, 379.50)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 03)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-04">
       <polygon points="655.0,393.4 666.5,399.2 666.5,409.0 655.0,403.2" fill="#0b3620" /> <polygon points="666.5,399.2 678.0,393.4 678.0,403.2 666.5,409.0" fill="#082818" /> <polygon points="666.5,387.7 678.0,393.4 666.5,399.2 655.0,393.4" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(676.50, 375.45)">
+      <g class="tooltip" transform="translate(526.50, 375.45)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">2 commits (Jun 04)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-05">
       <polygon points="643.5,385.6 655.0,391.4 655.0,414.8 643.5,409.0" fill="#005728" /> <polygon points="655.0,391.4 666.5,385.6 666.5,409.0 655.0,414.8" fill="#00411e" /> <polygon points="655.0,379.9 666.5,385.6 655.0,391.4 643.5,385.6" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(665.00, 367.60)">
+      <g class="tooltip" transform="translate(515.00, 367.60)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#006d32" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">4 commits (Jun 05)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-06">
       <polygon points="735.5,374.5 747.0,380.2 735.5,386.0 724.0,380.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(745.50, 362.25)">
+      <g class="tooltip" transform="translate(595.50, 362.25)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 06)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-07">
       <polygon points="724.0,380.2 735.5,386.0 724.0,391.8 712.5,386.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(734.00, 368.00)">
+      <g class="tooltip" transform="translate(584.00, 368.00)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 07)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-08">
       <polygon points="701.0,383.8 712.5,389.5 712.5,397.5 701.0,391.8" fill="#0b3620" /> <polygon points="712.5,389.5 724.0,383.8 724.0,391.8 712.5,397.5" fill="#082818" /> <polygon points="712.5,378.0 724.0,383.8 712.5,389.5 701.0,383.8" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(722.50, 365.75)">
+      <g class="tooltip" transform="translate(572.50, 365.75)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">1 commit (Jun 08)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-09">
       <polygon points="689.5,387.7 701.0,393.4 701.0,403.2 689.5,397.5" fill="#0b3620" /> <polygon points="701.0,393.4 712.5,387.7 712.5,397.5 701.0,403.2" fill="#082818" /> <polygon points="701.0,381.9 712.5,387.7 701.0,393.4 689.5,387.7" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(711.00, 369.70)">
+      <g class="tooltip" transform="translate(561.00, 369.70)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">2 commits (Jun 09)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-10">
       <polygon points="689.5,397.5 701.0,403.2 689.5,409.0 678.0,403.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(699.50, 385.25)">
+      <g class="tooltip" transform="translate(549.50, 385.25)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 10)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-11">
       <polygon points="666.5,401.0 678.0,406.8 678.0,414.8 666.5,409.0" fill="#0b3620" /> <polygon points="678.0,406.8 689.5,401.0 689.5,409.0 678.0,414.8" fill="#082818" /> <polygon points="678.0,395.2 689.5,401.0 678.0,406.8 666.5,401.0" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(688.00, 383.00)">
+      <g class="tooltip" transform="translate(538.00, 383.00)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">1 commit (Jun 11)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-12">
       <polygon points="666.5,409.0 678.0,414.8 666.5,420.5 655.0,414.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(676.50, 396.75)">
+      <g class="tooltip" transform="translate(526.50, 396.75)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 12)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-13">
       <polygon points="735.5,376.2 747.0,381.9 747.0,391.8 735.5,386.0" fill="#0b3620" /> <polygon points="747.0,381.9 758.5,376.2 758.5,386.0 747.0,391.8" fill="#082818" /> <polygon points="747.0,370.4 758.5,376.2 747.0,381.9 735.5,376.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(757.00, 358.20)">
+      <g class="tooltip" transform="translate(607.00, 358.20)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">2 commits (Jun 13)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-14">
       <polygon points="724.0,368.4 735.5,374.1 735.5,397.5 724.0,391.8" fill="#005728" /> <polygon points="735.5,374.1 747.0,368.4 747.0,391.8 735.5,397.5" fill="#00411e" /> <polygon points="735.5,362.6 747.0,368.4 735.5,374.1 724.0,368.4" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(745.50, 350.35)">
+      <g class="tooltip" transform="translate(595.50, 350.35)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#006d32" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">4 commits (Jun 14)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-15">
       <polygon points="724.0,391.8 735.5,397.5 724.0,403.2 712.5,397.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(734.00, 379.50)">
+      <g class="tooltip" transform="translate(584.00, 379.50)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 15)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-16">
       <polygon points="712.5,397.5 724.0,403.2 712.5,409.0 701.0,403.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(722.50, 385.25)">
+      <g class="tooltip" transform="translate(572.50, 385.25)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 16)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-17">
       <polygon points="689.5,401.0 701.0,406.8 701.0,414.8 689.5,409.0" fill="#0b3620" /> <polygon points="701.0,406.8 712.5,401.0 712.5,409.0 701.0,414.8" fill="#082818" /> <polygon points="701.0,395.2 712.5,401.0 701.0,406.8 689.5,401.0" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(711.00, 383.00)">
+      <g class="tooltip" transform="translate(561.00, 383.00)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">1 commit (Jun 17)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-18">
       <polygon points="678.0,404.9 689.5,410.7 689.5,420.5 678.0,414.8" fill="#0b3620" /> <polygon points="689.5,410.7 701.0,404.9 701.0,414.8 689.5,420.5" fill="#082818" /> <polygon points="689.5,399.2 701.0,404.9 689.5,410.7 678.0,404.9" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(699.50, 386.95)">
+      <g class="tooltip" transform="translate(549.50, 386.95)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">2 commits (Jun 18)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-19">
       <polygon points="678.0,414.8 689.5,420.5 678.0,426.2 666.5,420.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(688.00, 402.50)">
+      <g class="tooltip" transform="translate(538.00, 402.50)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 19)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-20">
       <polygon points="747.0,383.8 758.5,389.5 758.5,397.5 747.0,391.8" fill="#0b3620" /> <polygon points="758.5,389.5 770.0,383.8 770.0,391.8 758.5,397.5" fill="#082818" /> <polygon points="758.5,378.0 770.0,383.8 758.5,389.5 747.0,383.8" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(768.50, 365.75)">
+      <g class="tooltip" transform="translate(618.50, 365.75)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">1 commit (Jun 20)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-21">
       <polygon points="747.0,391.8 758.5,397.5 747.0,403.2 735.5,397.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(757.00, 379.50)">
+      <g class="tooltip" transform="translate(607.00, 379.50)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 21)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-22">
       <polygon points="724.0,393.4 735.5,399.2 735.5,409.0 724.0,403.2" fill="#0b3620" /> <polygon points="735.5,399.2 747.0,393.4 747.0,403.2 735.5,409.0" fill="#082818" /> <polygon points="735.5,387.7 747.0,393.4 735.5,399.2 724.0,393.4" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(745.50, 375.45)">
+      <g class="tooltip" transform="translate(595.50, 375.45)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">2 commits (Jun 22)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-23">
       <polygon points="712.5,385.6 724.0,391.4 724.0,414.8 712.5,409.0" fill="#005728" /> <polygon points="724.0,391.4 735.5,385.6 735.5,409.0 724.0,414.8" fill="#00411e" /> <polygon points="724.0,379.9 735.5,385.6 724.0,391.4 712.5,385.6" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(734.00, 367.60)">
+      <g class="tooltip" transform="translate(584.00, 367.60)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#006d32" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">4 commits (Jun 23)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-24">
       <polygon points="712.5,409.0 724.0,414.8 712.5,420.5 701.0,414.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(722.50, 396.75)">
+      <g class="tooltip" transform="translate(572.50, 396.75)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 24)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-25">
       <polygon points="701.0,414.8 712.5,420.5 701.0,426.2 689.5,420.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(711.00, 402.50)">
+      <g class="tooltip" transform="translate(561.00, 402.50)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 25)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-26">
       <polygon points="678.0,418.2 689.5,424.0 689.5,432.0 678.0,426.2" fill="#0b3620" /> <polygon points="689.5,424.0 701.0,418.2 701.0,426.2 689.5,432.0" fill="#082818" /> <polygon points="689.5,412.5 701.0,418.2 689.5,424.0 678.0,418.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(699.50, 400.25)">
+      <g class="tooltip" transform="translate(549.50, 400.25)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">1 commit (Jun 26)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-27">
       <polygon points="758.5,387.7 770.0,393.4 770.0,403.2 758.5,397.5" fill="#0b3620" /> <polygon points="770.0,393.4 781.5,387.7 781.5,397.5 770.0,403.2" fill="#082818" /> <polygon points="770.0,381.9 781.5,387.7 770.0,393.4 758.5,387.7" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(780.00, 369.70)">
+      <g class="tooltip" transform="translate(630.00, 369.70)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">2 commits (Jun 27)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-28">
       <polygon points="758.5,397.5 770.0,403.2 758.5,409.0 747.0,403.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(768.50, 385.25)">
+      <g class="tooltip" transform="translate(618.50, 385.25)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 28)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-29">
       <polygon points="735.5,401.0 747.0,406.8 747.0,414.8 735.5,409.0" fill="#0b3620" /> <polygon points="747.0,406.8 758.5,401.0 758.5,409.0 747.0,414.8" fill="#082818" /> <polygon points="747.0,395.2 758.5,401.0 747.0,406.8 735.5,401.0" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(757.00, 383.00)">
+      <g class="tooltip" transform="translate(607.00, 383.00)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">1 commit (Jun 29)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-06-30">
       <polygon points="735.5,409.0 747.0,414.8 735.5,420.5 724.0,414.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(745.50, 396.75)">
+      <g class="tooltip" transform="translate(595.50, 396.75)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jun 30)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-07-01">
       <polygon points="712.5,412.5 724.0,418.2 724.0,426.2 712.5,420.5" fill="#0b3620" /> <polygon points="724.0,418.2 735.5,412.5 735.5,420.5 724.0,426.2" fill="#082818" /> <polygon points="724.0,406.8 735.5,412.5 724.0,418.2 712.5,412.5" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(734.00, 394.50)">
+      <g class="tooltip" transform="translate(584.00, 394.50)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">1 commit (Jul 01)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-07-02">
       <polygon points="712.5,420.5 724.0,426.2 712.5,432.0 701.0,426.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(722.50, 408.25)">
+      <g class="tooltip" transform="translate(572.50, 408.25)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jul 02)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-07-03">
       <polygon points="689.5,422.2 701.0,427.9 701.0,437.8 689.5,432.0" fill="#0b3620" /> <polygon points="701.0,427.9 712.5,422.2 712.5,432.0 701.0,437.8" fill="#082818" /> <polygon points="701.0,416.4 712.5,422.2 701.0,427.9 689.5,422.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(711.00, 404.20)">
+      <g class="tooltip" transform="translate(561.00, 404.20)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">2 commits (Jul 03)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-07-04">
       <polygon points="770.0,379.9 781.5,385.6 781.5,409.0 770.0,403.2" fill="#005728" /> <polygon points="781.5,385.6 793.0,379.9 793.0,403.2 781.5,409.0" fill="#00411e" /> <polygon points="781.5,374.1 793.0,379.9 781.5,385.6 770.0,379.9" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(791.50, 361.85)">
+      <g class="tooltip" transform="translate(641.50, 361.85)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#006d32" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">4 commits (Jul 04)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-07-05">
       <polygon points="770.0,403.2 781.5,409.0 770.0,414.8 758.5,409.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(780.00, 391.00)">
+      <g class="tooltip" transform="translate(630.00, 391.00)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jul 05)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-07-06">
       <polygon points="758.5,409.0 770.0,414.8 758.5,420.5 747.0,414.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(768.50, 396.75)">
+      <g class="tooltip" transform="translate(618.50, 396.75)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jul 06)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-07-07">
       <polygon points="735.5,412.5 747.0,418.2 747.0,426.2 735.5,420.5" fill="#0b3620" /> <polygon points="747.0,418.2 758.5,412.5 758.5,420.5 747.0,426.2" fill="#082818" /> <polygon points="747.0,406.8 758.5,412.5 747.0,418.2 735.5,412.5" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(757.00, 394.50)">
+      <g class="tooltip" transform="translate(607.00, 394.50)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">1 commit (Jul 07)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-07-08">
       <polygon points="724.0,416.4 735.5,422.2 735.5,432.0 724.0,426.2" fill="#0b3620" /> <polygon points="735.5,422.2 747.0,416.4 747.0,426.2 735.5,432.0" fill="#082818" /> <polygon points="735.5,410.7 747.0,416.4 735.5,422.2 724.0,416.4" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(745.50, 398.45)">
+      <g class="tooltip" transform="translate(595.50, 398.45)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">2 commits (Jul 08)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-07-09">
       <polygon points="724.0,426.2 735.5,432.0 724.0,437.8 712.5,432.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(734.00, 414.00)">
+      <g class="tooltip" transform="translate(584.00, 414.00)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jul 09)</text>
       </g>
     </g>
     <g class="pillar-group recent-pillar" data-date="2026-07-10">
       <polygon points="701.0,429.8 712.5,435.5 712.5,443.5 701.0,437.8" fill="#0b3620" /> <polygon points="712.5,435.5 724.0,429.8 724.0,437.8 712.5,443.5" fill="#082818" /> <polygon points="712.5,424.0 724.0,429.8 712.5,435.5 701.0,429.8" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(722.50, 411.75)">
+      <g class="tooltip" transform="translate(572.50, 411.75)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">1 commit (Jul 10)</text>
       </g>
     </g>
     <g class="pillar-group" data-date="2026-07-11">
       <polygon points="793.0,403.2 804.5,409.0 793.0,414.8 781.5,409.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-      <g class="tooltip" transform="translate(803.00, 391.00)">
+      <g class="tooltip" transform="translate(653.00, 391.00)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jul 11)</text>
       </g>

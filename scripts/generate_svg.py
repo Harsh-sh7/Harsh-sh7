@@ -453,7 +453,10 @@ def generate_tree_svg(stats: dict, username: str):
         if cnt == 0:
             commit_lbl = "No commits"
             
-        tooltip_element = f"""<g class="tooltip" transform="translate({cx + 10:.2f}, {cy - H - 18:.2f})">
+        # Prevent clipping on the right edge of the card
+        tx_offset = -140 if col > 44 else 10
+            
+        tooltip_element = f"""<g class="tooltip" transform="translate({cx + tx_offset:.2f}, {cy - H - 18:.2f})">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="{top_color if cnt > 0 else '#1f2937'}" stroke-width="1" opacity="0.95" />
         <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">{commit_lbl} ({dt.strftime('%b %d')})</text>
       </g>"""

@@ -21,8 +21,9 @@
 <br>
 
 <p align="center">
-  <!-- Symmetrical Organic GitHub Contribution Tree -->
-  <img src="assets/contribution_tree.svg" alt="GitHub Contribution Tree" width="850">
+  <a href="assets/contribution_tree.svg" target="_blank">
+    <img src="assets/contribution_tree.svg" alt="GitHub Contribution Tree" width="850">
+  </a>
 </p>
 
 <br>
