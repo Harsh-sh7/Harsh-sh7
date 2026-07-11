@@ -124,7 +124,7 @@
   <text x="360" y="328.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
     <tspan fill="#f97316">Repos</tspan>
     <tspan fill="#4b5563">: ........... </tspan>
-    <tspan fill="#38bdf8">33 public repos</tspan>
+    <tspan fill="#38bdf8">31 public repos</tspan>
   </text>
   <text x="360" y="345.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
     <tspan fill="#f97316">Followers</tspan>
@@ -134,19 +134,19 @@
   <text x="360" y="363.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
     <tspan fill="#f97316">Activity</tspan>
     <tspan fill="#4b5563">: ........ </tspan>
-    <tspan fill="#38bdf8">0 contributions</tspan>
+    <tspan fill="#38bdf8">172 contributions | Streak: 5 days</tspan>
   </text>
   <text x="360" y="380.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
     <tspan fill="#f97316">Top Lang</tspan>
     <tspan fill="#4b5563">: ........ </tspan>
-    <tspan fill="#38bdf8">JavaScript, TypeScript, Python</tspan>
+    <tspan fill="#38bdf8">Jupyter Notebook, TypeScript, JavaScript</tspan>
   </text>
   <!-- Progress Bar -->
   <rect x="495" y="389.0" width="160" height="5" rx="2.5" fill="#1f2937" />
-  <rect x="495" y="389.0" width="67.0" height="5" rx="1.5" fill="#38bdf8" />
-  <rect x="562.04" y="389.0" width="41.3" height="5" rx="1.5" fill="#38bdf8" />
-  <rect x="603.3199999999999" y="389.0" width="20.6" height="5" rx="1.5" fill="#38bdf8" />
-  <rect x="623.9599999999999" y="389.0" width="15.5" height="5" rx="1.5" fill="#38bdf8" />
+  <rect x="495" y="389.0" width="92.8" height="5" rx="1.5" fill="#DA5B0B" />
+  <rect x="587.8" y="389.0" width="34.9" height="5" rx="1.5" fill="#3178c6" />
+  <rect x="622.68" y="389.0" width="21.4" height="5" rx="1.5" fill="#f1e05a" />
+  <rect x="644.12" y="389.0" width="6.9" height="5" rx="1.5" fill="#3572A5" />
   <text x="360" y="411.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11.5" font-weight="700">
     <tspan fill="#9ca3af">─ Recent Activity </tspan>
     <tspan fill="#1f2937">────────────────────────────────────</tspan>
@@ -168,7 +168,7 @@
   </text>
   <!-- Bottom Timestamp -->
   <text x="360" y="495" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">
-    Last Updated: 2026-07-11 21:45:41 (auto-updated every 12h)
+    Last Updated: 2026-07-11 16:17:28 (auto-updated every 12h)
   </text>
   </g>
 </svg>
