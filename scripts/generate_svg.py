@@ -1,7 +1,7 @@
 import os
 import json
 from datetime import datetime
-from avatar_to_ascii import download_avatar, image_to_ascii
+from avatar_to_ascii import download_avatar, image_to_color_ascii
 from github_stats import GitHubStatsFetcher
 
 def load_config() -> dict:
@@ -56,14 +56,17 @@ def generate_svg():
     
     print("Generating ASCII avatar...")
     avatar_img = download_avatar(username)
-    # Target height is 24 rows for a nice fit
-    ascii_lines = image_to_ascii(avatar_img, width=36, aspect_ratio_factor=0.55)
+    # Target size: width=60 columns, aspect_ratio=0.5. Height will be around 30 rows.
+    ascii_grid = image_to_color_ascii(avatar_img, width=60, aspect_ratio_factor=0.5)
     
-    # Pad or truncate ASCII lines to exactly 24 lines for stable rendering
-    if len(ascii_lines) < 24:
-        ascii_lines += [" " * 36] * (24 - len(ascii_lines))
+    # Pad/truncate ASCII grid to exactly 34 rows and 60 columns
+    target_rows = 34
+    target_cols = 60
+    if len(ascii_grid) < target_rows:
+        padding_row = [(" ", "#0b0f19")] * target_cols
+        ascii_grid += [padding_row] * (target_rows - len(ascii_grid))
     else:
-        ascii_lines = ascii_lines[:24]
+        ascii_grid = ascii_grid[:target_rows]
 
     # Calculate typing animation widths
     typed_text = f"{username}@macos:~"
@@ -76,15 +79,32 @@ def generate_svg():
     # Header buttons & macOS terminal style
     svg_elements = []
     
-    # 1. Left Side ASCII portrait
+    # 1. Left Side ASCII portrait (colorized)
     ascii_svg_lines = []
-    for i, line in enumerate(ascii_lines):
-        # Escape XML special characters
-        escaped_line = line.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-        dy = "14" if i > 0 else "0"
-        ascii_svg_lines.append(f'<tspan x="35" dy="{dy}">{escaped_line}</tspan>')
+    for y_idx, row in enumerate(ascii_grid):
+        dy = "11.5" if y_idx > 0 else "0"
+        row_svg = [f'<tspan x="35" dy="{dy}">']
         
-    ascii_text_block = f"""  <text x="35" y="102" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" font-weight="bold" fill="#34d399" xml:space="preserve">
+        current_color = None
+        current_text = []
+        for char, color in row:
+            char_esc = char.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+            if color == current_color:
+                current_text.append(char_esc)
+            else:
+                if current_color is not None:
+                    text_str = "".join(current_text)
+                    row_svg.append(f'<tspan fill="{current_color}">{text_str}</tspan>')
+                current_color = color
+                current_text = [char_esc]
+        if current_text:
+            text_str = "".join(current_text)
+            row_svg.append(f'<tspan fill="{current_color}">{text_str}</tspan>')
+            
+        row_svg.append('</tspan>')
+        ascii_svg_lines.append("".join(row_svg))
+        
+    ascii_text_block = f"""  <text x="35" y="98" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" font-weight="bold" xml:space="preserve">
     {"".join(ascii_svg_lines)}
   </text>"""
     svg_elements.append(ascii_text_block)

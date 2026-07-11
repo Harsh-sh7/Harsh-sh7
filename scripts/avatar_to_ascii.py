@@ -3,7 +3,6 @@ from PIL import Image
 from io import BytesIO
 
 # Character ramps for ASCII conversion
-# For dark backgrounds: darker pixels are mapped to spaces/dots, lighter to denser chars.
 ASCII_RAMP = " .:-=+*#%@"
 
 def download_avatar(username: str) -> Image.Image:
@@ -28,11 +27,11 @@ def download_avatar(username: str) -> Image.Image:
         draw.ellipse([10, 10, 90, 90], fill=(200, 200, 200, 255))
         return img
 
-def image_to_ascii(image: Image.Image, width: int = 38, aspect_ratio_factor: float = 0.55) -> list[str]:
+def image_to_color_ascii(image: Image.Image, width: int = 60, aspect_ratio_factor: float = 0.5) -> list[list[tuple[str, str]]]:
     """
-    Converts a Pillow image to a list of ASCII strings.
+    Converts a Pillow image to a 2D grid of (character, hex_color).
     """
-    # Handle transparency: paste RGBA images onto a black background
+    # Handle transparency: paste RGBA images onto a dark background
     if image.mode in ("RGBA", "LA") or (image.mode == "P" and "transparency" in image.info):
         alpha_composite = Image.new("RGBA", image.size, (11, 15, 25, 255)) # Match terminal background color
         alpha_composite.paste(image, mask=image.split()[-1])
@@ -43,32 +42,26 @@ def image_to_ascii(image: Image.Image, width: int = 38, aspect_ratio_factor: flo
     # Calculate height preserving aspect ratio with character font compensation
     img_width, img_height = image.size
     height = int(width * (img_height / img_width) * aspect_ratio_factor)
-    
-    # Ensure minimum height
     height = max(height, 1)
     
     # Resize image
     image = image.resize((width, height), Image.Resampling.LANCZOS)
     
-    # Convert to grayscale
-    gray_image = image.convert("L")
-    pixels = list(gray_image.tobytes())
-    
-    # Map pixels to characters
-    ascii_chars = []
-    ramp_len = len(ASCII_RAMP)
-    
-    for i, pixel in enumerate(pixels):
-        if i % width == 0:
-            if i > 0:
-                ascii_chars.append("\n")
+    # Convert pixels to character and color grid
+    grid = []
+    for y in range(height):
+        row = []
+        for x in range(width):
+            r, g, b = image.getpixel((x, y))
+            # Calculate luminance for character mapping
+            gray = int(0.299 * r + 0.587 * g + 0.114 * b)
+            char_idx = int(gray * (len(ASCII_RAMP) - 1) / 255)
+            char = ASCII_RAMP[char_idx]
+            hex_color = f"#{r:02x}{g:02x}{b:02x}"
+            row.append((char, hex_color))
+        grid.append(row)
         
-        # Scale to match character ramp index
-        char_idx = int(pixel * (ramp_len - 1) / 255)
-        ascii_chars.append(ASCII_RAMP[char_idx])
-        
-    ascii_str = "".join(ascii_chars)
-    return ascii_str.split("\n")
+    return grid
 
 if __name__ == "__main__":
     import sys
@@ -76,8 +69,10 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         username = sys.argv[1]
         
-    print(f"Testing avatar download and ASCII conversion for {username}...")
+    print(f"Testing color ASCII conversion for {username}...")
     img = download_avatar(username)
-    ascii_lines = image_to_ascii(img, width=38)
-    for line in ascii_lines:
-        print(line)
+    grid = image_to_color_ascii(img, width=60)
+    print(f"Generated grid of size {len(grid)}x{len(grid[0]) if grid else 0}")
+    # Print grayscale version in terminal
+    for row in grid:
+        print("".join([cell[0] for cell in row]))
