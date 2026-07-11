@@ -34,14 +34,13 @@
 <span style="color:#f97316">Database</span><span style="color:#4b5563"> : ........ </span><span style="color:#38bdf8">PostgreSQL, MongoDB, Redis</span><br>
 <span style="color:#f97316">Tools</span><span style="color:#4b5563"> : ........... </span><span style="color:#38bdf8">Git, Docker, Firebase, AWS</span><br>
 <span style="color:#9ca3af">─ GitHub Stats ─────────────────────────────────────────────</span><br>
-<span style="color:#f97316">Repos</span><span style="color:#4b5563"> : ............ </span><a href="https://github.com/Harsh-sh7?tab=repositories" target="_blank" style="color:#38bdf8; text-decoration:none;">33 public repos</a><br>
+<span style="color:#f97316">Repos</span><span style="color:#4b5563"> : ............ </span><a href="https://github.com/Harsh-sh7?tab=repositories" target="_blank" style="color:#38bdf8; text-decoration:none;">31 public repos</a><br>
 <span style="color:#f97316">Followers</span><span style="color:#4b5563"> : ........ </span><a href="https://github.com/Harsh-sh7/followers" target="_blank" style="color:#38bdf8; text-decoration:none;">7</a><span style="color:#4b5563"> | Following: </span><a href="https://github.com/Harsh-sh7/following" target="_blank" style="color:#38bdf8; text-decoration:none;">4</a><br>
-<span style="color:#f97316">Activity</span><span style="color:#4b5563"> : ......... </span><span style="color:#38bdf8">120 contributions | Streak: 10 days</span><br>
+<span style="color:#f97316">Activity</span><span style="color:#4b5563"> : ......... </span><span style="color:#38bdf8">192 contributions | Streak: 5 days</span><br>
 <span style="color:#9ca3af">─ Recent Activity ───────────────────────────────────────────</span><br>
 <span style="color:#60a5fa">Act 1</span><span style="color:#4b5563"> : .......... </span><a href="https://github.com/Harsh-sh7?tab=activity" target="_blank" style="color:#e5e7eb; text-decoration:none;">Commented on issue #8 in newton-school-ai/slmforge_1</a><br>
 <span style="color:#60a5fa">Act 2</span><span style="color:#4b5563"> : .......... </span><a href="https://github.com/Harsh-sh7?tab=activity" target="_blank" style="color:#e5e7eb; text-decoration:none;">Assigned issue #8 in newton-school-ai/slmforge_1</a><br>
-<span style="color:#60a5fa">Act 3</span><span style="color:#4b5563"> : .......... </span><a href="https://github.com/Harsh-sh7?tab=activity" target="_blank" style="color:#e5e7eb; text-decoration:none;">Assigned issue #8 in newton-school-ai/slmforge_1</a><br>
-<span style="color:#4b5563">Last Updated: 2026-07-11 22:29:17 (auto-updated every 12h)</span>
+<span style="color:#4b5563">Last Updated: 2026-07-11 16:59:32 (auto-updated every 12h)</span>
 </div>
 </td>
 </tr>
