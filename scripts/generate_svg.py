@@ -340,45 +340,67 @@ def generate_tree_svg(stats: dict, username: str):
             recent_day = day
             break
             
-    # GitHub colors mapping
+    # Premium Forest-themed Contribution colors mapping
+    # 0-commits is a dark forest green so the tree canopy looks green and full of foliage
     colors = {
-        0: "#161b22", # empty
-        1: "#0e4429", # level 1
-        2: "#006d32", # level 2
-        3: "#26a641", # level 3
-        4: "#39d353"  # level 4
+        0: "#14251c", # deep forest green leaf
+        1: "#0e4429", # level 1 green
+        2: "#006d32", # level 2 green
+        3: "#26a641", # level 3 green
+        4: "#39d353"  # level 4 neon green
     }
     
+    # Coordinates setup
     x_base = 450
-    y_base = 550
-    y_split = 405
+    y_base = 560
+    y_split = 435
+    
+    # Primary Limbs
+    # We branch trunk into 3 primary massive limbs first, which split into 12 month branches
+    limbs_paths = [
+        f'    <!-- Large Primary Limbs -->',
+        f'    <path d="M 438 {y_split} C 420 380, 340 330, 270 290" fill="none" stroke="#4e342e" stroke-width="8" stroke-linecap="round" />',
+        f'    <path d="M 450 {y_split} C 450 370, 440 310, 450 240" fill="none" stroke="#4e342e" stroke-width="7" stroke-linecap="round" />',
+        f'    <path d="M 462 {y_split} C 480 380, 560 330, 630 290" fill="none" stroke="#4e342e" stroke-width="8" stroke-linecap="round" />'
+    ]
     
     for i, key in enumerate(month_keys):
-        angle_deg = 172 - i * (164 / 11) # Symmetrical sweep from left to right
+        angle_deg = 172 - i * (164 / 11) # Sweep angle from left to right
         theta = math.radians(angle_deg)
         
-        # Target tip of branch
-        x_tip = x_base + 310 * math.cos(theta)
-        y_tip = y_split - 190 * math.sin(theta)
+        # Branch tip coordinates in a beautiful arc
+        x_tip = x_base + 320 * math.cos(theta)
+        y_tip = 360 - 210 * math.sin(theta)
         
-        # Bezier branch curve
-        c1x = x_base + 80 * math.cos(theta)
-        c1y = y_split - 40 * math.sin(theta)
-        c2x = x_base + 190 * math.cos(theta)
-        c2y = y_split - 110 * math.sin(theta)
-        
+        # Connect branches to their respective primary limbs
+        if i <= 3:
+            # Jan-Apr split from Left Limb (270, 290)
+            x_start_branch, y_start_branch = 270, 290
+            c1x = 270 + 40 * math.cos(theta)
+            c1y = 290 - 30 * math.sin(theta)
+        elif i <= 7:
+            # May-Aug split from Middle Limb (450, 240)
+            x_start_branch, y_start_branch = 450, 240
+            c1x = 450 + 30 * math.cos(theta)
+            c1y = 240 - 30 * math.sin(theta)
+        else:
+            # Sep-Dec split from Right Limb (630, 290)
+            x_start_branch, y_start_branch = 630, 290
+            c1x = 630 + 40 * math.cos(theta)
+            c1y = 290 - 30 * math.sin(theta)
+            
         branch_paths.append(
-            f'    <path d="M {x_base} {y_split} C {c1x:.1f} {c1y:.1f}, {c2x:.1f} {c2y:.1f}, {x_tip:.1f} {y_tip:.1f}" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />'
+            f'    <path d="M {x_start_branch} {y_start_branch} Q {c1x:.1f} {c1y:.1f} {x_tip:.1f} {y_tip:.1f}" fill="none" stroke="#4e342e" stroke-width="3.5" stroke-linecap="round" />'
         )
         
-        # Twigs config
-        twig_len1 = 38
-        twig_len2 = 48
-        twig_len3 = 38
+        # Twigs split off from each branch tip (extending radially)
+        twig_len1 = 36
+        twig_len2 = 45
+        twig_len3 = 36
         
-        theta1 = theta + 0.38
+        theta1 = theta + 0.35
         theta2 = theta
-        theta3 = theta - 0.38
+        theta3 = theta - 0.35
         
         xt1 = x_tip + twig_len1 * math.cos(theta1)
         yt1 = y_tip - twig_len1 * math.sin(theta1)
@@ -391,15 +413,28 @@ def generate_tree_svg(stats: dict, username: str):
         twig_paths.append(f'    <path d="M {x_tip:.1f} {y_tip:.1f} L {xt2:.1f} {yt2:.1f}" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />')
         twig_paths.append(f'    <path d="M {x_tip:.1f} {y_tip:.1f} L {xt3:.1f} {yt3:.1f}" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />')
         
-        # Label offset
-        label_x = x_tip + 22 * math.cos(theta)
-        label_y = y_tip - 22 * math.sin(theta)
+        # Month labels in outer arc with dotted pointer lines to tips
+        label_x = x_base + 380 * math.cos(theta)
+        label_y = 360 - 265 * math.sin(theta)
         
-        month_labels.append(
-            f'    <text x="{label_x:.1f}" y="{label_y:.1f}" font-family="\'JetBrains Mono\', \'Fira Code\', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">{key}</text>'
+        # Draw dotted indicator line
+        branch_paths.append(
+            f'    <line x1="{x_tip:.1f}" y1="{y_tip:.1f}" x2="{label_x:.1f}" y2="{label_y:.1f}" stroke="#1f2937" stroke-width="1" stroke-dasharray="2 2" />'
         )
         
-        # Days processing
+        anchor = "middle"
+        if label_x < 420:
+            anchor = "end"
+            label_x -= 5
+        elif label_x > 480:
+            anchor = "start"
+            label_x += 5
+            
+        month_labels.append(
+            f'    <text x="{label_x:.1f}" y="{label_y + 4:.1f}" font-family="\'JetBrains Mono\', \'Fira Code\', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="{anchor}">{key}</text>'
+        )
+        
+        # Distribute month days on the twigs
         month_days = months_data[key]
         N = len(month_days)
         for j, day in enumerate(month_days):
@@ -423,9 +458,9 @@ def generate_tree_svg(stats: dict, username: str):
             cx = x_start + (x_end - x_start) * t
             cy = y_start + (y_end - y_start) * t
             
-            # Organic foliage cluster offset
+            # Organic foliage cluster offset: widen spread to let clusters overlap (making a continuous canopy)
             angle_perp = twig_angle + math.pi / 2
-            offset = ((j * 17) % 15) - 7.5
+            offset = ((j * 17) % 28) - 14  # Spread leaves up to 14px on both sides of twigs
             cx += offset * math.cos(angle_perp)
             cy -= offset * math.sin(angle_perp)
             
@@ -444,25 +479,34 @@ def generate_tree_svg(stats: dict, username: str):
             is_recent = (recent_day and day["date"] == recent_day["date"])
             leaf_class = "contrib-leaf recent-leaf" if is_recent else "contrib-leaf"
             
+            # Larger rounded rects for a fuller leaf canopy
             leaf_rects.append(
-                f'    <rect class="{leaf_class}" x="{cx - 2.5:.2f}" y="{cy - 2.5:.2f}" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="{color}" />'
+                f'    <rect class="{leaf_class}" x="{cx - 3.2:.2f}" y="{cy - 3.2:.2f}" width="6.4" height="6.4" rx="1.5" ry="1.5" fill="{color}" />'
             )
             
             if is_recent:
                 recent_marker = f"""    <!-- Pulse Halo for Most Recent Commit -->
-    <circle cx="{cx:.2f}" cy="{cy:.2f}" r="8" fill="none" stroke="#38bdf8" stroke-width="1.5">
-      <animate attributeName="r" values="5;10;5" dur="1.4s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="1;0;1" dur="1.4s" repeatCount="indefinite" />
+    <circle cx="{cx:.2f}" cy="{cy:.2f}" r="9" fill="none" stroke="#ef4444" stroke-width="1.5">
+      <animate attributeName="r" values="6;12;6" dur="1.2s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite" />
     </circle>
     <circle cx="{cx:.2f}" cy="{cy:.2f}" r="2" fill="#ef4444" />
-    <!-- Floating Tooltip-like details -->
-    <g transform="translate({cx + 10:.2f}, {cy - 12:.2f})">
-      <rect x="0" y="0" width="185" height="18" rx="3" fill="#111827" stroke="#38bdf8" stroke-width="1" opacity="0.9" />
+    <!-- Floating details bubble -->
+    <g transform="translate({cx + 12:.2f}, {cy - 12:.2f})">
+      <rect x="0" y="0" width="185" height="18" rx="3" fill="#111827" stroke="#ef4444" stroke-width="1" opacity="0.95" />
       <text x="7" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#e5e7eb" font-weight="bold">Recent: {day['date']} ({cnt} commits)</text>
     </g>"""
 
-    # Trunk drawing
-    trunk_path = f'    <path d="M 434 {y_base} C 438 480, 442 440, 444 {y_split} L 456 {y_split} C 458 440, 462 480, 466 {y_base} Z" fill="#4e342e" />'
+    # Organic Roots
+    root_paths = [
+        f'    <!-- Trunk Roots -->',
+        f'    <path d="M 410 {y_base} Q 365 {y_base + 12}, 335 {y_base + 22} Q 320 {y_base + 26}, 305 {y_base + 26}" fill="none" stroke="#4e342e" stroke-width="8" stroke-linecap="round" />',
+        f'    <path d="M 490 {y_base} Q 535 {y_base + 12}, 565 {y_base + 22} Q 580 {y_base + 26}, 595 {y_base + 26}" fill="none" stroke="#4e342e" stroke-width="8" stroke-linecap="round" />',
+        f'    <path d="M 450 {y_base} Q 450 {y_base + 18}, 450 {y_base + 26}" fill="none" stroke="#4e342e" stroke-width="10" stroke-linecap="round" />'
+    ]
+    
+    # Organic Trunk
+    trunk_path = f'    <!-- Gnarled Organic Trunk -->\n    <path d="M 405 {y_base} C 410 500, 420 460, 425 {y_split} L 475 {y_split} C 480 460, 490 500, 495 {y_base} Z" fill="#4e342e" />'
     
     # SVG compilation
     svg_tree_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="auto">
@@ -482,7 +526,7 @@ def generate_tree_svg(stats: dict, username: str):
       }}
       
       .contrib-leaf:hover {{
-        transform: scale(1.6);
+        transform: scale(1.8);
         fill: #38bdf8;
         cursor: pointer;
       }}
@@ -516,11 +560,13 @@ def generate_tree_svg(stats: dict, username: str):
 
     <!-- Header Text -->
     <text x="35" y="70" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13" fill="#34d399" font-weight="bold">
-      &gt; git log --graph --date=relative --all (Past 12 Months)
+      &gt; git log --graph --date=relative --all --organic-foliage (Past 12 Months)
     </text>
 
     <!-- Tree elements -->
+{chr(10).join(root_paths)}
 {trunk_path}
+{chr(10).join(limbs_paths)}
 {chr(10).join(branch_paths)}
 {chr(10).join(twig_paths)}
 {chr(10).join(leaf_rects)}
