@@ -1,35 +1,34 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="auto">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="auto">
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
       
-      .contrib-tree-card {
+      .contrib-graph-card {
         filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.45));
-        animation: treeFadeIn 0.8s ease-out;
+        animation: graphFadeIn 0.8s ease-out;
       }
       
-      .contrib-leaf {
-        transition: transform 0.15s ease, fill 0.15s ease;
-        transform-box: fill-box;
-        transform-origin: center;
-      }
-      
-      .contrib-leaf:hover {
-        transform: scale(1.8);
-        fill: #38bdf8;
+      .pillar-group {
+        transition: transform 0.2s ease;
         cursor: pointer;
+        transform-box: fill-box;
+        transform-origin: bottom center;
       }
       
-      @keyframes treeFadeIn {
+      .pillar-group:hover {
+        transform: translateY(-8px);
+      }
+      
+      @keyframes graphFadeIn {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
       }
     </style>
   </defs>
 
-  <g class="contrib-tree-card">
+  <g class="contrib-graph-card">
     <!-- Window Background -->
-    <rect x="0" y="0" width="900" height="600" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+    <rect x="0" y="0" width="900" height="480" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
 
     <!-- Window Title Bar -->
     <path d="M 0,12 A 12,12 0 0,1 12,0 L 888,0 A 12,12 0 0,1 900,12 L 900,42 L 0,42 Z" fill="#111827" />
@@ -41,7 +40,7 @@
 
     <!-- Terminal Title -->
     <text x="450" y="25" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" text-anchor="middle" font-weight="bold">
-      Harsh-sh7@macos: ~/contribution-tree
+      Harsh-sh7@macos: ~/isometric-contributions
     </text>
 
     <!-- Title Bar Divider -->
@@ -49,759 +48,1173 @@
 
     <!-- Header Text -->
     <text x="35" y="70" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13" fill="#34d399" font-weight="bold">
-      &gt; git log --graph --date=relative --all --organic-foliage (Past 12 Months)
+      &gt; git log --graph --date=relative --all --3d-projection (Past 12 Months)
     </text>
 
-    <!-- Tree elements -->
-    <!-- Gnarled roots and flared base -->
-    <path d="M 390 570 Q 420 540, 435 460" fill="none" stroke="#4e342e" stroke-width="26" stroke-linecap="round" />
-    <path d="M 510 570 Q 480 540, 465 460" fill="none" stroke="#4e342e" stroke-width="26" stroke-linecap="round" />
-    <path d="M 450 570 L 450 435" fill="none" stroke="#4e342e" stroke-width="32" stroke-linecap="round" />
-    <path d="M 390 570 Q 350 580, 310 585" fill="none" stroke="#4e342e" stroke-width="12" stroke-linecap="round" />
-    <path d="M 510 570 Q 550 580, 590 585" fill="none" stroke="#4e342e" stroke-width="12" stroke-linecap="round" />
-    <path d="M 450 570 Q 450 585, 450 592" fill="none" stroke="#4e342e" stroke-width="14" stroke-linecap="round" />
-    <!-- Large Primary Limbs -->
-    <path d="M 435 450 C 410 390, 340 330, 290 280" fill="none" stroke="#4e342e" stroke-width="20" stroke-linecap="round" />
-    <path d="M 450 435 C 450 380, 440 310, 450 220" fill="none" stroke="#4e342e" stroke-width="16" stroke-linecap="round" />
-    <path d="M 465 450 C 490 390, 560 330, 610 280" fill="none" stroke="#4e342e" stroke-width="20" stroke-linecap="round" />
-    <path d="M 290 280 Q 255.3 277.0 241.6 321.7" fill="none" stroke="#4e342e" stroke-width="5.0" stroke-linecap="round" />
-    <line x1="241.6" y1="321.7" x2="72.8" y2="327.1" stroke="#374151" stroke-width="1" stroke-dasharray="3 3" />
-    <path d="M 290 280 Q 257.6 270.6 255.4 283.6" fill="none" stroke="#4e342e" stroke-width="5.0" stroke-linecap="round" />
-    <line x1="255.4" y1="283.6" x2="97.9" y2="258.5" stroke="#374151" stroke-width="1" stroke-dasharray="3 3" />
-    <path d="M 290 280 Q 262.1 264.9 282.7 249.3" fill="none" stroke="#4e342e" stroke-width="5.0" stroke-linecap="round" />
-    <line x1="282.7" y1="249.3" x2="147.2" y2="196.8" stroke="#374151" stroke-width="1" stroke-dasharray="3 3" />
-    <path d="M 290 280 Q 268.6 260.2 321.5 221.4" fill="none" stroke="#4e342e" stroke-width="5.0" stroke-linecap="round" />
-    <line x1="321.5" y1="221.4" x2="217.5" y2="146.4" stroke="#374151" stroke-width="1" stroke-dasharray="3 3" />
-    <path d="M 450 220 Q 440.4 196.9 369.2 201.6" fill="none" stroke="#4e342e" stroke-width="5.0" stroke-linecap="round" />
-    <line x1="369.2" y1="201.6" x2="303.7" y2="110.8" stroke="#374151" stroke-width="1" stroke-dasharray="3 3" />
-    <path d="M 450 220 Q 446.7 195.2 422.4 191.3" fill="none" stroke="#4e342e" stroke-width="5.0" stroke-linecap="round" />
-    <line x1="422.4" y1="191.3" x2="400.1" y2="92.3" stroke="#374151" stroke-width="1" stroke-dasharray="3 3" />
-    <path d="M 450 220 Q 453.3 195.2 477.6 191.3" fill="none" stroke="#4e342e" stroke-width="5.0" stroke-linecap="round" />
-    <line x1="477.6" y1="191.3" x2="499.9" y2="92.3" stroke="#374151" stroke-width="1" stroke-dasharray="3 3" />
-    <path d="M 450 220 Q 459.6 196.9 530.8 201.6" fill="none" stroke="#4e342e" stroke-width="5.0" stroke-linecap="round" />
-    <line x1="530.8" y1="201.6" x2="596.3" y2="110.8" stroke="#374151" stroke-width="1" stroke-dasharray="3 3" />
-    <path d="M 610 280 Q 631.4 260.2 578.5 221.4" fill="none" stroke="#4e342e" stroke-width="5.0" stroke-linecap="round" />
-    <line x1="578.5" y1="221.4" x2="682.5" y2="146.4" stroke="#374151" stroke-width="1" stroke-dasharray="3 3" />
-    <path d="M 610 280 Q 637.9 264.9 617.3 249.3" fill="none" stroke="#4e342e" stroke-width="5.0" stroke-linecap="round" />
-    <line x1="617.3" y1="249.3" x2="752.8" y2="196.8" stroke="#374151" stroke-width="1" stroke-dasharray="3 3" />
-    <path d="M 610 280 Q 642.4 270.6 644.6 283.6" fill="none" stroke="#4e342e" stroke-width="5.0" stroke-linecap="round" />
-    <line x1="644.6" y1="283.6" x2="802.1" y2="258.5" stroke="#374151" stroke-width="1" stroke-dasharray="3 3" />
-    <path d="M 610 280 Q 644.7 277.0 658.4 321.7" fill="none" stroke="#4e342e" stroke-width="5.0" stroke-linecap="round" />
-    <line x1="658.4" y1="321.7" x2="827.2" y2="327.1" stroke="#374151" stroke-width="1" stroke-dasharray="3 3" />
-    <path d="M 241.6 321.7 L 201.6 342.4" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 241.6 321.7 L 187.0 315.0" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 241.6 321.7 L 207.8 292.0" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 255.4 283.6 L 211.4 293.2" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 255.4 283.6 L 204.5 262.9" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 255.4 283.6 L 230.6 246.1" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 282.7 249.3 L 237.7 247.1" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 282.7 249.3 L 238.9 216.1" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 282.7 249.3 L 268.5 206.7" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 321.5 221.4 L 278.7 207.5" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 321.5 221.4 L 287.8 177.9" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 321.5 221.4 L 318.9 176.4" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 369.2 201.6 L 331.4 177.1" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 369.2 201.6 L 348.0 150.8" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 369.2 201.6 L 378.3 157.5" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 422.4 191.3 L 392.4 157.8" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 422.4 191.3 L 415.2 136.8" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 422.4 191.3 L 442.7 151.1" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 477.6 191.3 L 457.3 151.1" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 477.6 191.3 L 484.8 136.8" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 477.6 191.3 L 507.6 157.8" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 530.8 201.6 L 521.7 157.5" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 530.8 201.6 L 552.0 150.8" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 530.8 201.6 L 568.6 177.1" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 578.5 221.4 L 581.1 176.4" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 578.5 221.4 L 612.2 177.9" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 578.5 221.4 L 621.3 207.5" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 617.3 249.3 L 631.5 206.7" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 617.3 249.3 L 661.1 216.1" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 617.3 249.3 L 662.3 247.1" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 644.6 283.6 L 669.4 246.1" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 644.6 283.6 L 695.5 262.9" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 644.6 283.6 L 688.6 293.2" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 658.4 321.7 L 692.2 292.0" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 658.4 321.7 L 713.0 315.0" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <path d="M 658.4 321.7 L 698.4 342.4" fill="none" stroke="#4e342e" stroke-width="2.2" stroke-linecap="round" />
-    <rect class="contrib-leaf-bg" x="232.20" y="300.61" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="220.56" y="310.81" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="224.27" y="316.70" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="221.59" y="309.48" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="229.62" y="314.95" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="212.16" y="310.03" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="210.99" y="318.35" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="214.86" y="316.16" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="218.06" y="319.22" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="221.69" y="316.19" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="200.11" y="317.37" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="205.94" y="312.55" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="211.08" y="325.06" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="209.17" y="321.51" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="235.64" y="294.73" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="200.47" y="333.93" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="194.41" y="322.72" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="223.52" y="288.05" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="211.18" y="331.77" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="203.48" y="326.85" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="211.41" y="281.38" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="200.57" y="340.64" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="188.72" y="328.06" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="217.30" y="290.57" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="211.27" y="338.47" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="250.77" y="261.61" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="236.87" y="268.44" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="238.92" y="275.09" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="238.21" y="267.42" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="244.54" y="274.79" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="228.96" y="265.49" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="225.66" y="273.22" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="229.98" y="272.12" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="232.26" y="275.90" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="236.56" y="273.92" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="215.42" y="269.44" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="222.30" y="266.31" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="224.01" y="279.72" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="223.09" y="275.79" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="255.61" y="256.83" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="211.46" y="285.53" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="208.53" y="273.12" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="245.65" y="247.23" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="222.35" y="286.22" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="216.20" y="279.47" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="235.70" y="237.64" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="209.80" y="292.03" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="201.64" y="276.80" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="239.00" y="248.05" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="220.70" y="292.72" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="282.82" y="227.77" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="267.62" y="230.74" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="267.87" y="237.69" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="269.18" y="230.10" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="273.37" y="238.87" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="260.75" y="225.84" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="255.55" y="232.44" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="260.01" y="232.49" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="261.23" y="236.75" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="265.89" y="235.95" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="246.64" y="226.12" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="254.11" y="224.89" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="252.26" y="238.28" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="252.40" y="234.25" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="288.74" y="224.41" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="238.63" y="240.62" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="239.03" y="227.88" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="281.62" y="212.55" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="248.97" y="244.13" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="244.79" y="236.01" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="274.51" y="200.69" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="235.34" y="246.47" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="231.42" y="229.64" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="274.98" y="211.60" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="245.68" y="249.98" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="326.14" y="201.40" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="310.69" y="200.31" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="309.12" y="207.10" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="312.37" y="200.11" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="314.13" y="209.66" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="305.34" y="193.79" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="298.60" y="198.82" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="302.89" y="200.03" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="302.96" y="204.45" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="307.67" y="204.90" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="291.64" y="190.40" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="299.17" y="191.15" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="293.90" y="203.60" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="295.08" y="199.75" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="332.73" y="199.70" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="280.13" y="202.31" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="283.84" y="190.11" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="328.95" y="186.40" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="289.20" y="208.39" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="287.28" y="199.46" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="325.16" y="173.10" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="275.43" y="207.10" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="276.03" y="189.83" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="322.78" y="183.76" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="284.50" y="213.18" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="377.74" y="184.34" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="363.11" y="179.27" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="359.83" y="185.41" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="364.78" y="179.51" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="364.00" y="189.19" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="359.64" y="171.58" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="351.83" y="174.67" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="355.65" y="176.96" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="354.57" y="181.25" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="359.00" y="182.91" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="347.30" y="164.73" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="354.38" y="167.42" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="346.04" y="178.07" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="348.19" y="174.66" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="384.55" y="184.42" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="333.09" y="173.24" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="339.84" y="162.43" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="384.36" y="170.59" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="340.26" y="181.47" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="340.73" y="172.35" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="384.17" y="156.76" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="327.30" y="176.64" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="332.38" y="160.12" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="379.10" y="166.43" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="334.48" y="184.87" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="434.07" y="177.75" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="421.27" y="169.05" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="416.50" y="174.12" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="422.82" y="169.71" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="419.54" y="178.86" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="419.92" y="160.72" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="411.57" y="161.67" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="414.66" y="164.88" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="412.50" y="168.74" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="416.35" y="171.49" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="409.78" y="150.90" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="415.92" y="155.34" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="405.10" y="163.45" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="408.06" y="160.71" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="440.63" y="179.60" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="393.85" y="155.41" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="403.18" y="146.73" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="444.04" y="166.20" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="398.63" y="165.23" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="401.45" y="156.54" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="447.46" y="152.80" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="387.38" y="157.19" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="396.58" y="142.56" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="440.04" y="160.82" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="392.16" y="167.00" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="491.24" y="182.10" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="481.15" y="170.36" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="475.22" y="174.02" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="482.47" y="171.41" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="476.92" y="179.39" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="482.01" y="161.97" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="473.70" y="160.72" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="475.85" y="164.62" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="472.76" y="167.78" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="475.76" y="171.44" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="474.78" y="149.85" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="479.55" y="155.73" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="466.99" y="160.75" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="470.56" y="158.87" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="497.09" y="185.59" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="458.22" y="150.06" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="469.49" y="144.10" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="503.88" y="173.54" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="460.28" y="160.78" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="465.27" y="153.13" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="510.66" y="161.49" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="451.51" y="150.09" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="464.20" y="138.36" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="501.42" y="167.30" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="453.58" y="160.81" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="545.31" y="197.08" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="538.62" y="183.12" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="531.95" y="185.11" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="539.62" y="184.47" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="532.19" y="190.73" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="541.64" y="175.24" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="533.94" y="171.87" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="535.00" y="176.19" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="531.20" y="178.44" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="533.14" y="182.76" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="537.82" y="161.65" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="540.89" y="168.57" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="527.46" y="170.15" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="531.39" y="169.27" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="550.05" y="201.97" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="521.77" y="157.54" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="534.20" y="154.73" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="559.74" y="192.10" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="520.97" y="168.43" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="527.78" y="162.34" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="569.43" y="182.24" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="515.29" y="155.83" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="530.59" y="147.81" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="558.99" y="185.44" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="514.49" y="166.72" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="592.54" y="221.66" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="589.72" y="206.43" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="582.76" y="206.62" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="590.34" y="208.00" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="581.53" y="212.11" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="594.68" y="199.61" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="588.13" y="194.35" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="588.03" y="198.81" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="583.77" y="199.99" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="584.52" y="204.66" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="594.53" y="185.50" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="595.70" y="192.98" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="582.32" y="191.01" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="586.35" y="191.18" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="595.84" y="227.61" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="580.11" y="177.35" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="592.85" y="177.88" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="607.77" y="220.61" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="576.50" y="187.66" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="584.66" y="183.55" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="619.69" y="213.61" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="574.30" y="174.01" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="591.16" y="170.25" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="608.78" y="213.98" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="570.69" y="184.32" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="629.69" y="254.14" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="630.92" y="238.70" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="624.16" y="237.07" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="631.11" y="240.38" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="621.54" y="242.05" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="637.49" y="233.41" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="632.54" y="226.63" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="631.28" y="230.90" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="626.86" y="230.93" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="626.37" y="235.64" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="641.02" y="219.75" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="640.20" y="227.27" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="627.79" y="221.88" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="631.64" y="223.10" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="631.32" y="260.75" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="629.22" y="208.13" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="641.38" y="211.95" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="644.66" y="257.09" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="623.05" y="217.14" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="632.00" y="215.30" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="658.00" y="253.43" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="624.48" y="203.38" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="641.74" y="204.14" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="647.36" y="250.95" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="618.31" y="212.39" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="654.18" y="292.28" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="659.39" y="277.70" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="653.28" y="274.36" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="659.14" y="279.37" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="649.46" y="278.49" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="667.11" y="274.30" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="664.09" y="266.46" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="661.77" y="270.26" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="657.49" y="269.14" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="655.79" y="273.56" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="674.08" y="262.03" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="671.32" y="269.08" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="660.75" y="260.65" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="664.15" y="262.82" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="654.04" y="299.09" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="665.71" y="247.74" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="676.45" y="254.59" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="667.87" y="299.03" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="657.41" y="254.83" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="666.52" y="255.38" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="681.70" y="298.97" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="662.36" y="241.92" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="678.83" y="247.15" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="672.08" y="293.81" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="654.06" y="249.02" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="664.33" y="333.46" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="673.16" y="320.74" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="668.13" y="315.92" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="672.48" y="322.28" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="663.37" y="318.92" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="681.50" y="319.47" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="680.63" y="311.11" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="677.39" y="314.17" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="673.55" y="311.98" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="670.76" y="315.80" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="691.42" y="309.43" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="686.92" y="315.52" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="678.91" y="304.62" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="681.62" y="307.61" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="662.42" y="339.99" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="687.06" y="293.45" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="695.65" y="302.86" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="675.79" y="343.54" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="677.20" y="298.14" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="685.85" y="301.04" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="689.16" y="347.08" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="685.34" y="286.96" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="699.88" y="296.30" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="681.21" y="339.59" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf-bg" x="675.48" y="291.65" width="7.5" height="7.5" rx="1.8" fill="#102217" opacity="0.9" />
-    <rect class="contrib-leaf" x="234.20" y="299.57" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="218.83" y="314.63" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="214.67" y="318.90" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="219.25" y="324.20" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="215.61" y="329.35" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="228.10" y="302.75" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="225.62" y="337.80" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="216.78" y="308.33" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="217.74" y="313.61" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="215.43" y="319.43" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="213.57" y="323.05" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="231.17" y="297.45" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="221.79" y="333.02" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="214.73" y="302.04" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="220.80" y="308.31" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="211.60" y="314.65" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="211.52" y="316.76" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="234.23" y="292.16" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="217.97" y="328.25" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="208.30" y="331.47" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="223.87" y="303.02" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="224.33" y="341.84" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="209.47" y="310.46" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="213.50" y="313.88" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="214.14" y="323.47" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="182.43" y="322.25" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="208.92" y="281.86" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="199.20" y="348.10" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="183.60" y="301.24" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="198.56" y="292.72" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="189.01" y="329.73" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="252.97" y="261.13" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="234.21" y="271.67" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="229.08" y="274.71" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="232.12" y="281.02" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="227.27" y="285.04" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="246.25" y="262.61" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="234.73" y="295.81" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="233.87" y="265.06" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="233.42" y="270.40" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="229.67" y="275.42" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="226.93" y="278.43" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="250.59" y="258.30" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="232.28" y="290.20" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="233.53" y="258.45" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="237.75" y="266.08" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="227.22" y="269.81" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="226.59" y="271.82" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="254.93" y="253.98" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="229.83" y="284.59" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="219.65" y="285.19" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="242.09" y="261.77" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="232.43" y="299.38" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="226.25" y="265.21" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="229.26" y="269.56" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="227.38" y="278.99" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="197.08" y="269.55" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="233.17" y="237.45" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="206.53" y="298.88" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="203.68" y="249.57" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="220.34" y="245.24" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="285.06" y="227.88" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="264.21" y="233.17" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="258.46" y="234.77" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="259.76" y="241.65" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="254.03" y="244.27" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="278.19" y="227.56" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="258.43" y="256.61" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="265.60" y="226.70" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="263.77" y="231.73" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="258.85" y="235.60" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="255.42" y="237.80" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="283.51" y="224.52" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="257.52" y="250.56" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="267.00" y="220.22" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="269.09" y="228.70" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="257.95" y="229.55" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="256.82" y="231.33" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="288.82" y="221.48" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="256.62" y="244.50" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="246.64" y="242.43" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="274.40" y="225.66" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="255.28" y="259.46" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="258.21" y="224.85" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="259.98" y="229.84" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="255.71" y="238.45" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="228.91" y="221.46" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="272.12" y="199.86" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="230.41" y="252.23" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="240.48" y="203.88" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="257.70" y="204.03" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="230.83" y="231.23" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="328.28" y="202.09" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="306.76" y="201.77" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="300.80" y="201.82" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="300.26" y="208.81" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="294.04" y="209.84" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="321.73" y="200.00" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="295.08" y="222.90" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="309.79" y="195.89" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="306.72" y="200.28" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="300.96" y="202.73" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="297.07" y="203.96" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="327.65" y="198.45" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="295.78" y="216.82" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="312.83" y="190.00" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="312.64" y="198.73" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="301.66" y="196.65" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="300.11" y="198.07" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="333.57" y="196.90" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="296.48" y="210.74" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="287.39" y="206.14" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="318.56" y="197.18" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="291.30" y="224.83" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="303.14" y="192.19" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="303.55" y="197.46" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="297.18" y="204.66" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="275.73" y="181.27" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="323.08" y="171.67" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="269.16" y="211.38" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="291.48" y="167.32" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="308.07" y="171.95" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="379.63" y="185.56" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="358.94" y="179.65" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="353.17" y="178.15" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="350.83" y="184.75" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="344.56" y="184.13" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="373.85" y="181.84" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="342.16" y="197.01" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="363.40" y="174.76" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="359.29" y="178.20" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="353.09" y="179.07" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="349.02" y="179.24" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="379.97" y="181.88" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="344.42" y="191.32" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="367.86" y="169.87" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="365.41" y="178.24" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="355.35" y="173.38" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="353.48" y="174.35" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="386.09" y="181.93" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="346.68" y="185.64" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="339.09" y="178.83" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="371.52" y="178.29" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="338.01" y="197.89" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="357.94" y="169.45" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="356.96" y="174.65" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="348.94" y="179.95" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="334.32" y="151.78" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="382.53" y="154.84" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="320.14" y="179.14" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="353.16" y="142.41" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="367.96" y="151.20" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="331.07" y="161.20" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="435.57" y="179.43" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="417.14" y="168.33" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="411.96" y="165.38" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="407.98" y="171.15" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="402.08" y="168.92" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="430.97" y="174.32" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="396.42" y="180.72" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="422.72" y="164.77" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="417.85" y="167.02" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="411.64" y="166.25" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="407.66" y="165.35" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="436.86" y="175.96" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="400.08" y="175.82" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="428.30" y="161.21" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="423.75" y="168.66" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="415.30" y="161.34" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="413.24" y="161.79" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="442.76" y="177.60" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="403.74" y="170.92" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="398.19" y="162.37" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="429.64" y="170.29" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="392.18" y="180.49" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="418.83" y="158.23" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="416.53" y="162.99" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="407.40" y="166.02" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="400.62" y="135.01" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="446.37" y="150.51" width="7.5" height="7.5" rx="1.8" fill="#39d353" />
-    <rect class="contrib-leaf" x="379.81" y="157.74" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="421.25" y="130.87" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="433.26" y="143.21" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="395.03" y="143.26" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="492.26" y="184.11" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="477.34" y="168.60" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="473.11" y="164.40" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="467.59" y="168.57" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="462.72" y="164.75" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="489.41" y="177.68" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="453.75" y="174.45" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="483.79" y="165.64" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="478.91" y="166.92" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="472.04" y="164.08" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="469.17" y="161.80" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="495.21" y="180.20" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="458.20" y="169.96" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="490.23" y="162.68" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="484.71" y="169.44" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="476.49" y="159.59" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="475.61" y="158.84" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="501.01" y="182.72" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="462.65" y="165.46" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="460.99" y="155.00" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="490.51" y="171.96" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="448.82" y="171.34" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="482.06" y="155.88" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="480.02" y="161.19" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="467.11" y="160.97" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="470.58" y="128.25" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="512.35" y="156.62" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="442.44" y="145.43" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="545.77" y="199.28" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="535.41" y="180.42" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="532.41" y="175.26" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="526.07" y="178.25" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="522.10" y="173.36" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="544.35" y="192.55" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="511.27" y="180.71" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="542.02" y="180.15" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="536.69" y="179.64" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="531.71" y="175.85" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="528.72" y="173.08" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="548.62" y="196.93" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="516.90" y="178.32" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="548.64" y="179.87" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="540.96" y="184.02" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="537.34" y="173.46" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="535.33" y="172.81" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="552.90" y="201.31" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="522.53" y="175.92" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="522.03" y="165.74" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="545.23" y="188.40" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="507.72" y="178.39" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="541.95" y="172.53" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="537.57" y="175.49" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="528.16" y="173.53" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="537.88" y="143.32" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="569.64" y="179.72" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="508.47" y="152.49" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="557.80" y="150.11" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="561.97" y="166.81" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="528.90" y="147.63" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="592.41" y="223.90" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="587.32" y="203.00" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="585.77" y="197.24" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="578.88" y="198.47" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="576.31" y="192.71" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="592.80" y="217.04" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="563.94" y="196.99" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="593.78" y="204.45" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="588.76" y="202.58" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="584.94" y="197.62" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="582.77" y="194.17" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="595.78" y="222.38" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="570.00" y="196.15" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="600.24" y="205.91" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="591.74" y="207.92" width="7.5" height="7.5" rx="1.8" fill="#26a641" />
-    <rect class="contrib-leaf" x="591.00" y="196.77" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="589.23" y="195.62" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="598.77" y="227.72" width="7.5" height="7.5" rx="1.8" fill="#39d353" />
-    <rect class="contrib-leaf" x="576.06" y="195.30" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="578.22" y="185.34" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="594.73" y="213.26" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="561.12" y="193.82" width="7.5" height="7.5" rx="1.8" fill="#26a641" />
-    <rect class="contrib-leaf" x="595.69" y="197.08" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="590.69" y="198.80" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="582.12" y="194.45" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="599.37" y="167.81" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="620.55" y="211.23" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="568.58" y="169.02" width="7.5" height="7.5" rx="1.8" fill="#26a641" />
-    <rect class="contrib-leaf" x="616.83" y="179.56" width="7.5" height="7.5" rx="1.8" fill="#39d353" />
-    <rect class="contrib-leaf" x="616.52" y="196.77" width="7.5" height="7.5" rx="1.8" fill="#26a641" />
-    <rect class="contrib-leaf" x="628.98" y="256.27" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="629.50" y="234.76" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="629.51" y="228.80" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="622.53" y="228.19" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="621.55" y="221.96" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="631.14" y="249.74" width="7.5" height="7.5" rx="1.8" fill="#39d353" />
-    <rect class="contrib-leaf" x="608.49" y="222.88" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="635.36" y="237.85" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="631.00" y="234.73" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="628.60" y="228.95" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="627.41" y="225.05" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="632.63" y="255.68" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="614.56" y="223.64" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="641.22" y="240.94" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="632.49" y="240.67" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="634.67" y="229.71" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="633.27" y="228.14" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="634.12" y="261.61" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="620.63" y="224.40" width="7.5" height="7.5" rx="1.8" fill="#39d353" />
-    <rect class="contrib-leaf" x="625.32" y="215.34" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="633.99" y="246.60" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="606.59" y="219.08" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="639.12" y="231.23" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="633.85" y="231.59" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="626.70" y="225.16" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="650.30" y="203.93" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="659.45" y="251.36" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="620.25" y="197.07" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="664.10" y="219.81" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="659.31" y="236.35" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="640.37" y="203.15" width="7.5" height="7.5" rx="1.8" fill="#39d353" />
-    <rect class="contrib-leaf" x="652.94" y="294.16" width="7.5" height="7.5" rx="1.8" fill="#26a641" />
-    <rect class="contrib-leaf" x="659.05" y="273.53" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="660.60" y="267.77" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="654.02" y="265.37" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="654.70" y="259.10" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="656.72" y="288.42" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="641.85" y="256.58" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="663.90" y="278.03" width="7.5" height="7.5" rx="1.8" fill="#39d353" />
-    <rect class="contrib-leaf" x="660.50" y="273.89" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="659.69" y="267.68" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="659.55" y="263.61" width="7.5" height="7.5" rx="1.8" fill="#26a641" />
-    <rect class="contrib-leaf" x="656.62" y="294.53" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="647.52" y="258.89" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="668.75" y="282.54" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="660.40" y="280.01" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="665.35" y="269.99" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="664.40" y="268.11" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="656.51" y="300.65" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="653.18" y="261.21" width="7.5" height="7.5" rx="1.8" fill="#26a641" />
-    <rect class="contrib-leaf" x="660.06" y="253.69" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="660.29" y="286.12" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="641.01" y="252.42" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="669.26" y="272.62" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="664.07" y="271.59" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="658.84" y="263.52" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="687.15" y="249.17" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="683.64" y="297.35" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="659.93" y="234.73" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="696.34" y="268.10" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="687.42" y="282.82" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="662.64" y="334.95" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="673.91" y="316.62" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="676.92" y="311.46" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="677.49" y="301.88" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf" x="683.66" y="300.31" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="675.25" y="334.25" width="7.5" height="7.5" rx="1.8" fill="#26a641" />
-    <rect class="contrib-leaf" x="674.33" y="284.67" width="7.5" height="7.5" rx="1.8" fill="#26a641" />
-    <rect class="contrib-leaf" x="697.80" y="319.73" width="7.5" height="7.5" rx="1.8" fill="#0e4429" />
-    <rect class="contrib-leaf" x="690.14" y="325.07" width="7.5" height="7.5" rx="1.8" fill="#006d32" />
-    <rect class="contrib-leaf" x="694.96" y="294.48" width="7.5" height="7.5" rx="1.8" fill="#13261a" />
-    <rect class="contrib-leaf recent-leaf" x="707.56" y="303.42" width="7.5" height="7.5" rx="1.8" fill="#39d353" />
-    <text x="67.8" y="331.1" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="end">Aug '25</text>
-    <text x="92.9" y="262.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="end">Sep '25</text>
-    <text x="142.2" y="200.8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="end">Oct '25</text>
-    <text x="212.5" y="150.4" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="end">Nov '25</text>
-    <text x="298.7" y="114.8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="end">Dec '25</text>
-    <text x="395.1" y="96.3" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="end">Jan '26</text>
-    <text x="504.9" y="96.3" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="start">Feb '26</text>
-    <text x="601.3" y="114.8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="start">Mar '26</text>
-    <text x="687.5" y="150.4" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="start">Apr '26</text>
-    <text x="757.8" y="200.8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="start">May '26</text>
-    <text x="807.1" y="262.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="start">Jun '26</text>
-    <text x="832.2" y="331.1" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="start">Jul '26</text>
+    <!-- Weekday and Month labels -->
+    <text x="180.0" y="113.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#4b5563" text-anchor="end">Sun</text>
+    <text x="145.5" y="130.2" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#4b5563" text-anchor="end">Wed</text>
+    <text x="111.0" y="147.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#4b5563" text-anchor="end">Sat</text>
+    <line x1="191.0" y1="89.0" x2="195.0" y2="105.0" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />
+    <text x="177.0" y="85.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af" text-anchor="end">Jul</text>
+    <line x1="225.5" y1="106.2" x2="229.5" y2="122.2" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />
+    <text x="211.5" y="102.2" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af" text-anchor="end">Aug</text>
+    <line x1="283.0" y1="135.0" x2="287.0" y2="151.0" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />
+    <text x="269.0" y="131.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af" text-anchor="end">Sep</text>
+    <line x1="329.0" y1="158.0" x2="333.0" y2="174.0" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />
+    <text x="315.0" y="154.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af" text-anchor="end">Oct</text>
+    <line x1="375.0" y1="181.0" x2="379.0" y2="197.0" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />
+    <text x="361.0" y="177.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af" text-anchor="end">Nov</text>
+    <line x1="432.5" y1="209.8" x2="436.5" y2="225.8" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />
+    <text x="418.5" y="205.8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af" text-anchor="end">Dec</text>
+    <line x1="478.5" y1="232.8" x2="482.5" y2="248.8" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />
+    <text x="464.5" y="228.8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af" text-anchor="end">Jan</text>
+    <line x1="536.0" y1="261.5" x2="540.0" y2="277.5" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />
+    <text x="522.0" y="257.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af" text-anchor="end">Feb</text>
+    <line x1="582.0" y1="284.5" x2="586.0" y2="300.5" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />
+    <text x="568.0" y="280.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af" text-anchor="end">Mar</text>
+    <line x1="628.0" y1="307.5" x2="632.0" y2="323.5" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />
+    <text x="614.0" y="303.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af" text-anchor="end">Apr</text>
+    <line x1="674.0" y1="330.5" x2="678.0" y2="346.5" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />
+    <text x="660.0" y="326.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af" text-anchor="end">May</text>
+    <line x1="731.5" y1="359.2" x2="735.5" y2="375.2" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />
+    <text x="717.5" y="355.2" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af" text-anchor="end">Jun</text>
+
+    <!-- 3D Pillars -->
+    <g class="pillar-group" data-date="2025-07-06" data-commits="0">
+      <polygon points="195.0,104.2 206.5,110.0 195.0,115.8 183.5,110.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-07" data-commits="0">
+      <polygon points="183.5,110.0 195.0,115.8 183.5,121.5 172.0,115.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-08" data-commits="0">
+      <polygon points="172.0,115.8 183.5,121.5 172.0,127.2 160.5,121.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-09" data-commits="0">
+      <polygon points="160.5,121.5 172.0,127.2 160.5,133.0 149.0,127.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-10" data-commits="0">
+      <polygon points="149.0,127.2 160.5,133.0 149.0,138.8 137.5,133.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-11" data-commits="0">
+      <polygon points="137.5,133.0 149.0,138.8 137.5,144.5 126.0,138.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-12" data-commits="0">
+      <polygon points="126.0,138.8 137.5,144.5 126.0,150.2 114.5,144.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-13" data-commits="0">
+      <polygon points="206.5,110.0 218.0,115.8 206.5,121.5 195.0,115.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-14" data-commits="0">
+      <polygon points="195.0,115.8 206.5,121.5 195.0,127.2 183.5,121.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-15" data-commits="0">
+      <polygon points="183.5,121.5 195.0,127.2 183.5,133.0 172.0,127.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-16" data-commits="0">
+      <polygon points="172.0,127.2 183.5,133.0 172.0,138.8 160.5,133.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-17" data-commits="0">
+      <polygon points="160.5,133.0 172.0,138.8 160.5,144.5 149.0,138.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-18" data-commits="0">
+      <polygon points="149.0,138.8 160.5,144.5 149.0,150.2 137.5,144.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-19" data-commits="0">
+      <polygon points="137.5,144.5 149.0,150.2 137.5,156.0 126.0,150.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-20" data-commits="1">
+      <polygon points="206.5,113.5 218.0,119.2 218.0,127.2 206.5,121.5" fill="#0b3620" /> <polygon points="218.0,119.2 229.5,113.5 229.5,121.5 218.0,127.2" fill="#082818" /> <polygon points="218.0,107.8 229.5,113.5 218.0,119.2 206.5,113.5" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-21" data-commits="1">
+      <polygon points="195.0,119.2 206.5,125.0 206.5,133.0 195.0,127.2" fill="#0b3620" /> <polygon points="206.5,125.0 218.0,119.2 218.0,127.2 206.5,133.0" fill="#082818" /> <polygon points="206.5,113.5 218.0,119.2 206.5,125.0 195.0,119.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-22" data-commits="0">
+      <polygon points="195.0,127.2 206.5,133.0 195.0,138.8 183.5,133.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-23" data-commits="0">
+      <polygon points="183.5,133.0 195.0,138.8 183.5,144.5 172.0,138.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-24" data-commits="0">
+      <polygon points="172.0,138.8 183.5,144.5 172.0,150.2 160.5,144.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-25" data-commits="0">
+      <polygon points="160.5,144.5 172.0,150.2 160.5,156.0 149.0,150.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-26" data-commits="1">
+      <polygon points="137.5,148.0 149.0,153.8 149.0,161.8 137.5,156.0" fill="#0b3620" /> <polygon points="149.0,153.8 160.5,148.0 160.5,156.0 149.0,161.8" fill="#082818" /> <polygon points="149.0,142.2 160.5,148.0 149.0,153.8 137.5,148.0" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-27" data-commits="1">
+      <polygon points="218.0,119.2 229.5,125.0 229.5,133.0 218.0,127.2" fill="#0b3620" /> <polygon points="229.5,125.0 241.0,119.2 241.0,127.2 229.5,133.0" fill="#082818" /> <polygon points="229.5,113.5 241.0,119.2 229.5,125.0 218.0,119.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-28" data-commits="4">
+      <polygon points="206.5,109.6 218.0,115.3 218.0,138.8 206.5,133.0" fill="#005728" /> <polygon points="218.0,115.3 229.5,109.6 229.5,133.0 218.0,138.8" fill="#00411e" /> <polygon points="218.0,103.8 229.5,109.6 218.0,115.3 206.5,109.6" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-29" data-commits="0">
+      <polygon points="206.5,133.0 218.0,138.8 206.5,144.5 195.0,138.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-30" data-commits="0">
+      <polygon points="195.0,138.8 206.5,144.5 195.0,150.2 183.5,144.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-07-31" data-commits="0">
+      <polygon points="183.5,144.5 195.0,150.2 183.5,156.0 172.0,150.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-01" data-commits="0">
+      <polygon points="172.0,150.2 183.5,156.0 172.0,161.8 160.5,156.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-02" data-commits="0">
+      <polygon points="160.5,156.0 172.0,161.8 160.5,167.5 149.0,161.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-03" data-commits="0">
+      <polygon points="241.0,127.2 252.5,133.0 241.0,138.8 229.5,133.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-04" data-commits="0">
+      <polygon points="229.5,133.0 241.0,138.8 229.5,144.5 218.0,138.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-05" data-commits="0">
+      <polygon points="218.0,138.8 229.5,144.5 218.0,150.2 206.5,144.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-06" data-commits="0">
+      <polygon points="206.5,144.5 218.0,150.2 206.5,156.0 195.0,150.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-07" data-commits="0">
+      <polygon points="195.0,150.2 206.5,156.0 195.0,161.8 183.5,156.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-08" data-commits="0">
+      <polygon points="183.5,156.0 195.0,161.8 183.5,167.5 172.0,161.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-09" data-commits="0">
+      <polygon points="172.0,161.8 183.5,167.5 172.0,173.2 160.5,167.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-10" data-commits="0">
+      <polygon points="252.5,133.0 264.0,138.8 252.5,144.5 241.0,138.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-11" data-commits="0">
+      <polygon points="241.0,138.8 252.5,144.5 241.0,150.2 229.5,144.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-12" data-commits="0">
+      <polygon points="229.5,144.5 241.0,150.2 229.5,156.0 218.0,150.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-13" data-commits="0">
+      <polygon points="218.0,150.2 229.5,156.0 218.0,161.8 206.5,156.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-14" data-commits="0">
+      <polygon points="206.5,156.0 218.0,161.8 206.5,167.5 195.0,161.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-15" data-commits="0">
+      <polygon points="195.0,161.8 206.5,167.5 195.0,173.2 183.5,167.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-16" data-commits="0">
+      <polygon points="183.5,167.5 195.0,173.2 183.5,179.0 172.0,173.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-17" data-commits="0">
+      <polygon points="264.0,138.8 275.5,144.5 264.0,150.2 252.5,144.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-18" data-commits="0">
+      <polygon points="252.5,144.5 264.0,150.2 252.5,156.0 241.0,150.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-19" data-commits="0">
+      <polygon points="241.0,150.2 252.5,156.0 241.0,161.8 229.5,156.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-20" data-commits="0">
+      <polygon points="229.5,156.0 241.0,161.8 229.5,167.5 218.0,161.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-21" data-commits="0">
+      <polygon points="218.0,161.8 229.5,167.5 218.0,173.2 206.5,167.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-22" data-commits="0">
+      <polygon points="206.5,167.5 218.0,173.2 206.5,179.0 195.0,173.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-23" data-commits="0">
+      <polygon points="195.0,173.2 206.5,179.0 195.0,184.8 183.5,179.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-24" data-commits="0">
+      <polygon points="275.5,144.5 287.0,150.2 275.5,156.0 264.0,150.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-25" data-commits="0">
+      <polygon points="264.0,150.2 275.5,156.0 264.0,161.8 252.5,156.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-26" data-commits="0">
+      <polygon points="252.5,156.0 264.0,161.8 252.5,167.5 241.0,161.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-27" data-commits="0">
+      <polygon points="241.0,161.8 252.5,167.5 241.0,173.2 229.5,167.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-28" data-commits="0">
+      <polygon points="229.5,167.5 241.0,173.2 229.5,179.0 218.0,173.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-29" data-commits="0">
+      <polygon points="218.0,173.2 229.5,179.0 218.0,184.8 206.5,179.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-30" data-commits="0">
+      <polygon points="206.5,179.0 218.0,184.8 206.5,190.5 195.0,184.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-08-31" data-commits="0">
+      <polygon points="287.0,150.2 298.5,156.0 287.0,161.8 275.5,156.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-01" data-commits="0">
+      <polygon points="275.5,156.0 287.0,161.8 275.5,167.5 264.0,161.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-02" data-commits="0">
+      <polygon points="264.0,161.8 275.5,167.5 264.0,173.2 252.5,167.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-03" data-commits="0">
+      <polygon points="252.5,167.5 264.0,173.2 252.5,179.0 241.0,173.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-04" data-commits="0">
+      <polygon points="241.0,173.2 252.5,179.0 241.0,184.8 229.5,179.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-05" data-commits="0">
+      <polygon points="229.5,179.0 241.0,184.8 229.5,190.5 218.0,184.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-06" data-commits="1">
+      <polygon points="206.5,182.5 218.0,188.2 218.0,196.2 206.5,190.5" fill="#0b3620" /> <polygon points="218.0,188.2 229.5,182.5 229.5,190.5 218.0,196.2" fill="#082818" /> <polygon points="218.0,176.8 229.5,182.5 218.0,188.2 206.5,182.5" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-07" data-commits="0">
+      <polygon points="298.5,156.0 310.0,161.8 298.5,167.5 287.0,161.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-08" data-commits="0">
+      <polygon points="287.0,161.8 298.5,167.5 287.0,173.2 275.5,167.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-09" data-commits="0">
+      <polygon points="275.5,167.5 287.0,173.2 275.5,179.0 264.0,173.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-10" data-commits="0">
+      <polygon points="264.0,173.2 275.5,179.0 264.0,184.8 252.5,179.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-11" data-commits="0">
+      <polygon points="252.5,179.0 264.0,184.8 252.5,190.5 241.0,184.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-12" data-commits="0">
+      <polygon points="241.0,184.8 252.5,190.5 241.0,196.2 229.5,190.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-13" data-commits="0">
+      <polygon points="229.5,190.5 241.0,196.2 229.5,202.0 218.0,196.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-14" data-commits="0">
+      <polygon points="310.0,161.8 321.5,167.5 310.0,173.2 298.5,167.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-15" data-commits="0">
+      <polygon points="298.5,167.5 310.0,173.2 298.5,179.0 287.0,173.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-16" data-commits="0">
+      <polygon points="287.0,173.2 298.5,179.0 287.0,184.8 275.5,179.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-17" data-commits="0">
+      <polygon points="275.5,179.0 287.0,184.8 275.5,190.5 264.0,184.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-18" data-commits="0">
+      <polygon points="264.0,184.8 275.5,190.5 264.0,196.2 252.5,190.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-19" data-commits="0">
+      <polygon points="252.5,190.5 264.0,196.2 252.5,202.0 241.0,196.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-20" data-commits="0">
+      <polygon points="241.0,196.2 252.5,202.0 241.0,207.8 229.5,202.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-21" data-commits="0">
+      <polygon points="321.5,167.5 333.0,173.2 321.5,179.0 310.0,173.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-22" data-commits="0">
+      <polygon points="310.0,173.2 321.5,179.0 310.0,184.8 298.5,179.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-23" data-commits="0">
+      <polygon points="298.5,179.0 310.0,184.8 298.5,190.5 287.0,184.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-24" data-commits="1">
+      <polygon points="275.5,182.5 287.0,188.2 287.0,196.2 275.5,190.5" fill="#0b3620" /> <polygon points="287.0,188.2 298.5,182.5 298.5,190.5 287.0,196.2" fill="#082818" /> <polygon points="287.0,176.8 298.5,182.5 287.0,188.2 275.5,182.5" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-25" data-commits="0">
+      <polygon points="275.5,190.5 287.0,196.2 275.5,202.0 264.0,196.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-26" data-commits="0">
+      <polygon points="264.0,196.2 275.5,202.0 264.0,207.8 252.5,202.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-27" data-commits="0">
+      <polygon points="252.5,202.0 264.0,207.8 252.5,213.5 241.0,207.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-28" data-commits="0">
+      <polygon points="333.0,173.2 344.5,179.0 333.0,184.8 321.5,179.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-29" data-commits="0">
+      <polygon points="321.5,179.0 333.0,184.8 321.5,190.5 310.0,184.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-09-30" data-commits="0">
+      <polygon points="310.0,184.8 321.5,190.5 310.0,196.2 298.5,190.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-01" data-commits="0">
+      <polygon points="298.5,190.5 310.0,196.2 298.5,202.0 287.0,196.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-02" data-commits="0">
+      <polygon points="287.0,196.2 298.5,202.0 287.0,207.8 275.5,202.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-03" data-commits="0">
+      <polygon points="275.5,202.0 287.0,207.8 275.5,213.5 264.0,207.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-04" data-commits="0">
+      <polygon points="264.0,207.8 275.5,213.5 264.0,219.2 252.5,213.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-05" data-commits="1">
+      <polygon points="333.0,176.8 344.5,182.5 344.5,190.5 333.0,184.8" fill="#0b3620" /> <polygon points="344.5,182.5 356.0,176.8 356.0,184.8 344.5,190.5" fill="#082818" /> <polygon points="344.5,171.0 356.0,176.8 344.5,182.5 333.0,176.8" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-06" data-commits="0">
+      <polygon points="333.0,184.8 344.5,190.5 333.0,196.2 321.5,190.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-07" data-commits="0">
+      <polygon points="321.5,190.5 333.0,196.2 321.5,202.0 310.0,196.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-08" data-commits="0">
+      <polygon points="310.0,196.2 321.5,202.0 310.0,207.8 298.5,202.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-09" data-commits="0">
+      <polygon points="298.5,202.0 310.0,207.8 298.5,213.5 287.0,207.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-10" data-commits="0">
+      <polygon points="287.0,207.8 298.5,213.5 287.0,219.2 275.5,213.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-11" data-commits="0">
+      <polygon points="275.5,213.5 287.0,219.2 275.5,225.0 264.0,219.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-12" data-commits="0">
+      <polygon points="356.0,184.8 367.5,190.5 356.0,196.2 344.5,190.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-13" data-commits="0">
+      <polygon points="344.5,190.5 356.0,196.2 344.5,202.0 333.0,196.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-14" data-commits="0">
+      <polygon points="333.0,196.2 344.5,202.0 333.0,207.8 321.5,202.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-15" data-commits="0">
+      <polygon points="321.5,202.0 333.0,207.8 321.5,213.5 310.0,207.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-16" data-commits="0">
+      <polygon points="310.0,207.8 321.5,213.5 310.0,219.2 298.5,213.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-17" data-commits="0">
+      <polygon points="298.5,213.5 310.0,219.2 298.5,225.0 287.0,219.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-18" data-commits="0">
+      <polygon points="287.0,219.2 298.5,225.0 287.0,230.8 275.5,225.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-19" data-commits="0">
+      <polygon points="367.5,190.5 379.0,196.2 367.5,202.0 356.0,196.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-20" data-commits="0">
+      <polygon points="356.0,196.2 367.5,202.0 356.0,207.8 344.5,202.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-21" data-commits="1">
+      <polygon points="333.0,199.8 344.5,205.5 344.5,213.5 333.0,207.8" fill="#0b3620" /> <polygon points="344.5,205.5 356.0,199.8 356.0,207.8 344.5,213.5" fill="#082818" /> <polygon points="344.5,194.0 356.0,199.8 344.5,205.5 333.0,199.8" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-22" data-commits="0">
+      <polygon points="333.0,207.8 344.5,213.5 333.0,219.2 321.5,213.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-23" data-commits="0">
+      <polygon points="321.5,213.5 333.0,219.2 321.5,225.0 310.0,219.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-24" data-commits="0">
+      <polygon points="310.0,219.2 321.5,225.0 310.0,230.8 298.5,225.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-25" data-commits="0">
+      <polygon points="298.5,225.0 310.0,230.8 298.5,236.5 287.0,230.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-26" data-commits="0">
+      <polygon points="379.0,196.2 390.5,202.0 379.0,207.8 367.5,202.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-27" data-commits="0">
+      <polygon points="367.5,202.0 379.0,207.8 367.5,213.5 356.0,207.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-28" data-commits="0">
+      <polygon points="356.0,207.8 367.5,213.5 356.0,219.2 344.5,213.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-29" data-commits="2">
+      <polygon points="333.0,209.4 344.5,215.2 344.5,225.0 333.0,219.2" fill="#0b3620" /> <polygon points="344.5,215.2 356.0,209.4 356.0,219.2 344.5,225.0" fill="#082818" /> <polygon points="344.5,203.7 356.0,209.4 344.5,215.2 333.0,209.4" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-30" data-commits="0">
+      <polygon points="333.0,219.2 344.5,225.0 333.0,230.8 321.5,225.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-10-31" data-commits="0">
+      <polygon points="321.5,225.0 333.0,230.8 321.5,236.5 310.0,230.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-01" data-commits="0">
+      <polygon points="310.0,230.8 321.5,236.5 310.0,242.2 298.5,236.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-02" data-commits="0">
+      <polygon points="390.5,202.0 402.0,207.8 390.5,213.5 379.0,207.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-03" data-commits="0">
+      <polygon points="379.0,207.8 390.5,213.5 379.0,219.2 367.5,213.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-04" data-commits="0">
+      <polygon points="367.5,213.5 379.0,219.2 367.5,225.0 356.0,219.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-05" data-commits="1">
+      <polygon points="344.5,217.0 356.0,222.8 356.0,230.8 344.5,225.0" fill="#0b3620" /> <polygon points="356.0,222.8 367.5,217.0 367.5,225.0 356.0,230.8" fill="#082818" /> <polygon points="356.0,211.2 367.5,217.0 356.0,222.8 344.5,217.0" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-06" data-commits="0">
+      <polygon points="344.5,225.0 356.0,230.8 344.5,236.5 333.0,230.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-07" data-commits="0">
+      <polygon points="333.0,230.8 344.5,236.5 333.0,242.2 321.5,236.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-08" data-commits="0">
+      <polygon points="321.5,236.5 333.0,242.2 321.5,248.0 310.0,242.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-09" data-commits="0">
+      <polygon points="402.0,207.8 413.5,213.5 402.0,219.2 390.5,213.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-10" data-commits="1">
+      <polygon points="379.0,211.2 390.5,217.0 390.5,225.0 379.0,219.2" fill="#0b3620" /> <polygon points="390.5,217.0 402.0,211.2 402.0,219.2 390.5,225.0" fill="#082818" /> <polygon points="390.5,205.5 402.0,211.2 390.5,217.0 379.0,211.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-11" data-commits="0">
+      <polygon points="379.0,219.2 390.5,225.0 379.0,230.8 367.5,225.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-12" data-commits="3">
+      <polygon points="356.0,209.2 367.5,214.9 367.5,236.5 356.0,230.8" fill="#005728" /> <polygon points="367.5,214.9 379.0,209.2 379.0,230.8 367.5,236.5" fill="#00411e" /> <polygon points="367.5,203.4 379.0,209.2 367.5,214.9 356.0,209.2" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-13" data-commits="1">
+      <polygon points="344.5,228.5 356.0,234.2 356.0,242.2 344.5,236.5" fill="#0b3620" /> <polygon points="356.0,234.2 367.5,228.5 367.5,236.5 356.0,242.2" fill="#082818" /> <polygon points="356.0,222.8 367.5,228.5 356.0,234.2 344.5,228.5" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-14" data-commits="0">
+      <polygon points="344.5,236.5 356.0,242.2 344.5,248.0 333.0,242.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-15" data-commits="0">
+      <polygon points="333.0,242.2 344.5,248.0 333.0,253.8 321.5,248.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-16" data-commits="1">
+      <polygon points="402.0,211.2 413.5,217.0 413.5,225.0 402.0,219.2" fill="#0b3620" /> <polygon points="413.5,217.0 425.0,211.2 425.0,219.2 413.5,225.0" fill="#082818" /> <polygon points="413.5,205.5 425.0,211.2 413.5,217.0 402.0,211.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-17" data-commits="0">
+      <polygon points="402.0,219.2 413.5,225.0 402.0,230.8 390.5,225.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-18" data-commits="0">
+      <polygon points="390.5,225.0 402.0,230.8 390.5,236.5 379.0,230.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-19" data-commits="0">
+      <polygon points="379.0,230.8 390.5,236.5 379.0,242.2 367.5,236.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-20" data-commits="0">
+      <polygon points="367.5,236.5 379.0,242.2 367.5,248.0 356.0,242.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-21" data-commits="0">
+      <polygon points="356.0,242.2 367.5,248.0 356.0,253.8 344.5,248.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-22" data-commits="1">
+      <polygon points="333.0,245.8 344.5,251.5 344.5,259.5 333.0,253.8" fill="#0b3620" /> <polygon points="344.5,251.5 356.0,245.8 356.0,253.8 344.5,259.5" fill="#082818" /> <polygon points="344.5,240.0 356.0,245.8 344.5,251.5 333.0,245.8" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-23" data-commits="0">
+      <polygon points="425.0,219.2 436.5,225.0 425.0,230.8 413.5,225.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-24" data-commits="0">
+      <polygon points="413.5,225.0 425.0,230.8 413.5,236.5 402.0,230.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-25" data-commits="0">
+      <polygon points="402.0,230.8 413.5,236.5 402.0,242.2 390.5,236.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-26" data-commits="0">
+      <polygon points="390.5,236.5 402.0,242.2 390.5,248.0 379.0,242.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-27" data-commits="0">
+      <polygon points="379.0,242.2 390.5,248.0 379.0,253.8 367.5,248.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-28" data-commits="0">
+      <polygon points="367.5,248.0 379.0,253.8 367.5,259.5 356.0,253.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-29" data-commits="0">
+      <polygon points="356.0,253.8 367.5,259.5 356.0,265.2 344.5,259.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-11-30" data-commits="0">
+      <polygon points="436.5,225.0 448.0,230.8 436.5,236.5 425.0,230.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-01" data-commits="0">
+      <polygon points="425.0,230.8 436.5,236.5 425.0,242.2 413.5,236.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-02" data-commits="0">
+      <polygon points="413.5,236.5 425.0,242.2 413.5,248.0 402.0,242.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-03" data-commits="0">
+      <polygon points="402.0,242.2 413.5,248.0 402.0,253.8 390.5,248.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-04" data-commits="0">
+      <polygon points="390.5,248.0 402.0,253.8 390.5,259.5 379.0,253.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-05" data-commits="0">
+      <polygon points="379.0,253.8 390.5,259.5 379.0,265.2 367.5,259.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-06" data-commits="0">
+      <polygon points="367.5,259.5 379.0,265.2 367.5,271.0 356.0,265.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-07" data-commits="1">
+      <polygon points="436.5,228.5 448.0,234.2 448.0,242.2 436.5,236.5" fill="#0b3620" /> <polygon points="448.0,234.2 459.5,228.5 459.5,236.5 448.0,242.2" fill="#082818" /> <polygon points="448.0,222.8 459.5,228.5 448.0,234.2 436.5,228.5" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-08" data-commits="0">
+      <polygon points="436.5,236.5 448.0,242.2 436.5,248.0 425.0,242.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-09" data-commits="0">
+      <polygon points="425.0,242.2 436.5,248.0 425.0,253.8 413.5,248.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-10" data-commits="0">
+      <polygon points="413.5,248.0 425.0,253.8 413.5,259.5 402.0,253.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-11" data-commits="0">
+      <polygon points="402.0,253.8 413.5,259.5 402.0,265.2 390.5,259.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-12" data-commits="0">
+      <polygon points="390.5,259.5 402.0,265.2 390.5,271.0 379.0,265.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-13" data-commits="0">
+      <polygon points="379.0,265.2 390.5,271.0 379.0,276.8 367.5,271.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-14" data-commits="0">
+      <polygon points="459.5,236.5 471.0,242.2 459.5,248.0 448.0,242.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-15" data-commits="0">
+      <polygon points="448.0,242.2 459.5,248.0 448.0,253.8 436.5,248.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-16" data-commits="0">
+      <polygon points="436.5,248.0 448.0,253.8 436.5,259.5 425.0,253.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-17" data-commits="0">
+      <polygon points="425.0,253.8 436.5,259.5 425.0,265.2 413.5,259.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-18" data-commits="0">
+      <polygon points="413.5,259.5 425.0,265.2 413.5,271.0 402.0,265.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-19" data-commits="0">
+      <polygon points="402.0,265.2 413.5,271.0 402.0,276.8 390.5,271.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-20" data-commits="0">
+      <polygon points="390.5,271.0 402.0,276.8 390.5,282.5 379.0,276.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-21" data-commits="0">
+      <polygon points="471.0,242.2 482.5,248.0 471.0,253.8 459.5,248.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-22" data-commits="0">
+      <polygon points="459.5,248.0 471.0,253.8 459.5,259.5 448.0,253.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-23" data-commits="0">
+      <polygon points="448.0,253.8 459.5,259.5 448.0,265.2 436.5,259.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-24" data-commits="0">
+      <polygon points="436.5,259.5 448.0,265.2 436.5,271.0 425.0,265.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-25" data-commits="0">
+      <polygon points="425.0,265.2 436.5,271.0 425.0,276.8 413.5,271.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-26" data-commits="0">
+      <polygon points="413.5,271.0 425.0,276.8 413.5,282.5 402.0,276.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-27" data-commits="0">
+      <polygon points="402.0,276.8 413.5,282.5 402.0,288.2 390.5,282.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-28" data-commits="0">
+      <polygon points="482.5,248.0 494.0,253.8 482.5,259.5 471.0,253.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-29" data-commits="0">
+      <polygon points="471.0,253.8 482.5,259.5 471.0,265.2 459.5,259.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-30" data-commits="0">
+      <polygon points="459.5,259.5 471.0,265.2 459.5,271.0 448.0,265.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2025-12-31" data-commits="0">
+      <polygon points="448.0,265.2 459.5,271.0 448.0,276.8 436.5,271.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-01" data-commits="0">
+      <polygon points="436.5,271.0 448.0,276.8 436.5,282.5 425.0,276.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-02" data-commits="0">
+      <polygon points="425.0,276.8 436.5,282.5 425.0,288.2 413.5,282.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-03" data-commits="0">
+      <polygon points="413.5,282.5 425.0,288.2 413.5,294.0 402.0,288.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-04" data-commits="0">
+      <polygon points="494.0,253.8 505.5,259.5 494.0,265.2 482.5,259.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-05" data-commits="0">
+      <polygon points="482.5,259.5 494.0,265.2 482.5,271.0 471.0,265.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-06" data-commits="0">
+      <polygon points="471.0,265.2 482.5,271.0 471.0,276.8 459.5,271.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-07" data-commits="0">
+      <polygon points="459.5,271.0 471.0,276.8 459.5,282.5 448.0,276.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-08" data-commits="0">
+      <polygon points="448.0,276.8 459.5,282.5 448.0,288.2 436.5,282.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-09" data-commits="0">
+      <polygon points="436.5,282.5 448.0,288.2 436.5,294.0 425.0,288.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-10" data-commits="0">
+      <polygon points="425.0,288.2 436.5,294.0 425.0,299.8 413.5,294.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-11" data-commits="0">
+      <polygon points="505.5,259.5 517.0,265.2 505.5,271.0 494.0,265.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-12" data-commits="0">
+      <polygon points="494.0,265.2 505.5,271.0 494.0,276.8 482.5,271.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-13" data-commits="0">
+      <polygon points="482.5,271.0 494.0,276.8 482.5,282.5 471.0,276.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-14" data-commits="0">
+      <polygon points="471.0,276.8 482.5,282.5 471.0,288.2 459.5,282.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-15" data-commits="0">
+      <polygon points="459.5,282.5 471.0,288.2 459.5,294.0 448.0,288.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-16" data-commits="1">
+      <polygon points="436.5,286.0 448.0,291.8 448.0,299.8 436.5,294.0" fill="#0b3620" /> <polygon points="448.0,291.8 459.5,286.0 459.5,294.0 448.0,299.8" fill="#082818" /> <polygon points="448.0,280.2 459.5,286.0 448.0,291.8 436.5,286.0" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-17" data-commits="0">
+      <polygon points="436.5,294.0 448.0,299.8 436.5,305.5 425.0,299.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-18" data-commits="0">
+      <polygon points="517.0,265.2 528.5,271.0 517.0,276.8 505.5,271.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-19" data-commits="0">
+      <polygon points="505.5,271.0 517.0,276.8 505.5,282.5 494.0,276.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-20" data-commits="0">
+      <polygon points="494.0,276.8 505.5,282.5 494.0,288.2 482.5,282.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-21" data-commits="0">
+      <polygon points="482.5,282.5 494.0,288.2 482.5,294.0 471.0,288.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-22" data-commits="2">
+      <polygon points="459.5,284.2 471.0,289.9 471.0,299.8 459.5,294.0" fill="#0b3620" /> <polygon points="471.0,289.9 482.5,284.2 482.5,294.0 471.0,299.8" fill="#082818" /> <polygon points="471.0,278.4 482.5,284.2 471.0,289.9 459.5,284.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-23" data-commits="0">
+      <polygon points="459.5,294.0 471.0,299.8 459.5,305.5 448.0,299.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-24" data-commits="0">
+      <polygon points="448.0,299.8 459.5,305.5 448.0,311.2 436.5,305.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-25" data-commits="1">
+      <polygon points="517.0,268.8 528.5,274.5 528.5,282.5 517.0,276.8" fill="#0b3620" /> <polygon points="528.5,274.5 540.0,268.8 540.0,276.8 528.5,282.5" fill="#082818" /> <polygon points="528.5,263.0 540.0,268.8 528.5,274.5 517.0,268.8" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-26" data-commits="1">
+      <polygon points="505.5,274.5 517.0,280.2 517.0,288.2 505.5,282.5" fill="#0b3620" /> <polygon points="517.0,280.2 528.5,274.5 528.5,282.5 517.0,288.2" fill="#082818" /> <polygon points="517.0,268.8 528.5,274.5 517.0,280.2 505.5,274.5" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-27" data-commits="8">
+      <polygon points="494.0,245.7 505.5,251.4 505.5,294.0 494.0,288.2" fill="#1e8534" /> <polygon points="505.5,251.4 517.0,245.7 517.0,288.2 505.5,294.0" fill="#166327" /> <polygon points="505.5,239.9 517.0,245.7 505.5,251.4 494.0,245.7" fill="#26a641" stroke="#26a641" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-28" data-commits="0">
+      <polygon points="494.0,288.2 505.5,294.0 494.0,299.8 482.5,294.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-29" data-commits="0">
+      <polygon points="482.5,294.0 494.0,299.8 482.5,305.5 471.0,299.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-30" data-commits="0">
+      <polygon points="471.0,299.8 482.5,305.5 471.0,311.2 459.5,305.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-01-31" data-commits="0">
+      <polygon points="459.5,305.5 471.0,311.2 459.5,317.0 448.0,311.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-01" data-commits="0">
+      <polygon points="540.0,276.8 551.5,282.5 540.0,288.2 528.5,282.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-02" data-commits="0">
+      <polygon points="528.5,282.5 540.0,288.2 528.5,294.0 517.0,288.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-03" data-commits="0">
+      <polygon points="517.0,288.2 528.5,294.0 517.0,299.8 505.5,294.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-04" data-commits="0">
+      <polygon points="505.5,294.0 517.0,299.8 505.5,305.5 494.0,299.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-05" data-commits="2">
+      <polygon points="482.5,295.7 494.0,301.4 494.0,311.2 482.5,305.5" fill="#0b3620" /> <polygon points="494.0,301.4 505.5,295.7 505.5,305.5 494.0,311.2" fill="#082818" /> <polygon points="494.0,289.9 505.5,295.7 494.0,301.4 482.5,295.7" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-06" data-commits="0">
+      <polygon points="482.5,305.5 494.0,311.2 482.5,317.0 471.0,311.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-07" data-commits="0">
+      <polygon points="471.0,311.2 482.5,317.0 471.0,322.8 459.5,317.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-08" data-commits="0">
+      <polygon points="551.5,282.5 563.0,288.2 551.5,294.0 540.0,288.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-09" data-commits="0">
+      <polygon points="540.0,288.2 551.5,294.0 540.0,299.8 528.5,294.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-10" data-commits="1">
+      <polygon points="517.0,291.8 528.5,297.5 528.5,305.5 517.0,299.8" fill="#0b3620" /> <polygon points="528.5,297.5 540.0,291.8 540.0,299.8 528.5,305.5" fill="#082818" /> <polygon points="528.5,286.0 540.0,291.8 528.5,297.5 517.0,291.8" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-11" data-commits="1">
+      <polygon points="505.5,297.5 517.0,303.2 517.0,311.2 505.5,305.5" fill="#0b3620" /> <polygon points="517.0,303.2 528.5,297.5 528.5,305.5 517.0,311.2" fill="#082818" /> <polygon points="517.0,291.8 528.5,297.5 517.0,303.2 505.5,297.5" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-12" data-commits="0">
+      <polygon points="505.5,305.5 517.0,311.2 505.5,317.0 494.0,311.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-13" data-commits="0">
+      <polygon points="494.0,311.2 505.5,317.0 494.0,322.8 482.5,317.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-14" data-commits="0">
+      <polygon points="482.5,317.0 494.0,322.8 482.5,328.5 471.0,322.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-15" data-commits="0">
+      <polygon points="563.0,288.2 574.5,294.0 563.0,299.8 551.5,294.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-16" data-commits="0">
+      <polygon points="551.5,294.0 563.0,299.8 551.5,305.5 540.0,299.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-17" data-commits="0">
+      <polygon points="540.0,299.8 551.5,305.5 540.0,311.2 528.5,305.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-18" data-commits="3">
+      <polygon points="517.0,289.6 528.5,295.4 528.5,317.0 517.0,311.2" fill="#005728" /> <polygon points="528.5,295.4 540.0,289.6 540.0,311.2 528.5,317.0" fill="#00411e" /> <polygon points="528.5,283.9 540.0,289.6 528.5,295.4 517.0,289.6" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-19" data-commits="0">
+      <polygon points="517.0,311.2 528.5,317.0 517.0,322.8 505.5,317.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-20" data-commits="0">
+      <polygon points="505.5,317.0 517.0,322.8 505.5,328.5 494.0,322.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-21" data-commits="0">
+      <polygon points="494.0,322.8 505.5,328.5 494.0,334.2 482.5,328.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-22" data-commits="0">
+      <polygon points="574.5,294.0 586.0,299.8 574.5,305.5 563.0,299.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-23" data-commits="0">
+      <polygon points="563.0,299.8 574.5,305.5 563.0,311.2 551.5,305.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-24" data-commits="0">
+      <polygon points="551.5,305.5 563.0,311.2 551.5,317.0 540.0,311.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-25" data-commits="0">
+      <polygon points="540.0,311.2 551.5,317.0 540.0,322.8 528.5,317.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-26" data-commits="1">
+      <polygon points="517.0,314.8 528.5,320.5 528.5,328.5 517.0,322.8" fill="#0b3620" /> <polygon points="528.5,320.5 540.0,314.8 540.0,322.8 528.5,328.5" fill="#082818" /> <polygon points="528.5,309.0 540.0,314.8 528.5,320.5 517.0,314.8" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-27" data-commits="0">
+      <polygon points="517.0,322.8 528.5,328.5 517.0,334.2 505.5,328.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-02-28" data-commits="0">
+      <polygon points="505.5,328.5 517.0,334.2 505.5,340.0 494.0,334.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-01" data-commits="0">
+      <polygon points="586.0,299.8 597.5,305.5 586.0,311.2 574.5,305.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-02" data-commits="0">
+      <polygon points="574.5,305.5 586.0,311.2 574.5,317.0 563.0,311.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-03" data-commits="0">
+      <polygon points="563.0,311.2 574.5,317.0 563.0,322.8 551.5,317.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-04" data-commits="0">
+      <polygon points="551.5,317.0 563.0,322.8 551.5,328.5 540.0,322.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-05" data-commits="0">
+      <polygon points="540.0,322.8 551.5,328.5 540.0,334.2 528.5,328.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-06" data-commits="0">
+      <polygon points="528.5,328.5 540.0,334.2 528.5,340.0 517.0,334.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-07" data-commits="0">
+      <polygon points="517.0,334.2 528.5,340.0 517.0,345.8 505.5,340.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-08" data-commits="0">
+      <polygon points="597.5,305.5 609.0,311.2 597.5,317.0 586.0,311.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-09" data-commits="0">
+      <polygon points="586.0,311.2 597.5,317.0 586.0,322.8 574.5,317.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-10" data-commits="0">
+      <polygon points="574.5,317.0 586.0,322.8 574.5,328.5 563.0,322.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-11" data-commits="0">
+      <polygon points="563.0,322.8 574.5,328.5 563.0,334.2 551.5,328.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-12" data-commits="0">
+      <polygon points="551.5,328.5 563.0,334.2 551.5,340.0 540.0,334.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-13" data-commits="0">
+      <polygon points="540.0,334.2 551.5,340.0 540.0,345.8 528.5,340.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-14" data-commits="0">
+      <polygon points="528.5,340.0 540.0,345.8 528.5,351.5 517.0,345.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-15" data-commits="0">
+      <polygon points="609.0,311.2 620.5,317.0 609.0,322.8 597.5,317.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-16" data-commits="0">
+      <polygon points="597.5,317.0 609.0,322.8 597.5,328.5 586.0,322.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-17" data-commits="0">
+      <polygon points="586.0,322.8 597.5,328.5 586.0,334.2 574.5,328.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-18" data-commits="0">
+      <polygon points="574.5,328.5 586.0,334.2 574.5,340.0 563.0,334.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-19" data-commits="0">
+      <polygon points="563.0,334.2 574.5,340.0 563.0,345.8 551.5,340.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-20" data-commits="0">
+      <polygon points="551.5,340.0 563.0,345.8 551.5,351.5 540.0,345.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-21" data-commits="0">
+      <polygon points="540.0,345.8 551.5,351.5 540.0,357.2 528.5,351.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-22" data-commits="0">
+      <polygon points="620.5,317.0 632.0,322.8 620.5,328.5 609.0,322.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-23" data-commits="0">
+      <polygon points="609.0,322.8 620.5,328.5 609.0,334.2 597.5,328.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-24" data-commits="1">
+      <polygon points="586.0,326.2 597.5,332.0 597.5,340.0 586.0,334.2" fill="#0b3620" /> <polygon points="597.5,332.0 609.0,326.2 609.0,334.2 597.5,340.0" fill="#082818" /> <polygon points="597.5,320.5 609.0,326.2 597.5,332.0 586.0,326.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-25" data-commits="0">
+      <polygon points="586.0,334.2 597.5,340.0 586.0,345.8 574.5,340.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-26" data-commits="0">
+      <polygon points="574.5,340.0 586.0,345.8 574.5,351.5 563.0,345.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-27" data-commits="2">
+      <polygon points="551.5,341.7 563.0,347.4 563.0,357.2 551.5,351.5" fill="#0b3620" /> <polygon points="563.0,347.4 574.5,341.7 574.5,351.5 563.0,357.2" fill="#082818" /> <polygon points="563.0,335.9 574.5,341.7 563.0,347.4 551.5,341.7" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-28" data-commits="0">
+      <polygon points="551.5,351.5 563.0,357.2 551.5,363.0 540.0,357.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-29" data-commits="0">
+      <polygon points="632.0,322.8 643.5,328.5 632.0,334.2 620.5,328.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-30" data-commits="1">
+      <polygon points="609.0,326.2 620.5,332.0 620.5,340.0 609.0,334.2" fill="#0b3620" /> <polygon points="620.5,332.0 632.0,326.2 632.0,334.2 620.5,340.0" fill="#082818" /> <polygon points="620.5,320.5 632.0,326.2 620.5,332.0 609.0,326.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-03-31" data-commits="0">
+      <polygon points="609.0,334.2 620.5,340.0 609.0,345.8 597.5,340.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-01" data-commits="0">
+      <polygon points="597.5,340.0 609.0,345.8 597.5,351.5 586.0,345.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-02" data-commits="0">
+      <polygon points="586.0,345.8 597.5,351.5 586.0,357.2 574.5,351.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-03" data-commits="0">
+      <polygon points="574.5,351.5 586.0,357.2 574.5,363.0 563.0,357.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-04" data-commits="0">
+      <polygon points="563.0,357.2 574.5,363.0 563.0,368.8 551.5,363.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-05" data-commits="0">
+      <polygon points="643.5,328.5 655.0,334.2 643.5,340.0 632.0,334.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-06" data-commits="0">
+      <polygon points="632.0,334.2 643.5,340.0 632.0,345.8 620.5,340.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-07" data-commits="0">
+      <polygon points="620.5,340.0 632.0,345.8 620.5,351.5 609.0,345.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-08" data-commits="0">
+      <polygon points="609.0,345.8 620.5,351.5 609.0,357.2 597.5,351.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-09" data-commits="0">
+      <polygon points="597.5,351.5 609.0,357.2 597.5,363.0 586.0,357.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-10" data-commits="0">
+      <polygon points="586.0,357.2 597.5,363.0 586.0,368.8 574.5,363.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-11" data-commits="0">
+      <polygon points="574.5,363.0 586.0,368.8 574.5,374.5 563.0,368.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-12" data-commits="0">
+      <polygon points="655.0,334.2 666.5,340.0 655.0,345.8 643.5,340.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-13" data-commits="1">
+      <polygon points="632.0,337.8 643.5,343.5 643.5,351.5 632.0,345.8" fill="#0b3620" /> <polygon points="643.5,343.5 655.0,337.8 655.0,345.8 643.5,351.5" fill="#082818" /> <polygon points="643.5,332.0 655.0,337.8 643.5,343.5 632.0,337.8" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-14" data-commits="0">
+      <polygon points="632.0,345.8 643.5,351.5 632.0,357.2 620.5,351.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-15" data-commits="4">
+      <polygon points="609.0,333.9 620.5,339.6 620.5,363.0 609.0,357.2" fill="#005728" /> <polygon points="620.5,339.6 632.0,333.9 632.0,357.2 620.5,363.0" fill="#00411e" /> <polygon points="620.5,328.1 632.0,333.9 620.5,339.6 609.0,333.9" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-16" data-commits="0">
+      <polygon points="609.0,357.2 620.5,363.0 609.0,368.8 597.5,363.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-17" data-commits="0">
+      <polygon points="597.5,363.0 609.0,368.8 597.5,374.5 586.0,368.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-18" data-commits="7">
+      <polygon points="574.5,333.7 586.0,339.4 586.0,380.2 574.5,374.5" fill="#1e8534" /> <polygon points="586.0,339.4 597.5,333.7 597.5,374.5 586.0,380.2" fill="#166327" /> <polygon points="586.0,327.9 597.5,333.7 586.0,339.4 574.5,333.7" fill="#26a641" stroke="#26a641" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-19" data-commits="0">
+      <polygon points="666.5,340.0 678.0,345.8 666.5,351.5 655.0,345.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-20" data-commits="3">
+      <polygon points="643.5,329.9 655.0,335.6 655.0,357.2 643.5,351.5" fill="#005728" /> <polygon points="655.0,335.6 666.5,329.9 666.5,351.5 655.0,357.2" fill="#00411e" /> <polygon points="655.0,324.1 666.5,329.9 655.0,335.6 643.5,329.9" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-21" data-commits="0">
+      <polygon points="643.5,351.5 655.0,357.2 643.5,363.0 632.0,357.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-22" data-commits="4">
+      <polygon points="620.5,339.6 632.0,345.4 632.0,368.8 620.5,363.0" fill="#005728" /> <polygon points="632.0,345.4 643.5,339.6 643.5,363.0 632.0,368.8" fill="#00411e" /> <polygon points="632.0,333.9 643.5,339.6 632.0,345.4 620.5,339.6" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-23" data-commits="3">
+      <polygon points="609.0,347.1 620.5,352.9 620.5,374.5 609.0,368.8" fill="#005728" /> <polygon points="620.5,352.9 632.0,347.1 632.0,368.8 620.5,374.5" fill="#00411e" /> <polygon points="620.5,341.4 632.0,347.1 620.5,352.9 609.0,347.1" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-24" data-commits="0">
+      <polygon points="609.0,368.8 620.5,374.5 609.0,380.2 597.5,374.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-25" data-commits="0">
+      <polygon points="597.5,374.5 609.0,380.2 597.5,386.0 586.0,380.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-26" data-commits="0">
+      <polygon points="678.0,345.8 689.5,351.5 678.0,357.2 666.5,351.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-27" data-commits="0">
+      <polygon points="666.5,351.5 678.0,357.2 666.5,363.0 655.0,357.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-28" data-commits="5">
+      <polygon points="643.5,337.8 655.0,343.6 655.0,368.8 643.5,363.0" fill="#005728" /> <polygon points="655.0,343.6 666.5,337.8 666.5,363.0 655.0,368.8" fill="#00411e" /> <polygon points="655.0,332.1 666.5,337.8 655.0,343.6 643.5,337.8" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-29" data-commits="8">
+      <polygon points="632.0,326.1 643.5,331.9 643.5,374.5 632.0,368.8" fill="#1e8534" /> <polygon points="643.5,331.9 655.0,326.1 655.0,368.8 643.5,374.5" fill="#166327" /> <polygon points="643.5,320.4 655.0,326.1 643.5,331.9 632.0,326.1" fill="#26a641" stroke="#26a641" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-04-30" data-commits="4">
+      <polygon points="620.5,351.1 632.0,356.9 632.0,380.2 620.5,374.5" fill="#005728" /> <polygon points="632.0,356.9 643.5,351.1 643.5,374.5 632.0,380.2" fill="#00411e" /> <polygon points="632.0,345.4 643.5,351.1 632.0,356.9 620.5,351.1" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-01" data-commits="0">
+      <polygon points="620.5,374.5 632.0,380.2 620.5,386.0 609.0,380.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-02" data-commits="0">
+      <polygon points="609.0,380.2 620.5,386.0 609.0,391.8 597.5,386.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-03" data-commits="0">
+      <polygon points="689.5,351.5 701.0,357.2 689.5,363.0 678.0,357.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-04" data-commits="0">
+      <polygon points="678.0,357.2 689.5,363.0 678.0,368.8 666.5,363.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-05" data-commits="0">
+      <polygon points="666.5,363.0 678.0,368.8 666.5,374.5 655.0,368.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-06" data-commits="12">
+      <polygon points="643.5,309.7 655.0,315.4 655.0,380.2 643.5,374.5" fill="#2ea942" /> <polygon points="655.0,315.4 666.5,309.7 666.5,374.5 655.0,380.2" fill="#227e31" /> <polygon points="655.0,303.9 666.5,309.7 655.0,315.4 643.5,309.7" fill="#39d353" stroke="#39d353" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-07" data-commits="0">
+      <polygon points="643.5,374.5 655.0,380.2 643.5,386.0 632.0,380.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-08" data-commits="0">
+      <polygon points="632.0,380.2 643.5,386.0 632.0,391.8 620.5,386.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-09" data-commits="0">
+      <polygon points="620.5,386.0 632.0,391.8 620.5,397.5 609.0,391.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-10" data-commits="0">
+      <polygon points="701.0,357.2 712.5,363.0 701.0,368.8 689.5,363.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-11" data-commits="0">
+      <polygon points="689.5,363.0 701.0,368.8 689.5,374.5 678.0,368.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-12" data-commits="0">
+      <polygon points="678.0,368.8 689.5,374.5 678.0,380.2 666.5,374.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-13" data-commits="0">
+      <polygon points="666.5,374.5 678.0,380.2 666.5,386.0 655.0,380.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-14" data-commits="0">
+      <polygon points="655.0,380.2 666.5,386.0 655.0,391.8 643.5,386.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-15" data-commits="0">
+      <polygon points="643.5,386.0 655.0,391.8 643.5,397.5 632.0,391.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-16" data-commits="0">
+      <polygon points="632.0,391.8 643.5,397.5 632.0,403.2 620.5,397.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-17" data-commits="0">
+      <polygon points="712.5,363.0 724.0,368.8 712.5,374.5 701.0,368.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-18" data-commits="0">
+      <polygon points="701.0,368.8 712.5,374.5 701.0,380.2 689.5,374.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-19" data-commits="9">
+      <polygon points="678.0,320.9 689.5,326.6 689.5,386.0 678.0,380.2" fill="#2ea942" /> <polygon points="689.5,326.6 701.0,320.9 701.0,380.2 689.5,386.0" fill="#227e31" /> <polygon points="689.5,315.1 701.0,320.9 689.5,326.6 678.0,320.9" fill="#39d353" stroke="#39d353" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-20" data-commits="0">
+      <polygon points="678.0,380.2 689.5,386.0 678.0,391.8 666.5,386.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-21" data-commits="0">
+      <polygon points="666.5,386.0 678.0,391.8 666.5,397.5 655.0,391.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-22" data-commits="0">
+      <polygon points="655.0,391.8 666.5,397.5 655.0,403.2 643.5,397.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-23" data-commits="0">
+      <polygon points="643.5,397.5 655.0,403.2 643.5,409.0 632.0,403.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-24" data-commits="0">
+      <polygon points="724.0,368.8 735.5,374.5 724.0,380.2 712.5,374.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-25" data-commits="0">
+      <polygon points="712.5,374.5 724.0,380.2 712.5,386.0 701.0,380.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-26" data-commits="0">
+      <polygon points="701.0,380.2 712.5,386.0 701.0,391.8 689.5,386.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-27" data-commits="0">
+      <polygon points="689.5,386.0 701.0,391.8 689.5,397.5 678.0,391.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-28" data-commits="0">
+      <polygon points="678.0,391.8 689.5,397.5 678.0,403.2 666.5,397.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-29" data-commits="0">
+      <polygon points="666.5,397.5 678.0,403.2 666.5,409.0 655.0,403.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-30" data-commits="0">
+      <polygon points="655.0,403.2 666.5,409.0 655.0,414.8 643.5,409.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-05-31" data-commits="11">
+      <polygon points="724.0,317.2 735.5,323.0 735.5,386.0 724.0,380.2" fill="#2ea942" /> <polygon points="735.5,323.0 747.0,317.2 747.0,380.2 735.5,386.0" fill="#227e31" /> <polygon points="735.5,311.5 747.0,317.2 735.5,323.0 724.0,317.2" fill="#39d353" stroke="#39d353" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-01" data-commits="5">
+      <polygon points="712.5,360.8 724.0,366.6 724.0,391.8 712.5,386.0" fill="#005728" /> <polygon points="724.0,366.6 735.5,360.8 735.5,386.0 724.0,391.8" fill="#00411e" /> <polygon points="724.0,355.1 735.5,360.8 724.0,366.6 712.5,360.8" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-02" data-commits="2">
+      <polygon points="701.0,381.9 712.5,387.7 712.5,397.5 701.0,391.8" fill="#0b3620" /> <polygon points="712.5,387.7 724.0,381.9 724.0,391.8 712.5,397.5" fill="#082818" /> <polygon points="712.5,376.2 724.0,381.9 712.5,387.7 701.0,381.9" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-03" data-commits="0">
+      <polygon points="701.0,391.8 712.5,397.5 701.0,403.2 689.5,397.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-04" data-commits="0">
+      <polygon points="689.5,397.5 701.0,403.2 689.5,409.0 678.0,403.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-05" data-commits="0">
+      <polygon points="678.0,403.2 689.5,409.0 678.0,414.8 666.5,409.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-06" data-commits="0">
+      <polygon points="666.5,409.0 678.0,414.8 666.5,420.5 655.0,414.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-07" data-commits="0">
+      <polygon points="747.0,380.2 758.5,386.0 747.0,391.8 735.5,386.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-08" data-commits="7">
+      <polygon points="724.0,350.9 735.5,356.7 735.5,397.5 724.0,391.8" fill="#1e8534" /> <polygon points="735.5,356.7 747.0,350.9 747.0,391.8 735.5,397.5" fill="#166327" /> <polygon points="735.5,345.2 747.0,350.9 735.5,356.7 724.0,350.9" fill="#26a641" stroke="#26a641" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-09" data-commits="0">
+      <polygon points="724.0,391.8 735.5,397.5 724.0,403.2 712.5,397.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-10" data-commits="0">
+      <polygon points="712.5,397.5 724.0,403.2 712.5,409.0 701.0,403.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-11" data-commits="6">
+      <polygon points="689.5,370.0 701.0,375.8 701.0,414.8 689.5,409.0" fill="#1e8534" /> <polygon points="701.0,375.8 712.5,370.0 712.5,409.0 701.0,414.8" fill="#166327" /> <polygon points="701.0,364.2 712.5,370.0 701.0,375.8 689.5,370.0" fill="#26a641" stroke="#26a641" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-12" data-commits="0">
+      <polygon points="689.5,409.0 701.0,414.8 689.5,420.5 678.0,414.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-13" data-commits="0">
+      <polygon points="678.0,414.8 689.5,420.5 678.0,426.2 666.5,420.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-14" data-commits="0">
+      <polygon points="758.5,386.0 770.0,391.8 758.5,397.5 747.0,391.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-15" data-commits="0">
+      <polygon points="747.0,391.8 758.5,397.5 747.0,403.2 735.5,397.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-16" data-commits="0">
+      <polygon points="735.5,397.5 747.0,403.2 735.5,409.0 724.0,403.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-17" data-commits="0">
+      <polygon points="724.0,403.2 735.5,409.0 724.0,414.8 712.5,409.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-18" data-commits="0">
+      <polygon points="712.5,409.0 724.0,414.8 712.5,420.5 701.0,414.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-19" data-commits="4">
+      <polygon points="689.5,397.1 701.0,402.9 701.0,426.2 689.5,420.5" fill="#005728" /> <polygon points="701.0,402.9 712.5,397.1 712.5,420.5 701.0,426.2" fill="#00411e" /> <polygon points="701.0,391.4 712.5,397.1 701.0,402.9 689.5,397.1" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-20" data-commits="1">
+      <polygon points="678.0,418.2 689.5,424.0 689.5,432.0 678.0,426.2" fill="#0b3620" /> <polygon points="689.5,424.0 701.0,418.2 701.0,426.2 689.5,432.0" fill="#082818" /> <polygon points="689.5,412.5 701.0,418.2 689.5,424.0 678.0,418.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-21" data-commits="1">
+      <polygon points="758.5,389.5 770.0,395.2 770.0,403.2 758.5,397.5" fill="#0b3620" /> <polygon points="770.0,395.2 781.5,389.5 781.5,397.5 770.0,403.2" fill="#082818" /> <polygon points="770.0,383.8 781.5,389.5 770.0,395.2 758.5,389.5" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-22" data-commits="0">
+      <polygon points="758.5,397.5 770.0,403.2 758.5,409.0 747.0,403.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-23" data-commits="0">
+      <polygon points="747.0,403.2 758.5,409.0 747.0,414.8 735.5,409.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-24" data-commits="2">
+      <polygon points="724.0,404.9 735.5,410.7 735.5,420.5 724.0,414.8" fill="#0b3620" /> <polygon points="735.5,410.7 747.0,404.9 747.0,414.8 735.5,420.5" fill="#082818" /> <polygon points="735.5,399.2 747.0,404.9 735.5,410.7 724.0,404.9" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-25" data-commits="0">
+      <polygon points="724.0,414.8 735.5,420.5 724.0,426.2 712.5,420.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-26" data-commits="0">
+      <polygon points="712.5,420.5 724.0,426.2 712.5,432.0 701.0,426.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-27" data-commits="0">
+      <polygon points="701.0,426.2 712.5,432.0 701.0,437.8 689.5,432.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-28" data-commits="0">
+      <polygon points="781.5,397.5 793.0,403.2 781.5,409.0 770.0,403.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-29" data-commits="0">
+      <polygon points="770.0,403.2 781.5,409.0 770.0,414.8 758.5,409.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-06-30" data-commits="2">
+      <polygon points="747.0,404.9 758.5,410.7 758.5,420.5 747.0,414.8" fill="#0b3620" /> <polygon points="758.5,410.7 770.0,404.9 770.0,414.8 758.5,420.5" fill="#082818" /> <polygon points="758.5,399.2 770.0,404.9 758.5,410.7 747.0,404.9" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-07-01" data-commits="3">
+      <polygon points="735.5,398.9 747.0,404.6 747.0,426.2 735.5,420.5" fill="#005728" /> <polygon points="747.0,404.6 758.5,398.9 758.5,420.5 747.0,426.2" fill="#00411e" /> <polygon points="747.0,393.1 758.5,398.9 747.0,404.6 735.5,398.9" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-07-02" data-commits="0">
+      <polygon points="735.5,420.5 747.0,426.2 735.5,432.0 724.0,426.2" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-07-03" data-commits="2">
+      <polygon points="712.5,422.2 724.0,427.9 724.0,437.8 712.5,432.0" fill="#0b3620" /> <polygon points="724.0,427.9 735.5,422.2 735.5,432.0 724.0,437.8" fill="#082818" /> <polygon points="724.0,416.4 735.5,422.2 724.0,427.9 712.5,422.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-07-04" data-commits="0">
+      <polygon points="712.5,432.0 724.0,437.8 712.5,443.5 701.0,437.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-07-05" data-commits="1">
+      <polygon points="781.5,401.0 793.0,406.8 793.0,414.8 781.5,409.0" fill="#0b3620" /> <polygon points="793.0,406.8 804.5,401.0 804.5,409.0 793.0,414.8" fill="#082818" /> <polygon points="793.0,395.2 804.5,401.0 793.0,406.8 781.5,401.0" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-07-06" data-commits="5">
+      <polygon points="770.0,389.6 781.5,395.3 781.5,420.5 770.0,414.8" fill="#005728" /> <polygon points="781.5,395.3 793.0,389.6 793.0,414.8 781.5,420.5" fill="#00411e" /> <polygon points="781.5,383.8 793.0,389.6 781.5,395.3 770.0,389.6" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-07-07" data-commits="5">
+      <polygon points="758.5,395.3 770.0,401.1 770.0,426.2 758.5,420.5" fill="#005728" /> <polygon points="770.0,401.1 781.5,395.3 781.5,420.5 770.0,426.2" fill="#00411e" /> <polygon points="770.0,389.6 781.5,395.3 770.0,401.1 758.5,395.3" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-07-08" data-commits="1">
+      <polygon points="747.0,418.2 758.5,424.0 758.5,432.0 747.0,426.2" fill="#0b3620" /> <polygon points="758.5,424.0 770.0,418.2 770.0,426.2 758.5,432.0" fill="#082818" /> <polygon points="758.5,412.5 770.0,418.2 758.5,424.0 747.0,418.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-07-09" data-commits="2">
+      <polygon points="735.5,422.2 747.0,427.9 747.0,437.8 735.5,432.0" fill="#0b3620" /> <polygon points="747.0,427.9 758.5,422.2 758.5,432.0 747.0,437.8" fill="#082818" /> <polygon points="747.0,416.4 758.5,422.2 747.0,427.9 735.5,422.2" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group" data-date="2026-07-10" data-commits="0">
+      <polygon points="735.5,432.0 747.0,437.8 735.5,443.5 724.0,437.8" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
+    </g>
+    <g class="pillar-group recent-pillar" data-date="2026-07-11" data-commits="17">
+      <polygon points="712.5,369.7 724.0,375.4 724.0,449.2 712.5,443.5" fill="#2ea942" /> <polygon points="724.0,375.4 735.5,369.7 735.5,443.5 724.0,449.2" fill="#227e31" /> <polygon points="724.0,363.9 735.5,369.7 724.0,375.4 712.5,369.7" fill="#39d353" stroke="#39d353" stroke-width="0.3" />
+    </g>
     <!-- Pulse Halo for Most Recent Commit -->
-    <circle cx="711.31" cy="307.17" r="11" fill="none" stroke="#ef4444" stroke-width="1.8">
-      <animate attributeName="r" values="6;14;6" dur="1.2s" repeatCount="indefinite" />
+    <circle cx="724.00" cy="369.70" r="13" fill="none" stroke="#ef4444" stroke-width="1.8">
+      <animate attributeName="r" values="8;15;8" dur="1.2s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite" />
     </circle>
-    <circle cx="711.31" cy="307.17" r="2.5" fill="#ef4444" />
+    <circle cx="724.00" cy="369.70" r="2.5" fill="#ef4444" />
     <!-- Floating details bubble -->
-    <g transform="translate(723.31, 295.17)">
+    <g transform="translate(736.00, 357.70)">
       <rect x="0" y="0" width="185" height="18" rx="3" fill="#111827" stroke="#ef4444" stroke-width="1" opacity="0.95" />
-      <text x="7" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#e5e7eb" font-weight="bold">Recent: 2026-07-11 (15 commits)</text>
+      <text x="7" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#e5e7eb" font-weight="bold">Recent: 2026-07-11 (17 commits)</text>
     </g>
 
     <!-- Legend -->
-    <g transform="translate(680, 560)">
-      <text x="0" y="9" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Less</text>
-      <rect x="35" y="0" width="10" height="10" rx="1.5" fill="#13261a" stroke="#1f2937" stroke-width="0.5" />
-      <rect x="48" y="0" width="10" height="10" rx="1.5" fill="#0e4429" />
-      <rect x="61" y="0" width="10" height="10" rx="1.5" fill="#006d32" />
-      <rect x="74" y="0" width="10" height="10" rx="1.5" fill="#26a641" />
-      <rect x="87" y="0" width="10" height="10" rx="1.5" fill="#39d353" />
-      <text x="103" y="9" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">More</text>
+    <g transform="translate(0, 0)">
+      <text x="590" y="445" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#4b5563" font-weight="bold" text-anchor="end">Less</text>
+      <g transform="translate(0, 0)"><polygon points="650.0,434.2 661.5,440.0 650.0,445.8 638.5,440.0" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" /></g>
+      <g transform="translate(0, 0)"><polygon points="666.5,433.0 678.0,438.8 678.0,445.8 666.5,440.0" fill="#0b3620" /> <polygon points="678.0,438.8 689.5,433.0 689.5,440.0 678.0,445.8" fill="#082818" /> <polygon points="678.0,427.2 689.5,433.0 678.0,438.8 666.5,433.0" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" /></g>
+      <g transform="translate(0, 0)"><polygon points="694.5,426.0 706.0,431.8 706.0,445.8 694.5,440.0" fill="#005728" /> <polygon points="706.0,431.8 717.5,426.0 717.5,440.0 706.0,445.8" fill="#00411e" /> <polygon points="706.0,420.2 717.5,426.0 706.0,431.8 694.5,426.0" fill="#006d32" stroke="#006d32" stroke-width="0.3" /></g>
+      <g transform="translate(0, 0)"><polygon points="722.5,419.0 734.0,424.8 734.0,445.8 722.5,440.0" fill="#1e8534" /> <polygon points="734.0,424.8 745.5,419.0 745.5,440.0 734.0,445.8" fill="#166327" /> <polygon points="734.0,413.2 745.5,419.0 734.0,424.8 722.5,419.0" fill="#26a641" stroke="#26a641" stroke-width="0.3" /></g>
+      <g transform="translate(0, 0)"><polygon points="750.5,412.0 762.0,417.8 762.0,445.8 750.5,440.0" fill="#2ea942" /> <polygon points="762.0,417.8 773.5,412.0 773.5,440.0 762.0,445.8" fill="#227e31" /> <polygon points="762.0,406.2 773.5,412.0 762.0,417.8 750.5,412.0" fill="#39d353" stroke="#39d353" stroke-width="0.3" /></g>
+      <text x="795" y="445" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#4b5563" font-weight="bold" text-anchor="start">More</text>
     </g>
   </g>
 </svg>
