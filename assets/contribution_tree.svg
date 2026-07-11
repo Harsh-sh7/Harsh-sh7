@@ -1,0 +1,485 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="auto">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
+      
+      .contrib-tree-card {
+        filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.45));
+        animation: treeFadeIn 0.8s ease-out;
+      }
+      
+      .contrib-leaf {
+        transition: transform 0.15s ease, fill 0.15s ease;
+        transform-box: fill-box;
+        transform-origin: center;
+      }
+      
+      .contrib-leaf:hover {
+        transform: scale(1.6);
+        fill: #38bdf8;
+        cursor: pointer;
+      }
+      
+      @keyframes treeFadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  </defs>
+
+  <g class="contrib-tree-card">
+    <!-- Window Background -->
+    <rect x="0" y="0" width="900" height="600" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+
+    <!-- Window Title Bar -->
+    <path d="M 0,12 A 12,12 0 0,1 12,0 L 888,0 A 12,12 0 0,1 900,12 L 900,42 L 0,42 Z" fill="#111827" />
+    
+    <!-- Window Control Buttons (macOS Style) -->
+    <circle cx="25" cy="21" r="6" fill="#ff5f56" />
+    <circle cx="45" cy="21" r="6" fill="#ffbd2e" />
+    <circle cx="65" cy="21" r="6" fill="#27c93f" />
+
+    <!-- Terminal Title -->
+    <text x="450" y="25" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" text-anchor="middle" font-weight="bold">
+      Harsh-sh7@macos: ~/contribution-tree
+    </text>
+
+    <!-- Title Bar Divider -->
+    <line x1="0" y1="42" x2="900" y2="42" stroke="#1f2937" stroke-width="1" />
+
+    <!-- Header Text -->
+    <text x="35" y="70" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13" fill="#34d399" font-weight="bold">
+      &gt; git log --graph --date=relative --all (Past 12 Months)
+    </text>
+
+    <!-- Tree elements -->
+    <path d="M 434 550 C 438 480, 442 440, 444 405 L 456 405 C 458 440, 462 480, 466 550 Z" fill="#4e342e" />
+    <path d="M 450 405 C 370.8 399.4, 261.8 389.7, 143.0 378.6" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 450 405 C 376.3 389.4, 275.0 362.2, 164.5 331.0" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 450 405 C 386.8 380.5, 299.9 337.6, 205.1 288.5" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 450 405 C 401.6 373.2, 334.9 317.5, 262.3 253.8" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 450 405 C 419.6 368.0, 377.7 303.3, 332.1 229.3" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 450 405 C 439.6 365.3, 425.3 295.9, 409.8 216.6" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 450 405 C 460.4 365.3, 474.7 295.9, 490.2 216.6" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 450 405 C 480.4 368.0, 522.3 303.3, 567.9 229.3" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 450 405 C 498.4 373.2, 565.1 317.5, 637.7 253.8" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 450 405 C 513.2 380.5, 600.1 337.6, 694.9 288.5" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 450 405 C 523.7 389.4, 625.0 362.2, 735.5 331.0" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 450 405 C 529.2 399.4, 638.2 389.7, 757.0 378.6" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />
+    <path d="M 143.0 378.6 L 106.1 387.6" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 143.0 378.6 L 95.5 371.9" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 143.0 378.6 L 110.0 359.7" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 164.5 331.0 L 126.5 330.3" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 164.5 331.0 L 120.2 312.4" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 164.5 331.0 L 137.4 304.3" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 205.1 288.5 L 168.6 278.0" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 205.1 288.5 L 167.2 259.1" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 205.1 288.5 L 185.9 255.7" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 262.3 253.8 L 229.7 234.3" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 262.3 253.8 L 233.2 215.6" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 262.3 253.8 L 252.1 217.2" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 332.1 229.3 L 305.6 202.0" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 332.1 229.3 L 313.8 184.9" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 332.1 229.3 L 331.7 191.3" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 409.8 216.6 L 391.2 183.4" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 409.8 216.6 L 403.6 169.0" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 409.8 216.6 L 419.2 179.8" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 490.2 216.6 L 480.8 179.8" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 490.2 216.6 L 496.4 169.0" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 490.2 216.6 L 508.8 183.4" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 567.9 229.3 L 568.3 191.3" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 567.9 229.3 L 586.2 184.9" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 567.9 229.3 L 594.4 202.0" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 637.7 253.8 L 647.9 217.2" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 637.7 253.8 L 666.8 215.6" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 637.7 253.8 L 670.3 234.3" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 694.9 288.5 L 714.1 255.7" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 694.9 288.5 L 732.8 259.1" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 694.9 288.5 L 731.4 278.0" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 735.5 331.0 L 762.6 304.3" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 735.5 331.0 L 779.8 312.4" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 735.5 331.0 L 773.5 330.3" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 757.0 378.6 L 790.0 359.7" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 757.0 378.6 L 804.5 371.9" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <path d="M 757.0 378.6 L 793.9 387.6" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />
+    <rect class="contrib-leaf" x="133.20" y="370.13" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="134.15" y="369.61" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="137.31" y="370.19" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="131.67" y="376.68" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="129.51" y="375.02" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="131.69" y="373.89" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="130.15" y="383.23" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="124.88" y="380.42" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="133.52" y="364.57" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="125.05" y="375.21" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="122.33" y="370.98" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="127.90" y="368.26" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="123.53" y="381.77" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="117.69" y="376.38" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="122.28" y="371.96" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="118.43" y="373.75" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="115.14" y="366.94" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="124.11" y="362.64" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="116.91" y="380.30" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="110.50" y="372.34" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="118.50" y="366.34" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="115.38" y="386.85" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="105.86" y="377.75" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="120.33" y="357.02" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="110.29" y="378.83" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="103.31" y="368.30" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="114.71" y="360.72" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="108.76" y="385.38" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="98.68" y="373.71" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="109.09" y="364.42" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="103.67" y="377.37" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="156.40" y="320.93" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="157.46" y="320.67" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="160.36" y="322.04" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="153.24" y="326.87" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="151.59" y="324.70" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="153.98" y="324.17" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="150.08" y="332.80" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="145.72" y="328.73" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="158.15" y="315.63" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="147.22" y="323.75" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="145.68" y="318.95" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="151.77" y="317.76" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="144.07" y="329.68" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="139.81" y="322.98" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="145.39" y="319.89" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="141.20" y="320.63" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="139.77" y="313.20" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="149.55" y="311.35" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="138.05" y="326.56" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="133.90" y="317.23" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="143.17" y="313.48" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="134.89" y="332.50" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="128.03" y="321.26" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="147.34" y="304.95" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="132.03" y="323.44" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="128.00" y="311.47" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="140.96" y="307.07" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="128.87" y="329.38" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="122.12" y="315.51" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="134.58" y="309.20" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="199.21" y="277.22" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="200.30" y="277.24" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="202.75" y="279.31" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="194.63" y="282.14" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="193.58" y="279.63" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="196.03" y="279.73" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="190.05" y="287.07" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="186.87" y="282.01" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="202.26" y="272.55" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="189.61" y="277.58" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="189.36" y="272.55" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="195.54" y="272.97" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="185.03" y="282.50" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="182.64" y="274.93" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="188.83" y="273.38" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="184.60" y="273.02" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="185.13" y="265.47" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="195.05" y="266.20" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="180.02" y="277.94" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="178.42" y="267.85" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="188.34" y="266.62" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="175.44" y="282.87" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="171.70" y="270.24" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="194.56" y="259.44" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="175.01" y="273.38" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="174.19" y="260.77" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="187.85" y="259.86" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="170.43" y="278.30" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="167.48" y="263.16" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="181.13" y="260.27" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="169.99" y="268.81" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="258.73" y="241.94" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="259.78" y="242.24" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="261.61" y="244.88" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="253.04" y="245.52" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="252.68" y="242.82" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="255.02" y="243.55" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="247.34" y="249.11" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="245.58" y="243.40" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="262.88" y="238.22" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="249.37" y="239.82" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="250.41" y="234.89" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="256.28" y="236.89" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="243.67" y="243.41" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="243.31" y="235.47" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="249.69" y="235.56" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="245.70" y="234.12" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="248.15" y="226.97" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="257.55" y="230.23" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="240.00" y="237.71" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="241.05" y="227.54" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="250.95" y="228.90" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="234.31" y="241.29" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="233.95" y="228.12" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="258.81" y="223.57" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="236.33" y="232.01" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="238.79" y="219.62" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="252.22" y="222.24" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="230.64" y="235.59" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="231.69" y="220.19" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="245.63" y="220.92" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="330.96" y="217.48" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="331.90" y="218.04" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="332.99" y="221.05" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="324.54" y="219.47" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="324.89" y="216.77" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="326.96" y="218.08" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="318.12" y="221.47" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="317.88" y="215.50" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="335.93" y="214.94" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="322.46" y="213.02" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="324.74" y="208.53" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="329.90" y="211.97" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="316.04" y="215.02" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="317.73" y="207.26" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="323.87" y="208.99" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="320.38" y="206.57" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="324.59" y="200.28" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="332.83" y="205.86" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="313.96" y="208.56" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="317.58" y="199.01" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="326.80" y="202.88" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="307.53" y="210.56" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="310.57" y="197.75" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="335.77" y="199.74" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="311.87" y="202.11" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="317.43" y="190.77" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="329.74" y="196.77" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="305.45" y="204.11" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="310.42" y="189.50" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="323.71" y="193.79" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="309.79" y="195.66" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="411.04" y="205.47" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="411.80" y="206.25" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="412.08" y="209.45" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="404.32" y="205.75" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="405.35" y="203.22" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="407.02" y="205.02" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="397.60" y="206.02" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="398.91" y="200.19" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="416.49" y="204.30" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="403.97" y="198.98" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="407.33" y="195.22" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="411.43" y="199.87" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="397.25" y="199.25" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="400.88" y="192.19" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="406.37" y="195.44" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="403.62" y="192.20" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="409.31" y="187.22" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="415.84" y="194.72" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="396.90" y="192.48" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="402.86" y="184.19" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="410.78" y="190.29" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="390.18" y="192.76" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="396.41" y="181.16" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="420.25" y="189.57" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="396.55" y="185.71" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="404.84" y="176.18" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="415.19" y="185.14" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="389.83" y="185.99" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="398.39" y="173.15" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="410.13" y="180.71" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="396.20" y="178.94" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="493.58" y="206.73" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="494.11" y="207.68" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="493.56" y="210.84" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="486.93" y="204.94" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="488.71" y="202.67" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="489.97" y="204.96" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="480.28" y="203.15" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="483.32" y="197.66" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="499.47" y="206.41" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="488.16" y="197.65" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="492.79" y="194.60" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="495.89" y="200.53" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="481.51" y="195.86" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="487.40" y="189.59" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="492.30" y="194.65" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="489.40" y="190.36" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="496.87" y="186.53" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="501.80" y="196.10" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="482.75" y="188.57" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="491.48" y="181.52" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="498.22" y="190.22" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="476.10" y="186.79" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="486.08" y="176.51" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="507.72" y="191.67" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="483.99" y="181.29" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="495.56" y="173.45" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="504.13" y="185.79" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="477.34" y="179.50" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="573.01" y="221.17" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="573.28" y="222.22" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="571.93" y="225.14" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="567.04" y="218.07" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="569.19" y="216.39" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="569.74" y="218.78" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="561.07" y="214.96" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="565.10" y="210.56" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="578.32" y="222.86" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="570.10" y="212.02" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="574.88" y="210.43" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="576.13" y="216.50" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="564.13" y="208.92" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="570.80" y="204.60" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="573.94" y="210.14" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="573.17" y="205.97" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="580.58" y="204.47" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="582.52" y="214.23" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="567.20" y="202.87" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="576.49" y="198.63" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="580.33" y="207.87" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="561.23" y="199.77" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="572.41" y="192.80" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="588.90" y="211.95" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="570.26" y="196.82" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="582.19" y="192.67" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="586.71" y="205.59" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="564.29" y="193.72" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="578.10" y="186.84" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="584.52" y="199.23" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="573.32" y="190.77" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="643.99" y="247.82" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="643.98" y="248.91" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="641.93" y="251.37" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="639.02" y="243.28" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="641.53" y="242.22" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="641.45" y="244.67" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="634.05" y="238.75" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="639.08" y="235.53" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="648.68" y="250.82" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="643.54" y="238.23" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="648.57" y="237.92" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="648.21" y="244.11" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="638.57" y="233.69" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="646.12" y="231.23" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="647.73" y="237.40" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="648.05" y="233.17" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="655.60" y="233.63" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="654.96" y="243.56" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="643.08" y="228.64" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="653.15" y="226.94" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="654.48" y="236.85" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="638.11" y="224.10" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="650.71" y="220.25" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="661.72" y="243.00" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="647.60" y="223.58" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="660.19" y="222.64" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="661.24" y="236.29" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="642.63" y="219.05" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="657.74" y="215.95" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="660.76" y="229.58" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="701.74" y="284.88" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="701.45" y="285.93" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="698.83" y="287.79" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="698.11" y="279.22" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="700.80" y="278.84" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="700.10" y="281.18" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="694.47" y="273.56" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="700.16" y="271.74" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="705.51" y="288.99" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="703.77" y="275.50" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="708.71" y="276.50" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="706.77" y="282.38" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="700.13" y="269.84" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="708.06" y="269.40" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="708.03" y="275.78" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="709.44" y="271.77" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="716.62" y="274.16" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="713.44" y="283.59" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="705.80" y="266.11" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="715.97" y="267.06" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="714.70" y="276.98" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="702.16" y="260.45" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="715.32" y="259.97" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="720.11" y="284.79" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="711.46" y="262.39" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="723.88" y="264.72" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="721.38" y="278.18" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="707.83" y="256.73" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="723.23" y="257.63" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="722.64" y="271.58" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="717.13" y="258.66" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="742.37" y="329.86" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="741.82" y="330.80" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="738.82" y="331.92" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="740.32" y="323.46" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="743.02" y="323.78" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="741.74" y="325.87" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="738.26" y="317.06" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="744.22" y="316.76" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="744.95" y="334.80" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="746.75" y="321.32" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="751.26" y="323.55" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="747.88" y="328.74" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="744.69" y="314.91" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="752.47" y="316.53" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="750.80" y="322.69" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="753.18" y="319.18" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="759.51" y="323.33" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="754.01" y="331.62" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="751.13" y="312.77" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="760.71" y="316.31" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="756.93" y="325.56" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="749.07" y="306.37" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="761.91" y="309.29" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="760.15" y="334.50" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="757.56" y="310.63" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="768.95" y="316.08" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="763.07" y="328.44" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="755.50" y="304.23" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="770.15" y="309.06" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="765.99" y="322.38" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="763.15" y="379.74" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="762.38" y="380.50" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="759.19" y="380.81" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="768.97" y="369.50" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#26a641" />
+    <rect class="contrib-leaf" x="774.22" y="372.78" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="770.46" y="377.40" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf" x="774.79" y="359.26" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="786.06" y="365.06" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#006d32" />
+    <rect class="contrib-leaf" x="778.16" y="388.55" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <rect class="contrib-leaf recent-leaf" x="788.05" y="362.04" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#0e4429" />
+    <rect class="contrib-leaf" x="799.99" y="372.19" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="#161b22" />
+    <text x="121.2" y="375.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">Aug '25</text>
+    <text x="144.2" y="322.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">Sep '25</text>
+    <text x="187.7" y="275.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">Oct '25</text>
+    <text x="248.9" y="236.3" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">Nov '25</text>
+    <text x="323.7" y="208.9" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">Dec '25</text>
+    <text x="406.9" y="194.8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">Jan '26</text>
+    <text x="493.1" y="194.8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">Feb '26</text>
+    <text x="576.3" y="208.9" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">Mar '26</text>
+    <text x="651.1" y="236.3" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">Apr '26</text>
+    <text x="712.3" y="275.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">May '26</text>
+    <text x="755.8" y="322.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">Jun '26</text>
+    <text x="778.8" y="375.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">Jul '26</text>
+    <!-- Pulse Halo for Most Recent Commit -->
+    <circle cx="790.55" cy="364.54" r="8" fill="none" stroke="#38bdf8" stroke-width="1.5">
+      <animate attributeName="r" values="5;10;5" dur="1.4s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="1;0;1" dur="1.4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="790.55" cy="364.54" r="2" fill="#ef4444" />
+    <!-- Floating Tooltip-like details -->
+    <g transform="translate(800.55, 352.54)">
+      <rect x="0" y="0" width="185" height="18" rx="3" fill="#111827" stroke="#38bdf8" stroke-width="1" opacity="0.9" />
+      <text x="7" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#e5e7eb" font-weight="bold">Recent: 2026-07-10 (1 commits)</text>
+    </g>
+
+    <!-- Legend -->
+    <g transform="translate(680, 560)">
+      <text x="0" y="9" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Less</text>
+      <rect x="35" y="0" width="10" height="10" rx="1.5" fill="#161b22" stroke="#1f2937" stroke-width="0.5" />
+      <rect x="48" y="0" width="10" height="10" rx="1.5" fill="#0e4429" />
+      <rect x="61" y="0" width="10" height="10" rx="1.5" fill="#006d32" />
+      <rect x="74" y="0" width="10" height="10" rx="1.5" fill="#26a641" />
+      <rect x="87" y="0" width="10" height="10" rx="1.5" fill="#39d353" />
+      <text x="103" y="9" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">More</text>
+    </g>
+  </g>
+</svg>

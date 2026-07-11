@@ -1,5 +1,6 @@
 import os
 import json
+import math
 from datetime import datetime
 from avatar_to_ascii import download_avatar, image_to_contrib_grid
 from github_stats import GitHubStatsFetcher
@@ -261,6 +262,288 @@ def generate_svg():
         f.write(svg_template)
         
     print(f"Successfully generated responsive terminal SVG at {svg_output_path}!")
+    
+    # Run supplementary retro generators
+    generate_tree_svg(stats, username)
+    generate_retro_badges()
+
+def generate_retro_badges():
+    print("Generating retro CLI social badges...")
+    badges = {
+        "linkedin": ("[ LINKEDIN ]", "#38bdf8"),
+        "email": ("[ EMAIL ]", "#f97316"),
+        "portfolio": ("[ PORTFOLIO ]", "#34d399")
+    }
+    
+    for name, (label, color) in badges.items():
+        svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" width="130" height="28" viewBox="0 0 130 28">
+  <style>
+    .badge-rect {{
+      fill: #0b0f19;
+      stroke: #1f2937;
+      stroke-width: 1.5;
+      transition: all 0.2s ease;
+    }}
+    .badge-rect:hover {{
+      fill: #111827;
+      stroke: {color};
+    }}
+    .badge-text {{
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 10.5px;
+      font-weight: bold;
+      fill: {color};
+      text-anchor: middle;
+      dominant-baseline: middle;
+      transition: fill 0.2s ease;
+      cursor: pointer;
+    }}
+    .badge-rect:hover + .badge-text, .badge-text:hover {{
+      fill: #e5e7eb;
+    }}
+  </style>
+  <rect class="badge-rect" x="1.5" y="1.5" width="127" height="25" rx="4" />
+  <text class="badge-text" x="65" y="14">{label}</text>
+</svg>"""
+        output_path = os.path.join(os.path.dirname(__file__), "..", "assets", f"{name}_badge.svg")
+        with open(output_path, "w") as f:
+            f.write(svg_content)
+    print("Generated retro social badges successfully!")
+
+def generate_tree_svg(stats: dict, username: str):
+    print("Generating Contribution Tree SVG...")
+    if "contribution_days" not in stats or not stats["contribution_days"]:
+        print("No contribution days found in stats! Skipping tree generation.")
+        return
+        
+    months_data = {}
+    for day in stats["contribution_days"]:
+        dt = datetime.strptime(day["date"], "%Y-%m-%d")
+        my_key = dt.strftime("%b '%y")
+        if my_key not in months_data:
+            months_data[my_key] = []
+        months_data[my_key].append(day)
+        
+    # Get last 12 months keys
+    month_keys = list(months_data.keys())[-12:]
+    
+    branch_paths = []
+    twig_paths = []
+    leaf_rects = []
+    month_labels = []
+    recent_marker = ""
+    
+    # Find most recent commit
+    recent_day = None
+    for day in reversed(stats["contribution_days"]):
+        if day["contributionCount"] > 0:
+            recent_day = day
+            break
+            
+    # GitHub colors mapping
+    colors = {
+        0: "#161b22", # empty
+        1: "#0e4429", # level 1
+        2: "#006d32", # level 2
+        3: "#26a641", # level 3
+        4: "#39d353"  # level 4
+    }
+    
+    x_base = 450
+    y_base = 550
+    y_split = 405
+    
+    for i, key in enumerate(month_keys):
+        angle_deg = 172 - i * (164 / 11) # Symmetrical sweep from left to right
+        theta = math.radians(angle_deg)
+        
+        # Target tip of branch
+        x_tip = x_base + 310 * math.cos(theta)
+        y_tip = y_split - 190 * math.sin(theta)
+        
+        # Bezier branch curve
+        c1x = x_base + 80 * math.cos(theta)
+        c1y = y_split - 40 * math.sin(theta)
+        c2x = x_base + 190 * math.cos(theta)
+        c2y = y_split - 110 * math.sin(theta)
+        
+        branch_paths.append(
+            f'    <path d="M {x_base} {y_split} C {c1x:.1f} {c1y:.1f}, {c2x:.1f} {c2y:.1f}, {x_tip:.1f} {y_tip:.1f}" fill="none" stroke="#5c3d24" stroke-width="3.5" stroke-linecap="round" />'
+        )
+        
+        # Twigs config
+        twig_len1 = 38
+        twig_len2 = 48
+        twig_len3 = 38
+        
+        theta1 = theta + 0.38
+        theta2 = theta
+        theta3 = theta - 0.38
+        
+        xt1 = x_tip + twig_len1 * math.cos(theta1)
+        yt1 = y_tip - twig_len1 * math.sin(theta1)
+        xt2 = x_tip + twig_len2 * math.cos(theta2)
+        yt2 = y_tip - twig_len2 * math.sin(theta2)
+        xt3 = x_tip + twig_len3 * math.cos(theta3)
+        yt3 = y_tip - twig_len3 * math.sin(theta3)
+        
+        twig_paths.append(f'    <path d="M {x_tip:.1f} {y_tip:.1f} L {xt1:.1f} {yt1:.1f}" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />')
+        twig_paths.append(f'    <path d="M {x_tip:.1f} {y_tip:.1f} L {xt2:.1f} {yt2:.1f}" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />')
+        twig_paths.append(f'    <path d="M {x_tip:.1f} {y_tip:.1f} L {xt3:.1f} {yt3:.1f}" fill="none" stroke="#4e342e" stroke-width="1.5" stroke-linecap="round" />')
+        
+        # Label offset
+        label_x = x_tip + 22 * math.cos(theta)
+        label_y = y_tip - 22 * math.sin(theta)
+        
+        month_labels.append(
+            f'    <text x="{label_x:.1f}" y="{label_y:.1f}" font-family="\'JetBrains Mono\', \'Fira Code\', monospace" font-size="10.5" fill="#f97316" font-weight="bold" text-anchor="middle">{key}</text>'
+        )
+        
+        # Days processing
+        month_days = months_data[key]
+        N = len(month_days)
+        for j, day in enumerate(month_days):
+            twig_idx = j % 3
+            if twig_idx == 0:
+                x_start, y_start = x_tip, y_tip
+                x_end, y_end = xt1, yt1
+                twig_angle = theta1
+            elif twig_idx == 1:
+                x_start, y_start = x_tip, y_tip
+                x_end, y_end = xt2, yt2
+                twig_angle = theta2
+            else:
+                x_start, y_start = x_tip, y_tip
+                x_end, y_end = xt3, yt3
+                twig_angle = theta3
+                
+            t = 0.15 + (j // 3) * (0.8 / max(1, (N // 3)))
+            if t > 1.0: t = 1.0
+            
+            cx = x_start + (x_end - x_start) * t
+            cy = y_start + (y_end - y_start) * t
+            
+            # Organic foliage cluster offset
+            angle_perp = twig_angle + math.pi / 2
+            offset = ((j * 17) % 15) - 7.5
+            cx += offset * math.cos(angle_perp)
+            cy -= offset * math.sin(angle_perp)
+            
+            cnt = day["contributionCount"]
+            if cnt == 0:
+                color = colors[0]
+            elif cnt <= 1:
+                color = colors[1]
+            elif cnt <= 3:
+                color = colors[2]
+            elif cnt <= 6:
+                color = colors[3]
+            else:
+                color = colors[4]
+                
+            is_recent = (recent_day and day["date"] == recent_day["date"])
+            leaf_class = "contrib-leaf recent-leaf" if is_recent else "contrib-leaf"
+            
+            leaf_rects.append(
+                f'    <rect class="{leaf_class}" x="{cx - 2.5:.2f}" y="{cy - 2.5:.2f}" width="5.0" height="5.0" rx="1.2" ry="1.2" fill="{color}" />'
+            )
+            
+            if is_recent:
+                recent_marker = f"""    <!-- Pulse Halo for Most Recent Commit -->
+    <circle cx="{cx:.2f}" cy="{cy:.2f}" r="8" fill="none" stroke="#38bdf8" stroke-width="1.5">
+      <animate attributeName="r" values="5;10;5" dur="1.4s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="1;0;1" dur="1.4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="{cx:.2f}" cy="{cy:.2f}" r="2" fill="#ef4444" />
+    <!-- Floating Tooltip-like details -->
+    <g transform="translate({cx + 10:.2f}, {cy - 12:.2f})">
+      <rect x="0" y="0" width="185" height="18" rx="3" fill="#111827" stroke="#38bdf8" stroke-width="1" opacity="0.9" />
+      <text x="7" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#e5e7eb" font-weight="bold">Recent: {day['date']} ({cnt} commits)</text>
+    </g>"""
+
+    # Trunk drawing
+    trunk_path = f'    <path d="M 434 {y_base} C 438 480, 442 440, 444 {y_split} L 456 {y_split} C 458 440, 462 480, 466 {y_base} Z" fill="#4e342e" />'
+    
+    # SVG compilation
+    svg_tree_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="100%" height="auto">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
+      
+      .contrib-tree-card {{
+        filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.45));
+        animation: treeFadeIn 0.8s ease-out;
+      }}
+      
+      .contrib-leaf {{
+        transition: transform 0.15s ease, fill 0.15s ease;
+        transform-box: fill-box;
+        transform-origin: center;
+      }}
+      
+      .contrib-leaf:hover {{
+        transform: scale(1.6);
+        fill: #38bdf8;
+        cursor: pointer;
+      }}
+      
+      @keyframes treeFadeIn {{
+        from {{ opacity: 0; transform: translateY(10px); }}
+        to {{ opacity: 1; transform: translateY(0); }}
+      }}
+    </style>
+  </defs>
+
+  <g class="contrib-tree-card">
+    <!-- Window Background -->
+    <rect x="0" y="0" width="900" height="600" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+
+    <!-- Window Title Bar -->
+    <path d="M 0,12 A 12,12 0 0,1 12,0 L 888,0 A 12,12 0 0,1 900,12 L 900,42 L 0,42 Z" fill="#111827" />
+    
+    <!-- Window Control Buttons (macOS Style) -->
+    <circle cx="25" cy="21" r="6" fill="#ff5f56" />
+    <circle cx="45" cy="21" r="6" fill="#ffbd2e" />
+    <circle cx="65" cy="21" r="6" fill="#27c93f" />
+
+    <!-- Terminal Title -->
+    <text x="450" y="25" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" text-anchor="middle" font-weight="bold">
+      {username}@macos: ~/contribution-tree
+    </text>
+
+    <!-- Title Bar Divider -->
+    <line x1="0" y1="42" x2="900" y2="42" stroke="#1f2937" stroke-width="1" />
+
+    <!-- Header Text -->
+    <text x="35" y="70" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13" fill="#34d399" font-weight="bold">
+      &gt; git log --graph --date=relative --all (Past 12 Months)
+    </text>
+
+    <!-- Tree elements -->
+{trunk_path}
+{chr(10).join(branch_paths)}
+{chr(10).join(twig_paths)}
+{chr(10).join(leaf_rects)}
+{chr(10).join(month_labels)}
+{recent_marker}
+
+    <!-- Legend -->
+    <g transform="translate(680, 560)">
+      <text x="0" y="9" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Less</text>
+      <rect x="35" y="0" width="10" height="10" rx="1.5" fill="{colors[0]}" stroke="#1f2937" stroke-width="0.5" />
+      <rect x="48" y="0" width="10" height="10" rx="1.5" fill="{colors[1]}" />
+      <rect x="61" y="0" width="10" height="10" rx="1.5" fill="{colors[2]}" />
+      <rect x="74" y="0" width="10" height="10" rx="1.5" fill="{colors[3]}" />
+      <rect x="87" y="0" width="10" height="10" rx="1.5" fill="{colors[4]}" />
+      <text x="103" y="9" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">More</text>
+    </g>
+  </g>
+</svg>"""
+
+    output_path = os.path.join(os.path.dirname(__file__), "..", "assets", "contribution_tree.svg")
+    with open(output_path, "w") as f:
+        f.write(svg_tree_template)
+    print(f"Successfully generated Contribution Tree SVG at {output_path}!")
 
 if __name__ == "__main__":
     generate_svg()

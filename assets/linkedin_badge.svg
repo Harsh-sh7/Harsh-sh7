@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="130" height="28" viewBox="0 0 130 28">
+  <style>
+    .badge-rect {
+      fill: #0b0f19;
+      stroke: #1f2937;
+      stroke-width: 1.5;
+      transition: all 0.2s ease;
+    }
+    .badge-rect:hover {
+      fill: #111827;
+      stroke: #38bdf8;
+    }
+    .badge-text {
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 10.5px;
+      font-weight: bold;
+      fill: #38bdf8;
+      text-anchor: middle;
+      dominant-baseline: middle;
+      transition: fill 0.2s ease;
+      cursor: pointer;
+    }
+    .badge-rect:hover + .badge-text, .badge-text:hover {
+      fill: #e5e7eb;
+    }
+  </style>
+  <rect class="badge-rect" x="1.5" y="1.5" width="127" height="25" rx="4" />
+  <text class="badge-text" x="65" y="14">[ LINKEDIN ]</text>
+</svg>

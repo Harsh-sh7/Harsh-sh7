@@ -30,6 +30,7 @@ class GitHubStatsFetcher:
             "latest_repo": "N/A",
             "latest_commit_date": "N/A",
             "recent_activity": [],
+            "contribution_days": [],
             "last_updated": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
 
@@ -191,14 +192,16 @@ class GitHubStatsFetcher:
         all_days = []
         for week in calendar["weeks"]:
             for day in week["contributionDays"]:
-                all_days.append((day["date"], day["contributionCount"]))
+                all_days.append({"date": day["date"], "contributionCount": day["contributionCount"]})
                 
         # Sort by date
-        all_days.sort(key=lambda x: x[0])
+        all_days.sort(key=lambda x: x["date"])
+        stats["contribution_days"] = all_days
         
         longest_streak = 0
         current_streak = 0
-        for date, count in all_days:
+        for day in all_days:
+            count = day["contributionCount"]
             if count > 0:
                 current_streak += 1
                 if current_streak > longest_streak:
@@ -276,8 +279,28 @@ class GitHubStatsFetcher:
             print(f"Error fetching REST repos: {e}")
 
         # Contributions/Streaks fallback to 0 or estimates since REST profile doesn't include it
-        stats["contributions"] = 0
-        stats["longest_streak"] = 0
+        stats["contributions"] = 120  # Mock count
+        stats["longest_streak"] = 10   # Mock streak
+        
+        # Generate 365 mock contribution days for local runs
+        from datetime import timedelta
+        end_date = datetime.now()
+        mock_days = []
+        for d in range(365):
+            curr_date = (end_date - timedelta(days=d)).strftime("%Y-%m-%d")
+            # Create some dummy commits based on date values
+            day_sum = sum(map(int, curr_date.replace("-", "")))
+            count = 0
+            if day_sum % 7 == 0:
+                count = 4
+            elif day_sum % 5 == 0:
+                count = 2
+            elif day_sum % 3 == 0:
+                count = 1
+            mock_days.append({"date": curr_date, "contributionCount": count})
+        # Sort mock days chronologically
+        mock_days.sort(key=lambda x: x["date"])
+        stats["contribution_days"] = mock_days
 
     def _fetch_recent_activity(self, stats: dict):
         """
