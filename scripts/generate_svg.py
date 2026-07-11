@@ -60,83 +60,81 @@ def generate_svg():
     
     recent_activity_block = ""
     if stats["recent_activity"]:
-        recent_activity_block = '          <span style="color:#9ca3af">─ Recent Activity ───────────────────────────────────────────</span><br>\n'
+        recent_activity_block = '<span style="color:#9ca3af">─ Recent Activity ───────────────────────────────────────────</span><br>\n'
         for idx, act in enumerate(stats["recent_activity"][:3]):
-            recent_activity_block += f'          <span style="color:#60a5fa">Act {idx+1}</span><span style="color:#4b5563"> : .......... </span><a href="https://github.com/{username}?tab=activity" target="_blank" style="color:#e5e7eb; text-decoration:none;">{act}</a><br>\n'
+            recent_activity_block += f'<span style="color:#60a5fa">Act {idx+1}</span><span style="color:#4b5563"> : .......... </span><a href="https://github.com/{username}?tab=activity" target="_blank" style="color:#e5e7eb; text-decoration:none;">{act}</a><br>\n'
 
     # Build the full README.md content dynamically
     readme_content = f"""# Hi 👋
 
 <p align="center">
-  <table width="850" style="border-collapse: collapse; border: 1px solid #1f2937;">
-    <!-- Terminal Header Bar -->
-    <tr bgcolor="#111827">
-      <td colspan="2" style="padding: 8px; border: none;">
-        <span style="color:#ff5f56; font-size: 14px;">●</span>
-        <span style="color:#ffbd2e; font-size: 14px;">●</span>
-        <span style="color:#27c93f; font-size: 14px;">●</span>
-        &nbsp;&nbsp;&nbsp;&nbsp;
-        <span style="color:#9ca3af; font-family: monospace; font-size: 12px; font-weight: bold;">{username}@macos: ~</span>
-      </td>
-    </tr>
-    <!-- Terminal Body -->
-    <tr bgcolor="#0b0f19">
-      <!-- Left Column: ASCII Portrait SVG -->
-      <td width="300" valign="top" align="center" style="padding: 20px; border: none;">
-        <img src="assets/terminal_avatar.svg" width="280" alt="ASCII Portrait" />
-      </td>
-      <!-- Right Column: Interactive Monospace Stats -->
-      <td width="550" valign="top" align="left" style="padding: 20px 20px 20px 0px; border: none;">
-        <div style="font-family: monospace; font-size: 12.5px; line-height: 1.55;">
-          <b><span style="color:#34d399">{username}</span></b><span style="color:#9ca3af">@macos:~</span><br>
-          <span style="color:#f97316">OS</span><span style="color:#4b5563"> : ............ </span><span style="color:#38bdf8">{config['os']}</span><br>
-          <span style="color:#f97316">Host</span><span style="color:#4b5563"> : .......... </span><span style="color:#38bdf8">MacBook Pro</span><br>
-          <span style="color:#f97316">Editor</span><span style="color:#4b5563"> : ........ </span><span style="color:#38bdf8">{config['editor']}</span><br>
-          <span style="color:#f97316">Location</span><span style="color:#4b5563"> : ...... </span><span style="color:#38bdf8">{config['location']}</span><br>
-          <span style="color:#f97316">Portfolio</span><span style="color:#4b5563"> : ..... </span><a href="{config['portfolio']}" target="_blank" style="color:#38bdf8; text-decoration:none;">{config['portfolio']}</a><br>
-          <span style="color:#f97316">Email</span><span style="color:#4b5563"> : ......... </span><a href="mailto:{config['email']}" style="color:#38bdf8; text-decoration:none;">{config['email']}</a><br>
-          <span style="color:#9ca3af">─ Technical Profile ──────────────────────────────────────────</span><br>
-          <span style="color:#f97316">Languages</span><span style="color:#4b5563"> : ...... </span><span style="color:#38bdf8">{languages_display}</span><br>
-          <span style="color:#f97316">Frameworks</span><span style="color:#4b5563"> : ...... </span><span style="color:#38bdf8">{frameworks_display}</span><br>
-          <span style="color:#f97316">Database</span><span style="color:#4b5563"> : ........ </span><span style="color:#38bdf8">{database_display}</span><br>
-          <span style="color:#f97316">Tools</span><span style="color:#4b5563"> : ........... </span><span style="color:#38bdf8">{tools_display}</span><br>
-          <span style="color:#9ca3af">─ GitHub Stats ─────────────────────────────────────────────</span><br>
-          <span style="color:#f97316">Repos</span><span style="color:#4b5563"> : ............ </span><a href="https://github.com/{username}?tab=repositories" target="_blank" style="color:#38bdf8; text-decoration:none;">{stats['public_repos']} public repos</a><br>
-          <span style="color:#f97316">Followers</span><span style="color:#4b5563"> : ........ </span><a href="https://github.com/{username}/followers" target="_blank" style="color:#38bdf8; text-decoration:none;">{stats['followers']}</a><span style="color:#4b5563"> | Following: </span><a href="https://github.com/{username}/following" target="_blank" style="color:#38bdf8; text-decoration:none;">{stats['following']}</a><br>
-          <span style="color:#f97316">Activity</span><span style="color:#4b5563"> : ......... </span><span style="color:#38bdf8">{stats['contributions']} contributions | Streak: {stats['longest_streak']} days</span><br>
-{recent_activity_block}
-          <br>
-          <span style="color:#4b5563">Last Updated: {stats['last_updated']} (auto-updated every 12h)</span>
-        </div>
-      </td>
-    </tr>
-  </table>
+<table width="850" style="border-collapse: collapse; border: 1px solid #1f2937;">
+<!-- Terminal Header Bar -->
+<tr bgcolor="#111827">
+<td colspan="2" style="padding: 8px; border: none;">
+<span style="color:#ff5f56; font-size: 14px;">●</span>
+<span style="color:#ffbd2e; font-size: 14px;">●</span>
+<span style="color:#27c93f; font-size: 14px;">●</span>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<span style="color:#9ca3af; font-family: monospace; font-size: 12px; font-weight: bold;">{username}@macos: ~</span>
+</td>
+</tr>
+<!-- Terminal Body -->
+<tr bgcolor="#0b0f19">
+<!-- Left Column: ASCII Portrait SVG -->
+<td width="300" valign="top" align="center" style="padding: 20px; border: none;">
+<img src="assets/terminal_avatar.svg" width="280" alt="ASCII Portrait" />
+</td>
+<!-- Right Column: Interactive Monospace Stats -->
+<td width="550" valign="top" align="left" style="padding: 20px 20px 20px 0px; border: none;">
+<div style="font-family: monospace; font-size: 12.5px; line-height: 1.55;">
+<b><span style="color:#34d399">{username}</span></b><span style="color:#9ca3af">@macos:~</span><br>
+<span style="color:#f97316">OS</span><span style="color:#4b5563"> : ............ </span><span style="color:#38bdf8">{config['os']}</span><br>
+<span style="color:#f97316">Host</span><span style="color:#4b5563"> : .......... </span><span style="color:#38bdf8">MacBook Pro</span><br>
+<span style="color:#f97316">Editor</span><span style="color:#4b5563"> : ........ </span><span style="color:#38bdf8">{config['editor']}</span><br>
+<span style="color:#f97316">Location</span><span style="color:#4b5563"> : ...... </span><span style="color:#38bdf8">{config['location']}</span><br>
+<span style="color:#f97316">Portfolio</span><span style="color:#4b5563"> : ..... </span><a href="{config['portfolio']}" target="_blank" style="color:#38bdf8; text-decoration:none;">{config['portfolio']}</a><br>
+<span style="color:#f97316">Email</span><span style="color:#4b5563"> : ......... </span><a href="mailto:{config['email']}" style="color:#38bdf8; text-decoration:none;">{config['email']}</a><br>
+<span style="color:#9ca3af">─ Technical Profile ──────────────────────────────────────────</span><br>
+<span style="color:#f97316">Languages</span><span style="color:#4b5563"> : ...... </span><span style="color:#38bdf8">{languages_display}</span><br>
+<span style="color:#f97316">Frameworks</span><span style="color:#4b5563"> : ...... </span><span style="color:#38bdf8">{frameworks_display}</span><br>
+<span style="color:#f97316">Database</span><span style="color:#4b5563"> : ........ </span><span style="color:#38bdf8">{database_display}</span><br>
+<span style="color:#f97316">Tools</span><span style="color:#4b5563"> : ........... </span><span style="color:#38bdf8">{tools_display}</span><br>
+<span style="color:#9ca3af">─ GitHub Stats ─────────────────────────────────────────────</span><br>
+<span style="color:#f97316">Repos</span><span style="color:#4b5563"> : ............ </span><a href="https://github.com/{username}?tab=repositories" target="_blank" style="color:#38bdf8; text-decoration:none;">{stats['public_repos']} public repos</a><br>
+<span style="color:#f97316">Followers</span><span style="color:#4b5563"> : ........ </span><a href="https://github.com/{username}/followers" target="_blank" style="color:#38bdf8; text-decoration:none;">{stats['followers']}</a><span style="color:#4b5563"> | Following: </span><a href="https://github.com/{username}/following" target="_blank" style="color:#38bdf8; text-decoration:none;">{stats['following']}</a><br>
+<span style="color:#f97316">Activity</span><span style="color:#4b5563"> : ......... </span><span style="color:#38bdf8">{stats['contributions']} contributions | Streak: {stats['longest_streak']} days</span><br>
+{recent_activity_block}<span style="color:#4b5563">Last Updated: {stats['last_updated']} (auto-updated every 12h)</span>
+</div>
+</td>
+</tr>
+</table>
 </p>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/harshit-shakya/" target="_blank">
-    <img src="assets/linkedin_badge.svg" alt="LinkedIn" width="130">
-  </a>
-  <a href="mailto:{config['email']}">
-    <img src="assets/email_badge.svg" alt="Email" width="130">
-  </a>
-  <a href="{config['portfolio']}" target="_blank">
-    <img src="assets/portfolio_badge.svg" alt="Portfolio" width="130">
-  </a>
-</p>
-
-<br>
-
-<p align="center">
-  <a href="assets/contribution_tree.svg" target="_blank">
-    <img src="assets/contribution_tree.svg" alt="GitHub Contribution Tree" width="850">
-  </a>
+<a href="https://www.linkedin.com/in/harshit-shakya/" target="_blank">
+<img src="assets/linkedin_badge.svg" alt="LinkedIn" width="130">
+</a>
+<a href="mailto:{config['email']}">
+<img src="assets/email_badge.svg" alt="Email" width="130">
+</a>
+<a href="{config['portfolio']}" target="_blank">
+<img src="assets/portfolio_badge.svg" alt="Portfolio" width="130">
+</a>
 </p>
 
 <br>
 
 <p align="center">
-  <img src="https://visitor-badge.laobi.icu/badge?page_id={username}.{username}" alt="Visitors Counter">
+<a href="assets/contribution_tree.svg" target="_blank">
+<img src="assets/contribution_tree.svg" alt="GitHub Contribution Tree" width="850">
+</a>
+</p>
+
+<br>
+
+<p align="center">
+<img src="https://visitor-badge.laobi.icu/badge?page_id={username}.{username}" alt="Visitors Counter">
 </p>
 """
 
