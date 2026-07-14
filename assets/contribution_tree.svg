@@ -3371,7 +3371,7 @@
       </g>
     </a>
     <a href="https://github.com/Harsh-sh7?tab=overview&amp;from=2026-07-12&amp;to=2026-07-12" target="_blank">
-      <g class="pillar-group recent-pillar" data-date="2026-07-12">
+      <g class="pillar-group" data-date="2026-07-12">
         <polygon points="781.5,387.4 793.0,393.1 793.0,414.8 781.5,409.0" fill="#005728" /> <polygon points="793.0,393.1 804.5,387.4 804.5,409.0 793.0,414.8" fill="#00411e" /> <polygon points="793.0,381.6 804.5,387.4 793.0,393.1 781.5,387.4" fill="#006d32" stroke="#006d32" stroke-width="0.3" />
         <g class="tooltip" transform="translate(653.00, 369.40)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#006d32" stroke-width="1" opacity="0.95" />
@@ -3389,20 +3389,20 @@
       </g>
     </a>
     <a href="https://github.com/Harsh-sh7?tab=overview&amp;from=2026-07-14&amp;to=2026-07-14" target="_blank">
-      <g class="pillar-group" data-date="2026-07-14">
-        <polygon points="770.0,414.8 781.5,420.5 770.0,426.2 758.5,420.5" fill="#161b22" stroke="#0b0f19" stroke-width="0.3" />
-        <g class="tooltip" transform="translate(630.00, 402.50)">
-        <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#1f2937" stroke-width="1" opacity="0.95" />
-        <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">No commits (Jul 14)</text>
+      <g class="pillar-group recent-pillar" data-date="2026-07-14">
+        <polygon points="758.5,410.7 770.0,416.4 770.0,426.2 758.5,420.5" fill="#0b3620" /> <polygon points="770.0,416.4 781.5,410.7 781.5,420.5 770.0,426.2" fill="#082818" /> <polygon points="770.0,404.9 781.5,410.7 770.0,416.4 758.5,410.7" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+        <g class="tooltip" transform="translate(630.00, 392.70)">
+        <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
+        <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">2 commits (Jul 14)</text>
       </g>
       </g>
     </a>
     <!-- Pulse Halo for Most Recent Commit -->
-    <circle cx="793.00" cy="387.40" r="13" fill="none" stroke="#ef4444" stroke-width="1.8">
+    <circle cx="770.00" cy="410.70" r="13" fill="none" stroke="#ef4444" stroke-width="1.8">
       <animate attributeName="r" values="8;15;8" dur="1.2s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite" />
     </circle>
-    <circle cx="793.00" cy="387.40" r="2.5" fill="#ef4444" />
+    <circle cx="770.00" cy="410.70" r="2.5" fill="#ef4444" />
 
     <!-- Left Stats Panel -->
     <g transform="translate(45, 340)">
@@ -3411,14 +3411,14 @@
       <text x="0" y="38" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">Jul 05 - Jul 09</text>
       
       <text x="0" y="65" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Current Streak</text>
-      <text x="0" y="87" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="20" fill="#34d399" font-weight="bold">2 days</text>
-      <text x="0" y="103" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">Jul 11 - Jul 12</text>
+      <text x="0" y="87" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="20" fill="#34d399" font-weight="bold">1 days</text>
+      <text x="0" y="103" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">Jul 14 - Jul 14</text>
     </g>
 
     <!-- Right Stats Panel -->
     <g transform="translate(620, 95)">
       <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">1 Year Total</text>
-      <text x="0" y="24" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="22" fill="#34d399" font-weight="bold">199 commits</text>
+      <text x="0" y="24" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="22" fill="#34d399" font-weight="bold">201 commits</text>
       <text x="0" y="40" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">Past 365 Days</text>
       
       <text x="0" y="70" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Busiest Day</text>
