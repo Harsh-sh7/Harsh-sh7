@@ -1,6 +1,7 @@
 import os
 import json
 import math
+import random
 from datetime import datetime
 from avatar_to_ascii import download_avatar, image_to_contrib_grid
 from github_stats import GitHubStatsFetcher
@@ -612,25 +613,130 @@ def generate_retro_badges():
             f.write(svg_content)
     print("Generated retro social badges successfully!")
 
+# Default tree leaf weight constants
+DEFAULT_LEAF_WEIGHTS = {1: 0.35, 2: 0.30, 3: 0.20, 4: 0.15}
+PALETTE = {
+    1: "#9be9a8",
+    2: "#40c463",
+    3: "#30a14e",
+    4: "#216e39",
+}
+SQUARE = 9
+GAP = 3
+CORNER_RADIUS = 2
+
+def size_params(commits: int):
+    if commits < 10:
+        depth, base_len, leaf_cap = 3, 60, 40
+    elif commits < 50:
+        depth, base_len, leaf_cap = 4, 75, 140
+    elif commits < 150:
+        depth, base_len, leaf_cap = 5, 90, 320
+    elif commits < 350:
+        depth, base_len, leaf_cap = 6, 100, 550
+    elif commits < 700:
+        depth, base_len, leaf_cap = 7, 108, 800
+    else:
+        depth, base_len, leaf_cap = 8, 115, 1100
+
+    leaves_total = max(6, min(int(commits * 0.9), leaf_cap))
+    return depth, base_len, leaves_total
+
+def build_branches(max_depth, base_len, seed=0):
+    rng = random.Random(seed)
+    branches = []   # (x1, y1, x2, y2, depth)
+    tips = []       # endpoints of terminal branches -> canopy anchors
+
+    def recurse(x, y, angle, length, depth):
+        x2 = x + length * math.cos(angle)
+        y2 = y - length * math.sin(angle)
+        branches.append((x, y, x2, y2, depth))
+
+        if depth >= max_depth:
+            tips.append((x2, y2, depth))
+            return
+
+        n_children = 2 if depth < max_depth - 1 else rng.choice([2, 3])
+        for i in range(n_children):
+            spread = math.radians(rng.uniform(16, 34))
+            direction = -1 if i % 2 == 0 else 1
+            child_angle = angle + direction * spread + math.radians(rng.uniform(-4, 4))
+            child_len = length * rng.uniform(0.68, 0.78)
+            recurse(x2, y2, child_angle, child_len, depth + 1)
+
+    recurse(0, 0, math.pi / 2, base_len, 0)
+    return branches, tips
+
+def squares_for_branch(x1, y1, x2, y2, depth, max_depth, rng):
+    length = math.hypot(x2 - x1, y2 - y1)
+    n = max(1, round(length / (SQUARE + GAP)))
+    pts = []
+    for i in range(n + 1):
+        t = i / n if n else 0
+        x = x1 + (x2 - x1) * t
+        y = y1 + (y2 - y1) * t
+        jitter = rng.uniform(-1.1, 1.1)
+        nx, ny = -(y2 - y1), (x2 - x1)
+        norm = math.hypot(nx, ny) or 1
+        x += (nx / norm) * jitter
+        y += (ny / norm) * jitter
+        pts.append((x, y))
+
+    shade_level = max(1, min(4, 4 - round((depth / max_depth) * 3)))
+    return pts, shade_level
+
+def leaf_cluster(cx, cy, count, radius, rng):
+    pts = []
+    for _ in range(count):
+        r = radius * math.sqrt(rng.random())
+        theta = rng.uniform(0, 2 * math.pi)
+        x = cx + r * math.cos(theta)
+        y = cy - r * math.sin(theta) * 0.85
+        pts.append((x, y))
+    return pts
+
+def weighted_leaf_level(weights, rng):
+    r = rng.random()
+    cum = 0.0
+    for level, w in weights.items():
+        cum += w
+        if r <= cum:
+            return level
+    return 4
+
+def weights_from_days(contribution_days):
+    counts = [day["contributionCount"] for day in contribution_days if isinstance(day["contributionCount"], (int, float))]
+    nonzero = sorted(c for c in counts if c > 0)
+    if not nonzero:
+        return DEFAULT_LEAF_WEIGHTS
+
+    def pct(p):
+        idx = min(len(nonzero) - 1, int(len(nonzero) * p))
+        return nonzero[idx]
+
+    q1, q2, q3 = pct(0.25), pct(0.5), pct(0.75)
+    buckets = {1: 0, 2: 0, 3: 0, 4: 0}
+    for c in nonzero:
+        if c <= q1:
+            buckets[1] += 1
+        elif c <= q2:
+            buckets[2] += 1
+        elif c <= q3:
+            buckets[3] += 1
+        else:
+            buckets[4] += 1
+
+    total = sum(buckets.values()) or 1
+    return {k: v / total for k, v in buckets.items()}
+
 def generate_tree_svg(stats: dict, username: str):
-    print("Generating 3D Isometric Contribution Graph SVG...")
+    print("Generating Contribution Tree SVG...")
     if "contribution_days" not in stats or not stats["contribution_days"]:
         print("No contribution days found in stats! Skipping generation.")
         return
-        
-    # Find most recent commit
-    recent_day = None
-    for day in reversed(stats["contribution_days"]):
-        if day["contributionCount"] > 0:
-            recent_day = day
-            break
-            
+
     # Calculate stats
-    total_commits = sum(day["contributionCount"] for day in stats["contribution_days"])
-    
-    busiest_day = max(stats["contribution_days"], key=lambda d: d["contributionCount"])
-    busiest_count = busiest_day["contributionCount"]
-    busiest_date = datetime.strptime(busiest_day["date"], "%Y-%m-%d").strftime("%b %d, %Y") if busiest_count > 0 else "N/A"
+    total_commits = stats["contributions"]
     
     # Calculate streaks
     longest_streak = 0
@@ -675,168 +781,73 @@ def generate_tree_svg(stats: dict, username: str):
         cs_start = datetime.strptime(current_start, "%Y-%m-%d").strftime("%b %d")
         cs_end = datetime.strptime(current_end, "%Y-%m-%d").strftime("%b %d")
         current_streak_str = f"{cs_start} - {cs_end}"
-        
-    # Premium 3D Isometric Shading Color Palette
-    # Colors: (Top Face, Left Face, Right Face)
-    colors_3d = {
-        0: ("#161b22", "#11151b", "#0d1115"),  # Level 0
-        1: ("#0e4429", "#0b3620", "#082818"),  # Level 1
-        2: ("#006d32", "#005728", "#00411e"),  # Level 2
-        3: ("#26a641", "#1e8534", "#166327"),  # Level 3
-        4: ("#39d353", "#2ea942", "#227e31")   # Level 4
-    }
-    
-    x_origin = 195
-    y_origin = 110
-    w = 11.5
-    h_d = 5.75
-    
-    svg_elements = []
-    recent_marker = ""
-    
-    # Render all 3D pillars back-to-front
-    for idx, day in enumerate(stats["contribution_days"]):
-        col = idx // 7
-        row = idx % 7
-        
-        cx = x_origin + col * w - row * w
-        cy = y_origin + col * h_d + row * h_d
-        
-        cnt = day["contributionCount"]
-        dt = datetime.strptime(day["date"], "%Y-%m-%d")
-        
-        # Calculate level 0-4
-        if cnt == 0:
-            level = 0
-            H = 0
-        elif cnt <= 2:
-            level = 1
-            H = 8
-        elif cnt <= 5:
-            level = 2
-            H = 18
-        elif cnt <= 8:
-            level = 3
-            H = 30
-        else:
-            level = 4
-            H = 45
-            
-        # Add slight additional height scaling for active commits
-        if cnt > 0:
-            H = min(75, H + (cnt - 1) * 1.8)
-            
-        top_color, left_color, right_color = colors_3d[level]
-        is_recent = (recent_day and day["date"] == recent_day["date"])
-        
-        pillar_shapes = []
-        
-        # If H == 0, draw flat floor tile (rhombus only)
-        if H == 0:
-            pillar_shapes.append(
-                f'<polygon points="{cx:.1f},{cy - h_d:.1f} {cx + w:.1f},{cy:.1f} {cx:.1f},{cy + h_d:.1f} {cx - w:.1f},{cy:.1f}" fill="{top_color}" stroke="#0b0f19" stroke-width="0.3" />'
-            )
-        else:
-            # 1. Left face vertical wall
-            pillar_shapes.append(
-                f'<polygon points="{cx - w:.1f},{cy - H:.1f} {cx:.1f},{cy - H + h_d:.1f} {cx:.1f},{cy + h_d:.1f} {cx - w:.1f},{cy:.1f}" fill="{left_color}" />'
-            )
-            # 2. Right face vertical wall
-            pillar_shapes.append(
-                f'<polygon points="{cx:.1f},{cy - H + h_d:.1f} {cx + w:.1f},{cy - H:.1f} {cx + w:.1f},{cy:.1f} {cx:.1f},{cy + h_d:.1f}" fill="{right_color}" />'
-            )
-            # 3. Top face rhombus
-            pillar_shapes.append(
-                f'<polygon points="{cx:.1f},{cy - H - h_d:.1f} {cx + w:.1f},{cy - H:.1f} {cx:.1f},{cy - H + h_d:.1f} {cx - w:.1f},{cy - H:.1f}" fill="{top_color}" stroke="{top_color}" stroke-width="0.3" />'
-            )
-            
-        # Hover interactive tooltip
-        commit_lbl = f"{cnt} commits" if cnt != 1 else "1 commit"
-        if cnt == 0:
-            commit_lbl = "No commits"
-            
-        # Prevent clipping on the right edge of the card
-        tx_offset = -140 if col > 44 else 10
-            
-        tooltip_element = f"""<g class="tooltip" transform="translate({cx + tx_offset:.2f}, {cy - H - 18:.2f})">
-        <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="{top_color if cnt > 0 else '#1f2937'}" stroke-width="1" opacity="0.95" />
-        <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">{commit_lbl} ({dt.strftime('%b %d')})</text>
-      </g>"""
-      
-        group_class = "pillar-group recent-pillar" if is_recent else "pillar-group"
-        day_url = f"https://github.com/{username}?tab=overview&amp;from={day['date']}&amp;to={day['date']}"
-        svg_elements.append(
-            f'    <a href="{day_url}" target="_blank">\n      <g class="{group_class}" data-date="{day["date"]}">\n        {" ".join(pillar_shapes)}\n        {tooltip_element}\n      </g>\n    </a>'
-        )
-        
-        if is_recent:
-            recent_marker = f"""    <!-- Pulse Halo for Most Recent Commit -->
-    <circle cx="{cx:.2f}" cy="{cy - H:.2f}" r="13" fill="none" stroke="#ef4444" stroke-width="1.8">
-      <animate attributeName="r" values="8;15;8" dur="1.2s" repeatCount="indefinite" />
-      <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite" />
-    </circle>
-    <circle cx="{cx:.2f}" cy="{cy - H:.2f}" r="2.5" fill="#ef4444" />"""
 
-    # Generate month labels along the top-left axis (col axis)
-    months_labels = []
-    last_month = None
-    seen_months = set()
-    for idx, day in enumerate(stats["contribution_days"]):
-        col = idx // 7
-        dt = datetime.strptime(day["date"], "%Y-%m-%d")
-        m_name = dt.strftime("%b")
-        if m_name != last_month and m_name not in seen_months:
-            seen_months.add(m_name)
-            last_month = m_name
+    # Calculate tree parameters
+    seed = 7
+    width = 900
+    height = 680
+    rng = random.Random(seed)
+    
+    max_depth, base_len, leaves_total = size_params(total_commits)
+    branches, tips = build_branches(max_depth, base_len, seed=seed)
+    
+    ground_y = height - 80
+    origin_x = width / 2
+    
+    def to_canvas(x, y):
+        return origin_x + x, ground_y + y
+        
+    rects = []
+    max_branch_depth = max_depth
+    
+    # Branches
+    for (x1, y1, x2, y2, depth) in branches:
+        cx1, cy1 = to_canvas(x1, y1)
+        cx2, cy2 = to_canvas(x2, y2)
+        pts, shade = squares_for_branch(cx1, cy1, cx2, cy2, depth, max_branch_depth, rng)
+        base_delay = depth * 0.12
+        for i, (bx, by) in enumerate(pts):
+            delay = base_delay + i * 0.01
+            rects.append((bx, by, PALETTE[shade], round(delay, 3)))
             
-            # Week start baseline at row 0
-            cx = x_origin + col * w
-            cy = y_origin + col * h_d
-            tx = cx - 18
-            ty = cy - 25
-            months_labels.append(
-                f'    <line x1="{tx + 14:.1f}" y1="{ty + 4:.1f}" x2="{cx:.1f}" y2="{cy - 5:.1f}" stroke="#374151" stroke-width="0.8" stroke-dasharray="2 2" />'
-                f'\n    <text x="{tx:.1f}" y="{ty:.1f}" font-family="\'JetBrains Mono\', \'Fira Code\', monospace" font-size="9" fill="#9ca3af" text-anchor="end">{m_name}</text>'
-            )
+    # Leaves
+    weights = weights_from_days(stats["contribution_days"])
+    n_tips = max(1, len(tips))
+    per_tip = max(2, leaves_total // n_tips)
+    leaf_delay_base = max_depth * 0.12 + 0.15
+    
+    for (tx, ty, depth) in tips:
+        cx, cy = to_canvas(tx, ty)
+        radius = 22 + max_depth * 2.2
+        cluster = leaf_cluster(cx, cy, per_tip, radius, rng)
+        for i, (lx, ly) in enumerate(cluster):
+            level = weighted_leaf_level(weights, rng)
+            delay = leaf_delay_base + rng.uniform(0, 0.9)
+            rects.append((lx, ly, PALETTE[level], round(delay, 3)))
             
-    # Generate weekday labels along the top-right axis (row axis)
-    weekday_labels = []
-    for r, label in [(0, "Sun"), (3, "Wed"), (6, "Sat")]:
-        cx = x_origin - r * w
-        cy = y_origin + r * h_d
-        weekday_labels.append(
-            f'    <text x="{cx - 15:.1f}" y="{cy + 3:.1f}" font-family="\'JetBrains Mono\', \'Fira Code\', monospace" font-size="9" fill="#4b5563" text-anchor="end">{label}</text>'
+    # Grass
+    grass_rects = []
+    grass_span = width * 0.9
+    n_grass = int(grass_span / (SQUARE + GAP))
+    for i in range(n_grass):
+        gx = (width - grass_span) / 2 + i * (SQUARE + GAP) + rng.uniform(-2, 2)
+        gy = ground_y + rng.uniform(6, 26)
+        level = rng.choice([1, 1, 2, 2, 3])
+        delay = leaf_delay_base + 0.9 + rng.uniform(0, 0.6)
+        grass_rects.append((gx, gy, PALETTE[level], round(delay, 3)))
+        
+    all_rects = rects + grass_rects
+    
+    svg_rects = []
+    for (x, y, color, delay) in all_rects:
+        svg_rects.append(
+            f'<rect class="cell" x="{x - SQUARE/2:.1f}" y="{y - SQUARE/2:.1f}" '
+            f'width="{SQUARE}" height="{SQUARE}" rx="{CORNER_RADIUS}" ry="{CORNER_RADIUS}" '
+            f'fill="{color}" style="animation-delay:{delay}s" />'
         )
-        
-    # Generate 3D Legend items at bottom-right
-    legend_elements = []
-    lx_start = 650
-    ly_start = 440
-    for lvl in range(5):
-        lx = lx_start + lvl * 28
-        ly = ly_start
-        t_col, l_col, r_col = colors_3d[lvl]
-        H_leg = lvl * 7
-        
-        leg_shapes = []
-        if H_leg == 0:
-            leg_shapes.append(
-                f'<polygon points="{lx:.1f},{ly - h_d:.1f} {lx + w:.1f},{ly:.1f} {lx:.1f},{ly + h_d:.1f} {lx - w:.1f},{ly:.1f}" fill="{t_col}" stroke="#0b0f19" stroke-width="0.3" />'
-            )
-        else:
-            leg_shapes.append(
-                f'<polygon points="{lx - w:.1f},{ly - H_leg:.1f} {lx:.1f},{ly - H_leg + h_d:.1f} {lx:.1f},{ly + h_d:.1f} {lx - w:.1f},{ly:.1f}" fill="{l_col}" />'
-            )
-            leg_shapes.append(
-                f'<polygon points="{lx:.1f},{ly - H_leg + h_d:.1f} {lx + w:.1f},{ly - H_leg:.1f} {lx + w:.1f},{ly:.1f} {lx:.1f},{ly + h_d:.1f}" fill="{r_col}" />'
-            )
-            leg_shapes.append(
-                f'<polygon points="{lx:.1f},{ly - H_leg - h_d:.1f} {lx + w:.1f},{ly - H_leg:.1f} {lx:.1f},{ly - H_leg + h_d:.1f} {lx - w:.1f},{ly - H_leg:.1f}" fill="{t_col}" stroke="{t_col}" stroke-width="0.3" />'
-            )
-        legend_elements.append(f'      <g transform="translate(0, 0)">{" ".join(leg_shapes)}</g>')
 
-    # SVG compilation
-    svg_tree_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="auto">
+    # Compile the final SVG inside the premium terminal window template
+    svg_tree_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 680" width="100%" height="auto">
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
@@ -846,28 +857,16 @@ def generate_tree_svg(stats: dict, username: str):
         animation: graphFadeIn 0.8s ease-out;
       }}
       
-      .pillar-group {{
-        transition: transform 0.2s ease;
-        cursor: pointer;
-        transform-box: fill-box;
-        transform-origin: bottom center;
-      }}
-      
-      .pillar-group:hover {{
-        transform: translateY(-8px);
-      }}
-      
-      .pillar-group .tooltip {{
+      .cell {{
         opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.15s ease, transform 0.15s ease;
-        transform: translateY(5px);
         transform-box: fill-box;
+        transform-origin: center;
+        animation: grow 0.5s ease forwards;
       }}
       
-      .pillar-group:hover .tooltip {{
-        opacity: 1;
-        transform: translateY(0);
+      @keyframes grow {{
+        from {{ opacity: 0; transform: scale(0.2); }}
+        to   {{ opacity: 1; transform: scale(1); }}
       }}
       
       @keyframes graphFadeIn {{
@@ -879,7 +878,7 @@ def generate_tree_svg(stats: dict, username: str):
 
   <g class="contrib-graph-card">
     <!-- Window Background -->
-    <rect x="0" y="0" width="900" height="480" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+    <rect x="0" y="0" width="900" height="680" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
 
     <!-- Window Title Bar -->
     <path d="M 0,12 A 12,12 0 0,1 12,0 L 888,0 A 12,12 0 0,1 900,12 L 900,42 L 0,42 Z" fill="#111827" />
@@ -891,7 +890,7 @@ def generate_tree_svg(stats: dict, username: str):
 
     <!-- Terminal Title -->
     <text x="450" y="25" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" text-anchor="middle" font-weight="bold">
-      {username}@macos: ~/isometric-contributions
+      {username}@macos: ~/contribution-tree
     </text>
 
     <!-- Title Bar Divider -->
@@ -899,19 +898,17 @@ def generate_tree_svg(stats: dict, username: str):
 
     <!-- Header Text -->
     <text x="35" y="70" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13" fill="#34d399" font-weight="bold">
-      &gt; git log --graph --date=relative --all --3d-projection (Past 12 Months)
+      &gt; git log --graph --date=relative --all --fractal-tree (Past 12 Months)
     </text>
 
-    <!-- Weekday and Month labels -->
-{chr(10).join(weekday_labels)}
-{chr(10).join(months_labels)}
+    <!-- Tree rendering -->
+    <g>
+      {chr(10).join(svg_rects)}
+    </g>
 
-    <!-- 3D Pillars -->
-{chr(10).join(svg_elements)}
-{recent_marker}
-
+    <!-- Bottom Stats and Info Panel -->
     <!-- Left Stats Panel -->
-    <g transform="translate(45, 340)">
+    <g transform="translate(45, 110)">
       <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Longest Streak</text>
       <text x="0" y="22" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="20" fill="#34d399" font-weight="bold">{longest_streak} days</text>
       <text x="0" y="38" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">{longest_streak_str}</text>
@@ -922,22 +919,14 @@ def generate_tree_svg(stats: dict, username: str):
     </g>
 
     <!-- Right Stats Panel -->
-    <g transform="translate(620, 95)">
+    <g transform="translate(620, 110)">
       <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">1 Year Total</text>
       <text x="0" y="24" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="22" fill="#34d399" font-weight="bold">{total_commits:,} commits</text>
       <text x="0" y="40" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">Past 365 Days</text>
-      
-      <text x="0" y="70" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Busiest Day</text>
-      <text x="0" y="92" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="19" fill="#34d399" font-weight="bold">{busiest_count} commits</text>
-      <text x="0" y="108" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">{busiest_date}</text>
     </g>
 
-    <!-- Legend -->
-    <g transform="translate(0, 0)">
-      <text x="590" y="445" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#4b5563" font-weight="bold" text-anchor="end">Less</text>
-{chr(10).join(legend_elements)}
-      <text x="795" y="445" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#4b5563" font-weight="bold" text-anchor="start">More</text>
-    </g>
+    <!-- Bottom Counter Label -->
+    <text x="450" y="{height - 20}" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" opacity="0.85">{total_commits} commits grown 🌱</text>
   </g>
 </svg>"""
 

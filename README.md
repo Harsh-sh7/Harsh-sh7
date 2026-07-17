@@ -21,8 +21,8 @@
 <br>
 
 <p align="center">
-  <a href="assets/contribution_tree.svg?v=2" target="_blank">
-    <img src="assets/contribution_tree.svg?v=2" alt="GitHub Contribution Tree" width="850">
+  <a href="assets/contribution_tree.svg?v=3" target="_blank">
+    <img src="assets/contribution_tree.svg?v=3" alt="GitHub Contribution Tree" width="850">
   </a>
 </p>
 
