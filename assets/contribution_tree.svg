@@ -3417,19 +3417,19 @@
     </a>
     <a href="https://github.com/Harsh-sh7?tab=overview&amp;from=2026-07-17&amp;to=2026-07-17" target="_blank">
       <g class="pillar-group recent-pillar" data-date="2026-07-17">
-        <polygon points="724.0,429.8 735.5,435.5 735.5,443.5 724.0,437.8" fill="#0b3620" /> <polygon points="735.5,435.5 747.0,429.8 747.0,437.8 735.5,443.5" fill="#082818" /> <polygon points="735.5,424.0 747.0,429.8 735.5,435.5 724.0,429.8" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
-        <g class="tooltip" transform="translate(595.50, 411.75)">
+        <polygon points="724.0,427.9 735.5,433.7 735.5,443.5 724.0,437.8" fill="#0b3620" /> <polygon points="735.5,433.7 747.0,427.9 747.0,437.8 735.5,443.5" fill="#082818" /> <polygon points="735.5,422.2 747.0,427.9 735.5,433.7 724.0,427.9" fill="#0e4429" stroke="#0e4429" stroke-width="0.3" />
+        <g class="tooltip" transform="translate(595.50, 409.95)">
         <rect x="0" y="0" width="130" height="18" rx="3" fill="#111827" stroke="#0e4429" stroke-width="1" opacity="0.95" />
-        <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">1 commit (Jul 17)</text>
+        <text x="65" y="12" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8.5" fill="#e5e7eb" font-weight="bold" text-anchor="middle">2 commits (Jul 17)</text>
       </g>
       </g>
     </a>
     <!-- Pulse Halo for Most Recent Commit -->
-    <circle cx="735.50" cy="429.75" r="13" fill="none" stroke="#ef4444" stroke-width="1.8">
+    <circle cx="735.50" cy="427.95" r="13" fill="none" stroke="#ef4444" stroke-width="1.8">
       <animate attributeName="r" values="8;15;8" dur="1.2s" repeatCount="indefinite" />
       <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite" />
     </circle>
-    <circle cx="735.50" cy="429.75" r="2.5" fill="#ef4444" />
+    <circle cx="735.50" cy="427.95" r="2.5" fill="#ef4444" />
 
     <!-- Left Stats Panel -->
     <g transform="translate(45, 340)">
@@ -3445,7 +3445,7 @@
     <!-- Right Stats Panel -->
     <g transform="translate(620, 95)">
       <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">1 Year Total</text>
-      <text x="0" y="24" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="22" fill="#34d399" font-weight="bold">202 commits</text>
+      <text x="0" y="24" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="22" fill="#34d399" font-weight="bold">203 commits</text>
       <text x="0" y="40" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">Past 365 Days</text>
       
       <text x="0" y="70" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Busiest Day</text>
