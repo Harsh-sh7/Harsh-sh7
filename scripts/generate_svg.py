@@ -25,7 +25,7 @@ def load_config() -> dict:
     with open(config_path, "r") as f:
         return json.load(f)
 
-def format_stats_line(y_pos, label, value, label_color="#f97316", dot_color="#4b5563", value_color="#38bdf8", prefix_len=14, start_x=25):
+def format_stats_line(y_pos, label, value, is_recent_act=False, prefix_len=14, start_x=25):
     """
     Formats a single monospace line with dotted alignment.
     """
@@ -44,13 +44,16 @@ def format_stats_line(y_pos, label, value, label_color="#f97316", dot_color="#4b
     escaped_val = display_val.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
     escaped_label = label.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
     
+    lbl_class = "lbl-act" if is_recent_act else "lbl-os"
+    val_class = "lbl-act-val" if is_recent_act else "lbl-val"
+    
     return f"""  <text x="{start_x}" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="{label_color}">{escaped_label}</tspan>
-    <tspan fill="{dot_color}">: {dots} </tspan>
-    <tspan fill="{value_color}">{escaped_val}</tspan>
+    <tspan class="{lbl_class}">{escaped_label}</tspan>
+    <tspan class="lbl-dots">: {dots} </tspan>
+    <tspan class="{val_class}">{escaped_val}</tspan>
   </text>"""
 
-def format_stats_section_header(y_pos, title, line_color="#1f2937", text_color="#9ca3af", start_x=25):
+def format_stats_section_header(y_pos, title, start_x=25):
     """
     Formats a terminal section divider, e.g., - Contact -----------------
     """
@@ -60,8 +63,8 @@ def format_stats_section_header(y_pos, title, line_color="#1f2937", text_color="
         remaining_len = 1
     line = "─" * remaining_len
     return f"""  <text x="{start_x}" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="700">
-    <tspan fill="{text_color}">{title_text}</tspan>
-    <tspan fill="{line_color}">{line}</tspan>
+    <tspan class="section-text">{title_text}</tspan>
+    <tspan class="section-line">{line}</tspan>
   </text>"""
 
 def generate_stats_svg(stats: dict, config: dict):
@@ -130,7 +133,7 @@ def generate_stats_svg(stats: dict, config: dict):
         svg_elements.append(format_stats_line(TopLang_y, "Top Lang", lang_display))
         
         progress_bar_g = ['  <!-- Progress Bar -->']
-        progress_bar_g.append(f'  <rect x="150" y="{bar_y}" width="160" height="5" rx="2.5" fill="#1f2937" />')
+        progress_bar_g.append(f'  <rect class="progress-bg" x="150" y="{bar_y}" width="160" height="5" rx="2.5" />')
         current_x = 150
         for lang in stats["top_languages"][:4]:
             width = (lang["percentage"] / 100.0) * 160
@@ -143,12 +146,12 @@ def generate_stats_svg(stats: dict, config: dict):
     svg_elements.append(format_stats_section_header(y_act_header, "Recent Activity"))
     act_ys = [Act1_y, Act2_y]
     for idx, act in enumerate(stats["recent_activity"][:2]):
-        svg_elements.append(format_stats_line(act_ys[idx], f"Act {idx+1}", act, label_color="#60a5fa", value_color="#e5e7eb"))
+        svg_elements.append(format_stats_line(act_ys[idx], f"Act {idx+1}", act, is_recent_act=True))
         
     # Timestamp
     y_bottom = 295
     svg_elements.append(f"""  <!-- Bottom Timestamp -->
-  <text x="25" y="{y_bottom}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" fill="#4b5563" font-weight="bold">
+  <text x="25" y="{y_bottom}" class="timestamp-text" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" font-weight="bold">
     Last Updated: {stats['last_updated']} (auto-updated every 12h)
   </text>""")
 
@@ -165,31 +168,60 @@ def generate_stats_svg(stats: dict, config: dict):
         from {{ opacity: 0; transform: translateY(10px); }}
         to {{ opacity: 1; transform: translateY(0); }}
       }}
+
+      /* Theme Colors */
+      .bg-rect {{
+        fill: #0b0f19;
+        stroke: #1f2937;
+      }}
+      .lbl-os {{ fill: #f97316; }}
+      .lbl-dots {{ fill: #4b5563; }}
+      .lbl-val {{ fill: #38bdf8; }}
+      .header-name {{ fill: #34d399; }}
+      .header-host {{ fill: #9ca3af; }}
+      .header-cursor {{ fill: #38bdf8; }}
+      .section-text {{ fill: #9ca3af; }}
+      .section-line {{ fill: #1f2937; }}
+      .lbl-act {{ fill: #60a5fa; }}
+      .lbl-act-val {{ fill: #e5e7eb; }}
+      .progress-bg {{ fill: #1f2937; }}
+      .timestamp-text {{ fill: #4b5563; }}
+
+      @media (prefers-color-scheme: light) {{
+        .bg-rect {{
+          fill: #f9fafb;
+          stroke: #d1d5db;
+        }}
+        .lbl-os {{ fill: #ea580c; }}
+        .lbl-dots {{ fill: #9ca3af; }}
+        .lbl-val {{ fill: #0284c7; }}
+        .header-name {{ fill: #059669; }}
+        .header-host {{ fill: #4b5563; }}
+        .header-cursor {{ fill: #0284c7; }}
+        .section-text {{ fill: #4b5563; }}
+        .section-line {{ fill: #e5e7eb; }}
+        .lbl-act {{ fill: #2563eb; }}
+        .lbl-act-val {{ fill: #111827; }}
+        .progress-bg {{ fill: #e5e7eb; }}
+        .timestamp-text {{ fill: #9ca3af; }}
+      }}
     </style>
-    
-    <!-- Typing Animation Clip Path -->
-    <clipPath id="type-clip">
-      <rect x="25" y="20" width="0" height="30">
-        <animate attributeName="width" from="0" to="{cursor_end_x - 25}" dur="1.5s" begin="0.5s" fill="freeze" keyTimes="0; 1" keySplines="0.25, 0.1, 0.25, 1.0" calcMode="spline" />
-      </rect>
-    </clipPath>
   </defs>
 
   <g class="terminal-card">
-    <!-- Window Background (Premium Deep Dark) -->
-    <rect x="10" y="10" width="430" height="300" rx="10" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+    <!-- Window Background -->
+    <rect class="bg-rect" x="10" y="10" width="430" height="300" rx="10" stroke-width="1.5" />
 
     <!-- Typing Header -->
-    <g clip-path="url(#type-clip)">
+    <g>
       <text x="25" y="38" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="bold">
-        <tspan fill="#34d399">{username}</tspan>
-        <tspan fill="#9ca3af">@macos:~</tspan>
+        <tspan class="header-name">{username}</tspan>
+        <tspan class="header-host">@macos:~</tspan>
       </text>
     </g>
     
-    <!-- Typing Cursor -->
-    <rect x="{cursor_start_x}" y="24" width="7" height="15" fill="#38bdf8">
-      <animate attributeName="x" from="{cursor_start_x}" to="{cursor_end_x}" dur="1.5s" begin="0.5s" fill="freeze" keyTimes="0; 1" keySplines="0.25, 0.1, 0.25, 1.0" calcMode="spline" />
+    <!-- Blinking Cursor -->
+    <rect class="header-cursor" x="{cursor_end_x}" y="24" width="7" height="15">
       <animate attributeName="opacity" values="1;0;1" dur="0.8s" repeatCount="indefinite" />
     </rect>
 
@@ -355,51 +387,96 @@ def generate_game_svg():
       .score-3 {{ animation: score-3 6s infinite step-end; }}
       .score-4 {{ animation: score-4 6s infinite step-end; }}
       .score-5 {{ animation: score-5 6s infinite step-end; }}
+
+      /* Theme Colors */
+      .bg-rect {{
+        fill: #0b0f19;
+        stroke: #1f2937;
+      }}
+      .game-title {{
+        fill: #374151;
+      }}
+      .score-label, .lives-label {{
+        fill: #4b5563;
+      }}
+      .score-val {{
+        fill: #34d399;
+      }}
+      .lives-val {{
+        fill: #ef4444;
+      }}
+      .space-star {{
+        fill: #4b5563;
+        opacity: 0.5;
+      }}
+
+      @media (prefers-color-scheme: light) {{
+        .bg-rect {{
+          fill: #f9fafb;
+          stroke: #d1d5db;
+        }}
+        .game-title {{
+          fill: #9ca3af;
+        }}
+        .score-label, .lives-label {{
+          fill: #9ca3af;
+        }}
+        .score-val {{
+          fill: #059669;
+        }}
+        .lives-val {{
+          fill: #ef4444;
+        }}
+        .space-star {{
+          fill: #d1d5db;
+          opacity: 0.8;
+        }}
+      }}
     </style>
   </defs>
 
   <g class="game-card">
     <!-- Game Window Background -->
-    <rect x="10" y="10" width="430" height="300" rx="10" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+    <rect class="bg-rect" x="10" y="10" width="430" height="300" rx="10" stroke-width="1.5" />
     
     <!-- Starry Space Background (Scrolling Dust) -->
-    <circle cx="80" cy="50" r="1.2" fill="#4b5563" opacity="0.5">
+    <circle class="space-star" cx="80" cy="50" r="1.2">
       <animate attributeName="cy" from="10" to="310" dur="4s" repeatCount="indefinite" />
     </circle>
-    <circle cx="150" cy="120" r="1.5" fill="#34d399" opacity="0.3">
+    <circle class="space-star" cx="150" cy="120" r="1.5">
       <animate attributeName="cy" from="10" to="310" dur="6s" repeatCount="indefinite" />
     </circle>
-    <circle cx="340" cy="70" r="1.2" fill="#4b5563" opacity="0.4">
+    <circle class="space-star" cx="340" cy="70" r="1.2">
       <animate attributeName="cy" from="10" to="310" dur="5s" repeatCount="indefinite" />
     </circle>
-    <circle cx="210" cy="180" r="1" fill="#9ca3af" opacity="0.6">
+    <circle class="space-star" cx="210" cy="180" r="1">
       <animate attributeName="cy" from="10" to="310" dur="3.5s" repeatCount="indefinite" />
     </circle>
-    <circle cx="110" cy="220" r="1.5" fill="#26a641" opacity="0.2">
+    <circle class="space-star" cx="110" cy="220" r="1.5">
       <animate attributeName="cy" from="10" to="310" dur="7s" repeatCount="indefinite" />
     </circle>
-    <circle cx="280" cy="250" r="1" fill="#4b5563" opacity="0.5">
+    <circle class="space-star" cx="280" cy="250" r="1">
       <animate attributeName="cy" from="10" to="310" dur="4.5s" repeatCount="indefinite" />
     </circle>
 
     <!-- Game Headers & Scoreboard -->
-    <text x="225" y="32" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#374151" font-weight="800" text-anchor="middle" letter-spacing="1.5">COMMIT INVADERS</text>
+    <text class="game-title" x="225" y="32" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="800" text-anchor="middle" letter-spacing="1.5">COMMIT INVADERS</text>
     
     <!-- Score Labels -->
     <g transform="translate(30, 24)">
-      <text x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" fill="#4b5563" font-weight="bold">SCORE</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-0" opacity="1">0000</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-1" opacity="0">0100</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-2" opacity="0">0250</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-3" opacity="0">0450</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-4" opacity="0">0700</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-5" opacity="0">1000</text>
+      <text class="score-label" x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" font-weight="bold">SCORE</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-0" opacity="1">0000</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-1" opacity="0">0100</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-2" opacity="0">0250</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-3" opacity="0">0450</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-4" opacity="0">0700</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-5" opacity="0">1000</text>
     </g>
 
     <!-- Lives Indicator -->
     <g transform="translate(420, 24)">
-      <text x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" fill="#4b5563" font-weight="bold" text-anchor="end">LIVES</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" fill="#ef4444" text-anchor="end">💚 💚 💚</text>
+      <text class="lives-label" x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" font-weight="bold" text-anchor="end">LIVES</text>
+      <text class="lives-val" x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" text-anchor="end">💚 💚 💚</text>
     </g>
 
     <!-- Lasers (aligned with timeline) -->
@@ -772,6 +849,7 @@ def generate_tree_svg(stats: dict, username: str):
         )
         
     # Compile standalone SVG
+    # Compile standalone SVG
     svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="100%" height="auto">
   <defs>
     <style>
@@ -797,28 +875,65 @@ def generate_tree_svg(stats: dict, username: str):
         from {{ opacity: 0; transform: translateY(10px); }}
         to {{ opacity: 1; transform: translateY(0); }}
       }}
+
+      /* Theme Colors */
+      .bg-rect {{
+        fill: #0b0f19;
+        stroke: #1f2937;
+      }}
+      .stats-label {{
+        fill: #4b5563;
+      }}
+      .stats-val {{
+        fill: #34d399;
+      }}
+      .stats-sub {{
+        fill: #9ca3af;
+      }}
+      .commits-grown {{
+        fill: #9ca3af;
+      }}
+
+      @media (prefers-color-scheme: light) {{
+        .bg-rect {{
+          fill: #f9fafb;
+          stroke: #d1d5db;
+        }}
+        .stats-label {{
+          fill: #9ca3af;
+        }}
+        .stats-val {{
+          fill: #059669;
+        }}
+        .stats-sub {{
+          fill: #4b5563;
+        }}
+        .commits-grown {{
+          fill: #4b5563;
+        }}
+      }}
     </style>
   </defs>
 
   <g class="tree-card">
-    <!-- Background (Premium Deep Dark) -->
-    <rect x="10" y="10" width="880" height="480" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+    <!-- Background -->
+    <rect class="bg-rect" x="10" y="10" width="880" height="480" rx="12" stroke-width="1.5" />
 
     <!-- Left Stats Panel -->
     <g transform="translate(45, 60)">
-      <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Longest Streak</text>
-      <text x="0" y="20" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{longest} days</text>
-      <text x="0" y="34" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">{streak_str if streak_str else 'N/A'}</text>
+      <text class="stats-label" x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" font-weight="bold">Longest Streak</text>
+      <text class="stats-val" x="0" y="20" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" font-weight="bold">{longest} days</text>
+      <text class="stats-sub" x="0" y="34" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9">{streak_str if streak_str else 'N/A'}</text>
       
-      <text x="0" y="60" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Current Streak</text>
-      <text x="0" y="80" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{current} days</text>
+      <text class="stats-label" x="0" y="60" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" font-weight="bold">Current Streak</text>
+      <text class="stats-val" x="0" y="80" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" font-weight="bold">{current} days</text>
     </g>
 
     <!-- Right Stats Panel -->
     <g transform="translate(670, 60)">
-      <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">All-Time Total</text>
-      <text x="0" y="20" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{commits:,} commits</text>
-      <text x="0" y="34" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">Contribution Period</text>
+      <text class="stats-label" x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" font-weight="bold">All-Time Total</text>
+      <text class="stats-val" x="0" y="20" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" font-weight="bold">{commits:,} commits</text>
+      <text class="stats-sub" x="0" y="34" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9">Contribution Period</text>
     </g>
 
     <!-- Tree and Grass rendering -->
@@ -826,7 +941,7 @@ def generate_tree_svg(stats: dict, username: str):
       {''.join(svg_rects)}
     </g>
 
-    <text x="450" y="{height - 35}" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" opacity="0.85">{commits} commits grown 🌱</text>
+    <text class="commits-grown" x="450" y="{height - 35}" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" opacity="0.85">{commits} commits grown 🌱</text>
   </g>
 </svg>"""
 
@@ -879,6 +994,7 @@ def generate_retro_badges():
     }
     
     for name, (label, color) in badges.items():
+        light_color = "#0284c7" if name == "linkedin" else ("#ea580c" if name == "email" else "#059669")
         svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" width="130" height="28" viewBox="0 0 130 28">
   <style>
     .badge-rect {{
@@ -903,6 +1019,23 @@ def generate_retro_badges():
     }}
     .badge-rect:hover + .badge-text, .badge-text:hover {{
       fill: #e5e7eb;
+    }}
+
+    @media (prefers-color-scheme: light) {{
+      .badge-rect {{
+        fill: #f9fafb;
+        stroke: #d1d5db;
+      }}
+      .badge-rect:hover {{
+        fill: #f3f4f6;
+        stroke: {light_color};
+      }}
+      .badge-text {{
+        fill: {light_color};
+      }}
+      .badge-rect:hover + .badge-text, .badge-text:hover {{
+        fill: #111827;
+      }}
     }}
   </style>
   <rect class="badge-rect" x="1.5" y="1.5" width="127" height="25" rx="4" />

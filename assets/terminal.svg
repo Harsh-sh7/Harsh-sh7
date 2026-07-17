@@ -11,125 +11,154 @@
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
       }
+
+      /* Theme Colors */
+      .bg-rect {
+        fill: #0b0f19;
+        stroke: #1f2937;
+      }
+      .lbl-os { fill: #f97316; }
+      .lbl-dots { fill: #4b5563; }
+      .lbl-val { fill: #38bdf8; }
+      .header-name { fill: #34d399; }
+      .header-host { fill: #9ca3af; }
+      .header-cursor { fill: #38bdf8; }
+      .section-text { fill: #9ca3af; }
+      .section-line { fill: #1f2937; }
+      .lbl-act { fill: #60a5fa; }
+      .lbl-act-val { fill: #e5e7eb; }
+      .progress-bg { fill: #1f2937; }
+      .timestamp-text { fill: #4b5563; }
+
+      @media (prefers-color-scheme: light) {
+        .bg-rect {
+          fill: #f9fafb;
+          stroke: #d1d5db;
+        }
+        .lbl-os { fill: #ea580c; }
+        .lbl-dots { fill: #9ca3af; }
+        .lbl-val { fill: #0284c7; }
+        .header-name { fill: #059669; }
+        .header-host { fill: #4b5563; }
+        .header-cursor { fill: #0284c7; }
+        .section-text { fill: #4b5563; }
+        .section-line { fill: #e5e7eb; }
+        .lbl-act { fill: #2563eb; }
+        .lbl-act-val { fill: #111827; }
+        .progress-bg { fill: #e5e7eb; }
+        .timestamp-text { fill: #9ca3af; }
+      }
     </style>
-    
-    <!-- Typing Animation Clip Path -->
-    <clipPath id="type-clip">
-      <rect x="25" y="20" width="0" height="30">
-        <animate attributeName="width" from="0" to="175.6" dur="1.5s" begin="0.5s" fill="freeze" keyTimes="0; 1" keySplines="0.25, 0.1, 0.25, 1.0" calcMode="spline" />
-      </rect>
-    </clipPath>
   </defs>
 
   <g class="terminal-card">
-    <!-- Window Background (Premium Deep Dark) -->
-    <rect x="10" y="10" width="430" height="300" rx="10" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+    <!-- Window Background -->
+    <rect class="bg-rect" x="10" y="10" width="430" height="300" rx="10" stroke-width="1.5" />
 
     <!-- Typing Header -->
-    <g clip-path="url(#type-clip)">
+    <g>
       <text x="25" y="38" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="bold">
-        <tspan fill="#34d399">Harshit Shakya</tspan>
-        <tspan fill="#9ca3af">@macos:~</tspan>
+        <tspan class="header-name">Harshit Shakya</tspan>
+        <tspan class="header-host">@macos:~</tspan>
       </text>
     </g>
     
-    <!-- Typing Cursor -->
-    <rect x="25" y="24" width="7" height="15" fill="#38bdf8">
-      <animate attributeName="x" from="25" to="200.6" dur="1.5s" begin="0.5s" fill="freeze" keyTimes="0; 1" keySplines="0.25, 0.1, 0.25, 1.0" calcMode="spline" />
+    <!-- Blinking Cursor -->
+    <rect class="header-cursor" x="200.6" y="24" width="7" height="15">
       <animate attributeName="opacity" values="1;0;1" dur="0.8s" repeatCount="indefinite" />
     </rect>
 
   <text x="25" y="48" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#f97316">OS</tspan>
-    <tspan fill="#4b5563">: .......... </tspan>
-    <tspan fill="#38bdf8">macOS Sequoia, Linux</tspan>
+    <tspan class="lbl-os">OS</tspan>
+    <tspan class="lbl-dots">: .......... </tspan>
+    <tspan class="lbl-val">macOS Sequoia, Linux</tspan>
   </text>
   <text x="25" y="61.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#f97316">Host</tspan>
-    <tspan fill="#4b5563">: ........ </tspan>
-    <tspan fill="#38bdf8">MacBook Pro</tspan>
+    <tspan class="lbl-os">Host</tspan>
+    <tspan class="lbl-dots">: ........ </tspan>
+    <tspan class="lbl-val">MacBook Pro</tspan>
   </text>
   <text x="25" y="75.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#f97316">Location</tspan>
-    <tspan fill="#4b5563">: .... </tspan>
-    <tspan fill="#38bdf8">India</tspan>
+    <tspan class="lbl-os">Location</tspan>
+    <tspan class="lbl-dots">: .... </tspan>
+    <tspan class="lbl-val">India</tspan>
   </text>
   <text x="25" y="88.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#f97316">Editor</tspan>
-    <tspan fill="#4b5563">: ...... </tspan>
-    <tspan fill="#38bdf8">VS Code, Xcode, Vim</tspan>
+    <tspan class="lbl-os">Editor</tspan>
+    <tspan class="lbl-dots">: ...... </tspan>
+    <tspan class="lbl-val">VS Code, Xcode, Vim</tspan>
   </text>
   <text x="25" y="102.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#f97316">Focus</tspan>
-    <tspan fill="#4b5563">: ....... </tspan>
-    <tspan fill="#38bdf8">Advanced Agentic AI &amp; System...</tspan>
+    <tspan class="lbl-os">Focus</tspan>
+    <tspan class="lbl-dots">: ....... </tspan>
+    <tspan class="lbl-val">Advanced Agentic AI &amp; System...</tspan>
   </text>
   <text x="25" y="120.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="700">
-    <tspan fill="#9ca3af">─ Technical Profile </tspan>
-    <tspan fill="#1f2937">──────────────────</tspan>
+    <tspan class="section-text">─ Technical Profile </tspan>
+    <tspan class="section-line">──────────────────</tspan>
   </text>
   <text x="25" y="133.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#f97316">Languages</tspan>
-    <tspan fill="#4b5563">: ... </tspan>
-    <tspan fill="#38bdf8">Python, JavaScript, TypeScri...</tspan>
+    <tspan class="lbl-os">Languages</tspan>
+    <tspan class="lbl-dots">: ... </tspan>
+    <tspan class="lbl-val">Python, JavaScript, TypeScri...</tspan>
   </text>
   <text x="25" y="147.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#f97316">Frameworks</tspan>
-    <tspan fill="#4b5563">: .. </tspan>
-    <tspan fill="#38bdf8">Next.js, React, SwiftUI, Fas...</tspan>
+    <tspan class="lbl-os">Frameworks</tspan>
+    <tspan class="lbl-dots">: .. </tspan>
+    <tspan class="lbl-val">Next.js, React, SwiftUI, Fas...</tspan>
   </text>
   <text x="25" y="160.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#f97316">Database</tspan>
-    <tspan fill="#4b5563">: .... </tspan>
-    <tspan fill="#38bdf8">PostgreSQL, MongoDB, Redis</tspan>
+    <tspan class="lbl-os">Database</tspan>
+    <tspan class="lbl-dots">: .... </tspan>
+    <tspan class="lbl-val">PostgreSQL, MongoDB, Redis</tspan>
   </text>
   <text x="25" y="178.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="700">
-    <tspan fill="#9ca3af">─ GitHub Stats </tspan>
-    <tspan fill="#1f2937">───────────────────────</tspan>
+    <tspan class="section-text">─ GitHub Stats </tspan>
+    <tspan class="section-line">───────────────────────</tspan>
   </text>
   <text x="25" y="192.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#f97316">Repos</tspan>
-    <tspan fill="#4b5563">: ....... </tspan>
-    <tspan fill="#38bdf8">31 public repos</tspan>
+    <tspan class="lbl-os">Repos</tspan>
+    <tspan class="lbl-dots">: ....... </tspan>
+    <tspan class="lbl-val">33 public repos</tspan>
   </text>
   <text x="25" y="205.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#f97316">Followers</tspan>
-    <tspan fill="#4b5563">: ... </tspan>
-    <tspan fill="#38bdf8">7 | Following: 4</tspan>
+    <tspan class="lbl-os">Followers</tspan>
+    <tspan class="lbl-dots">: ... </tspan>
+    <tspan class="lbl-val">7 | Following: 4</tspan>
   </text>
   <text x="25" y="219.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#f97316">Activity</tspan>
-    <tspan fill="#4b5563">: .... </tspan>
-    <tspan fill="#38bdf8">208 contributions | Streak: 5d</tspan>
+    <tspan class="lbl-os">Activity</tspan>
+    <tspan class="lbl-dots">: .... </tspan>
+    <tspan class="lbl-val">120 contributions | Streak: 10d</tspan>
   </text>
   <text x="25" y="232.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#f97316">Top Lang</tspan>
-    <tspan fill="#4b5563">: .... </tspan>
-    <tspan fill="#38bdf8">Jupyter Notebook, TypeScript...</tspan>
+    <tspan class="lbl-os">Top Lang</tspan>
+    <tspan class="lbl-dots">: .... </tspan>
+    <tspan class="lbl-val">JavaScript, TypeScript, Python</tspan>
   </text>
   <!-- Progress Bar -->
-  <rect x="150" y="239.5" width="160" height="5" rx="2.5" fill="#1f2937" />
-  <rect x="150" y="239.5" width="92.5" height="5" rx="1.5" fill="#DA5B0B" />
-  <rect x="242.48" y="239.5" width="34.7" height="5" rx="1.5" fill="#3178c6" />
-  <rect x="277.2" y="239.5" width="21.3" height="5" rx="1.5" fill="#f1e05a" />
-  <rect x="298.48" y="239.5" width="7.4" height="5" rx="1.5" fill="#3572A5" />
+  <rect class="progress-bg" x="150" y="239.5" width="160" height="5" rx="2.5" />
+  <rect x="150" y="239.5" width="67.0" height="5" rx="1.5" fill="#38bdf8" />
+  <rect x="217.04" y="239.5" width="41.3" height="5" rx="1.5" fill="#38bdf8" />
+  <rect x="258.32" y="239.5" width="20.6" height="5" rx="1.5" fill="#38bdf8" />
+  <rect x="278.96" y="239.5" width="15.5" height="5" rx="1.5" fill="#38bdf8" />
   <text x="25" y="257.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="700">
-    <tspan fill="#9ca3af">─ Recent Activity </tspan>
-    <tspan fill="#1f2937">────────────────────</tspan>
+    <tspan class="section-text">─ Recent Activity </tspan>
+    <tspan class="section-line">────────────────────</tspan>
   </text>
   <text x="25" y="271.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#60a5fa">Act 1</tspan>
-    <tspan fill="#4b5563">: ....... </tspan>
-    <tspan fill="#e5e7eb">Commented on issue #10 in ne...</tspan>
+    <tspan class="lbl-act">Act 1</tspan>
+    <tspan class="lbl-dots">: ....... </tspan>
+    <tspan class="lbl-act-val">Commented on issue #10 in ne...</tspan>
   </text>
   <text x="25" y="284.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="#60a5fa">Act 2</tspan>
-    <tspan fill="#4b5563">: ....... </tspan>
-    <tspan fill="#e5e7eb">Assigned issue #10 in newton...</tspan>
+    <tspan class="lbl-act">Act 2</tspan>
+    <tspan class="lbl-dots">: ....... </tspan>
+    <tspan class="lbl-act-val">Assigned issue #10 in newton...</tspan>
   </text>
   <!-- Bottom Timestamp -->
-  <text x="25" y="295" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" fill="#4b5563" font-weight="bold">
-    Last Updated: 2026-07-17 06:36:18 (auto-updated every 12h)
+  <text x="25" y="295" class="timestamp-text" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" font-weight="bold">
+    Last Updated: 2026-07-17 12:12:52 (auto-updated every 12h)
   </text>
   </g>
 </svg>

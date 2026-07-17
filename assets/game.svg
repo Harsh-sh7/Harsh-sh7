@@ -148,51 +148,96 @@
       .score-3 { animation: score-3 6s infinite step-end; }
       .score-4 { animation: score-4 6s infinite step-end; }
       .score-5 { animation: score-5 6s infinite step-end; }
+
+      /* Theme Colors */
+      .bg-rect {
+        fill: #0b0f19;
+        stroke: #1f2937;
+      }
+      .game-title {
+        fill: #374151;
+      }
+      .score-label, .lives-label {
+        fill: #4b5563;
+      }
+      .score-val {
+        fill: #34d399;
+      }
+      .lives-val {
+        fill: #ef4444;
+      }
+      .space-star {
+        fill: #4b5563;
+        opacity: 0.5;
+      }
+
+      @media (prefers-color-scheme: light) {
+        .bg-rect {
+          fill: #f9fafb;
+          stroke: #d1d5db;
+        }
+        .game-title {
+          fill: #9ca3af;
+        }
+        .score-label, .lives-label {
+          fill: #9ca3af;
+        }
+        .score-val {
+          fill: #059669;
+        }
+        .lives-val {
+          fill: #ef4444;
+        }
+        .space-star {
+          fill: #d1d5db;
+          opacity: 0.8;
+        }
+      }
     </style>
   </defs>
 
   <g class="game-card">
     <!-- Game Window Background -->
-    <rect x="10" y="10" width="430" height="300" rx="10" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+    <rect class="bg-rect" x="10" y="10" width="430" height="300" rx="10" stroke-width="1.5" />
     
     <!-- Starry Space Background (Scrolling Dust) -->
-    <circle cx="80" cy="50" r="1.2" fill="#4b5563" opacity="0.5">
+    <circle class="space-star" cx="80" cy="50" r="1.2">
       <animate attributeName="cy" from="10" to="310" dur="4s" repeatCount="indefinite" />
     </circle>
-    <circle cx="150" cy="120" r="1.5" fill="#34d399" opacity="0.3">
+    <circle class="space-star" cx="150" cy="120" r="1.5">
       <animate attributeName="cy" from="10" to="310" dur="6s" repeatCount="indefinite" />
     </circle>
-    <circle cx="340" cy="70" r="1.2" fill="#4b5563" opacity="0.4">
+    <circle class="space-star" cx="340" cy="70" r="1.2">
       <animate attributeName="cy" from="10" to="310" dur="5s" repeatCount="indefinite" />
     </circle>
-    <circle cx="210" cy="180" r="1" fill="#9ca3af" opacity="0.6">
+    <circle class="space-star" cx="210" cy="180" r="1">
       <animate attributeName="cy" from="10" to="310" dur="3.5s" repeatCount="indefinite" />
     </circle>
-    <circle cx="110" cy="220" r="1.5" fill="#26a641" opacity="0.2">
+    <circle class="space-star" cx="110" cy="220" r="1.5">
       <animate attributeName="cy" from="10" to="310" dur="7s" repeatCount="indefinite" />
     </circle>
-    <circle cx="280" cy="250" r="1" fill="#4b5563" opacity="0.5">
+    <circle class="space-star" cx="280" cy="250" r="1">
       <animate attributeName="cy" from="10" to="310" dur="4.5s" repeatCount="indefinite" />
     </circle>
 
     <!-- Game Headers & Scoreboard -->
-    <text x="225" y="32" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#374151" font-weight="800" text-anchor="middle" letter-spacing="1.5">COMMIT INVADERS</text>
+    <text class="game-title" x="225" y="32" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="800" text-anchor="middle" letter-spacing="1.5">COMMIT INVADERS</text>
     
     <!-- Score Labels -->
     <g transform="translate(30, 24)">
-      <text x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" fill="#4b5563" font-weight="bold">SCORE</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-0" opacity="1">0000</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-1" opacity="0">0100</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-2" opacity="0">0250</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-3" opacity="0">0450</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-4" opacity="0">0700</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-5" opacity="0">1000</text>
+      <text class="score-label" x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" font-weight="bold">SCORE</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-0" opacity="1">0000</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-1" opacity="0">0100</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-2" opacity="0">0250</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-3" opacity="0">0450</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-4" opacity="0">0700</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-5" opacity="0">1000</text>
     </g>
 
     <!-- Lives Indicator -->
     <g transform="translate(420, 24)">
-      <text x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" fill="#4b5563" font-weight="bold" text-anchor="end">LIVES</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" fill="#ef4444" text-anchor="end">💚 💚 💚</text>
+      <text class="lives-label" x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" font-weight="bold" text-anchor="end">LIVES</text>
+      <text class="lives-val" x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" text-anchor="end">💚 💚 💚</text>
     </g>
 
     <!-- Lasers (aligned with timeline) -->

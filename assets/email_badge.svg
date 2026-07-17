@@ -23,6 +23,23 @@
     .badge-rect:hover + .badge-text, .badge-text:hover {
       fill: #e5e7eb;
     }
+
+    @media (prefers-color-scheme: light) {
+      .badge-rect {
+        fill: #f9fafb;
+        stroke: #d1d5db;
+      }
+      .badge-rect:hover {
+        fill: #f3f4f6;
+        stroke: #ea580c;
+      }
+      .badge-text {
+        fill: #ea580c;
+      }
+      .badge-rect:hover + .badge-text, .badge-text:hover {
+        fill: #111827;
+      }
+    }
   </style>
   <rect class="badge-rect" x="1.5" y="1.5" width="127" height="25" rx="4" />
   <text class="badge-text" x="65" y="14">[ EMAIL ]</text>
