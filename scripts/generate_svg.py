@@ -25,7 +25,7 @@ def load_config() -> dict:
     with open(config_path, "r") as f:
         return json.load(f)
 
-def format_stats_line(y_pos, label, value, is_recent_act=False, prefix_len=14, start_x=25):
+def format_stats_line(y_pos, label, value, is_recent_act=False, prefix_len=16, start_x=25):
     """
     Formats a single monospace line with dotted alignment.
     """
@@ -34,8 +34,8 @@ def format_stats_line(y_pos, label, value, is_recent_act=False, prefix_len=14, s
         dots_count = 1
     dots = "." * dots_count
     
-    # Total right side columns available ~45 characters
-    max_val_len = 45 - prefix_len
+    # Since the card is 640px wide, we have ~75 characters total columns
+    max_val_len = 75 - prefix_len
     display_val = str(value)
     if len(display_val) > max_val_len:
         display_val = display_val[:max_val_len - 3] + "..."
@@ -58,7 +58,8 @@ def format_stats_section_header(y_pos, title, start_x=25):
     Formats a terminal section divider, e.g., - Contact -----------------
     """
     title_text = f"─ {title} "
-    remaining_len = 38 - len(title_text)
+    # Wider container means ~72 dashes total columns
+    remaining_len = 72 - len(title_text)
     if remaining_len < 1:
         remaining_len = 1
     line = "─" * remaining_len
@@ -133,10 +134,10 @@ def generate_stats_svg(stats: dict, config: dict):
         svg_elements.append(format_stats_line(TopLang_y, "Top Lang", lang_display))
         
         progress_bar_g = ['  <!-- Progress Bar -->']
-        progress_bar_g.append(f'  <rect class="progress-bg" x="150" y="{bar_y}" width="160" height="5" rx="2.5" />')
+        progress_bar_g.append(f'  <rect class="progress-bg" x="150" y="{bar_y}" width="250" height="5" rx="2.5" />')
         current_x = 150
         for lang in stats["top_languages"][:4]:
-            width = (lang["percentage"] / 100.0) * 160
+            width = (lang["percentage"] / 100.0) * 250
             color = lang["color"]
             progress_bar_g.append(f'  <rect x="{current_x}" y="{bar_y}" width="{width:.1f}" height="5" rx="1.5" fill="{color}" />')
             current_x += width
@@ -155,7 +156,7 @@ def generate_stats_svg(stats: dict, config: dict):
     Last Updated: {stats['last_updated']} (auto-updated every 12h)
   </text>""")
 
-    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 320" width="100%" height="auto">
+    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" width="100%" height="auto">
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
@@ -210,7 +211,7 @@ def generate_stats_svg(stats: dict, config: dict):
 
   <g class="terminal-card">
     <!-- Window Background -->
-    <rect class="bg-rect" x="10" y="10" width="430" height="300" rx="10" stroke-width="1.5" />
+    <rect class="bg-rect" x="10" y="10" width="620" height="300" rx="10" stroke-width="1.5" />
 
     <!-- Typing Header -->
     <g>
@@ -237,7 +238,7 @@ def generate_stats_svg(stats: dict, config: dict):
 def generate_game_svg():
     print("Generating Standalone Game SVG...")
     
-    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 320" width="100%" height="auto">
+    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 320" width="100%" height="auto">
   <defs>
     <!-- Import beautiful Monospace Font -->
     <style>
@@ -254,12 +255,12 @@ def generate_game_svg():
 
       /* Player Spaceship Movement */
       @keyframes player-move {{
-        0%, 10% {{ transform: translate(225px, 265px); }}       /* Center */
-        15%, 26.6% {{ transform: translate(95px, 265px); }}      /* Left */
-        33.3%, 45% {{ transform: translate(355px, 265px); }}     /* Right */
-        51.6%, 63.3% {{ transform: translate(160px, 265px); }}   /* Mid-Left */
-        70%, 81.6% {{ transform: translate(290px, 265px); }}     /* Mid-Right */
-        90%, 100% {{ transform: translate(225px, 265px); }}      /* Back to Center */
+        0%, 10% {{ transform: translate(100px, 265px); }}       /* Center */
+        15%, 26.6% {{ transform: translate(40px, 265px); }}      /* Left */
+        33.3%, 45% {{ transform: translate(160px, 265px); }}     /* Right */
+        51.6%, 63.3% {{ transform: translate(70px, 265px); }}    /* Mid-Left */
+        70%, 81.6% {{ transform: translate(130px, 265px); }}     /* Mid-Right */
+        90%, 100% {{ transform: translate(100px, 265px); }}      /* Back to Center */
       }}
       
       .player-ship {{
@@ -437,33 +438,33 @@ def generate_game_svg():
 
   <g class="game-card">
     <!-- Game Window Background -->
-    <rect class="bg-rect" x="10" y="10" width="430" height="300" rx="10" stroke-width="1.5" />
+    <rect class="bg-rect" x="10" y="10" width="200" height="300" rx="10" stroke-width="1.5" />
     
     <!-- Starry Space Background (Scrolling Dust) -->
-    <circle class="space-star" cx="80" cy="50" r="1.2">
+    <circle class="space-star" cx="40" cy="50" r="1.2">
       <animate attributeName="cy" from="10" to="310" dur="4s" repeatCount="indefinite" />
     </circle>
-    <circle class="space-star" cx="150" cy="120" r="1.5">
+    <circle class="space-star" cx="70" cy="120" r="1.5">
       <animate attributeName="cy" from="10" to="310" dur="6s" repeatCount="indefinite" />
     </circle>
-    <circle class="space-star" cx="340" cy="70" r="1.2">
+    <circle class="space-star" cx="160" cy="70" r="1.2">
       <animate attributeName="cy" from="10" to="310" dur="5s" repeatCount="indefinite" />
     </circle>
-    <circle class="space-star" cx="210" cy="180" r="1">
+    <circle class="space-star" cx="100" cy="180" r="1">
       <animate attributeName="cy" from="10" to="310" dur="3.5s" repeatCount="indefinite" />
     </circle>
-    <circle class="space-star" cx="110" cy="220" r="1.5">
+    <circle class="space-star" cx="50" cy="220" r="1.5">
       <animate attributeName="cy" from="10" to="310" dur="7s" repeatCount="indefinite" />
     </circle>
-    <circle class="space-star" cx="280" cy="250" r="1">
+    <circle class="space-star" cx="130" cy="250" r="1">
       <animate attributeName="cy" from="10" to="310" dur="4.5s" repeatCount="indefinite" />
     </circle>
 
     <!-- Game Headers & Scoreboard -->
-    <text class="game-title" x="225" y="32" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="800" text-anchor="middle" letter-spacing="1.5">COMMIT INVADERS</text>
+    <text class="game-title" x="110" y="32" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" font-weight="800" text-anchor="middle" letter-spacing="1">COMMIT INVADERS</text>
     
     <!-- Score Labels -->
-    <g transform="translate(30, 24)">
+    <g transform="translate(20, 24)">
       <text class="score-label" x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" font-weight="bold">SCORE</text>
       <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-0" opacity="1">0000</text>
       <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-1" opacity="0">0100</text>
@@ -474,37 +475,37 @@ def generate_game_svg():
     </g>
 
     <!-- Lives Indicator -->
-    <g transform="translate(420, 24)">
+    <g transform="translate(200, 24)">
       <text class="lives-label" x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" font-weight="bold" text-anchor="end">LIVES</text>
       <text class="lives-val" x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" text-anchor="end">💚 💚 💚</text>
     </g>
 
     <!-- Lasers (aligned with timeline) -->
     <!-- Laser 1 -->
-    <g transform="translate(225, 0)">
+    <g transform="translate(100, 0)">
       <rect class="laser-beam laser-1" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
     </g>
     <!-- Laser 2 -->
-    <g transform="translate(95, 0)">
+    <g transform="translate(40, 0)">
       <rect class="laser-beam laser-2" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
     </g>
     <!-- Laser 3 -->
-    <g transform="translate(355, 0)">
+    <g transform="translate(160, 0)">
       <rect class="laser-beam laser-3" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
     </g>
     <!-- Laser 4 -->
-    <g transform="translate(160, 0)">
+    <g transform="translate(70, 0)">
       <rect class="laser-beam laser-4" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
     </g>
     <!-- Laser 5 -->
-    <g transform="translate(290, 0)">
+    <g transform="translate(130, 0)">
       <rect class="laser-beam laser-5" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
     </g>
 
     <!-- Enemies (falling) -->
-    <!-- Enemy 1 at x=225 -->
+    <!-- Enemy 1 at x=100 -->
     <g class="enemy-1" transform="translate(0, 0)">
-      <g transform="translate(225, 0)">
+      <g transform="translate(100, 0)">
         <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
         <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
         <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
@@ -518,9 +519,9 @@ def generate_game_svg():
       </g>
     </g>
 
-    <!-- Enemy 2 at x=95 -->
+    <!-- Enemy 2 at x=40 -->
     <g class="enemy-2" transform="translate(0, 0)">
-      <g transform="translate(95, 0)">
+      <g transform="translate(40, 0)">
         <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
         <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
         <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
@@ -530,9 +531,9 @@ def generate_game_svg():
       </g>
     </g>
 
-    <!-- Enemy 3 at x=355 -->
+    <!-- Enemy 3 at x=160 -->
     <g class="enemy-3" transform="translate(0, 0)">
-      <g transform="translate(355, 0)">
+      <g transform="translate(160, 0)">
         <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
         <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
         <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
@@ -543,9 +544,9 @@ def generate_game_svg():
       </g>
     </g>
 
-    <!-- Enemy 4 at x=160 -->
+    <!-- Enemy 4 at x=70 -->
     <g class="enemy-4" transform="translate(0, 0)">
-      <g transform="translate(160, 0)">
+      <g transform="translate(70, 0)">
         <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
         <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
         <rect x="-22.35" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
@@ -556,9 +557,9 @@ def generate_game_svg():
       </g>
     </g>
 
-    <!-- Enemy 5 at x=290 -->
+    <!-- Enemy 5 at x=130 -->
     <g class="enemy-5" transform="translate(0, 0)">
-      <g transform="translate(290, 0)">
+      <g transform="translate(130, 0)">
         <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
         <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
         <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
@@ -569,36 +570,36 @@ def generate_game_svg():
     </g>
 
     <!-- Explosions (triggered at corresponding hit points) -->
-    <!-- Explosion 1 (at x=225, y=165) -->
-    <g class="exp-1" transform="translate(225, 165)">
+    <!-- Explosion 1 (at x=100, y=165) -->
+    <g class="exp-1" transform="translate(100, 165)">
       <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
       <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
       <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
       <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
     </g>
-    <!-- Explosion 2 (at x=95, y=165) -->
-    <g class="exp-2" transform="translate(95, 165)">
+    <!-- Explosion 2 (at x=40, y=165) -->
+    <g class="exp-2" transform="translate(40, 165)">
       <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
       <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
       <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
       <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
     </g>
-    <!-- Explosion 3 (at x=355, y=165) -->
-    <g class="exp-3" transform="translate(355, 165)">
+    <!-- Explosion 3 (at x=160, y=165) -->
+    <g class="exp-3" transform="translate(160, 165)">
       <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
       <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
       <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
       <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
     </g>
-    <!-- Explosion 4 (at x=160, y=165) -->
-    <g class="exp-4" transform="translate(160, 165)">
+    <!-- Explosion 4 (at x=70, y=165) -->
+    <g class="exp-4" transform="translate(70, 165)">
       <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
       <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
       <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
       <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
     </g>
-    <!-- Explosion 5 (at x=290, y=165) -->
-    <g class="exp-5" transform="translate(290, 165)">
+    <!-- Explosion 5 (at x=130, y=165) -->
+    <g class="exp-5" transform="translate(130, 165)">
       <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
       <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
       <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />

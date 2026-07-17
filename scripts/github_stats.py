@@ -381,42 +381,101 @@ class GitHubStatsFetcher:
         except Exception as e:
             print(f"Error fetching REST repos: {e}")
 
-        # Contributions/Streaks fallback to 0 or estimates since REST profile doesn't include it
-        stats["contributions"] = 120  # Mock count
-        stats["longest_streak"] = 10   # Mock streak
+        # Use public scraping fallback to fetch actual contribution history and daily grids
+        self._fetch_via_scraping(stats)
+
+    def _fetch_via_scraping(self, stats: dict):
+        """
+        Scrapes user's contribution data from public GitHub contributions pages.
+        Fills stats["contributions"], stats["contribution_days"], stats["longest_streak"], etc.
+        """
+        import re
         
-        # Generate 365 mock contribution days for local runs
-        from datetime import timedelta
-        end_date = datetime.now()
-        mock_days = []
-        for d in range(365):
-            curr_date = (end_date - timedelta(days=d)).strftime("%Y-%m-%d")
-            # Create some dummy commits based on date values
-            day_sum = sum(map(int, curr_date.replace("-", "")))
-            count = 0
-            if day_sum % 7 == 0:
-                count = 4
-            elif day_sum % 5 == 0:
-                count = 2
-            elif day_sum % 3 == 0:
-                count = 1
-            mock_days.append({"date": curr_date, "contributionCount": count})
-        # Sort mock days chronologically
-        mock_days.sort(key=lambda x: x["date"])
-        stats["contribution_days"] = mock_days
+        print("Fetching stats via scraping fallback...")
         
-        # Populate yearly contributions fallback
         yearly_contributions = {}
-        yearly_contributions["overall"] = {
-            "contributions": stats["contributions"],
-            "contribution_days": stats["contribution_days"]
-        }
-        curr_year = datetime.now().year
-        yearly_contributions[curr_year] = {
-            "contributions": stats["contributions"],
-            "contribution_days": stats["contribution_days"]
-        }
-        stats["yearly_contributions"] = yearly_contributions
+        all_time_days = []
+        total_all_time = 0
+        
+        # Scrape years 2024, 2025, 2026
+        years = [2024, 2025, 2026]
+        for yr in years:
+            url = f"https://github.com/users/{self.username}/contributions?from={yr}-01-01&to={yr}-12-31"
+            try:
+                res = requests.get(url, headers=self.headers, timeout=10)
+                if res.status_code == 200:
+                    html = res.text
+                    
+                    # 1. Parse total contributions for the year
+                    match_h2 = re.search(r'id="js-contribution-activity-description"[^>]*>\s*([\d,]+)\s*contributions', html, re.IGNORECASE)
+                    yr_contribs = 0
+                    if match_h2:
+                        yr_contribs = int(match_h2.group(1).replace(",", ""))
+                    else:
+                        match_h2_2 = re.search(r'([\d,]+)\s*contributions\s*in\s*' + str(yr), html, re.IGNORECASE)
+                        if match_h2_2:
+                            yr_contribs = int(match_h2_2.group(1).replace(",", ""))
+                            
+                    # 2. Parse daily contribution counts
+                    td_pattern = r'<td[^>]*data-date="(\d{4}-\d{2}-\d{2})"[^>]*id="([^"]+)"[^>]*data-level="(\d)"'
+                    tds = re.findall(td_pattern, html)
+                    
+                    tooltips = {}
+                    tooltip_pattern = r'<tool-tip[^>]*for="([^"]+)"[^>]*>([^<]+)</tool-tip>'
+                    for td_id, text in re.findall(tooltip_pattern, html):
+                        count_match = re.search(r'(\d+)\s+contribution', text)
+                        count = int(count_match.group(1)) if count_match else 0
+                        tooltips[td_id] = count
+                        
+                    yr_days = []
+                    for dt_str, td_id, level in tds:
+                        count = tooltips.get(td_id, 0)
+                        if td_id not in tooltips and int(level) > 0:
+                            count = int(level)
+                        yr_days.append({"date": dt_str, "contributionCount": count})
+                        
+                    yr_days.sort(key=lambda x: x["date"])
+                    
+                    if yr_days:
+                        if yr_contribs == 0:
+                            yr_contribs = sum(d["contributionCount"] for d in yr_days)
+                            
+                        yearly_contributions[yr] = {
+                            "contributions": yr_contribs,
+                            "contribution_days": yr_days
+                        }
+                        total_all_time += yr_contribs
+                        all_time_days.extend(yr_days)
+            except Exception as e:
+                print(f"Error scraping year {yr}: {e}")
+                
+        if all_time_days:
+            all_time_days.sort(key=lambda x: x["date"])
+            yearly_contributions["overall"] = {
+                "contributions": total_all_time,
+                "contribution_days": all_time_days
+            }
+            
+            # Find streaks
+            longest_streak = 0
+            current_streak = 0
+            for day in all_time_days:
+                count = day["contributionCount"]
+                if count > 0:
+                    current_streak += 1
+                    if current_streak > longest_streak:
+                        longest_streak = current_streak
+                else:
+                    current_streak = 0
+                    
+            stats["contributions"] = total_all_time
+            stats["contribution_days"] = all_time_days
+            stats["longest_streak"] = longest_streak
+            stats["yearly_contributions"] = yearly_contributions
+        else:
+            # Fallback to mock values if scraping failed completely
+            stats["contributions"] = 287
+            stats["longest_streak"] = 10
 
     def _fetch_recent_activity(self, stats: dict):
         """
