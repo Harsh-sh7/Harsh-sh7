@@ -62,7 +62,7 @@
   <text x="25" y="102.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
     <tspan fill="#f97316">Focus</tspan>
     <tspan fill="#4b5563">: ....... </tspan>
-    <tspan fill="#38bdf8">Advanced Agentic AI & System...</tspan>
+    <tspan fill="#38bdf8">Advanced Agentic AI &amp; System...</tspan>
   </text>
   <text x="25" y="120.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="700">
     <tspan fill="#9ca3af">─ Technical Profile </tspan>
@@ -90,7 +90,7 @@
   <text x="25" y="192.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
     <tspan fill="#f97316">Repos</tspan>
     <tspan fill="#4b5563">: ....... </tspan>
-    <tspan fill="#38bdf8">31 public repos</tspan>
+    <tspan fill="#38bdf8">33 public repos</tspan>
   </text>
   <text x="25" y="205.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
     <tspan fill="#f97316">Followers</tspan>
@@ -100,19 +100,19 @@
   <text x="25" y="219.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
     <tspan fill="#f97316">Activity</tspan>
     <tspan fill="#4b5563">: .... </tspan>
-    <tspan fill="#38bdf8">207 contributions | Streak: 5d</tspan>
+    <tspan fill="#38bdf8">120 contributions | Streak: 10d</tspan>
   </text>
   <text x="25" y="232.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
     <tspan fill="#f97316">Top Lang</tspan>
     <tspan fill="#4b5563">: .... </tspan>
-    <tspan fill="#38bdf8">Jupyter Notebook, TypeScript...</tspan>
+    <tspan fill="#38bdf8">JavaScript, TypeScript, Python</tspan>
   </text>
   <!-- Progress Bar -->
   <rect x="150" y="239.5" width="160" height="5" rx="2.5" fill="#1f2937" />
-  <rect x="150" y="239.5" width="92.5" height="5" rx="1.5" fill="#DA5B0B" />
-  <rect x="242.48" y="239.5" width="34.7" height="5" rx="1.5" fill="#3178c6" />
-  <rect x="277.2" y="239.5" width="21.3" height="5" rx="1.5" fill="#f1e05a" />
-  <rect x="298.48" y="239.5" width="7.4" height="5" rx="1.5" fill="#3572A5" />
+  <rect x="150" y="239.5" width="67.0" height="5" rx="1.5" fill="#38bdf8" />
+  <rect x="217.04" y="239.5" width="41.3" height="5" rx="1.5" fill="#38bdf8" />
+  <rect x="258.32" y="239.5" width="20.6" height="5" rx="1.5" fill="#38bdf8" />
+  <rect x="278.96" y="239.5" width="15.5" height="5" rx="1.5" fill="#38bdf8" />
   <text x="25" y="257.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="700">
     <tspan fill="#9ca3af">─ Recent Activity </tspan>
     <tspan fill="#1f2937">────────────────────</tspan>
@@ -129,7 +129,7 @@
   </text>
   <!-- Bottom Timestamp -->
   <text x="25" y="295" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" fill="#4b5563" font-weight="bold">
-    Last Updated: 2026-07-17 06:32:49 (auto-updated every 12h)
+    Last Updated: 2026-07-17 12:05:54 (auto-updated every 12h)
   </text>
   </g>
 </svg>

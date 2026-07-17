@@ -40,10 +40,14 @@ def format_stats_line(y_pos, label, value, label_color="#f97316", dot_color="#4b
     if len(display_val) > max_val_len:
         display_val = display_val[:max_val_len - 3] + "..."
         
+    # XML Escape to prevent parser crashes on characters like &, <, >
+    escaped_val = display_val.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    escaped_label = label.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+    
     return f"""  <text x="{start_x}" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
-    <tspan fill="{label_color}">{label}</tspan>
+    <tspan fill="{label_color}">{escaped_label}</tspan>
     <tspan fill="{dot_color}">: {dots} </tspan>
-    <tspan fill="{value_color}">{display_val}</tspan>
+    <tspan fill="{value_color}">{escaped_val}</tspan>
   </text>"""
 
 def format_stats_section_header(y_pos, title, line_color="#1f2937", text_color="#9ca3af", start_x=25):
