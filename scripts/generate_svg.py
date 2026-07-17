@@ -71,23 +71,197 @@ def generate_svg():
     # Header buttons & macOS terminal style
     svg_elements = []
     
-    # 1. Left Side Contribution Grid Portrait
-    contrib_svg_rects = ["  <!-- Left Side Contribution Grid Portrait -->"]
-    tile_size = 7.5
-    tile_gap = 1.8
-    x_start = 45.5
-    y_start_contrib = 86.0
-    
-    for y_idx, row in enumerate(contrib_grid):
-        for x_idx, color in enumerate(row):
-            cx = x_start + x_idx * (tile_size + tile_gap)
-            cy = y_start_contrib + y_idx * (tile_size + tile_gap)
-            contrib_svg_rects.append(
-                f'  <rect class="contrib-tile" x="{cx:.2f}" y="{cy:.2f}" width="{tile_size}" height="{tile_size}" rx="1.5" ry="1.5" fill="{color}" />'
-            )
-            
-    contrib_text_block = "\n".join(contrib_svg_rects)
-    svg_elements.append(contrib_text_block)
+    # 1. Left Side Retro Game Loop instead of static contribution grid
+    game_loop_elements = """  <!-- Left Side Commit Invaders Retro Game Card -->
+  <!-- Game Bounding Box -->
+  <rect x="40" y="58" width="288" height="428" rx="8" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+  
+  <!-- Starry Space Background (Scrolling Dust) -->
+  <circle cx="80" cy="70" r="1.2" fill="#4b5563" opacity="0.5">
+    <animate attributeName="cy" from="58" to="486" dur="4s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="150" cy="150" r="1.5" fill="#34d399" opacity="0.3">
+    <animate attributeName="cy" from="58" to="486" dur="6s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="280" cy="90" r="1.2" fill="#4b5563" opacity="0.4">
+    <animate attributeName="cy" from="58" to="486" dur="5s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="210" cy="220" r="1" fill="#9ca3af" opacity="0.6">
+    <animate attributeName="cy" from="58" to="486" dur="3.5s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="110" cy="300" r="1.5" fill="#26a641" opacity="0.2">
+    <animate attributeName="cy" from="58" to="486" dur="7s" repeatCount="indefinite" />
+  </circle>
+  <circle cx="250" cy="350" r="1" fill="#4b5563" opacity="0.5">
+    <animate attributeName="cy" from="58" to="486" dur="4.5s" repeatCount="indefinite" />
+  </circle>
+
+  <!-- Game Headers & Scoreboard -->
+  <text x="184" y="78" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#374151" font-weight="800" text-anchor="middle" letter-spacing="1.5">COMMIT INVADERS</text>
+  
+  <!-- Score Labels -->
+  <g transform="translate(50, 80)">
+    <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8" fill="#4b5563" font-weight="bold">SCORE</text>
+    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-0" opacity="1">0000</text>
+    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-1" opacity="0">0100</text>
+    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-2" opacity="0">0250</text>
+    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-3" opacity="0">0450</text>
+    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-4" opacity="0">0700</text>
+    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-5" opacity="0">1000</text>
+  </g>
+
+  <!-- Lives Indicator -->
+  <g transform="translate(260, 80)">
+    <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8" fill="#4b5563" font-weight="bold" text-anchor="middle">LIVES</text>
+    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#ef4444" text-anchor="middle">💚 💚 💚</text>
+  </g>
+
+  <!-- Lasers (aligned with timeline) -->
+  <!-- Laser 1 -->
+  <g transform="translate(184, 0)">
+    <rect class="laser-beam laser-1" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+  </g>
+  <!-- Laser 2 -->
+  <g transform="translate(80, 0)">
+    <rect class="laser-beam laser-2" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+  </g>
+  <!-- Laser 3 -->
+  <g transform="translate(280, 0)">
+    <rect class="laser-beam laser-3" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+  </g>
+  <!-- Laser 4 -->
+  <g transform="translate(130, 0)">
+    <rect class="laser-beam laser-4" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+  </g>
+  <!-- Laser 5 -->
+  <g transform="translate(230, 0)">
+    <rect class="laser-beam laser-5" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+  </g>
+
+  <!-- Enemies (falling) -->
+  <!-- Enemy 1 at x=184 -->
+  <g class="enemy-1" transform="translate(0, 0)">
+    <g transform="translate(184, 0)">
+      <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="-22.35" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+      <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+      <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+      <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+      <rect x="14.85" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+      <rect x="-22.35" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
+      <rect x="14.85" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
+    </g>
+  </g>
+
+  <!-- Enemy 2 at x=80 -->
+  <g class="enemy-2" transform="translate(0, 0)">
+    <g transform="translate(80, 0)">
+      <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+      <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+      <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="-3.75" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+    </g>
+  </g>
+
+  <!-- Enemy 3 at x=280 -->
+  <g class="enemy-3" transform="translate(0, 0)">
+    <g transform="translate(280, 0)">
+      <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+      <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+      <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+      <rect x="-22.35" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
+      <rect x="14.85" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
+      <rect x="-13.05" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+      <rect x="5.55" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+    </g>
+  </g>
+
+  <!-- Enemy 4 at x=130 -->
+  <g class="enemy-4" transform="translate(0, 0)">
+    <g transform="translate(130, 0)">
+      <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+      <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+      <rect x="-22.35" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="14.85" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="-13.05" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
+      <rect x="5.55" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
+    </g>
+  </g>
+
+  <!-- Enemy 5 at x=230 -->
+  <g class="enemy-5" transform="translate(0, 0)">
+    <g transform="translate(230, 0)">
+      <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+      <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+      <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+      <rect x="-22.35" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+      <rect x="14.85" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+    </g>
+  </g>
+
+  <!-- Explosions (triggered at corresponding hit points) -->
+  <!-- Explosion 1 (at x=184, y=210) -->
+  <g class="exp-1" transform="translate(184, 210)">
+    <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+    <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+    <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+    <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+  </g>
+  <!-- Explosion 2 (at x=80, y=210) -->
+  <g class="exp-2" transform="translate(80, 210)">
+    <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+    <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+    <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
+    <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+  </g>
+  <!-- Explosion 3 (at x=280, y=210) -->
+  <g class="exp-3" transform="translate(280, 210)">
+    <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+    <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
+    <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+    <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+  </g>
+  <!-- Explosion 4 (at x=130, y=210) -->
+  <g class="exp-4" transform="translate(130, 210)">
+    <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+    <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+    <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
+    <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+  </g>
+  <!-- Explosion 5 (at x=230, y=210) -->
+  <g class="exp-5" transform="translate(230, 210)">
+    <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+    <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+    <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+    <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+  </g>
+
+  <!-- Player Ship (moving) -->
+  <g class="player-ship">
+    <!-- Center of the ship is at (0, 0), animated via translate in player-move keyframe -->
+    <!-- Row 0 (top tip) -->
+    <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#39d353" />
+    <!-- Row 1 -->
+    <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
+    <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#39d353" />
+    <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
+    <!-- Row 2 -->
+    <rect x="-22.35" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#006d32" />
+    <rect x="-13.05" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
+    <rect x="-3.75" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#39d353" />
+    <rect x="5.55" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
+    <rect x="14.85" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#006d32" />
+    <!-- Row 3 (wings) -->
+    <rect x="-22.35" y="14.85" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#0e4429" />
+    <rect x="14.85" y="14.85" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#0e4429" />
+  </g>"""
+    svg_elements.append(game_loop_elements)
 
     # 2. Right Side Info Panel
     # Typing username header
@@ -201,22 +375,150 @@ def generate_svg():
         animation: fadeIn 0.8s ease-out;
       }}
       
-      .contrib-tile {{
-        transition: transform 0.15s ease, fill 0.15s ease;
-        transform-box: fill-box;
-        transform-origin: center;
-      }}
-      
-      .contrib-tile:hover {{
-        transform: scale(1.3);
-        fill: #38bdf8; /* Sky blue highlight on hover */
-        cursor: pointer;
-      }}
-      
       @keyframes fadeIn {{
         from {{ opacity: 0; transform: translateY(10px); }}
         to {{ opacity: 1; transform: translateY(0); }}
       }}
+
+      /* ======================================================== */
+      /* Retro Arcade Commit Invaders Game Styles                  */
+      /* ======================================================== */
+      
+      /* Player Spaceship Movement */
+      @keyframes player-move {{
+        0%, 10% {{ transform: translate(184px, 420px); }}       /* Center */
+        15%, 26.6% {{ transform: translate(80px, 420px); }}      /* Left */
+        33.3%, 45% {{ transform: translate(280px, 420px); }}     /* Right */
+        51.6%, 63.3% {{ transform: translate(130px, 420px); }}   /* Mid-Left */
+        70%, 81.6% {{ transform: translate(230px, 420px); }}     /* Mid-Right */
+        90%, 100% {{ transform: translate(184px, 420px); }}      /* Back to Center */
+      }}
+      
+      .player-ship {{
+        animation: player-move 6s infinite ease-in-out;
+        transform-box: fill-box;
+        transform-origin: center;
+      }}
+
+      /* Laser Shooting Animation */
+      @keyframes shoot-laser {{
+        0% {{ transform: translateY(410px); opacity: 0; }}
+        0.1% {{ transform: translateY(410px); opacity: 1; }}
+        3.3% {{ transform: translateY(210px); opacity: 1; }}
+        3.4%, 100% {{ transform: translateY(210px); opacity: 0; }}
+      }}
+
+      .laser-beam {{
+        animation: shoot-laser 6s infinite linear;
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: bottom center;
+      }}
+      .laser-1 {{ animation-delay: 0.2s; }}
+      .laser-2 {{ animation-delay: 1.1s; }}
+      .laser-3 {{ animation-delay: 2.2s; }}
+      .laser-4 {{ animation-delay: 3.3s; }}
+      .laser-5 {{ animation-delay: 4.4s; }}
+
+      /* Enemy Falling Animations - Continuous, Staggered Flow */
+      @keyframes fall-e1 {{
+        0% {{ transform: translateY(160px); opacity: 1; }}
+        6.7% {{ transform: translateY(210px); opacity: 1; }}
+        6.8% {{ transform: translateY(210px); opacity: 0; }}
+        93.2% {{ transform: translateY(110px); opacity: 0; }}
+        93.3% {{ transform: translateY(110px); opacity: 1; }}
+        100% {{ transform: translateY(160px); opacity: 1; }}
+      }}
+      @keyframes fall-e2 {{
+        0%, 8.2% {{ transform: translateY(110px); opacity: 0; }}
+        8.3% {{ transform: translateY(110px); opacity: 1; }}
+        21.7% {{ transform: translateY(210px); opacity: 1; }}
+        21.8%, 100% {{ transform: translateY(210px); opacity: 0; }}
+      }}
+      @keyframes fall-e3 {{
+        0%, 26.6% {{ transform: translateY(110px); opacity: 0; }}
+        26.7% {{ transform: translateY(110px); opacity: 1; }}
+        40.0% {{ transform: translateY(210px); opacity: 1; }}
+        40.1%, 100% {{ transform: translateY(210px); opacity: 0; }}
+      }}
+      @keyframes fall-e4 {{
+        0%, 44.9% {{ transform: translateY(110px); opacity: 0; }}
+        45.0% {{ transform: translateY(110px); opacity: 1; }}
+        58.3% {{ transform: translateY(210px); opacity: 1; }}
+        58.4%, 100% {{ transform: translateY(210px); opacity: 0; }}
+      }}
+      @keyframes fall-e5 {{
+        0%, 63.2% {{ transform: translateY(110px); opacity: 0; }}
+        63.3% {{ transform: translateY(110px); opacity: 1; }}
+        76.7% {{ transform: translateY(210px); opacity: 1; }}
+        76.8%, 100% {{ transform: translateY(210px); opacity: 0; }}
+      }}
+
+      .enemy-1 {{ animation: fall-e1 6s infinite linear; transform-box: fill-box; transform-origin: center; }}
+      .enemy-2 {{ animation: fall-e2 6s infinite linear; transform-box: fill-box; transform-origin: center; }}
+      .enemy-3 {{ animation: fall-e3 6s infinite linear; transform-box: fill-box; transform-origin: center; }}
+      .enemy-4 {{ animation: fall-e4 6s infinite linear; transform-box: fill-box; transform-origin: center; }}
+      .enemy-5 {{ animation: fall-e5 6s infinite linear; transform-box: fill-box; transform-origin: center; }}
+
+      /* Explosion Particle Animations */
+      @keyframes part-ul {{
+        0% {{ transform: translate(0, 0); opacity: 0; }}
+        0.1% {{ transform: translate(0, 0); opacity: 1; }}
+        5.0% {{ transform: translate(-15px, -15px); opacity: 0; }}
+        100% {{ transform: translate(-15px, -15px); opacity: 0; }}
+      }}
+      @keyframes part-ur {{
+        0% {{ transform: translate(0, 0); opacity: 0; }}
+        0.1% {{ transform: translate(0, 0); opacity: 1; }}
+        5.0% {{ transform: translate(15px, -15px); opacity: 0; }}
+        100% {{ transform: translate(15px, -15px); opacity: 0; }}
+      }}
+      @keyframes part-dl {{
+        0% {{ transform: translate(0, 0); opacity: 0; }}
+        0.1% {{ transform: translate(0, 0); opacity: 1; }}
+        5.0% {{ transform: translate(-15px, 15px); opacity: 0; }}
+        100% {{ transform: translate(-15px, 15px); opacity: 0; }}
+      }}
+      @keyframes part-dr {{
+        0% {{ transform: translate(0, 0); opacity: 0; }}
+        0.1% {{ transform: translate(0, 0); opacity: 1; }}
+        5.0% {{ transform: translate(15px, 15px); opacity: 0; }}
+        100% {{ transform: translate(15px, 15px); opacity: 0; }}
+      }}
+
+      .particle {{
+        animation-duration: 6s;
+        animation-iteration-count: infinite;
+        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        opacity: 0;
+        transform-box: fill-box;
+        transform-origin: center;
+      }}
+      .p-ul {{ animation-name: part-ul; }}
+      .p-ur {{ animation-name: part-ur; }}
+      .p-dl {{ animation-name: part-dl; }}
+      .p-dr {{ animation-name: part-dr; }}
+
+      .exp-1 .particle {{ animation-delay: 0.4s; }}
+      .exp-2 .particle {{ animation-delay: 1.3s; }}
+      .exp-3 .particle {{ animation-delay: 2.4s; }}
+      .exp-4 .particle {{ animation-delay: 3.5s; }}
+      .exp-5 .particle {{ animation-delay: 4.6s; }}
+
+      /* Scoreboard Digital Count Up */
+      @keyframes score-0 {{ 0%, 6.7% {{ opacity: 1; }} 6.8%, 100% {{ opacity: 0; }} }}
+      @keyframes score-1 {{ 0%, 6.7% {{ opacity: 0; }} 6.8%, 21.7% {{ opacity: 1; }} 21.8%, 100% {{ opacity: 0; }} }}
+      @keyframes score-2 {{ 0%, 21.7% {{ opacity: 0; }} 21.8%, 40.0% {{ opacity: 1; }} 40.1%, 100% {{ opacity: 0; }} }}
+      @keyframes score-3 {{ 0%, 40.0% {{ opacity: 0; }} 40.1%, 58.3% {{ opacity: 1; }} 58.4%, 100% {{ opacity: 0; }} }}
+      @keyframes score-4 {{ 0%, 58.3% {{ opacity: 0; }} 58.4%, 76.7% {{ opacity: 1; }} 76.8%, 100% {{ opacity: 0; }} }}
+      @keyframes score-5 {{ 0%, 76.7% {{ opacity: 0; }} 76.8%, 100% {{ opacity: 1; }} }}
+
+      .score-0 {{ animation: score-0 6s infinite step-end; }}
+      .score-1 {{ animation: score-1 6s infinite step-end; }}
+      .score-2 {{ animation: score-2 6s infinite step-end; }}
+      .score-3 {{ animation: score-3 6s infinite step-end; }}
+      .score-4 {{ animation: score-4 6s infinite step-end; }}
+      .score-5 {{ animation: score-5 6s infinite step-end; }}
     </style>
     
     <!-- Typing Animation Clip Path -->
