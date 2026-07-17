@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import os
 import json
 import math
@@ -6,12 +7,24 @@ from datetime import datetime
 from avatar_to_ascii import download_avatar, image_to_contrib_grid
 from github_stats import GitHubStatsFetcher
 
+# Default tree leaf weight constants
+DEFAULT_LEAF_WEIGHTS = {1: 0.35, 2: 0.30, 3: 0.20, 4: 0.15}
+PALETTE = {
+    1: "#9be9a8",
+    2: "#40c463",
+    3: "#30a14e",
+    4: "#216e39",
+}
+SQUARE = 9
+GAP = 3
+CORNER_RADIUS = 2
+
 def load_config() -> dict:
     config_path = os.path.join(os.path.dirname(__file__), "..", "config.json")
     with open(config_path, "r") as f:
         return json.load(f)
 
-def format_line(y_pos, label, value, label_color="#f97316", dot_color="#4b5563", value_color="#38bdf8", prefix_len=18):
+def format_stats_line(y_pos, label, value, label_color="#f97316", dot_color="#4b5563", value_color="#38bdf8", prefix_len=14, start_x=25):
     """
     Formats a single monospace line with dotted alignment.
     """
@@ -20,359 +33,176 @@ def format_line(y_pos, label, value, label_color="#f97316", dot_color="#4b5563",
         dots_count = 1
     dots = "." * dots_count
     
-    # Total right side columns available ~48 characters (to fit x=360 to x=850 at font-size 12)
-    max_val_len = 65 - prefix_len - 2
+    # Total right side columns available ~45 characters
+    max_val_len = 45 - prefix_len
     display_val = str(value)
     if len(display_val) > max_val_len:
         display_val = display_val[:max_val_len - 3] + "..."
         
-    return f"""  <text x="360" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12.5" font-weight="500">
+    return f"""  <text x="{start_x}" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
     <tspan fill="{label_color}">{label}</tspan>
     <tspan fill="{dot_color}">: {dots} </tspan>
     <tspan fill="{value_color}">{display_val}</tspan>
   </text>"""
 
-def format_section_header(y_pos, title, line_color="#1f2937", text_color="#9ca3af"):
+def format_stats_section_header(y_pos, title, line_color="#1f2937", text_color="#9ca3af", start_x=25):
     """
     Formats a terminal section divider, e.g., - Contact -----------------
     """
     title_text = f"─ {title} "
-    # Right panel width at font-size 12 is about 60 chars
-    remaining_len = 54 - len(title_text)
+    remaining_len = 38 - len(title_text)
     if remaining_len < 1:
         remaining_len = 1
     line = "─" * remaining_len
-    return f"""  <text x="360" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11.5" font-weight="700">
+    return f"""  <text x="{start_x}" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="700">
     <tspan fill="{text_color}">{title_text}</tspan>
     <tspan fill="{line_color}">{line}</tspan>
   </text>"""
 
-def generate_svg():
-    print("Loading configurations...")
-    config = load_config()
-    username = config["github_username"]
+def generate_stats_svg(stats: dict, config: dict):
+    print("Generating Standalone Stats SVG...")
     
-    print(f"Fetching GitHub stats for {username}...")
-    stats_fetcher = GitHubStatsFetcher(username)
-    stats = stats_fetcher.fetch_all_stats()
-    
-    print("Generating Contribution Grid avatar...")
-    avatar_img = download_avatar(username)
-    # Target size: 30 columns x 40 rows for contribution grid
-    contrib_grid = image_to_contrib_grid(avatar_img, width=30, height=40)
-
+    username = stats["name"]
     # Calculate typing animation widths
     typed_text = f"{username}@macos:~"
-    char_width = 7.8  # Approx width of a monospace char at font-size 13
+    char_width = 7.8
     text_width = len(typed_text) * char_width
-    cursor_start_x = 360
-    cursor_end_x = 360 + text_width + 4
- 
-    print("Compiling SVG content...")
-    # Header buttons & macOS terminal style
+    cursor_start_x = 25
+    cursor_end_x = 25 + text_width + 4
+    
     svg_elements = []
     
-    # 1. Left Side Retro Game Loop instead of static contribution grid
-    game_loop_elements = """  <!-- Left Side Commit Invaders Retro Game Card -->
-  <!-- Game Bounding Box -->
-  <rect x="40" y="58" width="288" height="428" rx="8" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
-  
-  <!-- Starry Space Background (Scrolling Dust) -->
-  <circle cx="80" cy="70" r="1.2" fill="#4b5563" opacity="0.5">
-    <animate attributeName="cy" from="58" to="486" dur="4s" repeatCount="indefinite" />
-  </circle>
-  <circle cx="150" cy="150" r="1.5" fill="#34d399" opacity="0.3">
-    <animate attributeName="cy" from="58" to="486" dur="6s" repeatCount="indefinite" />
-  </circle>
-  <circle cx="280" cy="90" r="1.2" fill="#4b5563" opacity="0.4">
-    <animate attributeName="cy" from="58" to="486" dur="5s" repeatCount="indefinite" />
-  </circle>
-  <circle cx="210" cy="220" r="1" fill="#9ca3af" opacity="0.6">
-    <animate attributeName="cy" from="58" to="486" dur="3.5s" repeatCount="indefinite" />
-  </circle>
-  <circle cx="110" cy="300" r="1.5" fill="#26a641" opacity="0.2">
-    <animate attributeName="cy" from="58" to="486" dur="7s" repeatCount="indefinite" />
-  </circle>
-  <circle cx="250" cy="350" r="1" fill="#4b5563" opacity="0.5">
-    <animate attributeName="cy" from="58" to="486" dur="4.5s" repeatCount="indefinite" />
-  </circle>
-
-  <!-- Game Headers & Scoreboard -->
-  <text x="184" y="78" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#374151" font-weight="800" text-anchor="middle" letter-spacing="1.5">COMMIT INVADERS</text>
-  
-  <!-- Score Labels -->
-  <g transform="translate(50, 80)">
-    <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8" fill="#4b5563" font-weight="bold">SCORE</text>
-    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-0" opacity="1">0000</text>
-    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-1" opacity="0">0100</text>
-    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-2" opacity="0">0250</text>
-    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-3" opacity="0">0450</text>
-    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-4" opacity="0">0700</text>
-    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-5" opacity="0">1000</text>
-  </g>
-
-  <!-- Lives Indicator -->
-  <g transform="translate(260, 80)">
-    <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="8" fill="#4b5563" font-weight="bold" text-anchor="middle">LIVES</text>
-    <text x="0" y="14" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#ef4444" text-anchor="middle">💚 💚 💚</text>
-  </g>
-
-  <!-- Lasers (aligned with timeline) -->
-  <!-- Laser 1 -->
-  <g transform="translate(184, 0)">
-    <rect class="laser-beam laser-1" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
-  </g>
-  <!-- Laser 2 -->
-  <g transform="translate(80, 0)">
-    <rect class="laser-beam laser-2" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
-  </g>
-  <!-- Laser 3 -->
-  <g transform="translate(280, 0)">
-    <rect class="laser-beam laser-3" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
-  </g>
-  <!-- Laser 4 -->
-  <g transform="translate(130, 0)">
-    <rect class="laser-beam laser-4" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
-  </g>
-  <!-- Laser 5 -->
-  <g transform="translate(230, 0)">
-    <rect class="laser-beam laser-5" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
-  </g>
-
-  <!-- Enemies (falling) -->
-  <!-- Enemy 1 at x=184 -->
-  <g class="enemy-1" transform="translate(0, 0)">
-    <g transform="translate(184, 0)">
-      <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
-      <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
-      <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
-      <rect x="-22.35" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
-      <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
-      <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
-      <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
-      <rect x="14.85" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
-      <rect x="-22.35" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
-      <rect x="14.85" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
-    </g>
-  </g>
-
-  <!-- Enemy 2 at x=80 -->
-  <g class="enemy-2" transform="translate(0, 0)">
-    <g transform="translate(80, 0)">
-      <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
-      <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
-      <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
-      <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
-      <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
-      <rect x="-3.75" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
-    </g>
-  </g>
-
-  <!-- Enemy 3 at x=280 -->
-  <g class="enemy-3" transform="translate(0, 0)">
-    <g transform="translate(280, 0)">
-      <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
-      <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
-      <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
-      <rect x="-22.35" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
-      <rect x="14.85" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
-      <rect x="-13.05" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
-      <rect x="5.55" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
-    </g>
-  </g>
-
-  <!-- Enemy 4 at x=130 -->
-  <g class="enemy-4" transform="translate(0, 0)">
-    <g transform="translate(130, 0)">
-      <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
-      <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
-      <rect x="-22.35" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
-      <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
-      <rect x="14.85" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
-      <rect x="-13.05" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
-      <rect x="5.55" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
-    </g>
-  </g>
-
-  <!-- Enemy 5 at x=230 -->
-  <g class="enemy-5" transform="translate(0, 0)">
-    <g transform="translate(230, 0)">
-      <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
-      <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
-      <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
-      <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
-      <rect x="-22.35" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
-      <rect x="14.85" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
-    </g>
-  </g>
-
-  <!-- Explosions (triggered at corresponding hit points) -->
-  <!-- Explosion 1 (at x=184, y=210) -->
-  <g class="exp-1" transform="translate(184, 210)">
-    <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
-    <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
-    <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
-    <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
-  </g>
-  <!-- Explosion 2 (at x=80, y=210) -->
-  <g class="exp-2" transform="translate(80, 210)">
-    <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
-    <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
-    <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
-    <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
-  </g>
-  <!-- Explosion 3 (at x=280, y=210) -->
-  <g class="exp-3" transform="translate(280, 210)">
-    <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
-    <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
-    <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
-    <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
-  </g>
-  <!-- Explosion 4 (at x=130, y=210) -->
-  <g class="exp-4" transform="translate(130, 210)">
-    <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
-    <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
-    <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
-    <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
-  </g>
-  <!-- Explosion 5 (at x=230, y=210) -->
-  <g class="exp-5" transform="translate(230, 210)">
-    <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
-    <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
-    <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
-    <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
-  </g>
-
-  <!-- Player Ship (moving) -->
-  <g class="player-ship">
-    <!-- Center of the ship is at (0, 0), animated via translate in player-move keyframe -->
-    <!-- Row 0 (top tip) -->
-    <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#39d353" />
-    <!-- Row 1 -->
-    <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
-    <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#39d353" />
-    <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
-    <!-- Row 2 -->
-    <rect x="-22.35" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#006d32" />
-    <rect x="-13.05" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
-    <rect x="-3.75" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#39d353" />
-    <rect x="5.55" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
-    <rect x="14.85" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#006d32" />
-    <!-- Row 3 (wings) -->
-    <rect x="-22.35" y="14.85" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#0e4429" />
-    <rect x="14.85" y="14.85" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#0e4429" />
-  </g>"""
-    svg_elements.append(game_loop_elements)
-
-    # 2. Right Side Info Panel
-    # Typing username header
-    typing_header = f"""  <!-- Typing Header -->
-  <g clip-path="url(#type-clip)">
-    <text x="360" y="80" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13.5" font-weight="bold">
-      <tspan fill="#34d399">{username}</tspan>
-      <tspan fill="#9ca3af">@macos:~</tspan>
-    </text>
-  </g>
-  
-  <!-- Typing Cursor -->
-  <rect x="{cursor_start_x}" y="66" width="7" height="15" fill="#38bdf8">
-    <animate attributeName="x" from="{cursor_start_x}" to="{cursor_end_x}" dur="1.5s" begin="0.5s" fill="freeze" keyTimes="0; 1" keySplines="0.25, 0.1, 0.25, 1.0" calcMode="spline" />
-    <animate attributeName="opacity" values="1;0;1" dur="0.8s" repeatCount="indefinite" />
-  </rect>"""
-    svg_elements.append(typing_header)
-
-    # Calculate Y-positions dynamically with explicit margins to prevent overlap
-    OS_y = 105
-    Host_y = OS_y + 17.5
-    Editor_y = Host_y + 17.5
-    Location_y = Editor_y + 17.5
-    Portfolio_y = Location_y + 17.5
-    Email_y = Portfolio_y + 17.5
+    # Dynamic positions
+    OS_y = 52
+    Host_y = OS_y + 14
+    Location_y = Host_y + 14
     
-    y_tech_header = Email_y + 24
-    Languages_y = y_tech_header + 17.5
-    Frameworks_y = Languages_y + 17.5
-    Database_y = Frameworks_y + 17.5
-    Tools_y = Database_y + 17.5
+    y_tech_header = Location_y + 20
+    Languages_y = y_tech_header + 14
+    Frameworks_y = Languages_y + 14
+    Database_y = Frameworks_y + 14
     
-    y_stats_header = Tools_y + 24
-    Repos_y = y_stats_header + 17.5
-    Followers_y = Repos_y + 17.5
-    Activity_y = Followers_y + 17.5
-    TopLang_y = Activity_y + 17.5
+    y_stats_header = Database_y + 20
+    Repos_y = y_stats_header + 14
+    Followers_y = Repos_y + 14
+    Activity_y = Followers_y + 14
+    TopLang_y = Activity_y + 14
     bar_y = TopLang_y + 8.5
     
-    y_act_header = bar_y + 22 if stats["top_languages"] else TopLang_y + 24
-    Act1_y = y_act_header + 17.5
-    Act2_y = Act1_y + 17.5
-    Act3_y = Act2_y + 17.5
+    y_act_header = bar_y + 20 if stats["top_languages"] else TopLang_y + 20
+    Act1_y = y_act_header + 14
+    Act2_y = Act1_y + 14
     
     # System Info
-    svg_elements.append(format_line(OS_y, "OS", config["os"]))
-    svg_elements.append(format_line(Host_y, "Host", "MacBook Pro"))
-    svg_elements.append(format_line(Editor_y, "Editor", config["editor"]))
-    svg_elements.append(format_line(Location_y, "Location", config["location"]))
-    svg_elements.append(format_line(Portfolio_y, "Portfolio", config["portfolio"]))
-    svg_elements.append(format_line(Email_y, "Email", config["email"]))
+    svg_elements.append(format_stats_line(OS_y, "OS", config["os"]))
+    svg_elements.append(format_stats_line(Host_y, "Host", "MacBook Pro"))
+    svg_elements.append(format_stats_line(Location_y, "Location", config["location"]))
     
-    # Technical Profile Section
-    svg_elements.append(format_section_header(y_tech_header, "Technical Profile"))
-    svg_elements.append(format_line(Languages_y, "Languages", ", ".join(config["languages"])))
-    svg_elements.append(format_line(Frameworks_y, "Frameworks", ", ".join(config["frameworks"])))
-    svg_elements.append(format_line(Database_y, "Database", ", ".join(config["database"])))
-    svg_elements.append(format_line(Tools_y, "Tools", ", ".join(config["tools"])))
+    # Tech Profile
+    svg_elements.append(format_stats_section_header(y_tech_header, "Technical Profile"))
+    svg_elements.append(format_stats_line(Languages_y, "Languages", ", ".join(config["languages"])))
+    svg_elements.append(format_stats_line(Frameworks_y, "Frameworks", ", ".join(config["frameworks"])))
+    svg_elements.append(format_stats_line(Database_y, "Database", ", ".join(config["database"])))
     
-    # GitHub Stats Section
-    svg_elements.append(format_section_header(y_stats_header, "GitHub Stats"))
-    svg_elements.append(format_line(Repos_y, "Repos", f"{stats['public_repos']} public repos"))
-    svg_elements.append(format_line(Followers_y, "Followers", f"{stats['followers']} | Following: {stats['following']}"))
+    # GitHub Stats
+    svg_elements.append(format_stats_section_header(y_stats_header, "GitHub Stats"))
+    svg_elements.append(format_stats_line(Repos_y, "Repos", f"{stats['public_repos']} public repos"))
+    svg_elements.append(format_stats_line(Followers_y, "Followers", f"{stats['followers']} | Following: {stats['following']}"))
     
     contrib_str = f"{stats['contributions']} contributions"
     if stats["longest_streak"] > 0:
-        contrib_str += f" | Streak: {stats['longest_streak']} days"
-    svg_elements.append(format_line(Activity_y, "Activity", contrib_str))
+        contrib_str += f" | Streak: {stats['longest_streak']}d"
+    svg_elements.append(format_stats_line(Activity_y, "Activity", contrib_str))
     
     # Top Languages Progress Bar
     if stats["top_languages"]:
         lang_names = [lang["name"] for lang in stats["top_languages"][:3]]
         lang_display = ", ".join(lang_names)
-        svg_elements.append(format_line(TopLang_y, "Top Lang", lang_display))
+        svg_elements.append(format_stats_line(TopLang_y, "Top Lang", lang_display))
         
-        # Render the custom multi-colored progress bar
-        progress_bar_g = [f'  <!-- Progress Bar -->']
-        progress_bar_g.append(f'  <rect x="495" y="{bar_y}" width="160" height="5" rx="2.5" fill="#1f2937" />')
-        
-        current_x = 495
+        progress_bar_g = ['  <!-- Progress Bar -->']
+        progress_bar_g.append(f'  <rect x="150" y="{bar_y}" width="160" height="5" rx="2.5" fill="#1f2937" />')
+        current_x = 150
         for lang in stats["top_languages"][:4]:
             width = (lang["percentage"] / 100.0) * 160
             color = lang["color"]
             progress_bar_g.append(f'  <rect x="{current_x}" y="{bar_y}" width="{width:.1f}" height="5" rx="1.5" fill="{color}" />')
             current_x += width
-            
         svg_elements.append("\n".join(progress_bar_g))
-
-    # Recent Activity Section
-    svg_elements.append(format_section_header(y_act_header, "Recent Activity"))
-    act_ys = [Act1_y, Act2_y, Act3_y]
-    for idx, act in enumerate(stats["recent_activity"][:3]):
-        svg_elements.append(format_line(act_ys[idx], f"Act {idx+1}", act, label_color="#60a5fa", value_color="#e5e7eb"))
-
-    # Bottom Update Timestamp
-    y_bottom = 495
+        
+    # Recent Activity
+    svg_elements.append(format_stats_section_header(y_act_header, "Recent Activity"))
+    act_ys = [Act1_y, Act2_y]
+    for idx, act in enumerate(stats["recent_activity"][:2]):
+        svg_elements.append(format_stats_line(act_ys[idx], f"Act {idx+1}", act, label_color="#60a5fa", value_color="#e5e7eb"))
+        
+    # Timestamp
+    y_bottom = 295
     svg_elements.append(f"""  <!-- Bottom Timestamp -->
-  <text x="360" y="{y_bottom}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">
+  <text x="25" y="{y_bottom}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" fill="#4b5563" font-weight="bold">
     Last Updated: {stats['last_updated']} (auto-updated every 12h)
   </text>""")
 
-    # Combine into full SVG template
-    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="100%" height="auto">
+    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 320" width="100%" height="auto">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
+      
+      .terminal-card {{
+        animation: fadeIn 0.8s ease-out;
+      }}
+      
+      @keyframes fadeIn {{
+        from {{ opacity: 0; transform: translateY(10px); }}
+        to {{ opacity: 1; transform: translateY(0); }}
+      }}
+    </style>
+    
+    <!-- Typing Animation Clip Path -->
+    <clipPath id="type-clip">
+      <rect x="25" y="20" width="0" height="30">
+        <animate attributeName="width" from="0" to="{cursor_end_x - 25}" dur="1.5s" begin="0.5s" fill="freeze" keyTimes="0; 1" keySplines="0.25, 0.1, 0.25, 1.0" calcMode="spline" />
+      </rect>
+    </clipPath>
+  </defs>
+
+  <g class="terminal-card">
+    <!-- Window Background (Premium Deep Dark) -->
+    <rect x="10" y="10" width="430" height="300" rx="10" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+
+    <!-- Typing Header -->
+    <g clip-path="url(#type-clip)">
+      <text x="25" y="38" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="bold">
+        <tspan fill="#34d399">{username}</tspan>
+        <tspan fill="#9ca3af">@macos:~</tspan>
+      </text>
+    </g>
+    
+    <!-- Typing Cursor -->
+    <rect x="{cursor_start_x}" y="24" width="7" height="15" fill="#38bdf8">
+      <animate attributeName="x" from="{cursor_start_x}" to="{cursor_end_x}" dur="1.5s" begin="0.5s" fill="freeze" keyTimes="0; 1" keySplines="0.25, 0.1, 0.25, 1.0" calcMode="spline" />
+      <animate attributeName="opacity" values="1;0;1" dur="0.8s" repeatCount="indefinite" />
+    </rect>
+
+{chr(10).join(svg_elements)}
+  </g>
+</svg>"""
+
+    output_path = os.path.join(os.path.dirname(__file__), "..", "assets", "terminal.svg")
+    with open(output_path, "w") as f:
+        f.write(svg_template)
+    print(f"Successfully generated standalone Stats SVG at {output_path}!")
+
+def generate_game_svg():
+    print("Generating Standalone Game SVG...")
+    
+    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 450 320" width="100%" height="auto">
   <defs>
     <!-- Import beautiful Monospace Font -->
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
       
-      .terminal-window {{
-        filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.45));
+      .game-card {{
         animation: fadeIn 0.8s ease-out;
       }}
       
@@ -381,18 +211,14 @@ def generate_svg():
         to {{ opacity: 1; transform: translateY(0); }}
       }}
 
-      /* ======================================================== */
-      /* Retro Arcade Commit Invaders Game Styles                  */
-      /* ======================================================== */
-      
       /* Player Spaceship Movement */
       @keyframes player-move {{
-        0%, 10% {{ transform: translate(184px, 420px); }}       /* Center */
-        15%, 26.6% {{ transform: translate(80px, 420px); }}      /* Left */
-        33.3%, 45% {{ transform: translate(280px, 420px); }}     /* Right */
-        51.6%, 63.3% {{ transform: translate(130px, 420px); }}   /* Mid-Left */
-        70%, 81.6% {{ transform: translate(230px, 420px); }}     /* Mid-Right */
-        90%, 100% {{ transform: translate(184px, 420px); }}      /* Back to Center */
+        0%, 10% {{ transform: translate(225px, 265px); }}       /* Center */
+        15%, 26.6% {{ transform: translate(95px, 265px); }}      /* Left */
+        33.3%, 45% {{ transform: translate(355px, 265px); }}     /* Right */
+        51.6%, 63.3% {{ transform: translate(160px, 265px); }}   /* Mid-Left */
+        70%, 81.6% {{ transform: translate(290px, 265px); }}     /* Mid-Right */
+        90%, 100% {{ transform: translate(225px, 265px); }}      /* Back to Center */
       }}
       
       .player-ship {{
@@ -403,10 +229,10 @@ def generate_svg():
 
       /* Laser Shooting Animation */
       @keyframes shoot-laser {{
-        0% {{ transform: translateY(410px); opacity: 0; }}
-        0.1% {{ transform: translateY(410px); opacity: 1; }}
-        3.3% {{ transform: translateY(210px); opacity: 1; }}
-        3.4%, 100% {{ transform: translateY(210px); opacity: 0; }}
+        0% {{ transform: translateY(255px); opacity: 0; }}
+        0.1% {{ transform: translateY(255px); opacity: 1; }}
+        3.3% {{ transform: translateY(165px); opacity: 1; }}
+        3.4%, 100% {{ transform: translateY(165px); opacity: 0; }}
       }}
 
       .laser-beam {{
@@ -423,36 +249,36 @@ def generate_svg():
 
       /* Enemy Falling Animations - Continuous, Staggered Flow */
       @keyframes fall-e1 {{
-        0% {{ transform: translateY(160px); opacity: 1; }}
-        6.7% {{ transform: translateY(210px); opacity: 1; }}
-        6.8% {{ transform: translateY(210px); opacity: 0; }}
-        93.2% {{ transform: translateY(110px); opacity: 0; }}
-        93.3% {{ transform: translateY(110px); opacity: 1; }}
-        100% {{ transform: translateY(160px); opacity: 1; }}
+        0% {{ transform: translateY(125px); opacity: 1; }}
+        6.7% {{ transform: translateY(165px); opacity: 1; }}
+        6.8% {{ transform: translateY(165px); opacity: 0; }}
+        93.2% {{ transform: translateY(85px); opacity: 0; }}
+        93.3% {{ transform: translateY(85px); opacity: 1; }}
+        100% {{ transform: translateY(125px); opacity: 1; }}
       }}
       @keyframes fall-e2 {{
-        0%, 8.2% {{ transform: translateY(110px); opacity: 0; }}
-        8.3% {{ transform: translateY(110px); opacity: 1; }}
-        21.7% {{ transform: translateY(210px); opacity: 1; }}
-        21.8%, 100% {{ transform: translateY(210px); opacity: 0; }}
+        0%, 8.2% {{ transform: translateY(85px); opacity: 0; }}
+        8.3% {{ transform: translateY(85px); opacity: 1; }}
+        21.7% {{ transform: translateY(165px); opacity: 1; }}
+        21.8%, 100% {{ transform: translateY(165px); opacity: 0; }}
       }}
       @keyframes fall-e3 {{
-        0%, 26.6% {{ transform: translateY(110px); opacity: 0; }}
-        26.7% {{ transform: translateY(110px); opacity: 1; }}
-        40.0% {{ transform: translateY(210px); opacity: 1; }}
-        40.1%, 100% {{ transform: translateY(210px); opacity: 0; }}
+        0%, 26.6% {{ transform: translateY(85px); opacity: 0; }}
+        26.7% {{ transform: translateY(85px); opacity: 1; }}
+        40.0% {{ transform: translateY(165px); opacity: 1; }}
+        40.1%, 100% {{ transform: translateY(165px); opacity: 0; }}
       }}
       @keyframes fall-e4 {{
-        0%, 44.9% {{ transform: translateY(110px); opacity: 0; }}
-        45.0% {{ transform: translateY(110px); opacity: 1; }}
-        58.3% {{ transform: translateY(210px); opacity: 1; }}
-        58.4%, 100% {{ transform: translateY(210px); opacity: 0; }}
+        0%, 44.9% {{ transform: translateY(85px); opacity: 0; }}
+        45.0% {{ transform: translateY(85px); opacity: 1; }}
+        58.3% {{ transform: translateY(165px); opacity: 1; }}
+        58.4%, 100% {{ transform: translateY(165px); opacity: 0; }}
       }}
       @keyframes fall-e5 {{
-        0%, 63.2% {{ transform: translateY(110px); opacity: 0; }}
-        63.3% {{ transform: translateY(110px); opacity: 1; }}
-        76.7% {{ transform: translateY(210px); opacity: 1; }}
-        76.8%, 100% {{ transform: translateY(210px); opacity: 0; }}
+        0%, 63.2% {{ transform: translateY(85px); opacity: 0; }}
+        63.3% {{ transform: translateY(85px); opacity: 1; }}
+        76.7% {{ transform: translateY(165px); opacity: 1; }}
+        76.8%, 100% {{ transform: translateY(165px); opacity: 0; }}
       }}
 
       .enemy-1 {{ animation: fall-e1 6s infinite linear; transform-box: fill-box; transform-origin: center; }}
@@ -521,123 +347,251 @@ def generate_svg():
       .score-4 {{ animation: score-4 6s infinite step-end; }}
       .score-5 {{ animation: score-5 6s infinite step-end; }}
     </style>
-    
-    <!-- Typing Animation Clip Path -->
-    <clipPath id="type-clip">
-      <rect x="360" y="60" width="0" height="30">
-        <animate attributeName="width" from="0" to="{cursor_end_x - 360}" dur="1.5s" begin="0.5s" fill="freeze" keyTimes="0; 1" keySplines="0.25, 0.1, 0.25, 1.0" calcMode="spline" />
-      </rect>
-    </clipPath>
   </defs>
 
-  <g class="terminal-window">
-    <!-- Window Background (Premium Deep Dark) -->
-    <rect x="0" y="0" width="900" height="520" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
-
-    <!-- Window Title Bar -->
-    <path d="M 0,12 A 12,12 0 0,1 12,0 L 888,0 A 12,12 0 0,1 900,12 L 900,42 L 0,42 Z" fill="#111827" />
+  <g class="game-card">
+    <!-- Game Window Background -->
+    <rect x="10" y="10" width="430" height="300" rx="10" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
     
-    <!-- Window Control Buttons (macOS Style) -->
-    <circle cx="25" cy="21" r="6" fill="#ff5f56" />
-    <circle cx="45" cy="21" r="6" fill="#ffbd2e" />
-    <circle cx="65" cy="21" r="6" fill="#27c93f" />
+    <!-- Starry Space Background (Scrolling Dust) -->
+    <circle cx="80" cy="50" r="1.2" fill="#4b5563" opacity="0.5">
+      <animate attributeName="cy" from="10" to="310" dur="4s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="150" cy="120" r="1.5" fill="#34d399" opacity="0.3">
+      <animate attributeName="cy" from="10" to="310" dur="6s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="340" cy="70" r="1.2" fill="#4b5563" opacity="0.4">
+      <animate attributeName="cy" from="10" to="310" dur="5s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="210" cy="180" r="1" fill="#9ca3af" opacity="0.6">
+      <animate attributeName="cy" from="10" to="310" dur="3.5s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="110" cy="220" r="1.5" fill="#26a641" opacity="0.2">
+      <animate attributeName="cy" from="10" to="310" dur="7s" repeatCount="indefinite" />
+    </circle>
+    <circle cx="280" cy="250" r="1" fill="#4b5563" opacity="0.5">
+      <animate attributeName="cy" from="10" to="310" dur="4.5s" repeatCount="indefinite" />
+    </circle>
 
-    <!-- Terminal Title -->
-    <text x="450" y="25" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" text-anchor="middle" font-weight="bold">
-      {username}@macos: ~
-    </text>
+    <!-- Game Headers & Scoreboard -->
+    <text x="225" y="32" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#374151" font-weight="800" text-anchor="middle" letter-spacing="1.5">COMMIT INVADERS</text>
+    
+    <!-- Score Labels -->
+    <g transform="translate(30, 24)">
+      <text x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" fill="#4b5563" font-weight="bold">SCORE</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-0" opacity="1">0000</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-1" opacity="0">0100</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-2" opacity="0">0250</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-3" opacity="0">0450</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-4" opacity="0">0700</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" fill="#34d399" font-weight="bold" class="score-5" opacity="0">1000</text>
+    </g>
 
-    <!-- Title Bar Divider -->
-    <line x1="0" y1="42" x2="900" y2="42" stroke="#1f2937" stroke-width="1" />
+    <!-- Lives Indicator -->
+    <g transform="translate(420, 24)">
+      <text x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" fill="#4b5563" font-weight="bold" text-anchor="end">LIVES</text>
+      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" fill="#ef4444" text-anchor="end">💚 💚 💚</text>
+    </g>
 
-    <!-- Vertical Separator Line (Dashed, Premium look) -->
-    <line x1="335" y1="58" x2="335" y2="502" stroke="#1f2937" stroke-width="1.5" stroke-dasharray="4 4" />
+    <!-- Lasers (aligned with timeline) -->
+    <!-- Laser 1 -->
+    <g transform="translate(225, 0)">
+      <rect class="laser-beam laser-1" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+    </g>
+    <!-- Laser 2 -->
+    <g transform="translate(95, 0)">
+      <rect class="laser-beam laser-2" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+    </g>
+    <!-- Laser 3 -->
+    <g transform="translate(355, 0)">
+      <rect class="laser-beam laser-3" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+    </g>
+    <!-- Laser 4 -->
+    <g transform="translate(160, 0)">
+      <rect class="laser-beam laser-4" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+    </g>
+    <!-- Laser 5 -->
+    <g transform="translate(290, 0)">
+      <rect class="laser-beam laser-5" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+    </g>
 
-    <!-- Rendered SVG elements -->
-{chr(10).join(svg_elements)}
+    <!-- Enemies (falling) -->
+    <!-- Enemy 1 at x=225 -->
+    <g class="enemy-1" transform="translate(0, 0)">
+      <g transform="translate(225, 0)">
+        <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+        <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+        <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+        <rect x="-22.35" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+        <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+        <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+        <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+        <rect x="14.85" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+        <rect x="-22.35" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
+        <rect x="14.85" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
+      </g>
+    </g>
+
+    <!-- Enemy 2 at x=95 -->
+    <g class="enemy-2" transform="translate(0, 0)">
+      <g transform="translate(95, 0)">
+        <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+        <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+        <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+        <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+        <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+        <rect x="-3.75" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+      </g>
+    </g>
+
+    <!-- Enemy 3 at x=355 -->
+    <g class="enemy-3" transform="translate(0, 0)">
+      <g transform="translate(355, 0)">
+        <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+        <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+        <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+        <rect x="-22.35" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
+        <rect x="14.85" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
+        <rect x="-13.05" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+        <rect x="5.55" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+      </g>
+    </g>
+
+    <!-- Enemy 4 at x=160 -->
+    <g class="enemy-4" transform="translate(0, 0)">
+      <g transform="translate(160, 0)">
+        <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+        <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+        <rect x="-22.35" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+        <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+        <rect x="14.85" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+        <rect x="-13.05" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
+        <rect x="5.55" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
+      </g>
+    </g>
+
+    <!-- Enemy 5 at x=290 -->
+    <g class="enemy-5" transform="translate(0, 0)">
+      <g transform="translate(290, 0)">
+        <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+        <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+        <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+        <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+        <rect x="-22.35" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+        <rect x="14.85" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+      </g>
+    </g>
+
+    <!-- Explosions (triggered at corresponding hit points) -->
+    <!-- Explosion 1 (at x=225, y=165) -->
+    <g class="exp-1" transform="translate(225, 165)">
+      <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+      <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+      <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+      <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+    </g>
+    <!-- Explosion 2 (at x=95, y=165) -->
+    <g class="exp-2" transform="translate(95, 165)">
+      <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+      <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+      <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
+      <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+    </g>
+    <!-- Explosion 3 (at x=355, y=165) -->
+    <g class="exp-3" transform="translate(355, 165)">
+      <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+      <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
+      <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+      <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+    </g>
+    <!-- Explosion 4 (at x=160, y=165) -->
+    <g class="exp-4" transform="translate(160, 165)">
+      <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+      <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+      <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
+      <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+    </g>
+    <!-- Explosion 5 (at x=290, y=165) -->
+    <g class="exp-5" transform="translate(290, 165)">
+      <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+      <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+      <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+      <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+    </g>
+
+    <!-- Player Ship (moving) -->
+    <g class="player-ship">
+      <!-- Row 0 (top tip) -->
+      <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#39d353" />
+      <!-- Row 1 -->
+      <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
+      <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#39d353" />
+      <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
+      <!-- Row 2 -->
+      <rect x="-22.35" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#006d32" />
+      <rect x="-13.05" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
+      <rect x="-3.75" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#39d353" />
+      <rect x="5.55" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
+      <rect x="14.85" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#006d32" />
+      <!-- Row 3 (wings) -->
+      <rect x="-22.35" y="14.85" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#0e4429" />
+      <rect x="14.85" y="14.85" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#0e4429" />
+    </g>
   </g>
 </svg>"""
 
-    os.makedirs(os.path.join(os.path.dirname(__file__), "..", "assets"), exist_ok=True)
-    svg_output_path = os.path.join(os.path.dirname(__file__), "..", "assets", "terminal.svg")
-    
-    with open(svg_output_path, "w") as f:
+    output_path = os.path.join(os.path.dirname(__file__), "..", "assets", "game.svg")
+    with open(output_path, "w") as f:
         f.write(svg_template)
+    print(f"Successfully generated standalone Game SVG at {output_path}!")
+
+def compute_streaks_for_days(contribution_days):
+    longest_streak = 0
+    current_streak = 0
+    temp_streak = 0
+    longest_start = None
+    longest_end = None
+    temp_start = None
+    
+    for day in contribution_days:
+        if day["contributionCount"] > 0:
+            if temp_streak == 0:
+                temp_start = day["date"]
+            temp_streak += 1
+            if temp_streak > longest_streak:
+                longest_streak = temp_streak
+                longest_start = temp_start
+                longest_end = day["date"]
+        else:
+            temp_streak = 0
+            
+    for day in reversed(contribution_days):
+        if day["contributionCount"] > 0:
+            current_streak += 1
+        else:
+            break
+            
+    longest_streak_str = ""
+    if longest_streak > 0 and longest_start and longest_end:
+        ls_start = datetime.strptime(longest_start, "%Y-%m-%d").strftime("%b %d")
+        ls_end = datetime.strptime(longest_end, "%Y-%m-%d").strftime("%b %d")
+        longest_streak_str = f"{ls_start} - {ls_end}"
         
-    print(f"Successfully generated responsive terminal SVG at {svg_output_path}!")
-    
-    # Run supplementary retro generators
-    generate_tree_svg(stats, username)
-    generate_retro_badges()
-
-def generate_retro_badges():
-    print("Generating retro CLI social badges...")
-    badges = {
-        "linkedin": ("[ LINKEDIN ]", "#38bdf8"),
-        "email": ("[ EMAIL ]", "#f97316"),
-        "portfolio": ("[ PORTFOLIO ]", "#34d399")
-    }
-    
-    for name, (label, color) in badges.items():
-        svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" width="130" height="28" viewBox="0 0 130 28">
-  <style>
-    .badge-rect {{
-      fill: #0b0f19;
-      stroke: #1f2937;
-      stroke-width: 1.5;
-      transition: all 0.2s ease;
-    }}
-    .badge-rect:hover {{
-      fill: #111827;
-      stroke: {color};
-    }}
-    .badge-text {{
-      font-family: 'JetBrains Mono', 'Fira Code', monospace;
-      font-size: 10.5px;
-      font-weight: bold;
-      fill: {color};
-      text-anchor: middle;
-      dominant-baseline: middle;
-      transition: fill 0.2s ease;
-      cursor: pointer;
-    }}
-    .badge-rect:hover + .badge-text, .badge-text:hover {{
-      fill: #e5e7eb;
-    }}
-  </style>
-  <rect class="badge-rect" x="1.5" y="1.5" width="127" height="25" rx="4" />
-  <text class="badge-text" x="65" y="14">{label}</text>
-</svg>"""
-        output_path = os.path.join(os.path.dirname(__file__), "..", "assets", f"{name}_badge.svg")
-        with open(output_path, "w") as f:
-            f.write(svg_content)
-    print("Generated retro social badges successfully!")
-
-# Default tree leaf weight constants
-DEFAULT_LEAF_WEIGHTS = {1: 0.35, 2: 0.30, 3: 0.20, 4: 0.15}
-PALETTE = {
-    1: "#9be9a8",
-    2: "#40c463",
-    3: "#30a14e",
-    4: "#216e39",
-}
-SQUARE = 9
-GAP = 3
-CORNER_RADIUS = 2
+    return longest_streak, current_streak, longest_streak_str
 
 def size_params(commits: int):
     if commits < 10:
-        depth, base_len, leaf_cap = 3, 60, 40
+        depth, base_len, leaf_cap = 3, 50, 40
     elif commits < 50:
-        depth, base_len, leaf_cap = 4, 75, 140
+        depth, base_len, leaf_cap = 4, 65, 140
     elif commits < 150:
-        depth, base_len, leaf_cap = 5, 90, 320
+        depth, base_len, leaf_cap = 5, 80, 320
     elif commits < 350:
-        depth, base_len, leaf_cap = 6, 100, 550
+        depth, base_len, leaf_cap = 6, 90, 550
     elif commits < 700:
-        depth, base_len, leaf_cap = 7, 108, 800
+        depth, base_len, leaf_cap = 7, 98, 800
     else:
-        depth, base_len, leaf_cap = 8, 115, 1100
+        depth, base_len, leaf_cap = 8, 105, 1100
 
     leaves_total = max(6, min(int(commits * 0.9), leaf_cap))
     return depth, base_len, leaves_total
@@ -730,131 +684,174 @@ def weights_from_days(contribution_days):
     return {k: v / total for k, v in buckets.items()}
 
 def generate_tree_svg(stats: dict, username: str):
-    print("Generating Contribution Tree SVG...")
-    if "contribution_days" not in stats or not stats["contribution_days"]:
-        print("No contribution days found in stats! Skipping generation.")
+    print("Generating Standalone Contribution Tree SVG with Year Toggle...")
+    if "yearly_contributions" not in stats or not stats["yearly_contributions"]:
+        print("No yearly contributions found in stats! Skipping toggle tree generation.")
         return
-
-    # Calculate stats
-    total_commits = stats["contributions"]
-    
-    # Calculate streaks
-    longest_streak = 0
-    temp_streak = 0
-    longest_start = None
-    longest_end = None
-    temp_start = None
-    
-    for day in stats["contribution_days"]:
-        if day["contributionCount"] > 0:
-            if temp_streak == 0:
-                temp_start = day["date"]
-            temp_streak += 1
-            if temp_streak > longest_streak:
-                longest_streak = temp_streak
-                longest_start = temp_start
-                longest_end = day["date"]
-        else:
-            temp_streak = 0
-            
-    current_streak = 0
-    current_start = None
-    current_end = None
-    for day in reversed(stats["contribution_days"]):
-        if day["contributionCount"] > 0:
-            if current_streak == 0:
-                current_end = day["date"]
-            current_streak += 1
-            current_start = day["date"]
-        else:
-            if current_streak > 0:
-                break
-                
-    longest_streak_str = ""
-    if longest_streak > 0 and longest_start and longest_end:
-        ls_start = datetime.strptime(longest_start, "%Y-%m-%d").strftime("%b %d")
-        ls_end = datetime.strptime(longest_end, "%Y-%m-%d").strftime("%b %d")
-        longest_streak_str = f"{ls_start} - {ls_end}"
         
-    current_streak_str = ""
-    if current_streak > 0 and current_start and current_end:
-        cs_start = datetime.strptime(current_start, "%Y-%m-%d").strftime("%b %d")
-        cs_end = datetime.strptime(current_end, "%Y-%m-%d").strftime("%b %d")
-        current_streak_str = f"{cs_start} - {cs_end}"
-
-    # Calculate tree parameters
-    seed = 7
+    yearly_data = stats["yearly_contributions"]
+    
+    # Sort target years in descending order (e.g. overall, 2026, 2025, 2024...)
+    all_keys = list(yearly_data.keys())
+    years = sorted([k for k in all_keys if isinstance(k, int)], reverse=True)
+    all_targets = ["overall"] + [str(y) for y in years]
+    
     width = 900
-    height = 680
-    rng = random.Random(seed)
-    
-    max_depth, base_len, leaves_total = size_params(total_commits)
-    branches, tips = build_branches(max_depth, base_len, seed=seed)
-    
-    ground_y = height - 80
+    height = 585
+    ground_y = height - 70
     origin_x = width / 2
+    seed = 7
     
     def to_canvas(x, y):
         return origin_x + x, ground_y + y
-        
-    rects = []
-    max_branch_depth = max_depth
-    
-    # Branches
-    for (x1, y1, x2, y2, depth) in branches:
-        cx1, cy1 = to_canvas(x1, y1)
-        cx2, cy2 = to_canvas(x2, y2)
-        pts, shade = squares_for_branch(cx1, cy1, cx2, cy2, depth, max_branch_depth, rng)
-        base_delay = depth * 0.12
-        for i, (bx, by) in enumerate(pts):
-            delay = base_delay + i * 0.01
-            rects.append((bx, by, PALETTE[shade], round(delay, 3)))
-            
-    # Leaves
-    weights = weights_from_days(stats["contribution_days"])
-    n_tips = max(1, len(tips))
-    per_tip = max(2, leaves_total // n_tips)
-    leaf_delay_base = max_depth * 0.12 + 0.15
-    
-    for (tx, ty, depth) in tips:
-        cx, cy = to_canvas(tx, ty)
-        radius = 22 + max_depth * 2.2
-        cluster = leaf_cluster(cx, cy, per_tip, radius, rng)
-        for i, (lx, ly) in enumerate(cluster):
-            level = weighted_leaf_level(weights, rng)
-            delay = leaf_delay_base + rng.uniform(0, 0.9)
-            rects.append((lx, ly, PALETTE[level], round(delay, 3)))
-            
-    # Grass
-    grass_rects = []
-    grass_span = width * 0.9
-    n_grass = int(grass_span / (SQUARE + GAP))
-    for i in range(n_grass):
-        gx = (width - grass_span) / 2 + i * (SQUARE + GAP) + rng.uniform(-2, 2)
-        gy = ground_y + rng.uniform(6, 26)
-        level = rng.choice([1, 1, 2, 2, 3])
-        delay = leaf_delay_base + 0.9 + rng.uniform(0, 0.6)
-        grass_rects.append((gx, gy, PALETTE[level], round(delay, 3)))
-        
-    all_rects = rects + grass_rects
-    
-    svg_rects = []
-    for (x, y, color, delay) in all_rects:
-        svg_rects.append(
-            f'<rect class="cell" x="{x - SQUARE/2:.1f}" y="{y - SQUARE/2:.1f}" '
-            f'width="{SQUARE}" height="{SQUARE}" rx="{CORNER_RADIUS}" ry="{CORNER_RADIUS}" '
-            f'fill="{color}" style="animation-delay:{delay}s" />'
-        )
 
-    # Compile the final SVG inside the premium terminal window template
-    svg_tree_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 680" width="100%" height="auto">
+    # Generate tree groups and stats groups for each year
+    svg_trees_markup = []
+    svg_stats_markup = []
+    
+    for key in all_targets:
+        # Resolve data key
+        data_key = int(key) if key.isdigit() else key
+        data = yearly_data[data_key]
+        
+        commits = data["contributions"]
+        days = data["contribution_days"]
+        
+        # Calculate streaks
+        longest, current, streak_str = compute_streaks_for_days(days)
+        
+        # Build tree elements
+        rng = random.Random(seed)
+        max_depth, base_len, leaves_total = size_params(commits)
+        branches, tips = build_branches(max_depth, base_len, seed=seed)
+        
+        rects = []
+        max_branch_depth = max_depth
+        
+        # Branches
+        for (x1, y1, x2, y2, depth) in branches:
+            cx1, cy1 = to_canvas(x1, y1)
+            cx2, cy2 = to_canvas(x2, y2)
+            pts, shade = squares_for_branch(cx1, cy1, cx2, cy2, depth, max_branch_depth, rng)
+            base_delay = depth * 0.12
+            for i, (bx, by) in enumerate(pts):
+                delay = base_delay + i * 0.01
+                rects.append((bx, by, PALETTE[shade], round(delay, 3)))
+                
+        # Leaves
+        weights = weights_from_days(days)
+        n_tips = max(1, len(tips))
+        per_tip = max(2, leaves_total // n_tips)
+        leaf_delay_base = max_depth * 0.12 + 0.15
+        
+        for (tx, ty, depth) in tips:
+            cx, cy = to_canvas(tx, ty)
+            radius = 22 + max_depth * 2.2
+            cluster = leaf_cluster(cx, cy, per_tip, radius, rng)
+            for i, (lx, ly) in enumerate(cluster):
+                level = weighted_leaf_level(weights, rng)
+                delay = leaf_delay_base + rng.uniform(0, 0.9)
+                rects.append((lx, ly, PALETTE[level], round(delay, 3)))
+                
+        # Grass
+        grass_rects = []
+        grass_span = width * 0.85
+        n_grass = int(grass_span / (SQUARE + GAP))
+        for i in range(n_grass):
+            gx = (width - grass_span) / 2 + i * (SQUARE + GAP) + rng.uniform(-2, 2)
+            gy = ground_y + rng.uniform(6, 26)
+            level = rng.choice([1, 1, 2, 2, 3])
+            delay = leaf_delay_base + 0.9 + rng.uniform(0, 0.6)
+            grass_rects.append((gx, gy, PALETTE[level], round(delay, 3)))
+            
+        all_rects = rects + grass_rects
+        
+        svg_rects = []
+        for (x, y, color, delay) in all_rects:
+            svg_rects.append(
+                f'<rect class="cell" x="{x - SQUARE/2:.1f}" y="{y - SQUARE/2:.1f}" '
+                f'width="{SQUARE}" height="{SQUARE}" rx="{CORNER_RADIUS}" ry="{CORNER_RADIUS}" '
+                f'fill="{color}" style="animation-delay:{delay}s" />'
+            )
+            
+        # Compile tree markup
+        svg_trees_markup.append(f"""
+    <!-- Tree and Grass for {key} -->
+    <g class="tree-group tree-{key}-group">
+      {''.join(svg_rects)}
+      <text x="450" y="{height - 20}" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" opacity="0.85">{commits} commits grown 🌱</text>
+    </g>""")
+    
+        # Compile stats markup
+        label_year = "All-Time" if key == "overall" else f"Year {key}"
+        svg_stats_markup.append(f"""
+    <!-- Stats Panel for {key} -->
+    <g class="stats-group stats-{key}-group">
+      <!-- Left Stats Panel -->
+      <g transform="translate(45, 90)">
+        <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#4b5563" font-weight="bold">Longest Streak</text>
+        <text x="0" y="20" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{longest} days</text>
+        <text x="0" y="34" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">{streak_str if streak_str else 'N/A'}</text>
+        
+        <text x="0" y="60" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#4b5563" font-weight="bold">Current Streak</text>
+        <text x="0" y="80" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{current} days</text>
+      </g>
+
+      <!-- Right Stats Panel -->
+      <g transform="translate(670, 90)">
+        <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#4b5563" font-weight="bold">{label_year} Total</text>
+        <text x="0" y="20" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{commits:,} commits</text>
+        <text x="0" y="34" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">Contribution Period</text>
+      </g>
+    </g>""")
+
+    # Render target anchors at top level
+    target_anchors = []
+    for key in all_targets:
+        target_anchors.append(f'<g id="year-{key}" />' if key != "overall" else '<g id="overall" />')
+        
+    # Render tab buttons dynamically
+    tab_buttons = []
+    tab_width = 75
+    tab_gap = 10
+    total_tabs_width = len(all_targets) * tab_width + (len(all_targets) - 1) * tab_gap
+    start_x = width / 2 - total_tabs_width / 2
+    
+    for idx, key in enumerate(all_targets):
+        bx = start_x + idx * (tab_width + tab_gap)
+        label = "Overall" if key == "overall" else key
+        target_href = f"#year-{key}" if key != "overall" else "#overall"
+        tab_buttons.append(f"""
+      <g class="tab-{key}">
+        <a href="{target_href}">
+          <rect class="tab-btn" x="{bx:.1f}" y="30" width="{tab_width}" height="24" rx="4" />
+          <text class="tab-text" x="{bx + tab_width/2:.1f}" y="44">{label}</text>
+        </a>
+      </g>""")
+
+    # CSS Target Toggle logic
+    css_rules = []
+    for key in all_targets:
+        target_id = f"#year-{key}" if key != "overall" else "#overall"
+        css_rules.append(f"""
+      {target_id}:target ~ .tree-card .tree-group {{ display: none; }}
+      {target_id}:target ~ .tree-card .stats-group {{ display: none; }}
+      {target_id}:target ~ .tree-card .tabs-container .tab-btn {{ fill: #111827; stroke: #1f2937; }}
+      {target_id}:target ~ .tree-card .tabs-container .tab-text {{ fill: #9ca3af; }}
+      
+      /* Show targeted */
+      {target_id}:target ~ .tree-card .tree-{key}-group {{ display: block; }}
+      {target_id}:target ~ .tree-card .stats-{key}-group {{ display: block; }}
+      {target_id}:target ~ .tree-card .tabs-container .tab-{key} .tab-btn {{ fill: #047857; stroke: #10b981; }}
+      {target_id}:target ~ .tree-card .tabs-container .tab-{key} .tab-text {{ fill: #ffffff; }}""")
+
+    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 585" width="100%" height="auto">
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
       
-      .contrib-graph-card {{
-        filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.45));
-        animation: graphFadeIn 0.8s ease-out;
+      .tree-card {{
+        animation: cardFadeIn 0.8s ease-out;
       }}
       
       .cell {{
@@ -869,70 +866,140 @@ def generate_tree_svg(stats: dict, username: str):
         to   {{ opacity: 1; transform: scale(1); }}
       }}
       
-      @keyframes graphFadeIn {{
+      @keyframes cardFadeIn {{
         from {{ opacity: 0; transform: translateY(10px); }}
         to {{ opacity: 1; transform: translateY(0); }}
       }}
+
+      /* Default active styles (Overall) */
+      .tree-group {{ display: none; }}
+      .stats-group {{ display: none; }}
+      .tree-overall-group {{ display: block; }}
+      .stats-overall-group {{ display: block; }}
+      
+      .tab-btn {{
+        fill: #111827;
+        stroke: #1f2937;
+        stroke-width: 1.5;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }}
+      .tab-btn:hover {{
+        fill: #1f2937;
+        stroke: #374151;
+      }}
+      .tab-text {{
+        font-family: 'JetBrains Mono', 'Fira Code', monospace;
+        font-size: 10.5px;
+        font-weight: bold;
+        fill: #9ca3af;
+        text-anchor: middle;
+        dominant-baseline: middle;
+        cursor: pointer;
+      }}
+
+      .tab-overall .tab-btn {{
+        fill: #047857;
+        stroke: #10b981;
+      }}
+      .tab-overall .tab-text {{
+        fill: #ffffff;
+      }}
+
+      /* Target overrides */
+      {''.join(css_rules)}
     </style>
   </defs>
 
-  <g class="contrib-graph-card">
-    <!-- Window Background -->
-    <rect x="0" y="0" width="900" height="680" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+  <!-- Interactive Target Anchors -->
+  {''.join(target_anchors)}
 
-    <!-- Window Title Bar -->
-    <path d="M 0,12 A 12,12 0 0,1 12,0 L 888,0 A 12,12 0 0,1 900,12 L 900,42 L 0,42 Z" fill="#111827" />
+  <g class="tree-card">
+    <!-- Window Background (Premium Deep Dark) -->
+    <rect x="10" y="10" width="880" height="565" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
+
+    <!-- Interactive Navigation Tabs -->
+    <g class="tabs-container">
+      {''.join(tab_buttons)}
+    </g>
     
-    <!-- Window Control Buttons (macOS Style) -->
-    <circle cx="25" cy="21" r="6" fill="#ff5f56" />
-    <circle cx="45" cy="21" r="6" fill="#ffbd2e" />
-    <circle cx="65" cy="21" r="6" fill="#27c93f" />
-
-    <!-- Terminal Title -->
-    <text x="450" y="25" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" text-anchor="middle" font-weight="bold">
-      {username}@macos: ~/contribution-tree
+    <!-- Inline Help Info -->
+    <text x="450" y="70" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#4b5563" font-style="italic">
+      💡 Click years to toggle contribution history (open in new tab if viewing inside GitHub profile README)
     </text>
 
-    <!-- Title Bar Divider -->
-    <line x1="0" y1="42" x2="900" y2="42" stroke="#1f2937" stroke-width="1" />
+    <!-- Trees rendering -->
+    {''.join(svg_trees_markup)}
 
-    <!-- Header Text -->
-    <text x="35" y="70" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13" fill="#34d399" font-weight="bold">
-      &gt; git log --graph --date=relative --all --fractal-tree (Past 12 Months)
-    </text>
-
-    <!-- Tree rendering -->
-    <g>
-      {chr(10).join(svg_rects)}
-    </g>
-
-    <!-- Bottom Stats and Info Panel -->
-    <!-- Left Stats Panel -->
-    <g transform="translate(45, 110)">
-      <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Longest Streak</text>
-      <text x="0" y="22" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="20" fill="#34d399" font-weight="bold">{longest_streak} days</text>
-      <text x="0" y="38" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">{longest_streak_str}</text>
-      
-      <text x="0" y="65" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Current Streak</text>
-      <text x="0" y="87" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="20" fill="#34d399" font-weight="bold">{current_streak} days</text>
-      <text x="0" y="103" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">{current_streak_str}</text>
-    </g>
-
-    <!-- Right Stats Panel -->
-    <g transform="translate(620, 110)">
-      <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">1 Year Total</text>
-      <text x="0" y="24" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="22" fill="#34d399" font-weight="bold">{total_commits:,} commits</text>
-      <text x="0" y="40" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">Past 365 Days</text>
-    </g>
-
-    <!-- Bottom Counter Label -->
-    <text x="450" y="{height - 20}" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" opacity="0.85">{total_commits} commits grown 🌱</text>
+    <!-- Stats Panels rendering -->
+    {''.join(svg_stats_markup)}
   </g>
 </svg>"""
 
     output_path = os.path.join(os.path.dirname(__file__), "..", "assets", "contribution_tree.svg")
-    with open(output_path, "w") as f: f.write(svg_tree_template)
-    print(f"Successfully generated Contribution Tree SVG at {output_path}!")
+    with open(output_path, "w") as f:
+        f.write(svg_template)
+    print(f"Successfully generated interactive Contribution Tree SVG at {output_path}!")
+
+def generate_retro_badges():
+    print("Generating retro CLI social badges...")
+    badges = {
+        "linkedin": ("[ LINKEDIN ]", "#38bdf8"),
+        "email": ("[ EMAIL ]", "#f97316"),
+        "portfolio": ("[ PORTFOLIO ]", "#34d399")
+    }
+    
+    for name, (label, color) in badges.items():
+        svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" width="130" height="28" viewBox="0 0 130 28">
+  <style>
+    .badge-rect {{
+      fill: #0b0f19;
+      stroke: #1f2937;
+      stroke-width: 1.5;
+      transition: all 0.2s ease;
+    }}
+    .badge-rect:hover {{
+      fill: #111827;
+      stroke: {color};
+    }}
+    .badge-text {{
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 10.5px;
+      font-weight: bold;
+      fill: {color};
+      text-anchor: middle;
+      dominant-baseline: middle;
+      transition: fill 0.2s ease;
+      cursor: pointer;
+    }}
+    .badge-rect:hover + .badge-text, .badge-text:hover {{
+      fill: #e5e7eb;
+    }}
+  </style>
+  <rect class="badge-rect" x="1.5" y="1.5" width="127" height="25" rx="4" />
+  <text class="badge-text" x="65" y="14">{label}</text>
+</svg>"""
+        output_path = os.path.join(os.path.dirname(__file__), "..", "assets", f"{name}_badge.svg")
+        with open(output_path, "w") as f:
+            f.write(svg_content)
+    print("Generated retro social badges successfully!")
+
+def generate_svg():
+    print("Loading configurations...")
+    config = load_config()
+    username = config["github_username"]
+    
+    print(f"Fetching GitHub stats for {username}...")
+    stats_fetcher = GitHubStatsFetcher(username)
+    stats = stats_fetcher.fetch_all_stats()
+    
+    os.makedirs(os.path.join(os.path.dirname(__file__), "..", "assets"), exist_ok=True)
+    
+    # Generate standalone components
+    generate_stats_svg(stats, config)
+    generate_game_svg()
+    generate_tree_svg(stats, username)
+    generate_retro_badges()
 
 if __name__ == "__main__":
     generate_svg()

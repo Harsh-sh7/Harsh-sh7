@@ -211,6 +211,109 @@ class GitHubStatsFetcher:
                 
         stats["longest_streak"] = longest_streak
 
+        # Fetch all active years of contributions
+        yearly_contributions = {}
+        all_time_days = []
+        total_all_time = 0
+        
+        try:
+            years = self._fetch_contribution_years()
+            if not years:
+                years = [datetime.now().year]
+            
+            # Limit to the most recent 5 years to keep it fast
+            years = sorted(years, reverse=True)[:5]
+            for yr in years:
+                yr_data = self._fetch_year_calendar(yr)
+                if yr_data and "data" in yr_data and yr_data["data"].get("user"):
+                    cal = yr_data["data"]["user"]["contributionsCollection"]["contributionCalendar"]
+                    yr_contribs = cal["totalContributions"]
+                    yr_days = []
+                    for wk in cal["weeks"]:
+                        for dy in wk["contributionDays"]:
+                            yr_days.append({"date": dy["date"], "contributionCount": dy["contributionCount"]})
+                    yr_days.sort(key=lambda x: x["date"])
+                    
+                    yearly_contributions[yr] = {
+                        "contributions": yr_contribs,
+                        "contribution_days": yr_days
+                    }
+                    total_all_time += yr_contribs
+                    all_time_days.extend(yr_days)
+            
+            all_time_days.sort(key=lambda x: x["date"])
+            yearly_contributions["overall"] = {
+                "contributions": total_all_time,
+                "contribution_days": all_time_days
+            }
+        except Exception as e:
+            print(f"Failed to fetch yearly contributions: {e}")
+            yearly_contributions["overall"] = {
+                "contributions": stats["contributions"],
+                "contribution_days": stats["contribution_days"]
+            }
+            curr_year = datetime.now().year
+            yearly_contributions[curr_year] = {
+                "contributions": stats["contributions"],
+                "contribution_days": stats["contribution_days"]
+            }
+            
+        stats["yearly_contributions"] = yearly_contributions
+
+    def _fetch_contribution_years(self) -> list:
+        query = """
+        query($username: String!) {
+          user(login: $username) {
+            contributionsCollection {
+              contributionYears
+            }
+          }
+        }
+        """
+        url = "https://api.github.com/graphql"
+        variables = {"username": self.username}
+        try:
+            response = requests.post(url, json={"query": query, "variables": variables}, headers=self.headers, timeout=10)
+            response.raise_for_status()
+            res_json = response.json()
+            if "data" in res_json and res_json["data"].get("user"):
+                return res_json["data"]["user"]["contributionsCollection"]["contributionYears"]
+        except Exception as e:
+            print(f"Error fetching contribution years: {e}")
+        return []
+
+    def _fetch_year_calendar(self, year: int) -> dict:
+        query = """
+        query($username: String!, $from: DateTime!, $to: DateTime!) {
+          user(login: $username) {
+            contributionsCollection(from: $from, to: $to) {
+              contributionCalendar {
+                totalContributions
+                weeks {
+                  contributionDays {
+                    contributionCount
+                    date
+                  }
+                }
+              }
+            }
+          }
+        }
+        """
+        url = "https://api.github.com/graphql"
+        variables = {
+            "username": self.username,
+            "from": f"{year}-01-01T00:00:00Z",
+            "to": f"{year}-12-31T23:59:59Z"
+        }
+        try:
+            response = requests.post(url, json={"query": query, "variables": variables}, headers=self.headers, timeout=10)
+            response.raise_for_status()
+            return response.json()
+        except Exception as e:
+            print(f"Error fetching calendar for year {year}: {e}")
+        return {}
+
     def _fetch_rest_fallback(self, stats: dict):
         """
         Queries GitHub REST API endpoints as fallback.
@@ -301,6 +404,19 @@ class GitHubStatsFetcher:
         # Sort mock days chronologically
         mock_days.sort(key=lambda x: x["date"])
         stats["contribution_days"] = mock_days
+        
+        # Populate yearly contributions fallback
+        yearly_contributions = {}
+        yearly_contributions["overall"] = {
+            "contributions": stats["contributions"],
+            "contribution_days": stats["contribution_days"]
+        }
+        curr_year = datetime.now().year
+        yearly_contributions[curr_year] = {
+            "contributions": stats["contributions"],
+            "contribution_days": stats["contribution_days"]
+        }
+        stats["yearly_contributions"] = yearly_contributions
 
     def _fetch_recent_activity(self, stats: dict):
         """

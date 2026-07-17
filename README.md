@@ -1,8 +1,10 @@
 # Hi, I'm Harshit
 
 <p align="center">
-  <!-- Main macOS Terminal Profile Card -->
-  <img src="assets/terminal.svg?v=2" alt="Harshit Shakya's Terminal Profile" width="850">
+  <!-- Standalone Stats & Invaders Game Side-by-Side -->
+  <img src="assets/terminal.svg?v=4" alt="Terminal Stats" width="420" valign="top">
+  &nbsp;&nbsp;
+  <img src="assets/game.svg?v=4" alt="Commit Invaders Game" width="420" valign="top">
 </p>
 
 <p align="center">
@@ -21,8 +23,8 @@
 <br>
 
 <p align="center">
-  <a href="assets/contribution_tree.svg?v=3" target="_blank">
-    <img src="assets/contribution_tree.svg?v=3" alt="GitHub Contribution Tree" width="850">
+  <a href="assets/contribution_tree.svg?v=4" target="_blank">
+    <img src="assets/contribution_tree.svg?v=4" alt="GitHub Contribution Tree" width="850">
   </a>
 </p>
 
