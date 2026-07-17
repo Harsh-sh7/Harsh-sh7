@@ -2,7 +2,7 @@
 
 <p align="center">
   <!-- Main macOS Terminal Profile Card -->
-  <img src="assets/terminal.svg" alt="Harshit Shakya's Terminal Profile" width="850">
+  <img src="assets/terminal.svg?v=2" alt="Harshit Shakya's Terminal Profile" width="850">
 </p>
 
 <p align="center">
@@ -21,8 +21,8 @@
 <br>
 
 <p align="center">
-  <a href="assets/contribution_tree.svg" target="_blank">
-    <img src="assets/contribution_tree.svg" alt="GitHub Contribution Tree" width="850">
+  <a href="assets/contribution_tree.svg?v=2" target="_blank">
+    <img src="assets/contribution_tree.svg?v=2" alt="GitHub Contribution Tree" width="850">
   </a>
 </p>
 
