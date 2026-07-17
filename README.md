@@ -28,20 +28,9 @@
 <br>
 
 <!-- START_CONTRIBUTION_TREE -->
-<details open>
-  <summary><b>🌳 View Overall Contribution Tree</b></summary>
-  <br>
-  <p align="center">
-    <img src="assets/contribution_tree.svg?v=5#overall" alt="Overall Contribution Tree" width="850">
-  </p>
-</details>
-<details>
-  <summary><b>🌱 View 2026 Contribution Tree</b></summary>
-  <br>
-  <p align="center">
-    <img src="assets/contribution_tree.svg?v=5#year-2026" alt="2026 Contribution Tree" width="850">
-  </p>
-</details>
+<p align="center">
+  <img src="assets/contribution_tree.svg?v=5" alt="GitHub Contribution Tree" width="850">
+</p>
 <!-- END_CONTRIBUTION_TREE -->
 
 <br>

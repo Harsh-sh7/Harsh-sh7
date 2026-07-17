@@ -74,30 +74,34 @@ def generate_stats_svg(stats: dict, config: dict):
     svg_elements = []
     
     # Dynamic positions
-    OS_y = 52
-    Host_y = OS_y + 14
-    Location_y = Host_y + 14
+    OS_y = 48
+    Host_y = OS_y + 13.5
+    Location_y = Host_y + 13.5
+    Editor_y = Location_y + 13.5
+    Focus_y = Editor_y + 13.5
     
-    y_tech_header = Location_y + 20
-    Languages_y = y_tech_header + 14
-    Frameworks_y = Languages_y + 14
-    Database_y = Frameworks_y + 14
+    y_tech_header = Focus_y + 18
+    Languages_y = y_tech_header + 13.5
+    Frameworks_y = Languages_y + 13.5
+    Database_y = Frameworks_y + 13.5
     
-    y_stats_header = Database_y + 20
-    Repos_y = y_stats_header + 14
-    Followers_y = Repos_y + 14
-    Activity_y = Followers_y + 14
-    TopLang_y = Activity_y + 14
-    bar_y = TopLang_y + 8.5
+    y_stats_header = Database_y + 18
+    Repos_y = y_stats_header + 13.5
+    Followers_y = Repos_y + 13.5
+    Activity_y = Followers_y + 13.5
+    TopLang_y = Activity_y + 13.5
+    bar_y = TopLang_y + 7
     
-    y_act_header = bar_y + 20 if stats["top_languages"] else TopLang_y + 20
-    Act1_y = y_act_header + 14
-    Act2_y = Act1_y + 14
+    y_act_header = bar_y + 18 if stats["top_languages"] else TopLang_y + 18
+    Act1_y = y_act_header + 13.5
+    Act2_y = Act1_y + 13.5
     
     # System Info
     svg_elements.append(format_stats_line(OS_y, "OS", config["os"]))
     svg_elements.append(format_stats_line(Host_y, "Host", "MacBook Pro"))
     svg_elements.append(format_stats_line(Location_y, "Location", config["location"]))
+    svg_elements.append(format_stats_line(Editor_y, "Editor", config["editor"]))
+    svg_elements.append(format_stats_line(Focus_y, "Focus", config["current_focus"]))
     
     # Tech Profile
     svg_elements.append(format_stats_section_header(y_tech_header, "Technical Profile"))
@@ -685,17 +689,14 @@ def weights_from_days(contribution_days):
     return {k: v / total for k, v in buckets.items()}
 
 def generate_tree_svg(stats: dict, username: str):
-    print("Generating Standalone Contribution Tree SVG with Year Toggle...")
+    print("Generating Standalone Contribution Tree SVG...")
     if "yearly_contributions" not in stats or not stats["yearly_contributions"]:
-        print("No yearly contributions found in stats! Skipping toggle tree generation.")
+        print("No yearly contributions found in stats! Skipping tree generation.")
         return
         
     yearly_data = stats["yearly_contributions"]
-    
-    # Sort target years in descending order (e.g. overall, 2026, 2025, 2024...)
-    all_keys = list(yearly_data.keys())
-    years = sorted([k for k in all_keys if isinstance(k, int)], reverse=True)
-    all_targets = ["overall"] + [str(y) for y in years]
+    key = "overall"
+    data = yearly_data[key]
     
     width = 900
     height = 500
@@ -706,125 +707,68 @@ def generate_tree_svg(stats: dict, username: str):
     def to_canvas(x, y):
         return origin_x + x, ground_y + y
 
-    # Generate tree groups and stats groups for each year inside the single SVG file
-    svg_trees_markup = []
-    svg_stats_markup = []
+    commits = data["contributions"]
+    days = data["contribution_days"]
     
-    for key in all_targets:
-        # Resolve data key
-        data_key = int(key) if key.isdigit() else key
-        data = yearly_data[data_key]
-        
-        commits = data["contributions"]
-        days = data["contribution_days"]
-        
-        # Calculate streaks
-        longest, current, streak_str = compute_streaks_for_days(days)
-        
-        # Build tree elements
-        rng = random.Random(seed)
-        max_depth, base_len, leaves_total = size_params(commits)
-        branches, tips = build_branches(max_depth, base_len, seed=seed)
-        
-        rects = []
-        max_branch_depth = max_depth
-        
-        # Branches
-        for (x1, y1, x2, y2, depth) in branches:
-            cx1, cy1 = to_canvas(x1, y1)
-            cx2, cy2 = to_canvas(x2, y2)
-            pts, shade = squares_for_branch(cx1, cy1, cx2, cy2, depth, max_branch_depth, rng)
-            base_delay = depth * 0.12
-            for i, (bx, by) in enumerate(pts):
-                delay = base_delay + i * 0.01
-                rects.append((bx, by, PALETTE[shade], round(delay, 3)))
-                
-        # Leaves
-        weights = weights_from_days(days)
-        n_tips = max(1, len(tips))
-        per_tip = max(2, leaves_total // n_tips)
-        leaf_delay_base = max_depth * 0.12 + 0.15
-        
-        for (tx, ty, depth) in tips:
-            cx, cy = to_canvas(tx, ty)
-            radius = 22 + max_depth * 2.2
-            cluster = leaf_cluster(cx, cy, per_tip, radius, rng)
-            for i, (lx, ly) in enumerate(cluster):
-                level = weighted_leaf_level(weights, rng)
-                delay = leaf_delay_base + rng.uniform(0, 0.9)
-                rects.append((lx, ly, PALETTE[level], round(delay, 3)))
-                
-        # Grass
-        grass_rects = []
-        grass_span = width * 0.85
-        n_grass = int(grass_span / (SQUARE + GAP))
-        for i in range(n_grass):
-            gx = (width - grass_span) / 2 + i * (SQUARE + GAP) + rng.uniform(-2, 2)
-            gy = ground_y + rng.uniform(6, 26)
-            level = rng.choice([1, 1, 2, 2, 3])
-            delay = leaf_delay_base + 0.9 + rng.uniform(0, 0.6)
-            grass_rects.append((gx, gy, PALETTE[level], round(delay, 3)))
-            
-        all_rects = rects + grass_rects
-        
-        svg_rects = []
-        for (x, y, color, delay) in all_rects:
-            svg_rects.append(
-                f'<rect class="cell" x="{x - SQUARE/2:.1f}" y="{y - SQUARE/2:.1f}" '
-                f'width="{SQUARE}" height="{SQUARE}" rx="{CORNER_RADIUS}" ry="{CORNER_RADIUS}" '
-                f'fill="{color}" style="animation-delay:{delay}s" />'
-            )
-            
-        # Compile tree markup
-        svg_trees_markup.append(f"""
-    <!-- Tree and Grass for {key} -->
-    <g class="tree-group tree-{key}-group">
-      {''.join(svg_rects)}
-      <text x="450" y="{height - 35}" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" opacity="0.85">{commits} commits grown 🌱</text>
-    </g>""")
+    # Calculate streaks
+    longest, current, streak_str = compute_streaks_for_days(days)
     
-        # Compile stats markup
-        label_year = "All-Time" if key == "overall" else f"Year {key}"
-        svg_stats_markup.append(f"""
-    <!-- Stats Panel for {key} -->
-    <g class="stats-group stats-{key}-group">
-      <!-- Left Stats Panel -->
-      <g transform="translate(45, 60)">
-        <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Longest Streak</text>
-        <text x="0" y="20" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{longest} days</text>
-        <text x="0" y="34" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">{streak_str if streak_str else 'N/A'}</text>
+    # Build tree elements
+    rng = random.Random(seed)
+    max_depth, base_len, leaves_total = size_params(commits)
+    branches, tips = build_branches(max_depth, base_len, seed=seed)
+    
+    rects = []
+    max_branch_depth = max_depth
+    
+    # Branches
+    for (x1, y1, x2, y2, depth) in branches:
+        cx1, cy1 = to_canvas(x1, y1)
+        cx2, cy2 = to_canvas(x2, y2)
+        pts, shade = squares_for_branch(cx1, cy1, cx2, cy2, depth, max_branch_depth, rng)
+        base_delay = depth * 0.12
+        for i, (bx, by) in enumerate(pts):
+            delay = base_delay + i * 0.01
+            rects.append((bx, by, PALETTE[shade], round(delay, 3)))
+            
+    # Leaves
+    weights = weights_from_days(days)
+    n_tips = max(1, len(tips))
+    per_tip = max(2, leaves_total // n_tips)
+    leaf_delay_base = max_depth * 0.12 + 0.15
+    
+    for (tx, ty, depth) in tips:
+        cx, cy = to_canvas(tx, ty)
+        radius = 22 + max_depth * 2.2
+        cluster = leaf_cluster(cx, cy, per_tip, radius, rng)
+        for i, (lx, ly) in enumerate(cluster):
+            level = weighted_leaf_level(weights, rng)
+            delay = leaf_delay_base + rng.uniform(0, 0.9)
+            rects.append((lx, ly, PALETTE[level], round(delay, 3)))
+            
+    # Grass
+    grass_rects = []
+    grass_span = width * 0.85
+    n_grass = int(grass_span / (SQUARE + GAP))
+    for i in range(n_grass):
+        gx = (width - grass_span) / 2 + i * (SQUARE + GAP) + rng.uniform(-2, 2)
+        gy = ground_y + rng.uniform(6, 26)
+        level = rng.choice([1, 1, 2, 2, 3])
+        delay = leaf_delay_base + 0.9 + rng.uniform(0, 0.6)
+        grass_rects.append((gx, gy, PALETTE[level], round(delay, 3)))
         
-        <text x="0" y="60" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Current Streak</text>
-        <text x="0" y="80" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{current} days</text>
-      </g>
-
-      <!-- Right Stats Panel -->
-      <g transform="translate(670, 60)">
-        <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">{label_year} Total</text>
-        <text x="0" y="20" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{commits:,} commits</text>
-        <text x="0" y="34" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">Contribution Period</text>
-      </g>
-    </g>""")
-
-    # Render target anchors at top level
-    target_anchors = []
-    for key in all_targets:
-        target_anchors.append(f'<g id="year-{key}" />' if key != "overall" else '<g id="overall" />')
-        target_anchors.append(f'<g id="user-content-year-{key}" />' if key != "overall" else '<g id="user-content-overall" />')
-
-    # CSS Target Toggle logic
-    css_rules = []
-    for key in all_targets:
-        target_id = f"#year-{key}" if key != "overall" else "#overall"
-        prefixed_target_id = f"#user-content-year-{key}" if key != "overall" else "#user-content-overall"
-        for tid in [target_id, prefixed_target_id]:
-            css_rules.append(f"""
-      {tid}:target ~ .tree-card .tree-group {{ display: none; }}
-      {tid}:target ~ .tree-card .stats-group {{ display: none; }}
-      {tid}:target ~ .tree-card .tree-{key}-group {{ display: block; }}
-      {tid}:target ~ .tree-card .stats-{key}-group {{ display: block; }}""")
-
-    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="100%" height="auto">
+    all_rects = rects + grass_rects
+    
+    svg_rects = []
+    for (x, y, color, delay) in all_rects:
+        svg_rects.append(
+            f'<rect class="cell" x="{x - SQUARE/2:.1f}" y="{y - SQUARE/2:.1f}" '
+            f'width="{SQUARE}" height="{SQUARE}" rx="{CORNER_RADIUS}" ry="{CORNER_RADIUS}" '
+            f'fill="{color}" style="animation-delay:{delay}s" />'
+        )
+        
+    # Compile standalone SVG
+    svg_content = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="100%" height="auto">
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
@@ -849,40 +793,45 @@ def generate_tree_svg(stats: dict, username: str):
         from {{ opacity: 0; transform: translateY(10px); }}
         to {{ opacity: 1; transform: translateY(0); }}
       }}
-
-      /* Default active styles (Overall) */
-      .tree-group {{ display: none; }}
-      .stats-group {{ display: none; }}
-      .tree-overall-group {{ display: block; }}
-      .stats-overall-group {{ display: block; }}
-
-      /* Target overrides */
-      {''.join(css_rules)}
     </style>
   </defs>
 
-  <!-- Interactive Target Anchors -->
-  {''.join(target_anchors)}
-
   <g class="tree-card">
-    <!-- Window Background (Premium Deep Dark) -->
+    <!-- Background (Premium Deep Dark) -->
     <rect x="10" y="10" width="880" height="480" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
 
-    <!-- Trees rendering -->
-    {''.join(svg_trees_markup)}
+    <!-- Left Stats Panel -->
+    <g transform="translate(45, 60)">
+      <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Longest Streak</text>
+      <text x="0" y="20" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{longest} days</text>
+      <text x="0" y="34" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">{streak_str if streak_str else 'N/A'}</text>
+      
+      <text x="0" y="60" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Current Streak</text>
+      <text x="0" y="80" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{current} days</text>
+    </g>
 
-    <!-- Stats Panels rendering -->
-    {''.join(svg_stats_markup)}
+    <!-- Right Stats Panel -->
+    <g transform="translate(670, 60)">
+      <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">All-Time Total</text>
+      <text x="0" y="20" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{commits:,} commits</text>
+      <text x="0" y="34" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">Contribution Period</text>
+    </g>
+
+    <!-- Tree and Grass rendering -->
+    <g>
+      {''.join(svg_rects)}
+    </g>
+
+    <text x="450" y="{height - 35}" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" opacity="0.85">{commits} commits grown 🌱</text>
   </g>
 </svg>"""
 
     output_path = os.path.join(os.path.dirname(__file__), "..", "assets", "contribution_tree.svg")
     with open(output_path, "w") as f:
-        f.write(svg_template)
-    print(f"Successfully generated interactive Contribution Tree SVG at {output_path}!")
+        f.write(svg_content)
+    print(f"Successfully generated overall Contribution Tree SVG at {output_path}!")
 
-    # Update README.md with the generated years
-    update_readme_with_trees(all_targets)
+    update_readme_with_trees(["overall"])
 
 def update_readme_with_trees(targets):
     readme_path = os.path.join(os.path.dirname(__file__), "..", "README.md")
@@ -900,23 +849,10 @@ def update_readme_with_trees(targets):
         print("Contribution tree placeholders not found in README.md. Skipping update.")
         return
         
-    # Generate details markup pointing to the SINGLE contribution_tree.svg with hashes
-    markup_lines = []
-    for idx, key in enumerate(targets):
-        is_open = ' open' if idx == 0 else ''
-        label = "Overall" if key == "overall" else key
-        emoji = "🌳" if key == "overall" else ("🌱" if idx % 2 == 1 else "🌿")
-        hash_frag = "#overall" if key == "overall" else f"#year-{key}"
-        
-        markup_lines.append(f"""<details{is_open}>
-  <summary><b>{emoji} View {label} Contribution Tree</b></summary>
-  <br>
-  <p align="center">
-    <img src="assets/contribution_tree.svg?v=5{hash_frag}" alt="{label} Contribution Tree" width="850">
-  </p>
-</details>""")
-        
-    markup = "\n".join(markup_lines)
+    # Just render the single Overall contribution tree card
+    markup = f"""<p align="center">
+  <img src="assets/contribution_tree.svg?v=5" alt="GitHub Contribution Tree" width="850">
+</p>"""
     
     # Replace content between placeholders
     new_content = re.sub(
@@ -928,7 +864,7 @@ def update_readme_with_trees(targets):
     
     with open(readme_path, "w") as f:
         f.write(new_content)
-    print("Successfully updated README.md with dynamic contribution tree details using a single SVG!")
+    print("Successfully updated README.md with the single overall contribution tree SVG!")
 
 def generate_retro_badges():
     print("Generating retro CLI social badges...")
