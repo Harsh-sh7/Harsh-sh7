@@ -970,7 +970,7 @@ def update_readme_with_trees(targets):
         
     # Just render the single Overall contribution tree card
     markup = f"""<p align="center">
-  <img src="assets/contribution_tree.svg?v=5" alt="GitHub Contribution Tree" width="850">
+  <img src="assets/contribution_tree.svg?v=6" alt="GitHub Contribution Tree" width="850">
 </p>"""
     
     # Replace content between placeholders

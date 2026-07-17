@@ -3,11 +3,11 @@
 <table align="center" border="0" cellpadding="0" cellspacing="0">
   <tr>
     <td valign="top">
-      <img src="assets/game.svg?v=5" alt="Commit Invaders Game" width="410">
+      <img src="assets/game.svg?v=6" alt="Commit Invaders Game" width="410">
     </td>
     <td width="20"></td>
     <td valign="top">
-      <img src="assets/terminal.svg?v=5" alt="Terminal Stats" width="410">
+      <img src="assets/terminal.svg?v=6" alt="Terminal Stats" width="410">
     </td>
   </tr>
 </table>
@@ -29,7 +29,7 @@
 
 <!-- START_CONTRIBUTION_TREE -->
 <p align="center">
-  <img src="assets/contribution_tree.svg?v=5" alt="GitHub Contribution Tree" width="850">
+  <img src="assets/contribution_tree.svg?v=6" alt="GitHub Contribution Tree" width="850">
 </p>
 <!-- END_CONTRIBUTION_TREE -->
 
