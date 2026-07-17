@@ -1,11 +1,16 @@
 # Hi, I'm Harshit
 
-<p align="center">
-  <!-- Standalone Stats & Invaders Game Side-by-Side -->
-  <img src="assets/terminal.svg?v=4" alt="Terminal Stats" width="420" valign="top">
-  &nbsp;&nbsp;
-  <img src="assets/game.svg?v=4" alt="Commit Invaders Game" width="420" valign="top">
-</p>
+<table align="center" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td valign="top">
+      <img src="assets/game.svg?v=5" alt="Commit Invaders Game" width="410">
+    </td>
+    <td width="20"></td>
+    <td valign="top">
+      <img src="assets/terminal.svg?v=5" alt="Terminal Stats" width="410">
+    </td>
+  </tr>
+</table>
 
 <p align="center">
   <!-- Retro CLI Social Badges -->
@@ -22,11 +27,22 @@
 
 <br>
 
-<p align="center">
-  <a href="assets/contribution_tree.svg?v=4" target="_blank">
-    <img src="assets/contribution_tree.svg?v=4" alt="GitHub Contribution Tree" width="850">
-  </a>
-</p>
+<!-- START_CONTRIBUTION_TREE -->
+<details open>
+  <summary><b>🌳 View Overall Contribution Tree</b></summary>
+  <br>
+  <p align="center">
+    <img src="assets/contribution_tree.svg?v=5#overall" alt="Overall Contribution Tree" width="850">
+  </p>
+</details>
+<details>
+  <summary><b>🌱 View 2026 Contribution Tree</b></summary>
+  <br>
+  <p align="center">
+    <img src="assets/contribution_tree.svg?v=5#year-2026" alt="2026 Contribution Tree" width="850">
+  </p>
+</details>
+<!-- END_CONTRIBUTION_TREE -->
 
 <br>
 

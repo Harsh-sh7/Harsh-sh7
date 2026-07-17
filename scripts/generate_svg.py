@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import re
 import json
 import math
 import random
@@ -697,15 +698,15 @@ def generate_tree_svg(stats: dict, username: str):
     all_targets = ["overall"] + [str(y) for y in years]
     
     width = 900
-    height = 585
-    ground_y = height - 70
+    height = 500
+    ground_y = height - 60
     origin_x = width / 2
     seed = 7
     
     def to_canvas(x, y):
         return origin_x + x, ground_y + y
 
-    # Generate tree groups and stats groups for each year
+    # Generate tree groups and stats groups for each year inside the single SVG file
     svg_trees_markup = []
     svg_stats_markup = []
     
@@ -779,7 +780,7 @@ def generate_tree_svg(stats: dict, username: str):
     <!-- Tree and Grass for {key} -->
     <g class="tree-group tree-{key}-group">
       {''.join(svg_rects)}
-      <text x="450" y="{height - 20}" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" opacity="0.85">{commits} commits grown 🌱</text>
+      <text x="450" y="{height - 35}" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" fill="#9ca3af" opacity="0.85">{commits} commits grown 🌱</text>
     </g>""")
     
         # Compile stats markup
@@ -788,18 +789,18 @@ def generate_tree_svg(stats: dict, username: str):
     <!-- Stats Panel for {key} -->
     <g class="stats-group stats-{key}-group">
       <!-- Left Stats Panel -->
-      <g transform="translate(45, 90)">
-        <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#4b5563" font-weight="bold">Longest Streak</text>
+      <g transform="translate(45, 60)">
+        <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Longest Streak</text>
         <text x="0" y="20" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{longest} days</text>
         <text x="0" y="34" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">{streak_str if streak_str else 'N/A'}</text>
         
-        <text x="0" y="60" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#4b5563" font-weight="bold">Current Streak</text>
+        <text x="0" y="60" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">Current Streak</text>
         <text x="0" y="80" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{current} days</text>
       </g>
 
       <!-- Right Stats Panel -->
-      <g transform="translate(670, 90)">
-        <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10" fill="#4b5563" font-weight="bold">{label_year} Total</text>
+      <g transform="translate(670, 60)">
+        <text x="0" y="0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="10.5" fill="#4b5563" font-weight="bold">{label_year} Total</text>
         <text x="0" y="20" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="18" fill="#34d399" font-weight="bold">{commits:,} commits</text>
         <text x="0" y="34" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#9ca3af">Contribution Period</text>
       </g>
@@ -809,43 +810,21 @@ def generate_tree_svg(stats: dict, username: str):
     target_anchors = []
     for key in all_targets:
         target_anchors.append(f'<g id="year-{key}" />' if key != "overall" else '<g id="overall" />')
-        
-    # Render tab buttons dynamically
-    tab_buttons = []
-    tab_width = 75
-    tab_gap = 10
-    total_tabs_width = len(all_targets) * tab_width + (len(all_targets) - 1) * tab_gap
-    start_x = width / 2 - total_tabs_width / 2
-    
-    for idx, key in enumerate(all_targets):
-        bx = start_x + idx * (tab_width + tab_gap)
-        label = "Overall" if key == "overall" else key
-        target_href = f"#year-{key}" if key != "overall" else "#overall"
-        tab_buttons.append(f"""
-      <g class="tab-{key}">
-        <a href="{target_href}">
-          <rect class="tab-btn" x="{bx:.1f}" y="30" width="{tab_width}" height="24" rx="4" />
-          <text class="tab-text" x="{bx + tab_width/2:.1f}" y="44">{label}</text>
-        </a>
-      </g>""")
+        target_anchors.append(f'<g id="user-content-year-{key}" />' if key != "overall" else '<g id="user-content-overall" />')
 
     # CSS Target Toggle logic
     css_rules = []
     for key in all_targets:
         target_id = f"#year-{key}" if key != "overall" else "#overall"
-        css_rules.append(f"""
-      {target_id}:target ~ .tree-card .tree-group {{ display: none; }}
-      {target_id}:target ~ .tree-card .stats-group {{ display: none; }}
-      {target_id}:target ~ .tree-card .tabs-container .tab-btn {{ fill: #111827; stroke: #1f2937; }}
-      {target_id}:target ~ .tree-card .tabs-container .tab-text {{ fill: #9ca3af; }}
-      
-      /* Show targeted */
-      {target_id}:target ~ .tree-card .tree-{key}-group {{ display: block; }}
-      {target_id}:target ~ .tree-card .stats-{key}-group {{ display: block; }}
-      {target_id}:target ~ .tree-card .tabs-container .tab-{key} .tab-btn {{ fill: #047857; stroke: #10b981; }}
-      {target_id}:target ~ .tree-card .tabs-container .tab-{key} .tab-text {{ fill: #ffffff; }}""")
+        prefixed_target_id = f"#user-content-year-{key}" if key != "overall" else "#user-content-overall"
+        for tid in [target_id, prefixed_target_id]:
+            css_rules.append(f"""
+      {tid}:target ~ .tree-card .tree-group {{ display: none; }}
+      {tid}:target ~ .tree-card .stats-group {{ display: none; }}
+      {tid}:target ~ .tree-card .tree-{key}-group {{ display: block; }}
+      {tid}:target ~ .tree-card .stats-{key}-group {{ display: block; }}""")
 
-    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 585" width="100%" height="auto">
+    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="100%" height="auto">
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
@@ -876,35 +855,6 @@ def generate_tree_svg(stats: dict, username: str):
       .stats-group {{ display: none; }}
       .tree-overall-group {{ display: block; }}
       .stats-overall-group {{ display: block; }}
-      
-      .tab-btn {{
-        fill: #111827;
-        stroke: #1f2937;
-        stroke-width: 1.5;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }}
-      .tab-btn:hover {{
-        fill: #1f2937;
-        stroke: #374151;
-      }}
-      .tab-text {{
-        font-family: 'JetBrains Mono', 'Fira Code', monospace;
-        font-size: 10.5px;
-        font-weight: bold;
-        fill: #9ca3af;
-        text-anchor: middle;
-        dominant-baseline: middle;
-        cursor: pointer;
-      }}
-
-      .tab-overall .tab-btn {{
-        fill: #047857;
-        stroke: #10b981;
-      }}
-      .tab-overall .tab-text {{
-        fill: #ffffff;
-      }}
 
       /* Target overrides */
       {''.join(css_rules)}
@@ -916,17 +866,7 @@ def generate_tree_svg(stats: dict, username: str):
 
   <g class="tree-card">
     <!-- Window Background (Premium Deep Dark) -->
-    <rect x="10" y="10" width="880" height="565" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
-
-    <!-- Interactive Navigation Tabs -->
-    <g class="tabs-container">
-      {''.join(tab_buttons)}
-    </g>
-    
-    <!-- Inline Help Info -->
-    <text x="450" y="70" text-anchor="middle" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9" fill="#4b5563" font-style="italic">
-      💡 Click years to toggle contribution history (open in new tab if viewing inside GitHub profile README)
-    </text>
+    <rect x="10" y="10" width="880" height="480" rx="12" fill="#0b0f19" stroke="#1f2937" stroke-width="1.5" />
 
     <!-- Trees rendering -->
     {''.join(svg_trees_markup)}
@@ -940,6 +880,55 @@ def generate_tree_svg(stats: dict, username: str):
     with open(output_path, "w") as f:
         f.write(svg_template)
     print(f"Successfully generated interactive Contribution Tree SVG at {output_path}!")
+
+    # Update README.md with the generated years
+    update_readme_with_trees(all_targets)
+
+def update_readme_with_trees(targets):
+    readme_path = os.path.join(os.path.dirname(__file__), "..", "README.md")
+    if not os.path.exists(readme_path):
+        print(f"README.md not found at {readme_path}. Skipping README tree update.")
+        return
+        
+    with open(readme_path, "r") as f:
+        content = f.read()
+        
+    start_placeholder = "<!-- START_CONTRIBUTION_TREE -->"
+    end_placeholder = "<!-- END_CONTRIBUTION_TREE -->"
+    
+    if start_placeholder not in content or end_placeholder not in content:
+        print("Contribution tree placeholders not found in README.md. Skipping update.")
+        return
+        
+    # Generate details markup pointing to the SINGLE contribution_tree.svg with hashes
+    markup_lines = []
+    for idx, key in enumerate(targets):
+        is_open = ' open' if idx == 0 else ''
+        label = "Overall" if key == "overall" else key
+        emoji = "🌳" if key == "overall" else ("🌱" if idx % 2 == 1 else "🌿")
+        hash_frag = "#overall" if key == "overall" else f"#year-{key}"
+        
+        markup_lines.append(f"""<details{is_open}>
+  <summary><b>{emoji} View {label} Contribution Tree</b></summary>
+  <br>
+  <p align="center">
+    <img src="assets/contribution_tree.svg?v=5{hash_frag}" alt="{label} Contribution Tree" width="850">
+  </p>
+</details>""")
+        
+    markup = "\n".join(markup_lines)
+    
+    # Replace content between placeholders
+    new_content = re.sub(
+        f"{re.escape(start_placeholder)}.*?{re.escape(end_placeholder)}",
+        f"{start_placeholder}\n{markup}\n{end_placeholder}",
+        content,
+        flags=re.DOTALL
+    )
+    
+    with open(readme_path, "w") as f:
+        f.write(new_content)
+    print("Successfully updated README.md with dynamic contribution tree details using a single SVG!")
 
 def generate_retro_badges():
     print("Generating retro CLI social badges...")
