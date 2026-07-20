@@ -236,10 +236,7 @@ def generate_game_svg():
     
     svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 360" width="100%" height="auto">
   <defs>
-    <!-- Import beautiful Monospace Font -->
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
-      
       .game-card {{
         animation: fadeIn 0.8s ease-out;
       }}
@@ -249,14 +246,14 @@ def generate_game_svg():
         to {{ opacity: 1; transform: translateY(0); }}
       }}
 
-      /* Player Spaceship Movement */
+      /* Player Spaceship Movement (X=115, 55, 175, 85, 145) */
       @keyframes player-move {{
-        0%, 10% {{ transform: translate(105px, 285px); }}       /* Center */
-        15%, 26.6% {{ transform: translate(45px, 285px); }}      /* Left */
-        33.3%, 45% {{ transform: translate(165px, 285px); }}     /* Right */
-        51.6%, 63.3% {{ transform: translate(75px, 285px); }}    /* Mid-Left */
-        70%, 81.6% {{ transform: translate(135px, 285px); }}     /* Mid-Right */
-        90%, 100% {{ transform: translate(105px, 285px); }}      /* Back to Center */
+        0%, 10% {{ transform: translate(115px, 290px); }}        /* Center */
+        15%, 26.6% {{ transform: translate(55px, 290px); }}       /* Left */
+        33.3%, 45% {{ transform: translate(175px, 290px); }}      /* Right */
+        51.6%, 63.3% {{ transform: translate(85px, 290px); }}     /* Mid-Left */
+        70%, 81.6% {{ transform: translate(145px, 290px); }}      /* Mid-Right */
+        90%, 100% {{ transform: translate(115px, 290px); }}       /* Back to Center */
       }}
       
       .player-ship {{
@@ -264,39 +261,78 @@ def generate_game_svg():
         transform-origin: center;
       }}
 
+      /* Falling Invaders Animations */
+      @keyframes fall-alien-1 {{
+        0% {{ transform: translate(115px, 55px); opacity: 1; }}
+        9.5% {{ transform: translate(115px, 140px); opacity: 1; }}
+        10%, 95% {{ transform: translate(115px, 140px); opacity: 0; }}
+        100% {{ transform: translate(115px, 55px); opacity: 1; }}
+      }}
+      @keyframes fall-alien-2 {{
+        0%, 15% {{ transform: translate(55px, 55px); opacity: 0; }}
+        16.6% {{ transform: translate(55px, 55px); opacity: 1; }}
+        29.5% {{ transform: translate(55px, 160px); opacity: 1; }}
+        30%, 100% {{ transform: translate(55px, 160px); opacity: 0; }}
+      }}
+      @keyframes fall-alien-3 {{
+        0%, 31% {{ transform: translate(175px, 55px); opacity: 0; }}
+        33.3% {{ transform: translate(175px, 55px); opacity: 1; }}
+        44.5% {{ transform: translate(175px, 140px); opacity: 1; }}
+        45%, 100% {{ transform: translate(175px, 140px); opacity: 0; }}
+      }}
+      @keyframes fall-alien-4 {{
+        0%, 48% {{ transform: translate(85px, 55px); opacity: 0; }}
+        50.0% {{ transform: translate(85px, 55px); opacity: 1; }}
+        62.5% {{ transform: translate(85px, 160px); opacity: 1; }}
+        63%, 100% {{ transform: translate(85px, 160px); opacity: 0; }}
+      }}
+      @keyframes fall-alien-5 {{
+        0%, 65% {{ transform: translate(145px, 55px); opacity: 0; }}
+        66.6% {{ transform: translate(145px, 55px); opacity: 1; }}
+        79.5% {{ transform: translate(145px, 140px); opacity: 1; }}
+        80%, 100% {{ transform: translate(145px, 140px); opacity: 0; }}
+      }}
+
+      .enemy-1 {{ animation: fall-alien-1 6s infinite linear; }}
+      .enemy-2 {{ animation: fall-alien-2 6s infinite linear; }}
+      .enemy-3 {{ animation: fall-alien-3 6s infinite linear; }}
+      .enemy-4 {{ animation: fall-alien-4 6s infinite linear; }}
+      .enemy-5 {{ animation: fall-alien-5 6s infinite linear; }}
+
       /* Projectile Lasers Fired by Player */
       @keyframes laser-1 {{
-        0%, 1.6% {{ transform: translate(110px, 280px); opacity: 1; }}
-        8% {{ transform: translate(110px, 100px); opacity: 1; }}
-        8.1%, 100% {{ opacity: 0; }}
+        0%, 5% {{ transform: translate(115px, 280px); opacity: 0; }}
+        5.1% {{ transform: translate(115px, 280px); opacity: 1; }}
+        9.5% {{ transform: translate(115px, 140px); opacity: 1; }}
+        9.6%, 100% {{ opacity: 0; }}
       }}
       
       @keyframes laser-2 {{
-        0%, 16.6% {{ opacity: 0; }}
-        16.7%, 18.3% {{ transform: translate(50px, 280px); opacity: 1; }}
-        24.7% {{ transform: translate(50px, 140px); opacity: 1; }}
-        24.8%, 100% {{ opacity: 0; }}
+        0%, 20% {{ transform: translate(55px, 280px); opacity: 0; }}
+        20.1% {{ transform: translate(55px, 280px); opacity: 1; }}
+        29.5% {{ transform: translate(55px, 160px); opacity: 1; }}
+        29.6%, 100% {{ opacity: 0; }}
       }}
 
       @keyframes laser-3 {{
-        0%, 33.3% {{ opacity: 0; }}
-        33.4%, 35% {{ transform: translate(170px, 280px); opacity: 1; }}
-        41.4% {{ transform: translate(170px, 100px); opacity: 1; }}
-        41.5%, 100% {{ opacity: 0; }}
+        0%, 37% {{ transform: translate(175px, 280px); opacity: 0; }}
+        37.1% {{ transform: translate(175px, 280px); opacity: 1; }}
+        44.5% {{ transform: translate(175px, 140px); opacity: 1; }}
+        44.6%, 100% {{ opacity: 0; }}
       }}
 
       @keyframes laser-4 {{
-        0%, 51.6% {{ opacity: 0; }}
-        51.7%, 53.3% {{ transform: translate(80px, 280px); opacity: 1; }}
-        59.7% {{ transform: translate(80px, 140px); opacity: 1; }}
-        59.8%, 100% {{ opacity: 0; }}
+        0%, 55% {{ transform: translate(85px, 280px); opacity: 0; }}
+        55.1% {{ transform: translate(85px, 280px); opacity: 1; }}
+        62.5% {{ transform: translate(85px, 160px); opacity: 1; }}
+        62.6%, 100% {{ opacity: 0; }}
       }}
 
       @keyframes laser-5 {{
-        0%, 70% {{ opacity: 0; }}
-        70.1%, 71.7% {{ transform: translate(140px, 280px); opacity: 1; }}
-        78.1% {{ transform: translate(140px, 100px); opacity: 1; }}
-        78.2%, 100% {{ opacity: 0; }}
+        0%, 72% {{ transform: translate(145px, 280px); opacity: 0; }}
+        72.1% {{ transform: translate(145px, 280px); opacity: 1; }}
+        79.5% {{ transform: translate(145px, 140px); opacity: 1; }}
+        79.6%, 100% {{ opacity: 0; }}
       }}
 
       .laser-1 {{ animation: laser-1 6s infinite linear; }}
@@ -305,75 +341,36 @@ def generate_game_svg():
       .laser-4 {{ animation: laser-4 6s infinite linear; }}
       .laser-5 {{ animation: laser-5 6s infinite linear; }}
 
-      /* Alien Destruction Animations (Fade out and shrink when hit) */
-      @keyframes destroy-alien-1 {{
-        0%, 7.9% {{ opacity: 1; transform: scale(1); }}
-        8% {{ opacity: 0; transform: scale(0.2); }}
-        8.1%, 100% {{ opacity: 1; transform: scale(1); }}
-      }}
+      /* Explosion Particle Animations */
+      @keyframes part-ul {{ 0% {{ transform: translate(0, 0); opacity: 1; }} 100% {{ transform: translate(-14px, -14px); opacity: 0; }} }}
+      @keyframes part-ur {{ 0% {{ transform: translate(0, 0); opacity: 1; }} 100% {{ transform: translate(14px, -14px); opacity: 0; }} }}
+      @keyframes part-dl {{ 0% {{ transform: translate(0, 0); opacity: 1; }} 100% {{ transform: translate(-14px, 14px); opacity: 0; }} }}
+      @keyframes part-dr {{ 0% {{ transform: translate(0, 0); opacity: 1; }} 100% {{ transform: translate(14px, 14px); opacity: 0; }} }}
 
-      @keyframes destroy-alien-2 {{
-        0%, 24.6% {{ opacity: 1; transform: scale(1); }}
-        24.7% {{ opacity: 0; transform: scale(0.2); }}
-        24.8%, 100% {{ opacity: 1; transform: scale(1); }}
-      }}
+      .p-ul {{ animation: part-ul 0.4s ease-out forwards; }}
+      .p-ur {{ animation: part-ur 0.4s ease-out forwards; }}
+      .p-dl {{ animation: part-dl 0.4s ease-out forwards; }}
+      .p-dr {{ animation: part-dr 0.4s ease-out forwards; }}
 
-      @keyframes destroy-alien-3 {{
-        0%, 41.3% {{ opacity: 1; transform: scale(1); }}
-        41.4% {{ opacity: 0; transform: scale(0.2); }}
-        41.5%, 100% {{ opacity: 1; transform: scale(1); }}
-      }}
+      @keyframes exp-burst-1 {{ 0%, 9.5% {{ opacity: 0; }} 9.6%, 14% {{ opacity: 1; }} 14.1%, 100% {{ opacity: 0; }} }}
+      @keyframes exp-burst-2 {{ 0%, 29.5% {{ opacity: 0; }} 29.6%, 34% {{ opacity: 1; }} 34.1%, 100% {{ opacity: 0; }} }}
+      @keyframes exp-burst-3 {{ 0%, 44.5% {{ opacity: 0; }} 44.6%, 49% {{ opacity: 1; }} 49.1%, 100% {{ opacity: 0; }} }}
+      @keyframes exp-burst-4 {{ 0%, 62.5% {{ opacity: 0; }} 62.6%, 67% {{ opacity: 1; }} 67.1%, 100% {{ opacity: 0; }} }}
+      @keyframes exp-burst-5 {{ 0%, 79.5% {{ opacity: 0; }} 79.6%, 84% {{ opacity: 1; }} 84.1%, 100% {{ opacity: 0; }} }}
 
-      @keyframes destroy-alien-4 {{
-        0%, 59.6% {{ opacity: 1; transform: scale(1); }}
-        59.7% {{ opacity: 0; transform: scale(0.2); }}
-        59.8%, 100% {{ opacity: 1; transform: scale(1); }}
-      }}
-
-      @keyframes destroy-alien-5 {{
-        0%, 78.0% {{ opacity: 1; transform: scale(1); }}
-        78.1% {{ opacity: 0; transform: scale(0.2); }}
-        78.2%, 100% {{ opacity: 1; transform: scale(1); }}
-      }}
-
-      .target-1 {{ animation: destroy-alien-1 6s infinite; transform-origin: center; }}
-      .target-2 {{ animation: destroy-alien-2 6s infinite; transform-origin: center; }}
-      .target-3 {{ animation: destroy-alien-3 6s infinite; transform-origin: center; }}
-      .target-4 {{ animation: destroy-alien-4 6s infinite; transform-origin: center; }}
-      .target-5 {{ animation: destroy-alien-5 6s infinite; transform-origin: center; }}
-
-      /* Explosion Particles */
-      @keyframes part-ul {{ 0% {{ transform: translate(0, 0); opacity: 1; }} 100% {{ transform: translate(-12px, -12px); opacity: 0; }} }}
-      @keyframes part-ur {{ 0% {{ transform: translate(0, 0); opacity: 1; }} 100% {{ transform: translate(12px, -12px); opacity: 0; }} }}
-      @keyframes part-dl {{ 0% {{ transform: translate(0, 0); opacity: 1; }} 100% {{ transform: translate(-12px, 12px); opacity: 0; }} }}
-      @keyframes part-dr {{ 0% {{ transform: translate(0, 0); opacity: 1; }} 100% {{ transform: translate(12px, 12px); opacity: 0; }} }}
-
-      .p-ul {{ animation-name: part-ul; }}
-      .p-ur {{ animation-name: part-ur; }}
-      .p-dl {{ animation-name: part-dl; }}
-      .p-dr {{ animation-name: part-dr; }}
-
-      .particle {{
-        animation-duration: 0.6s;
-        animation-iteration-count: infinite;
-        animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        opacity: 0;
-        transform-origin: center;
-      }}
-
-      .exp-1 .particle {{ animation-delay: 8.0s; }}
-      .exp-2 .particle {{ animation-delay: 24.7s; }}
-      .exp-3 .particle {{ animation-delay: 41.4s; }}
-      .exp-4 .particle {{ animation-delay: 59.7s; }}
-      .exp-5 .particle {{ animation-delay: 78.1s; }}
+      .exp-1 {{ animation: exp-burst-1 6s infinite; }}
+      .exp-2 {{ animation: exp-burst-2 6s infinite; }}
+      .exp-3 {{ animation: exp-burst-3 6s infinite; }}
+      .exp-4 {{ animation: exp-burst-4 6s infinite; }}
+      .exp-5 {{ animation: exp-burst-5 6s infinite; }}
 
       /* Scoreboard Digital Count Up */
-      @keyframes score-0 {{ 0%, 6.7% {{ opacity: 1; }} 6.8%, 100% {{ opacity: 0; }} }}
-      @keyframes score-1 {{ 0%, 6.7% {{ opacity: 0; }} 6.8%, 21.7% {{ opacity: 1; }} 21.8%, 100% {{ opacity: 0; }} }}
-      @keyframes score-2 {{ 0%, 21.7% {{ opacity: 0; }} 21.8%, 40.0% {{ opacity: 1; }} 40.1%, 100% {{ opacity: 0; }} }}
-      @keyframes score-3 {{ 0%, 40.0% {{ opacity: 0; }} 40.1%, 58.3% {{ opacity: 1; }} 58.4%, 100% {{ opacity: 0; }} }}
-      @keyframes score-4 {{ 0%, 58.3% {{ opacity: 0; }} 58.4%, 76.7% {{ opacity: 1; }} 76.8%, 100% {{ opacity: 0; }} }}
-      @keyframes score-5 {{ 0%, 76.7% {{ opacity: 0; }} 76.8%, 100% {{ opacity: 1; }} }}
+      @keyframes score-0 {{ 0%, 9.5% {{ opacity: 1; }} 9.6%, 100% {{ opacity: 0; }} }}
+      @keyframes score-1 {{ 0%, 9.5% {{ opacity: 0; }} 9.6%, 29.5% {{ opacity: 1; }} 29.6%, 100% {{ opacity: 0; }} }}
+      @keyframes score-2 {{ 0%, 29.5% {{ opacity: 0; }} 29.6%, 44.5% {{ opacity: 1; }} 44.6%, 100% {{ opacity: 0; }} }}
+      @keyframes score-3 {{ 0%, 44.5% {{ opacity: 0; }} 44.6%, 62.5% {{ opacity: 1; }} 62.6%, 100% {{ opacity: 0; }} }}
+      @keyframes score-4 {{ 0%, 62.5% {{ opacity: 0; }} 62.6%, 79.5% {{ opacity: 1; }} 79.6%, 100% {{ opacity: 0; }} }}
+      @keyframes score-5 {{ 0%, 79.5% {{ opacity: 0; }} 79.6%, 100% {{ opacity: 1; }} }}
 
       .score-0 {{ animation: score-0 6s infinite step-end; }}
       .score-1 {{ animation: score-1 6s infinite step-end; }}
@@ -433,7 +430,7 @@ def generate_game_svg():
     <!-- Game Window Background -->
     <rect class="bg-rect" x="8" y="8" width="214" height="344" rx="10" stroke-width="1.5" />
     
-    <!-- Starry Space Background (Scrolling Dust) -->
+    <!-- Starry Space Background -->
     <circle class="space-star" cx="40" cy="50" r="1.2">
       <animate attributeName="cy" from="10" to="350" dur="4s" repeatCount="indefinite" />
     </circle>
@@ -454,51 +451,47 @@ def generate_game_svg():
     </circle>
 
     <!-- Game Headers and Scoreboard -->
-    <text class="game-title" x="115" y="32" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="10" font-weight="800" text-anchor="middle" letter-spacing="1">COMMIT INVADERS</text>
+    <text class="game-title" x="115" y="28" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="10" font-weight="800" text-anchor="middle" letter-spacing="1">COMMIT INVADERS</text>
     
     <!-- Score Labels -->
-    <g transform="translate(22, 24)">
+    <g transform="translate(22, 22)">
       <text class="score-label" x="0" y="8" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="7.5" font-weight="bold">SCORE</text>
-      <text x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-0" opacity="1">0000</text>
-      <text x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-1" opacity="0">0100</text>
-      <text x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-2" opacity="0">0250</text>
-      <text x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-3" opacity="0">0450</text>
-      <text x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-4" opacity="0">0700</text>
-      <text x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-5" opacity="0">1000</text>
+      <text x="0" y="20" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-0" opacity="1">0000</text>
+      <text x="0" y="20" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-1" opacity="0">0100</text>
+      <text x="0" y="20" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-2" opacity="0">0250</text>
+      <text x="0" y="20" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-3" opacity="0">0450</text>
+      <text x="0" y="20" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-4" opacity="0">0700</text>
+      <text x="0" y="20" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-5" opacity="0">1000</text>
     </g>
 
     <!-- Lives Indicator -->
-    <g transform="translate(208, 24)">
+    <g transform="translate(208, 22)">
       <text class="lives-label" x="0" y="8" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="7.5" font-weight="bold" text-anchor="end">LIVES</text>
-      <text class="lives-val" x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="9.5" text-anchor="end">💚 💚 💚</text>
+      <text class="lives-val" x="0" y="20" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="9.5" text-anchor="end">💚 💚 💚</text>
     </g>
 
-    <!-- Lasers (aligned with timeline) -->
-    <!-- Laser 1 -->
-    <g transform="translate(100, 0)">
-      <rect class="laser-beam laser-1" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+    <line x1="16" y1="48" x2="214" y2="48" stroke="#1f2937" stroke-dasharray="3 3" />
+
+    <!-- Lasers -->
+    <g class="laser-1">
+      <rect x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
     </g>
-    <!-- Laser 2 -->
-    <g transform="translate(40, 0)">
-      <rect class="laser-beam laser-2" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+    <g class="laser-2">
+      <rect x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
     </g>
-    <!-- Laser 3 -->
-    <g transform="translate(160, 0)">
-      <rect class="laser-beam laser-3" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+    <g class="laser-3">
+      <rect x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
     </g>
-    <!-- Laser 4 -->
-    <g transform="translate(70, 0)">
-      <rect class="laser-beam laser-4" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+    <g class="laser-4">
+      <rect x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
     </g>
-    <!-- Laser 5 -->
-    <g transform="translate(130, 0)">
-      <rect class="laser-beam laser-5" x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
+    <g class="laser-5">
+      <rect x="-1" y="0" width="2" height="12" fill="#38bdf8" rx="1" />
     </g>
 
-    <!-- Enemies (falling) -->
-    <!-- Enemy 1 at x=100 -->
-    <g class="enemy-1" transform="translate(0, 0)">
-      <g transform="translate(100, 0)">
+    <!-- Falling Enemies -->
+    <g class="enemy-1">
+      <g>
         <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
         <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
         <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
@@ -512,9 +505,8 @@ def generate_game_svg():
       </g>
     </g>
 
-    <!-- Enemy 2 at x=40 -->
-    <g class="enemy-2" transform="translate(0, 0)">
-      <g transform="translate(40, 0)">
+    <g class="enemy-2">
+      <g>
         <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
         <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
         <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
@@ -524,9 +516,8 @@ def generate_game_svg():
       </g>
     </g>
 
-    <!-- Enemy 3 at x=160 -->
-    <g class="enemy-3" transform="translate(0, 0)">
-      <g transform="translate(160, 0)">
+    <g class="enemy-3">
+      <g>
         <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
         <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
         <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
@@ -537,9 +528,8 @@ def generate_game_svg():
       </g>
     </g>
 
-    <!-- Enemy 4 at x=70 -->
-    <g class="enemy-4" transform="translate(0, 0)">
-      <g transform="translate(70, 0)">
+    <g class="enemy-4">
+      <g>
         <rect x="-13.05" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
         <rect x="5.55" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
         <rect x="-22.35" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
@@ -550,9 +540,8 @@ def generate_game_svg():
       </g>
     </g>
 
-    <!-- Enemy 5 at x=130 -->
-    <g class="enemy-5" transform="translate(0, 0)">
-      <g transform="translate(130, 0)">
+    <g class="enemy-5">
+      <g>
         <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
         <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
         <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
@@ -562,60 +551,51 @@ def generate_game_svg():
       </g>
     </g>
 
-    <!-- Explosions (triggered at corresponding hit points) -->
-    <!-- Explosion 1 (at x=100, y=165) -->
-    <g class="exp-1" transform="translate(100, 165)">
-      <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
-      <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
-      <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
-      <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+    <!-- Explosions -->
+    <g class="exp-1" transform="translate(115, 140)">
+      <rect class="p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+      <rect class="p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+      <rect class="p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+      <rect class="p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
     </g>
-    <!-- Explosion 2 (at x=40, y=165) -->
-    <g class="exp-2" transform="translate(40, 165)">
-      <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
-      <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
-      <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
-      <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+    <g class="exp-2" transform="translate(55, 160)">
+      <rect class="p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+      <rect class="p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+      <rect class="p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
+      <rect class="p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
     </g>
-    <!-- Explosion 3 (at x=160, y=165) -->
-    <g class="exp-3" transform="translate(160, 165)">
-      <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
-      <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
-      <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
-      <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+    <g class="exp-3" transform="translate(175, 140)">
+      <rect class="p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+      <rect class="p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
+      <rect class="p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+      <rect class="p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
     </g>
-    <!-- Explosion 4 (at x=70, y=165) -->
-    <g class="exp-4" transform="translate(70, 165)">
-      <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
-      <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
-      <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
-      <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+    <g class="exp-4" transform="translate(85, 160)">
+      <rect class="p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+      <rect class="p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+      <rect class="p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#0e4429" />
+      <rect class="p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
     </g>
-    <!-- Explosion 5 (at x=130, y=165) -->
-    <g class="exp-5" transform="translate(130, 165)">
-      <rect class="particle p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
-      <rect class="particle p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
-      <rect class="particle p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
-      <rect class="particle p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+    <g class="exp-5" transform="translate(145, 140)">
+      <rect class="p-ul" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
+      <rect class="p-ur" x="-2" y="-2" width="4" height="4" rx="1" fill="#39d353" />
+      <rect class="p-dl" x="-2" y="-2" width="4" height="4" rx="1" fill="#006d32" />
+      <rect class="p-dr" x="-2" y="-2" width="4" height="4" rx="1" fill="#26a641" />
     </g>
 
-    <!-- Player Ship (moving) -->
+    <!-- Player Ship -->
     <g class="player-ship">
-      <!-- Row 0 (top tip) -->
-      <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#39d353" />
-      <!-- Row 1 -->
-      <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
-      <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#39d353" />
-      <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
-      <!-- Row 2 -->
-      <rect x="-22.35" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#006d32" />
-      <rect x="-13.05" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
-      <rect x="-3.75" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#39d353" />
-      <rect x="5.55" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#26a641" />
-      <rect x="14.85" y="5.55" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#006d32" />
-      <!-- Row 3 (wings) -->
-      <rect x="-22.35" y="14.85" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#0e4429" />
-      <rect x="14.85" y="14.85" width="7.5" height="7.5" rx="1.5" ry="1.5" fill="#0e4429" />
+      <rect x="-3.75" y="-13.05" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+      <rect x="-13.05" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="-3.75" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+      <rect x="5.55" y="-3.75" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="-22.35" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+      <rect x="-13.05" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="-3.75" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#39d353" />
+      <rect x="5.55" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#26a641" />
+      <rect x="14.85" y="5.55" width="7.5" height="7.5" rx="1.5" fill="#006d32" />
+      <rect x="-22.35" y="14.85" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
+      <rect x="14.85" y="14.85" width="7.5" height="7.5" rx="1.5" fill="#0e4429" />
     </g>
   </g>
 </svg>"""
