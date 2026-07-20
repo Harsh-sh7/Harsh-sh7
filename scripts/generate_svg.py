@@ -261,7 +261,6 @@ def generate_game_svg():
       
       .player-ship {{
         animation: player-move 6s infinite ease-in-out;
-        transform-box: fill-box;
         transform-origin: center;
       }}
 
@@ -337,11 +336,11 @@ def generate_game_svg():
         78.2%, 100% {{ opacity: 1; transform: scale(1); }}
       }}
 
-      .target-1 {{ animation: destroy-alien-1 6s infinite; transform-box: fill-box; transform-origin: center; }}
-      .target-2 {{ animation: destroy-alien-2 6s infinite; transform-box: fill-box; transform-origin: center; }}
-      .target-3 {{ animation: destroy-alien-3 6s infinite; transform-box: fill-box; transform-origin: center; }}
-      .target-4 {{ animation: destroy-alien-4 6s infinite; transform-box: fill-box; transform-origin: center; }}
-      .target-5 {{ animation: destroy-alien-5 6s infinite; transform-box: fill-box; transform-origin: center; }}
+      .target-1 {{ animation: destroy-alien-1 6s infinite; transform-origin: center; }}
+      .target-2 {{ animation: destroy-alien-2 6s infinite; transform-origin: center; }}
+      .target-3 {{ animation: destroy-alien-3 6s infinite; transform-origin: center; }}
+      .target-4 {{ animation: destroy-alien-4 6s infinite; transform-origin: center; }}
+      .target-5 {{ animation: destroy-alien-5 6s infinite; transform-origin: center; }}
 
       /* Explosion Particles */
       @keyframes part-ul {{ 0% {{ transform: translate(0, 0); opacity: 1; }} 100% {{ transform: translate(-12px, -12px); opacity: 0; }} }}
@@ -359,7 +358,6 @@ def generate_game_svg():
         animation-iteration-count: infinite;
         animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         opacity: 0;
-        transform-box: fill-box;
         transform-origin: center;
       }}
 
