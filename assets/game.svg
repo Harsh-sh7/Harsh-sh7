@@ -217,24 +217,24 @@
       <animate attributeName="cy" from="10" to="310" dur="4.5s" repeatCount="indefinite" />
     </circle>
 
-    <!-- Game Headers & Scoreboard -->
-    <text class="game-title" x="110" y="32" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" font-weight="800" text-anchor="middle" letter-spacing="1">COMMIT INVADERS</text>
+    <!-- Game Headers and Scoreboard -->
+    <text class="game-title" x="115" y="32" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="10" font-weight="800" text-anchor="middle" letter-spacing="1">COMMIT INVADERS</text>
     
     <!-- Score Labels -->
-    <g transform="translate(20, 24)">
-      <text class="score-label" x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" font-weight="bold">SCORE</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-0" opacity="1">0000</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-1" opacity="0">0100</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-2" opacity="0">0250</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-3" opacity="0">0450</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-4" opacity="0">0700</text>
-      <text x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold" class="score-val score-5" opacity="0">1000</text>
+    <g transform="translate(22, 24)">
+      <text class="score-label" x="0" y="8" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="7.5" font-weight="bold">SCORE</text>
+      <text x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-0" opacity="1">0000</text>
+      <text x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-1" opacity="0">0100</text>
+      <text x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-2" opacity="0">0250</text>
+      <text x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-3" opacity="0">0450</text>
+      <text x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-4" opacity="0">0700</text>
+      <text x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="11" font-weight="bold" class="score-val score-5" opacity="0">1000</text>
     </g>
 
     <!-- Lives Indicator -->
-    <g transform="translate(200, 24)">
-      <text class="lives-label" x="0" y="8" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="7.5" font-weight="bold" text-anchor="end">LIVES</text>
-      <text class="lives-val" x="0" y="21" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" text-anchor="end">💚 💚 💚</text>
+    <g transform="translate(208, 24)">
+      <text class="lives-label" x="0" y="8" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="7.5" font-weight="bold" text-anchor="end">LIVES</text>
+      <text class="lives-val" x="0" y="21" font-family="ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, 'Fira Code', 'JetBrains Mono', monospace" font-size="9.5" text-anchor="end">💚 💚 💚</text>
     </g>
 
     <!-- Lasers (aligned with timeline) -->
