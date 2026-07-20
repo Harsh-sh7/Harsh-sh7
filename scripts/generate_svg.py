@@ -25,7 +25,7 @@ def load_config() -> dict:
     with open(config_path, "r") as f:
         return json.load(f)
 
-def format_stats_line(y_pos, label, value, is_recent_act=False, prefix_len=16, start_x=25):
+def format_stats_line(y_pos, label, value, is_recent_act=False, prefix_len=14, start_x=22):
     """
     Formats a single monospace line with dotted alignment.
     """
@@ -34,36 +34,33 @@ def format_stats_line(y_pos, label, value, is_recent_act=False, prefix_len=16, s
         dots_count = 1
     dots = "." * dots_count
     
-    # Since the card is 640px wide, we have ~75 characters total columns
-    max_val_len = 75 - prefix_len
+    max_val_len = 60 - prefix_len
     display_val = str(value)
     if len(display_val) > max_val_len:
         display_val = display_val[:max_val_len - 3] + "..."
         
-    # XML Escape to prevent parser crashes on characters like &, <, >
     escaped_val = display_val.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
     escaped_label = label.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
     
     lbl_class = "lbl-act" if is_recent_act else "lbl-os"
     val_class = "lbl-act-val" if is_recent_act else "lbl-val"
     
-    return f"""  <text x="{start_x}" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
+    return f"""  <text x="{start_x}" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13.5" font-weight="600">
     <tspan class="{lbl_class}">{escaped_label}</tspan>
     <tspan class="lbl-dots">: {dots} </tspan>
     <tspan class="{val_class}">{escaped_val}</tspan>
   </text>"""
 
-def format_stats_section_header(y_pos, title, start_x=25):
+def format_stats_section_header(y_pos, title, start_x=22):
     """
     Formats a terminal section divider, e.g., - Contact -----------------
     """
     title_text = f"─ {title} "
-    # Wider container means ~72 dashes total columns
-    remaining_len = 72 - len(title_text)
+    remaining_len = 54 - len(title_text)
     if remaining_len < 1:
         remaining_len = 1
     line = "─" * remaining_len
-    return f"""  <text x="{start_x}" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="700">
+    return f"""  <text x="{start_x}" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13" font-weight="700">
     <tspan class="section-text">{title_text}</tspan>
     <tspan class="section-line">{line}</tspan>
   </text>"""
@@ -72,37 +69,36 @@ def generate_stats_svg(stats: dict, config: dict):
     print("Generating Standalone Stats SVG...")
     
     username = stats["name"]
-    # Calculate typing animation widths
     typed_text = f"{username}@macos:~"
-    char_width = 7.8
+    char_width = 9.0
     text_width = len(typed_text) * char_width
-    cursor_start_x = 25
-    cursor_end_x = 25 + text_width + 4
+    cursor_start_x = 22
+    cursor_end_x = 22 + text_width + 4
     
     svg_elements = []
     
     # Dynamic positions
-    OS_y = 48
-    Host_y = OS_y + 13.5
-    Location_y = Host_y + 13.5
-    Editor_y = Location_y + 13.5
-    Focus_y = Editor_y + 13.5
+    OS_y = 52
+    Host_y = OS_y + 15
+    Location_y = Host_y + 15
+    Editor_y = Location_y + 15
+    Focus_y = Editor_y + 15
     
-    y_tech_header = Focus_y + 18
-    Languages_y = y_tech_header + 13.5
-    Frameworks_y = Languages_y + 13.5
-    Database_y = Frameworks_y + 13.5
+    y_tech_header = Focus_y + 19
+    Languages_y = y_tech_header + 15
+    Frameworks_y = Languages_y + 15
+    Database_y = Frameworks_y + 15
     
-    y_stats_header = Database_y + 18
-    Repos_y = y_stats_header + 13.5
-    Followers_y = Repos_y + 13.5
-    Activity_y = Followers_y + 13.5
-    TopLang_y = Activity_y + 13.5
-    bar_y = TopLang_y + 7
+    y_stats_header = Database_y + 19
+    Repos_y = y_stats_header + 15
+    Followers_y = Repos_y + 15
+    Activity_y = Followers_y + 15
+    TopLang_y = Activity_y + 15
+    bar_y = TopLang_y + 8
     
-    y_act_header = bar_y + 18 if stats["top_languages"] else TopLang_y + 18
-    Act1_y = y_act_header + 13.5
-    Act2_y = Act1_y + 13.5
+    y_act_header = bar_y + 19 if stats["top_languages"] else TopLang_y + 19
+    Act1_y = y_act_header + 15
+    Act2_y = Act1_y + 15
     
     # System Info
     svg_elements.append(format_stats_line(OS_y, "OS", config["os"]))
@@ -134,12 +130,12 @@ def generate_stats_svg(stats: dict, config: dict):
         svg_elements.append(format_stats_line(TopLang_y, "Top Lang", lang_display))
         
         progress_bar_g = ['  <!-- Progress Bar -->']
-        progress_bar_g.append(f'  <rect class="progress-bg" x="150" y="{bar_y}" width="250" height="5" rx="2.5" />')
-        current_x = 150
+        progress_bar_g.append(f'  <rect class="progress-bg" x="145" y="{bar_y}" width="240" height="6" rx="3" />')
+        current_x = 145
         for lang in stats["top_languages"][:4]:
-            width = (lang["percentage"] / 100.0) * 250
+            width = (lang["percentage"] / 100.0) * 240
             color = lang["color"]
-            progress_bar_g.append(f'  <rect x="{current_x}" y="{bar_y}" width="{width:.1f}" height="5" rx="1.5" fill="{color}" />')
+            progress_bar_g.append(f'  <rect x="{current_x}" y="{bar_y}" width="{width:.1f}" height="6" rx="2" fill="{color}" />')
             current_x += width
         svg_elements.append("\n".join(progress_bar_g))
         
@@ -150,13 +146,13 @@ def generate_stats_svg(stats: dict, config: dict):
         svg_elements.append(format_stats_line(act_ys[idx], f"Act {idx+1}", act, is_recent_act=True))
         
     # Timestamp
-    y_bottom = 295
+    y_bottom = Act2_y + 18
     svg_elements.append(f"""  <!-- Bottom Timestamp -->
-  <text x="25" y="{y_bottom}" class="timestamp-text" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" font-weight="bold">
+  <text x="22" y="{y_bottom}" class="timestamp-text" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="bold">
     Last Updated: {stats['last_updated']} (auto-updated every 12h)
   </text>""")
 
-    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 320" width="100%" height="auto">
+    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 360" width="100%" height="auto">
   <defs>
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap');
@@ -211,18 +207,18 @@ def generate_stats_svg(stats: dict, config: dict):
 
   <g class="terminal-card">
     <!-- Window Background -->
-    <rect class="bg-rect" x="10" y="10" width="620" height="300" rx="10" stroke-width="1.5" />
+    <rect class="bg-rect" x="8" y="8" width="524" height="344" rx="10" stroke-width="1.5" />
 
     <!-- Typing Header -->
     <g>
-      <text x="25" y="38" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="bold">
+      <text x="22" y="34" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="14.5" font-weight="bold">
         <tspan class="header-name">{username}</tspan>
         <tspan class="header-host">@macos:~</tspan>
       </text>
     </g>
     
     <!-- Blinking Cursor -->
-    <rect class="header-cursor" x="{cursor_end_x}" y="24" width="7" height="15">
+    <rect class="header-cursor" x="{cursor_end_x}" y="20" width="8" height="16">
       <animate attributeName="opacity" values="1;0;1" dur="0.8s" repeatCount="indefinite" />
     </rect>
 
@@ -238,7 +234,7 @@ def generate_stats_svg(stats: dict, config: dict):
 def generate_game_svg():
     print("Generating Standalone Game SVG...")
     
-    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 320" width="100%" height="auto">
+    svg_template = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 230 360" width="100%" height="auto">
   <defs>
     <!-- Import beautiful Monospace Font -->
     <style>
@@ -255,12 +251,12 @@ def generate_game_svg():
 
       /* Player Spaceship Movement */
       @keyframes player-move {{
-        0%, 10% {{ transform: translate(100px, 265px); }}       /* Center */
-        15%, 26.6% {{ transform: translate(40px, 265px); }}      /* Left */
-        33.3%, 45% {{ transform: translate(160px, 265px); }}     /* Right */
-        51.6%, 63.3% {{ transform: translate(70px, 265px); }}    /* Mid-Left */
-        70%, 81.6% {{ transform: translate(130px, 265px); }}     /* Mid-Right */
-        90%, 100% {{ transform: translate(100px, 265px); }}      /* Back to Center */
+        0%, 10% {{ transform: translate(105px, 285px); }}       /* Center */
+        15%, 26.6% {{ transform: translate(45px, 285px); }}      /* Left */
+        33.3%, 45% {{ transform: translate(165px, 285px); }}     /* Right */
+        51.6%, 63.3% {{ transform: translate(75px, 285px); }}    /* Mid-Left */
+        70%, 81.6% {{ transform: translate(135px, 285px); }}     /* Mid-Right */
+        90%, 100% {{ transform: translate(105px, 285px); }}      /* Back to Center */
       }}
       
       .player-ship {{
@@ -269,110 +265,109 @@ def generate_game_svg():
         transform-origin: center;
       }}
 
-      /* Laser Shooting Animation */
-      @keyframes shoot-laser {{
-        0% {{ transform: translateY(255px); opacity: 0; }}
-        0.1% {{ transform: translateY(255px); opacity: 1; }}
-        3.3% {{ transform: translateY(165px); opacity: 1; }}
-        3.4%, 100% {{ transform: translateY(165px); opacity: 0; }}
+      /* Projectile Lasers Fired by Player */
+      @keyframes laser-1 {{
+        0%, 1.6% {{ transform: translate(110px, 280px); opacity: 1; }}
+        8% {{ transform: translate(110px, 100px); opacity: 1; }}
+        8.1%, 100% {{ opacity: 0; }}
+      }}
+      
+      @keyframes laser-2 {{
+        0%, 16.6% {{ opacity: 0; }}
+        16.7%, 18.3% {{ transform: translate(50px, 280px); opacity: 1; }}
+        24.7% {{ transform: translate(50px, 140px); opacity: 1; }}
+        24.8%, 100% {{ opacity: 0; }}
       }}
 
-      .laser-beam {{
-        animation: shoot-laser 6s infinite linear;
-        opacity: 0;
-        transform-box: fill-box;
-        transform-origin: bottom center;
-      }}
-      .laser-1 {{ animation-delay: 0.2s; }}
-      .laser-2 {{ animation-delay: 1.1s; }}
-      .laser-3 {{ animation-delay: 2.2s; }}
-      .laser-4 {{ animation-delay: 3.3s; }}
-      .laser-5 {{ animation-delay: 4.4s; }}
-
-      /* Enemy Falling Animations - Continuous, Staggered Flow */
-      @keyframes fall-e1 {{
-        0% {{ transform: translateY(125px); opacity: 1; }}
-        6.7% {{ transform: translateY(165px); opacity: 1; }}
-        6.8% {{ transform: translateY(165px); opacity: 0; }}
-        93.2% {{ transform: translateY(85px); opacity: 0; }}
-        93.3% {{ transform: translateY(85px); opacity: 1; }}
-        100% {{ transform: translateY(125px); opacity: 1; }}
-      }}
-      @keyframes fall-e2 {{
-        0%, 8.2% {{ transform: translateY(85px); opacity: 0; }}
-        8.3% {{ transform: translateY(85px); opacity: 1; }}
-        21.7% {{ transform: translateY(165px); opacity: 1; }}
-        21.8%, 100% {{ transform: translateY(165px); opacity: 0; }}
-      }}
-      @keyframes fall-e3 {{
-        0%, 26.6% {{ transform: translateY(85px); opacity: 0; }}
-        26.7% {{ transform: translateY(85px); opacity: 1; }}
-        40.0% {{ transform: translateY(165px); opacity: 1; }}
-        40.1%, 100% {{ transform: translateY(165px); opacity: 0; }}
-      }}
-      @keyframes fall-e4 {{
-        0%, 44.9% {{ transform: translateY(85px); opacity: 0; }}
-        45.0% {{ transform: translateY(85px); opacity: 1; }}
-        58.3% {{ transform: translateY(165px); opacity: 1; }}
-        58.4%, 100% {{ transform: translateY(165px); opacity: 0; }}
-      }}
-      @keyframes fall-e5 {{
-        0%, 63.2% {{ transform: translateY(85px); opacity: 0; }}
-        63.3% {{ transform: translateY(85px); opacity: 1; }}
-        76.7% {{ transform: translateY(165px); opacity: 1; }}
-        76.8%, 100% {{ transform: translateY(165px); opacity: 0; }}
+      @keyframes laser-3 {{
+        0%, 33.3% {{ opacity: 0; }}
+        33.4%, 35% {{ transform: translate(170px, 280px); opacity: 1; }}
+        41.4% {{ transform: translate(170px, 100px); opacity: 1; }}
+        41.5%, 100% {{ opacity: 0; }}
       }}
 
-      .enemy-1 {{ animation: fall-e1 6s infinite linear; transform-box: fill-box; transform-origin: center; }}
-      .enemy-2 {{ animation: fall-e2 6s infinite linear; transform-box: fill-box; transform-origin: center; }}
-      .enemy-3 {{ animation: fall-e3 6s infinite linear; transform-box: fill-box; transform-origin: center; }}
-      .enemy-4 {{ animation: fall-e4 6s infinite linear; transform-box: fill-box; transform-origin: center; }}
-      .enemy-5 {{ animation: fall-e5 6s infinite linear; transform-box: fill-box; transform-origin: center; }}
+      @keyframes laser-4 {{
+        0%, 51.6% {{ opacity: 0; }}
+        51.7%, 53.3% {{ transform: translate(80px, 280px); opacity: 1; }}
+        59.7% {{ transform: translate(80px, 140px); opacity: 1; }}
+        59.8%, 100% {{ opacity: 0; }}
+      }}
 
-      /* Explosion Particle Animations */
-      @keyframes part-ul {{
-        0% {{ transform: translate(0, 0); opacity: 0; }}
-        0.1% {{ transform: translate(0, 0); opacity: 1; }}
-        5.0% {{ transform: translate(-15px, -15px); opacity: 0; }}
-        100% {{ transform: translate(-15px, -15px); opacity: 0; }}
+      @keyframes laser-5 {{
+        0%, 70% {{ opacity: 0; }}
+        70.1%, 71.7% {{ transform: translate(140px, 280px); opacity: 1; }}
+        78.1% {{ transform: translate(140px, 100px); opacity: 1; }}
+        78.2%, 100% {{ opacity: 0; }}
       }}
-      @keyframes part-ur {{
-        0% {{ transform: translate(0, 0); opacity: 0; }}
-        0.1% {{ transform: translate(0, 0); opacity: 1; }}
-        5.0% {{ transform: translate(15px, -15px); opacity: 0; }}
-        100% {{ transform: translate(15px, -15px); opacity: 0; }}
+
+      .laser-1 {{ animation: laser-1 6s infinite linear; }}
+      .laser-2 {{ animation: laser-2 6s infinite linear; }}
+      .laser-3 {{ animation: laser-3 6s infinite linear; }}
+      .laser-4 {{ animation: laser-4 6s infinite linear; }}
+      .laser-5 {{ animation: laser-5 6s infinite linear; }}
+
+      /* Alien Destruction Animations (Fade out & shrink when hit) */
+      @keyframes destroy-alien-1 {{
+        0%, 7.9% {{ opacity: 1; transform: scale(1); }}
+        8% {{ opacity: 0; transform: scale(0.2); }}
+        8.1%, 100% {{ opacity: 1; transform: scale(1); }}
       }}
-      @keyframes part-dl {{
-        0% {{ transform: translate(0, 0); opacity: 0; }}
-        0.1% {{ transform: translate(0, 0); opacity: 1; }}
-        5.0% {{ transform: translate(-15px, 15px); opacity: 0; }}
-        100% {{ transform: translate(-15px, 15px); opacity: 0; }}
+
+      @keyframes destroy-alien-2 {{
+        0%, 24.6% {{ opacity: 1; transform: scale(1); }}
+        24.7% {{ opacity: 0; transform: scale(0.2); }}
+        24.8%, 100% {{ opacity: 1; transform: scale(1); }}
       }}
-      @keyframes part-dr {{
-        0% {{ transform: translate(0, 0); opacity: 0; }}
-        0.1% {{ transform: translate(0, 0); opacity: 1; }}
-        5.0% {{ transform: translate(15px, 15px); opacity: 0; }}
-        100% {{ transform: translate(15px, 15px); opacity: 0; }}
+
+      @keyframes destroy-alien-3 {{
+        0%, 41.3% {{ opacity: 1; transform: scale(1); }}
+        41.4% {{ opacity: 0; transform: scale(0.2); }}
+        41.5%, 100% {{ opacity: 1; transform: scale(1); }}
       }}
+
+      @keyframes destroy-alien-4 {{
+        0%, 59.6% {{ opacity: 1; transform: scale(1); }}
+        59.7% {{ opacity: 0; transform: scale(0.2); }}
+        59.8%, 100% {{ opacity: 1; transform: scale(1); }}
+      }}
+
+      @keyframes destroy-alien-5 {{
+        0%, 78.0% {{ opacity: 1; transform: scale(1); }}
+        78.1% {{ opacity: 0; transform: scale(0.2); }}
+        78.2%, 100% {{ opacity: 1; transform: scale(1); }}
+      }}
+
+      .target-1 {{ animation: destroy-alien-1 6s infinite; transform-box: fill-box; transform-origin: center; }}
+      .target-2 {{ animation: destroy-alien-2 6s infinite; transform-box: fill-box; transform-origin: center; }}
+      .target-3 {{ animation: destroy-alien-3 6s infinite; transform-box: fill-box; transform-origin: center; }}
+      .target-4 {{ animation: destroy-alien-4 6s infinite; transform-box: fill-box; transform-origin: center; }}
+      .target-5 {{ animation: destroy-alien-5 6s infinite; transform-box: fill-box; transform-origin: center; }}
+
+      /* Explosion Particles */
+      @keyframes part-ul {{ 0% {{ transform: translate(0, 0); opacity: 1; }} 100% {{ transform: translate(-12px, -12px); opacity: 0; }} }}
+      @keyframes part-ur {{ 0% {{ transform: translate(0, 0); opacity: 1; }} 100% {{ transform: translate(12px, -12px); opacity: 0; }} }}
+      @keyframes part-dl {{ 0% {{ transform: translate(0, 0); opacity: 1; }} 100% {{ transform: translate(-12px, 12px); opacity: 0; }} }}
+      @keyframes part-dr {{ 0% {{ transform: translate(0, 0); opacity: 1; }} 100% {{ transform: translate(12px, 12px); opacity: 0; }} }}
+
+      .p-ul {{ animation-name: part-ul; }}
+      .p-ur {{ animation-name: part-ur; }}
+      .p-dl {{ animation-name: part-dl; }}
+      .p-dr {{ animation-name: part-dr; }}
 
       .particle {{
-        animation-duration: 6s;
+        animation-duration: 0.6s;
         animation-iteration-count: infinite;
         animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         opacity: 0;
         transform-box: fill-box;
         transform-origin: center;
       }}
-      .p-ul {{ animation-name: part-ul; }}
-      .p-ur {{ animation-name: part-ur; }}
-      .p-dl {{ animation-name: part-dl; }}
-      .p-dr {{ animation-name: part-dr; }}
 
-      .exp-1 .particle {{ animation-delay: 0.4s; }}
-      .exp-2 .particle {{ animation-delay: 1.3s; }}
-      .exp-3 .particle {{ animation-delay: 2.4s; }}
-      .exp-4 .particle {{ animation-delay: 3.5s; }}
-      .exp-5 .particle {{ animation-delay: 4.6s; }}
+      .exp-1 .particle {{ animation-delay: 8.0s; }}
+      .exp-2 .particle {{ animation-delay: 24.7s; }}
+      .exp-3 .particle {{ animation-delay: 41.4s; }}
+      .exp-4 .particle {{ animation-delay: 59.7s; }}
+      .exp-5 .particle {{ animation-delay: 78.1s; }}
 
       /* Scoreboard Digital Count Up */
       @keyframes score-0 {{ 0%, 6.7% {{ opacity: 1; }} 6.8%, 100% {{ opacity: 0; }} }}
@@ -438,11 +433,11 @@ def generate_game_svg():
 
   <g class="game-card">
     <!-- Game Window Background -->
-    <rect class="bg-rect" x="10" y="10" width="200" height="300" rx="10" stroke-width="1.5" />
+    <rect class="bg-rect" x="8" y="8" width="214" height="344" rx="10" stroke-width="1.5" />
     
     <!-- Starry Space Background (Scrolling Dust) -->
     <circle class="space-star" cx="40" cy="50" r="1.2">
-      <animate attributeName="cy" from="10" to="310" dur="4s" repeatCount="indefinite" />
+      <animate attributeName="cy" from="10" to="350" dur="4s" repeatCount="indefinite" />
     </circle>
     <circle class="space-star" cx="70" cy="120" r="1.5">
       <animate attributeName="cy" from="10" to="310" dur="6s" repeatCount="indefinite" />
