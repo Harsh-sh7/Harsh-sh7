@@ -45,7 +45,7 @@ def format_stats_line(y_pos, label, value, is_recent_act=False, prefix_len=14, s
     lbl_class = "lbl-act" if is_recent_act else "lbl-os"
     val_class = "lbl-act-val" if is_recent_act else "lbl-val"
     
-    return f"""  <text x="{start_x}" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13.5" font-weight="600">
+    return f"""  <text x="{start_x}" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="14.5" font-weight="600">
     <tspan class="{lbl_class}">{escaped_label}</tspan>
     <tspan class="lbl-dots">: {dots} </tspan>
     <tspan class="{val_class}">{escaped_val}</tspan>
@@ -60,7 +60,7 @@ def format_stats_section_header(y_pos, title, start_x=22):
     if remaining_len < 1:
         remaining_len = 1
     line = "─" * remaining_len
-    return f"""  <text x="{start_x}" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="13" font-weight="700">
+    return f"""  <text x="{start_x}" y="{y_pos}" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="14" font-weight="700">
     <tspan class="section-text">{title_text}</tspan>
     <tspan class="section-line">{line}</tspan>
   </text>"""
