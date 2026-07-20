@@ -119,7 +119,7 @@
   <text x="25" y="192.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
     <tspan class="lbl-os">Repos</tspan>
     <tspan class="lbl-dots">: ......... </tspan>
-    <tspan class="lbl-val">31 public repos</tspan>
+    <tspan class="lbl-val">33 public repos</tspan>
   </text>
   <text x="25" y="205.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
     <tspan class="lbl-os">Followers</tspan>
@@ -129,19 +129,19 @@
   <text x="25" y="219.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
     <tspan class="lbl-os">Activity</tspan>
     <tspan class="lbl-dots">: ...... </tspan>
-    <tspan class="lbl-val">214 contributions | Streak: 5d</tspan>
+    <tspan class="lbl-val">291 contributions | Streak: 5d</tspan>
   </text>
   <text x="25" y="232.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
     <tspan class="lbl-os">Top Lang</tspan>
     <tspan class="lbl-dots">: ...... </tspan>
-    <tspan class="lbl-val">Jupyter Notebook, TypeScript, JavaScript</tspan>
+    <tspan class="lbl-val">JavaScript, TypeScript, Python</tspan>
   </text>
   <!-- Progress Bar -->
   <rect class="progress-bg" x="150" y="239.5" width="250" height="5" rx="2.5" />
-  <rect x="150" y="239.5" width="144.3" height="5" rx="1.5" fill="#DA5B0B" />
-  <rect x="294.25" y="239.5" width="54.2" height="5" rx="1.5" fill="#3178c6" />
-  <rect x="348.5" y="239.5" width="33.2" height="5" rx="1.5" fill="#f1e05a" />
-  <rect x="381.75" y="239.5" width="11.8" height="5" rx="1.5" fill="#3572A5" />
+  <rect x="150" y="239.5" width="104.8" height="5" rx="1.5" fill="#38bdf8" />
+  <rect x="254.75" y="239.5" width="64.5" height="5" rx="1.5" fill="#38bdf8" />
+  <rect x="319.25" y="239.5" width="32.2" height="5" rx="1.5" fill="#38bdf8" />
+  <rect x="351.5" y="239.5" width="24.2" height="5" rx="1.5" fill="#38bdf8" />
   <text x="25" y="257.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="11" font-weight="700">
     <tspan class="section-text">─ Recent Activity </tspan>
     <tspan class="section-line">──────────────────────────────────────────────────────</tspan>
@@ -149,16 +149,16 @@
   <text x="25" y="271.0" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
     <tspan class="lbl-act">Act 1</tspan>
     <tspan class="lbl-dots">: ......... </tspan>
-    <tspan class="lbl-act-val">Assigned issue #11 in newton-school-ai/slmforge_1</tspan>
+    <tspan class="lbl-act-val">Commented on issue #61 in newton-school-ai/slmforge_1</tspan>
   </text>
   <text x="25" y="284.5" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="12" font-weight="500">
     <tspan class="lbl-act">Act 2</tspan>
     <tspan class="lbl-dots">: ......... </tspan>
-    <tspan class="lbl-act-val">Closed issue #10 in newton-school-ai/slmforge_1</tspan>
+    <tspan class="lbl-act-val">Assigned issue #11 in newton-school-ai/slmforge_1</tspan>
   </text>
   <!-- Bottom Timestamp -->
   <text x="25" y="295" class="timestamp-text" font-family="'JetBrains Mono', 'Fira Code', monospace" font-size="9.5" font-weight="bold">
-    Last Updated: 2026-07-20 03:49:32 (auto-updated every 12h)
+    Last Updated: 2026-07-20 13:22:38 (auto-updated every 12h)
   </text>
   </g>
 </svg>
