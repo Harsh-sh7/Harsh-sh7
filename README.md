@@ -1,8 +1,8 @@
 # Hi, I'm Harshit
 
 <p align="center" style="margin: 10px 0 0 0;">
-  <img src="assets/game.svg?v=6" alt="Commit Invaders Game" width="230" style="max-width: 27%; height: auto; vertical-align: top;">
-  <img src="assets/terminal.svg?v=6" alt="Terminal Stats" width="610" style="max-width: 71%; height: auto; vertical-align: top;">
+  <img src="assets/game.svg?v=7" alt="Commit Invaders Game" width="230" style="max-width: 27%; height: auto; vertical-align: top;">
+  <img src="assets/terminal.svg?v=7" alt="Terminal Stats" width="610" style="max-width: 71%; height: auto; vertical-align: top;">
 </p>
 <p align="center" style="margin: 10px 0 0 0;">
   <!-- Retro CLI Social Badges -->

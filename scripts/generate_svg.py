@@ -306,7 +306,7 @@ def generate_game_svg():
       .laser-4 {{ animation: laser-4 6s infinite linear; }}
       .laser-5 {{ animation: laser-5 6s infinite linear; }}
 
-      /* Alien Destruction Animations (Fade out & shrink when hit) */
+      /* Alien Destruction Animations (Fade out and shrink when hit) */
       @keyframes destroy-alien-1 {{
         0%, 7.9% {{ opacity: 1; transform: scale(1); }}
         8% {{ opacity: 0; transform: scale(0.2); }}
